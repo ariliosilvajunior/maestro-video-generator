@@ -77,6 +77,10 @@
       "gap_hours": 2
     }
   },
+  "painel": {
+    "enabled": true,
+    "url": "https://painel.recursoscognitivos.com.br"
+  },
   "qc": {
     "enabled": false,
     "threshold": 75,

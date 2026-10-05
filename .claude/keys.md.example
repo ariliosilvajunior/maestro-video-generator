@@ -52,3 +52,11 @@ PIXABAY_API_KEY, COVERR_API_KEY, METRICOOL_TOKEN).
 ## ManyChat (optional — comment→DM automation; Google/Facebook SSO, no password stored)
 - Saved session: `.claude/auth/manychat-storage-state.json`
 - Get one: https://manychat.partnerlinks.io/iyoaakb3km0q
+
+## Painel (dono) — aprovação dos Reels no Painel do Dono (Recursos Cognitivos) antes de publicar
+- API Key: `PASTE_PAINEL_TOKEN_HERE`
+- Mesmo token usado por `content_factory`/`painel` no repositório `ecossistema-ia-recursos-cognitivos`
+  (`CONTENT_FACTORY_API_TOKEN` — pedir pro dono, não é gerado aqui).
+- URL: configurada em `config/config.json` -> `painel.url` (padrão:
+  `https://painel.recursoscognitivos.com.br`), não aqui.
+- Usado por `post-pipeline/enviar_para_painel.py` — ver NOTAS_DONO.md.
