@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maestro Video Generator · Gerador de Automação Comentário→DM (1 por post)</title>
+<style>
+  :root{
+    --bg:#0e0f13; --panel:#171922; --panel2:#1f2230; --line:#2a2e3e;
+    --ink:#f3f1ea; --mut:#a4a8b8; --gold:#e9c46a; --gold2:#f4d889;
+    --green:#3ddc97; --red:#ff6b6b; --blue:#6aa9ff;
+    --radius:14px; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:'Segoe UI',Roboto,Helvetica,Arial,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 700px at 80% -10%,#1b1e2b,transparent),var(--bg);
+       color:var(--ink);font-family:var(--sans);line-height:1.5;padding:32px 18px 80px}
+  .wrap{max-width:1120px;margin:0 auto}
+  header.top{text-align:center;margin-bottom:26px}
+  .kick{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+        color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:5px 14px;background:var(--panel)}
+  h1{font-size:30px;margin:14px 0 6px;font-weight:800;letter-spacing:-.02em}
+  h1 span{color:var(--gold)}
+  .sub{color:var(--mut);max-width:760px;margin:0 auto;font-size:15px}
+  .grid{display:grid;grid-template-columns:380px 1fr;gap:22px;margin-top:26px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .card h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 16px;font-weight:700}
+  label{display:block;font-size:13px;color:var(--mut);margin:14px 0 6px;font-weight:600}
+  input,select,textarea{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--ink);
+        border-radius:10px;padding:10px 12px;font-size:14px;font-family:var(--sans)}
+  textarea{resize:vertical;min-height:62px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  .hint{font-size:12px;color:var(--mut);margin-top:5px}
+  .kw-status{font-size:12.5px;margin-top:6px;font-weight:700}
+  .ok{color:var(--green)} .bad{color:var(--red)}
+  .examples{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .examples button{font-size:11.5px;padding:5px 9px;background:var(--panel2);border:1px solid var(--line);
+        color:var(--mut);border-radius:999px;cursor:pointer}
+  .examples button:hover{border-color:var(--gold);color:var(--ink)}
+  .out-block{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px}
+  .out-block .bh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .step-no{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px}
+  .step-no b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--gold);color:#211c0a;font-size:12px}
+  .field-tag{font-size:11px;color:var(--mut);font-family:var(--mono)}
+  .val{background:var(--panel2);border:1px dashed var(--line);border-radius:10px;padding:11px 13px;
+       white-space:pre-wrap;font-size:14px}
+  .reply-list .val{margin-bottom:7px}
+  .btn-pill{display:inline-block;margin-top:8px;background:linear-gradient(180deg,var(--gold2),var(--gold));
+       color:#241f0c;font-weight:800;border-radius:999px;padding:9px 16px;font-size:13px}
+  .copy{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--ink);
+        border-radius:8px;padding:6px 11px;font-size:12px;font-weight:700;white-space:nowrap}
+  .copy:hover{border-color:var(--gold)}
+  .copy.done{border-color:var(--green);color:var(--green)}
+  .url{color:var(--blue);font-family:var(--mono);font-size:13px;word-break:break-all}
+  .twocol{display:grid;grid-template-columns:1fr 300px;gap:22px}
+  @media(max-width:900px){.twocol{grid-template-columns:1fr}}
+  /* phone */
+  .phone{background:#0b0d12;border:1px solid var(--line);border-radius:26px;padding:14px 12px;position:sticky;top:18px}
+  .phone .scr{background:#11141c;border-radius:18px;padding:14px 12px;min-height:300px}
+  .ig-top{display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:12px}
+  .ava{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af)}
+  .ig-name{font-size:13px;font-weight:700}
+  .bub{max-width:84%;padding:9px 12px;border-radius:14px;font-size:13px;margin:8px 0;clear:both}
+  .from-biz{background:#23283a;float:left;border-bottom-left-radius:4px}
+  .from-user{background:#2f6df6;color:#fff;float:right;border-bottom-right-radius:4px}
+  .qbtn{clear:both;display:block;text-align:center;border:1px solid var(--blue);color:var(--blue);
+        border-radius:999px;padding:7px;font-size:12.5px;font-weight:700;margin:6px 0;background:transparent}
+  .linkbtn{clear:both;display:block;text-align:center;background:#2f6df6;color:#fff;border-radius:10px;
+        padding:9px;font-size:13px;font-weight:800;margin:6px 0}
+  .note{font-size:12.5px;color:var(--mut);text-align:center;margin:10px 0;font-style:italic;clear:both}
+  details{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px}
+  summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--gold)}
+  ol.steps{margin:12px 0 0;padding-left:20px} ol.steps li{margin:7px 0;font-size:13.5px;color:var(--mut)}
+  ol.steps b{color:var(--ink)}
+  code{font-family:var(--mono);font-size:12.5px;background:var(--panel2);padding:1px 6px;border-radius:5px;color:var(--gold2)}
+  .warn{background:#2a1d12;border:1px solid #6b4a23;border-radius:10px;padding:10px 13px;font-size:13px;color:#f3d6a6;margin-top:12px}
+  .foot{margin-top:30px;color:var(--mut);font-size:12px;text-align:center}
+  .used{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .used span{font-family:var(--mono);font-size:11.5px;background:var(--panel2);border:1px solid var(--line);
+        padding:3px 8px;border-radius:6px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="kick">Maestro Video Generator · Comentário → DM</span>
+    <h1>Gerador de Automação <span>1 por post / keyword</span></h1>
+    <p class="sub">Cada vídeo recebe <b>sua própria automação</b> no ManyChat (template
+      “Auto-DM links from comments”), com uma <b>keyword única</b>. Preencha os 3 campos do post e
+      copie o texto pronto pra colar no ManyChat. A estrutura (respostas públicas → DM de abertura →
+      follow-gate → DM com o link) é sempre a mesma; só mudam <b>nome, keyword e link</b>.</p>
+  </header>
+
+  <div class="grid">
+    <!-- INPUTS -->
+    <div class="card">
+      <h2>Dados do post</h2>
+
+      <label>Nome do recurso</label>
+      <input id="name" placeholder="Ex.: Remotion" />
+
+      <label>Tipo</label>
+      <select id="kind">
+        <option value="ferramenta">ferramenta</option>
+        <option value="repositório">repositório (repo)</option>
+        <option value="agente">agente</option>
+        <option value="skill">skill</option>
+        <option value="app">app</option>
+        <option value="produto">produto</option>
+        <option value="site">site</option>
+        <option value="recurso">recurso (genérico)</option>
+      </select>
+
+      <label>Palavra-chave (keyword) — única, 1 palavra, sem acento</label>
+      <input id="kw" placeholder="Ex.: REMOTION" autocomplete="off" />
+      <div id="kwStatus" class="kw-status"></div>
+      <div class="examples" id="examples"></div>
+
+      <label>O que ele faz — completa "Ele ___" (verbo, PT-BR)</label>
+      <textarea id="blurb" placeholder="Ex.: deixa você criar vídeos programando em React"></textarea>
+
+      <label>Link do recurso (URL)</label>
+      <input id="link" placeholder="https://..." />
+      <div id="linkStatus" class="kw-status"></div>
+
+      <label>Rótulo do botão final</label>
+      <input id="btn" value="Acessar agora" />
+
+      <details>
+        <summary>Keywords já usadas (não reutilize)</summary>
+        <div class="used" id="usedList"></div>
+      </details>
+    </div>
+
+    <!-- OUTPUT -->
+    <div>
+      <div class="twocol">
+        <div id="output"></div>
+        <!-- phone preview -->
+        <div>
+          <div class="phone">
+            <div class="scr">
+              <div class="ig-top"><div class="ava"></div><div class="ig-name">sua-conta</div></div>
+              <div id="ph"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <details open>
+        <summary>Como aplicar no ManyChat</summary>
+        <div class="warn" style="background:#12261a;border-color:#2c6b46;color:#bdf0d0">⚡ <b>Método oficial: DUPLICAR o TEMPLATE.</b>
+          Abra o template-mestre <b>⭐ TEMPLATE — Auto-DM</b> (Flow Builder, fica em DRAFT, nunca publica) →
+          <code>(id em config.json → manychat.template_flow_id)</code> → <b>More Actions (⋮) → Duplicate</b>. Na cópia troque só
+          <b>(1) a keyword</b> (única!), <b>(2) a “DM com o link”</b> (ramo <i>Yes</i>) e <b>(3) o link</b> →
+          <b>renomeie</b> <code>[&lt;KEYWORD&gt;] …</code> → <b>Set Live</b>. Respostas públicas, DM de abertura,
+          follow-gate e o botão <b>“Estou Seguindo”</b> já vêm prontos e idênticos. Use os campos acima pro texto novo.
+          <br><b>Pra mudar a cópia de TODOS os próximos posts:</b> edite o próprio template-mestre (vale só pros próximos).</div>
+        <p style="color:var(--mut);font-size:13px;margin:10px 0 4px"><b>Estrutura do template (Flow Builder):</b>
+          gatilho → DM de abertura (“Quero Receber”) → <b>Condição: segue a conta?</b> →
+          <i>Sim</i> → DM com link (“Acessar agora”) · <i>Não</i> → follow-gate + “Estou Seguindo” (volta pra checagem).</p>
+        <p style="color:var(--mut);font-size:13px;margin:10px 0 4px"><b>Do zero, em easy-builder</b> (fallback — atenção: o easy-builder NÃO permite o botão “Estou Seguindo”, mostra o sistema “Following” em inglês):</p>
+        <ol class="steps">
+          <li><b>Preflight:</b> confirme que o canal Instagram do ManyChat (Settings → Instagram) é o
+            MESMO em que o pipeline posta o Reel (<code>config.json → posting.instagram_handle</code>). Se não for, os comentários
+            são perdidos silenciosamente.</li>
+          <li>Automation → <b>New Automation</b> → template <b>“Auto-DM links from comments”</b>
+            (<code>easy_builder_cgt_next_post_multi_links</code>).</li>
+          <li><b>Post:</b> selecione <b>“any post or reel”</b>.</li>
+          <li><b>Comments:</b> cole a <b>keyword</b> única; ative <b>“reply to their comments under the post”</b>
+            e cole as <b>3 respostas públicas</b>.</li>
+          <li><b>Opening DM:</b> mantenha ON; cole a mensagem de abertura + botão <b>“Quero Receber”</b>.</li>
+          <li><b>Follow-gate:</b> marque a caixa <b>“a DM asking to follow you before they get the link”</b> e cole a
+            mensagem PT-BR (campo “4 Follow-gate” acima). <i>Não existe botão de “já segui” no easy-builder</i> — o ManyChat
+            detecta o follow sozinho e libera o link; a mensagem ainda pede pra re-tocar no botão como garantia.</li>
+          <li><b>Link DM:</b> cole a mensagem com o link; <b>Add a link</b> → rótulo do botão + a <b>URL</b> → Save.</li>
+          <li><b>Go Live</b> → reabra e confira: keyword certa, follow-gate marcado, link certo, status <b>LIVE</b>.</li>
+          <li><b>Renomear (OBRIGATÓRIO):</b> na lista de Automations, kebab (⋮) da automação → <b>Rename</b> →
+            <code>[&lt;KEYWORD&gt;] Auto-DM links from comments</code> → <b>Rename</b>. (Use o campo “0 Nome da automação” acima.)</li>
+          <li>Registre no <code>keyword-ledger.json</code> via <code>set_resource_cta.py</code> (nunca edite o JSON à mão).</li>
+        </ol>
+        <div class="warn">⚠️ <b>Regra de ouro:</b> a keyword tem que ser <b>única</b>. Como toda automação
+          dispara em “any post or reel”, duas automações com a mesma keyword <b>disparam as duas</b>
+          (uma keyword de teste duplicada já disparou duas automações). Sempre cheque a lista acima.</div>
+      </details>
+    </div>
+  </div>
+
+  <p class="foot">Maestro Video Generator · template canônico Comentário→DM · gerado a partir de
+    <code>manychat-pipeline/MANYCHAT_INSTRUCTIONS.md</code> + <code>set_resource_cta.py</code>.
+    Estrutura fixa, especificidades (nome/keyword/link) por post.</p>
+</div>
+
+<script>
+// ---- canonical defaults (must mirror MANYCHAT_INSTRUCTIONS.md) ----
+// ⬇️ MIRRORS your master TEMPLATE flow in ManyChat (config.json → manychat.template_flow_id). Keep in sync.
+const PUBLIC_REPLIES = ["Te enviei no direct! 📩","Já mandei no seu direct! 👀","Olha lá no seu direct! ✅"];
+const OPENING_BTN = "Quero Receber";
+// OPTIONAL static extra bubble (an upsell/community invite) — second bubble in the link-DM node, same for
+// every video. Mirror config.json → manychat.extra_bubble here (leave empty to skip it).
+const COMMUNITY_DM = "Ah, e quero fazer um convite especial para você 😁\n\n[Descreva aqui o seu produto/comunidade em 3–5 linhas.]\n\nSe quiser saber mais, clique abaixo 👇";
+const COMMUNITY_BTN = "Quero saber mais";
+const COMMUNITY_URL = "https://example.com/sua-oferta";
+const FOLLOW_ASK = "Falta só 1 coisa rápida pra liberar seu acesso 🙌\n\n1️⃣ Visite nosso Instagram\n2️⃣ Clique em Seguir/Follow\n3️⃣ Volte e clique em “Estou Seguindo”";
+const FOLLOW_BTN = "Estou Seguindo"; // custom follow-confirm button (Flow Builder template)
+// keywords already used (ledger + live automations) — do not reuse
+const USED = []; // keep in sync with manychat-pipeline/keyword-ledger.json
+// blurb = verb phrase that completes "Ele ___" (o que ele faz)
+const EXAMPLES = [
+  {name:"Remotion",kind:"ferramenta",kw:"REMOTION",blurb:"deixa você criar vídeos programando em React",link:"https://www.remotion.dev/"},
+  {name:"NotebookLM",kind:"ferramenta",kw:"NOTEBOOK",blurb:"resume e responde sobre seus documentos com IA",link:"https://notebooklm.google.com"},
+  {name:"VidRush",kind:"ferramenta",kw:"RUSH",blurb:"cria vídeos com IA",link:"https://vidrush.ai"},
+];
+
+const $ = id => document.getElementById(id);
+const norm = s => (s||"").trim().toUpperCase();
+
+function composeDM(name, kind, blurb){ // 3 paragraphs separated by BLANK LINES (\n\n) — matches the template link-DM
+  const ele = blurb ? `Ele ${blurb}.` : "Ele [o que ele faz].";
+  return `Prontinho! Aqui está o ${name||"[NOME DO RECURSO]"} 🎁\n\n${ele}\n\nÉ só tocar no botão aqui embaixo pra acessar 👇`;
+}
+
+function composeOpeningDM(name){ // opening DM NAMES the resource — mirrors set_resource_cta._compose_opening_dm (2 paragraphs, \n\n)
+  const thing = (name||"").trim();
+  const body = thing
+    ? `Já separei o ${thing} pra você! Agora é só tocar no botão aqui embaixo para receber ⚡`
+    : "Já separei o material pra você! Agora é só tocar no botão aqui embaixo para receber o que pediu ⚡";
+  return `Oiê! Que alegria te ver por aqui 😊\n\n${body}`;
+}
+
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function copyBtn(text){
+  const id = "c"+Math.random().toString(36).slice(2,8);
+  // store text on a global map to avoid escaping issues
+  window.__cp = window.__cp || {}; window.__cp[id]=text;
+  return `<button class="copy" data-cp="${id}">Copiar</button>`;
+}
+
+function render(){
+  const name=$("name").value, kind=$("kind").value, kw=norm($("kw").value),
+        blurb=$("blurb").value, link=$("link").value.trim(), btn=$("btn").value||"Acessar agora";
+  const dm = composeDM(name,kind,blurb);
+  const odm = composeOpeningDM(name); // opening DM names the resource (defaults to the name field)
+
+  // keyword status
+  const ks=$("kwStatus");
+  if(!kw){ks.textContent="";}
+  else if(/[^A-Z0-9]/.test(kw)){ks.textContent="⚠ use só letras/números, 1 palavra, sem acento/espaço.";ks.className="kw-status bad";}
+  else if(USED.includes(kw)){ks.textContent="✗ keyword JÁ usada — escolha outra.";ks.className="kw-status bad";}
+  else{ks.textContent="✓ keyword livre.";ks.className="kw-status ok";}
+
+  // link status
+  const ls=$("linkStatus");
+  if(!link){ls.textContent="";}
+  else if(!/^https:\/\/.+\..+/.test(link)){ls.textContent="⚠ use uma URL https:// válida.";ls.className="kw-status bad";}
+  else{ls.textContent="✓ link ok.";ls.className="kw-status ok";}
+
+  const repliesHtml = PUBLIC_REPLIES.map(r=>`<div class="val">${esc(r)} ${copyBtn(r)}</div>`).join("");
+
+  const autoName = `[${kw||"KEYWORD"}] Auto-DM links from comments`;
+  $("output").innerHTML = `
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>0</b> Nome da automação</span><span class="field-tag">rename (obrigatório)</span></div>
+     <div class="val">${esc(autoName)} ${copyBtn(autoName)}</div>
+   </div>
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>1</b> Gatilho</span><span class="field-tag">Post + Trigger</span></div>
+     <div class="val">Post: <b>any post or reel</b>\nComentário contém a keyword: <b>${esc(kw||"[KEYWORD]")}</b> ${copyBtn(kw)}</div>
+   </div>
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>2</b> Respostas públicas (rotação)</span><span class="field-tag">public_reply ×3</span></div>
+     <div class="reply-list">${repliesHtml}</div>
+   </div>
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>3</b> DM de abertura</span>${copyBtn(odm)}</div>
+     <div class="val">${esc(odm)}</div>
+     <span class="btn-pill">▸ ${esc(OPENING_BTN)}</span> ${copyBtn(OPENING_BTN)}
+   </div>
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>4</b> Follow-gate (não-seguidor)</span><span class="field-tag">Condition: Follows?</span></div>
+     <div class="val">${esc(FOLLOW_ASK)} ${copyBtn(FOLLOW_ASK)}</div>
+     <span class="btn-pill">▸ ${esc(FOLLOW_BTN)}</span> ${copyBtn(FOLLOW_BTN)} <span class="field-tag">→ volta pra checagem de follow</span>
+   </div>
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>5</b> DM com o link</span>${copyBtn(dm)}</div>
+     <div class="val">${esc(dm)}</div>
+     <span class="btn-pill">▸ ${esc(btn)}</span> ${copyBtn(btn)}
+     <div style="margin-top:8px" class="url">→ ${esc(link||"[LINK]")}</div> ${copyBtn(link)}
+   </div>
+   <div class="out-block">
+     <div class="bh"><span class="step-no"><b>6</b> Bolha extra opcional (upsell/comunidade · ESTÁTICA p/ todo vídeo)</span>${copyBtn(COMMUNITY_DM)}</div>
+     <div class="val">${esc(COMMUNITY_DM)}</div>
+     <span class="btn-pill">▸ ${esc(COMMUNITY_BTN)}</span> ${copyBtn(COMMUNITY_BTN)}
+     <div style="margin-top:8px" class="url">→ ${esc(COMMUNITY_URL)}</div> ${copyBtn(COMMUNITY_URL)}
+   </div>`;
+
+  // phone preview
+  $("ph").innerHTML = `
+    <div class="note">— comentário no post: <b>${esc(kw||"[KEYWORD]")}</b> —</div>
+    <div class="bub from-biz">${esc(odm)}</div>
+    <div class="qbtn">${esc(OPENING_BTN)}</div>
+    <div class="note">follow-gate: segue antes de receber o link</div>
+    <div class="bub from-biz">${esc(dm)}</div>
+    <div class="linkbtn">${esc(btn)}</div>
+    <div class="bub from-biz">${esc(COMMUNITY_DM)}</div>
+    <div class="linkbtn">${esc(COMMUNITY_BTN)}</div>`;
+
+  bindCopies();
+}
+
+function bindCopies(){
+  document.querySelectorAll(".copy").forEach(b=>{
+    b.onclick=()=>{const t=(window.__cp||{})[b.dataset.cp]||"";
+      navigator.clipboard.writeText(t).then(()=>{b.textContent="Copiado ✓";b.classList.add("done");
+        setTimeout(()=>{b.textContent="Copiar";b.classList.remove("done");},1300);});};
+  });
+}
+
+// used list + examples
+$("usedList").innerHTML = USED.map(k=>`<span>${k}</span>`).join("");
+$("examples").innerHTML = EXAMPLES.map((e,i)=>`<button data-ex="${i}">${e.name}</button>`).join("")
+  + `<button data-ex="clear">limpar</button>`;
+$("examples").onclick=(ev)=>{const v=ev.target.dataset.ex; if(v===undefined)return;
+  if(v==="clear"){["name","kw","blurb","link"].forEach(id=>$(id).value="");$("kind").value="ferramenta";$("btn").value="Acessar agora";}
+  else{const e=EXAMPLES[v];$("name").value=e.name;$("kind").value=e.kind;$("kw").value=e.kw;$("blurb").value=e.blurb;$("link").value=e.link;}
+  render();};
+
+["name","kind","kw","blurb","link","btn"].forEach(id=>$(id).addEventListener("input",render));
+render();
+</script>
+</body>
+</html>

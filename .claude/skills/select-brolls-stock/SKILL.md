@@ -1,0 +1,80 @@
+# Skill: select-brolls-stock (Phase 4 — Stock B-Roll Selection, $0 — the ONLY b-roll source)
+
+> Precondition: `config/config.json` has `setup.completed: true` (run `/setup` otherwise).
+
+Wraps `broll-pipeline/select_stock_brolls.py`. **This is the ONLY b-roll source** (house rule — no AI-generated b-roll; an A/B test once showed a stock-footage cut passing QC **100/100 at $0**, vs the AI-generated version's 94 at ~$0.96). Real stock footage from the internet (Pexels/Pixabay/Coverr free APIs). **No generative-video API, no AI-generated b-roll** — any window with no acceptable stock clip (a MISS) becomes a hand-drawn MOTION scene in Stage 5, never AI.
+
+## ANTI-REPETITION — USED-CLIP LEDGER + MULTI-SOURCE (house rule)
+"Same b-rolls keep repeating across videos." Root cause was structural: QCR-032 made the pick the lowest-id clip for a query, so the **same query → same clip on every video, forever**, and nothing remembered prior picks. Fixed in the script — **no behavior change for you except richer, never-repeating results**:
+- **Persistent ledger** `broll-pipeline/broll-used-ledger.json` (created on the first real run) records every clip id ever inserted (`"<source>:<id>"`). The pick is still fully deterministic (dry-run == real run == --only-window re-run) but now takes the lowest-id clip **NOT in the ledger**. Only a real (non-dry) HIT writes to the ledger.
+- **Cross-window dedup is now AUTOMATIC** — the old manual "QCR-040 dedup the dry-run ids across windows" step is handled by the script (a clip reserved by window 1 is excluded from window 2 in the same run). You no longer need to hand-check for shared ids.
+- **Multi-source rotation** `pexels → pixabay → coverr` (whichever have keys in `.claude/keys.md`; `--sources auto` is the default, `config.stock.sources`). Pexels-only until the Pixabay/Coverr keys are pasted (sections exist with `PASTE_..._HERE` placeholders, which the script ignores). More sources = deeper fresh pool = exhaustion (which would force a repeat) becomes effectively impossible.
+- **If the fresh pool is exhausted** for a window, it is a **MISS → MOTION scene** (never an old repeat). Write **varied** queries across videos to keep the pool deep — don't reuse `"artificial intelligence"`/`"coding"` on every video.
+- Debug only: `--ignore-ledger` disables dedup (allows repeats); `--sources pexels` forces a single source.
+
+## WHERE IT RUNS — BEFORE motion (critical ordering)
+B-roll selection runs in **Phase 4, BEFORE the motion composition is built (Phase 5)**, because a window with no acceptable clip (a MISS) must become a MOTION scene. Resolving hits/misses first lets Phase 5 build motion scenes over the missed windows and leave only the HIT windows as empty gaps. This is the whole point of the reorder — **a missed b-roll is replaced by motion, never left empty, and never AI-generated.**
+
+Order: HeyGen+SRT (3) → **select-brolls-stock (4)** → Motion (5, fills misses) → Merge (6) → Insert (7, hits only) → Subtitles (8) → Music (9) → QC (10, optional) → CTA (11, optional) → Post (12, `/post-now`).
+
+## INPUTS
+- `<downloads>/<VideoName>_visual_plan.json` — the candidate `broll_windows[]` (insert_at, duration, beat). The agent decides these from the SRT first (same window rules as before: hook ~3.0s after the S0 headline + 3 body windows ~9-38s, 5s each, ≥2s gaps).
+- `<VideoName>_broll_queries.json` — **agent-written**, a JSON array with one element per window (in plan order), each a list of 1-4 simple ENGLISH search phrases distilled from that window's beat (Pexels search is English/keyword-based). Keep them ABSTRACT/cinematic-tech to avoid clips with human faces (e.g. `"artificial intelligence"`, `"data center"`, `"circuit board macro"`, NOT `"person using laptop"`).
+  - **QCR-033 — for any "data / tokens / processing / stream" beat, LEAD with an abstract motion-background term** (`"abstract glowing particles"`, `"blue light streaks motion"`, `"digital particles dark"`, `"data grid landscape"`). Do NOT lead with `"binary data"`, `"matrix rain"`, `"data stream"`, `"hacker"`, or `"coding screen"` — on Pexels these reliably return human faces / on-screen UI and fail the frame gate (they cost a real run 2 wasted re-queries). Keep a literal term only as a later fallback phrase.
+  - **QCR-036 — for any "fire / flame / heat / engine-burn / energy" beat, LEAD with an abstract fire/energy term** (`"fire flames black background"`, `"glowing embers"`, `"abstract energy swirl"`, `"plasma slow motion dark"`). Do NOT lead with `"jet engine afterburner flame"`, `"rocket engine test fire"`, `"welding torch"`, or `"campfire"` — on Pexels these reliably return hobbyist footage with human faces / on-screen text (hot-air balloons, blowtorch-with-hands) and fail the frame gate (2 wasted re-queries on a real run's W3). Keep a literal term only as a later fallback phrase.
+  - **QCR-038 — for any "lens / focus / sharpen / blur→crisp / clarity" beat, LEAD with an abstract optical term** (`"abstract bokeh lights dark"`, `"blurry lights defocus"`, `"glowing particles dark"`, `"optical glass refraction"`). Do NOT lead with `"camera lens macro"`, `"lens focus macro"`, or `"macro lens"` — on Pexels these reliably return an extreme close-up of a HUMAN EYE through a lens (face → frame-gate REJECT; 2 wasted re-queries on a real run's W4). A `"camera lens"` clip held in HANDS (no face) is acceptable for a generic "camera/photography" hook, but the eye-through-lens variant is not.
+  - **QCR-038 — for any "passport / ID / document photo" beat, LEAD with a paper/page term** (`"passport pages closeup"`, `"document page macro"`, `"open book pages"`, `"identity document table"`). Do NOT lead with `"passport travel document"` — on Pexels it returns a packed TRAVEL SUITCASE (off-topic + clothing-label text; rejected on a real run's W2). Keep the literal term only as a later fallback phrase.
+  - **QCR-040 — for any "AI / brain / intelligence / agreement / thinking / model" beat, LEAD with a pure abstract motion term** (`"abstract glowing blue particles dark"`, `"blue digital waves motion dark"`, `"abstract network lines dark"`, `"plexus particles dark background"`). Do NOT lead with `"ai"`, `"brain"`, `"neural"`, `"hologram"`, `"intelligence"` — on Pexels these reliably return a HUMAN FACE lit by projected binary/data (face + on-screen text → frame-gate REJECT; cost a re-query on a real run's W1). Keep a literal term only as a later fallback.
+  - **QCR-040 — for any "score / rating / dashboard / analytics / metrics / nota / 0-10 / HUD" beat, LEAD with abstract light geometry** (`"abstract flowing blue lines dark"`, `"blue light streaks motion dark"`, `"digital particles flowing dark"`, `"abstract energy waves blue dark"`). Do NOT lead with `"hud"`, `"interface"`, `"dashboard"`, `"screen"`, `"monitor"` — these return a MONITOR showing a UI/text dashboard (on-screen text → REJECT; cost a re-query on a real run's W4). For an alert/risk beat AVOID `"warning lights"` (near-black frame, tiny dim object) — use `"abstract red energy swirl dark"` / `"red light streaks motion dark"`.
+  - **QCR-040 — dedup the dry-run pexels ids ACROSS windows before downloading.** Two windows can resolve to the SAME clip id (W2 + W4 both hit the same id on a real run's first pass). Re-dry-run; if any two windows share an id, reorder the colliding window's queries so every window gets a distinct clip. (The ledger now does this automatically — keep the check as a sanity habit.)
+  - **QCR-042 — for any "server / data center / local computer / hardware / your own machine" beat, LEAD with a MACRO-ELECTRONICS term** (`"circuit board macro"`, `"microchip macro close up"`, `"computer processor macro"`, `"motherboard circuit lights"`). Do NOT lead with `"server room blue lights"` (returns a MONEY BRIEFCASE full of $100 bills — off-topic + on-screen text) or `"data center server racks"` (returns an OFFICE WORKER with a headset — face → REJECT). Cost 2 wasted re-queries on a real run's W2; the macro-electronics term gave a clean face-free workbench on the first try.
+  - **QCR-042 — for any "automation / gears / everything runs by itself / workflow" beat, PREFER dropping the window to a MOTION scene over chasing stock.** Pexels has almost no clean abstract "automation/gears" footage: `"abstract glowing gears dark"` returned a bokeh/sparkler, `"blue light streaks motion dark"` a person silhouette in the dark (face), `"abstract geometric motion dark"` a dull off-palette dark-red blob. The automation beat (icons/flow/keyword burst) is exactly what motion graphics do best — `--drop-window N` and build it as a motion scene (a real run dropped W4 → motion S3 and passed QC 100/100). If you MUST keep it stock, lead ONLY with the two proven face-free abstract-render terms (`"abstract glowing blue particles dark"`, `"abstract network lines dark"`) and frame-gate hard.
+  - **QCR-050 — FOUR verified-clean abstract-blue leads (use these for any blue-tech/abstract beat).** Even QCR-040-"abstract" queries still return faces/embers/night-sky/UI: on one real run, `"abstract glowing blue particles dark"`→orange embers on near-black, `"blue light streaks motion dark"`→night sky over trees, `"abstract flowing blue lines dark"`→flowing hair+head silhouette, `"digital network grid dark"`→face with projected binary, `"data grid landscape"`→financial dashboard UI (5 wasted re-queries). The leads that hit CLEAN first try: **`"circuit board macro"`** (electronics/orb macro), **`"blue digital waves motion dark"`** (soft gradient), **`"abstract bokeh lights dark"`** (hexagonal bokeh flares), **`"abstract energy waves blue dark"`** (soft fluid). LEAD with one of these four for an abstract blue beat; AVOID `"data grid landscape"` / `"digital network grid dark"` / `"blue light streaks motion dark"`, and treat `"abstract glowing/flowing ... particles/lines"` as unreliable (embers/hair) — fallbacks only. **QCR-051 caveat: these four are clean FAMILIES, not guaranteed clips.** The used-clip ledger excludes already-used clips, so the SAME query resolves to a DIFFERENT clip on each video — a lead that hit clean last video can return hands/objects this video (a real run: `"circuit board macro"` → human hands on a PC workbench; `"microchip macro close up"` → green glass bottle). ALWAYS frame-gate every download; never assume a QCR-050 lead is still clean.
+  - **QCR-051 — for any "code / script / small program / hook / config-file" beat, PREFER dropping the window to a MOTION scene** (`--drop-window N`) over chasing stock — same as QCR-042's automation beat. Pexels has no clean literal "code/script" footage: `"circuit board macro"` returned human hands assembling a PC, `"microchip macro close up"` a green glass bottle with embossed numerals (on-screen text). A tiny script/hook is an abstract idea that motion graphics own (keyword burst / step-count / IconDraw) — a real run dropped W3 → motion S3 "SEM APP / SÓ CÓDIGO" and passed QC 100/100. If you MUST keep it stock, lead with `"circuit board macro"` / `"microchip macro close up"` and frame-gate HARD for human hands/bodies; expect 1-2 re-queries.
+  - **QCR-052 — for any "magical light / lights flicker / glowing / sparkle / light floods in" beat, LEAD with `"abstract light leaks dark"` / `"neon glow motion dark"` (clean light-leak / particle render), NOT `"colorful bokeh lights dark"` / `"sparkle lights"` / `"bokeh party"`.** On a real run's W3 the lead `"colorful bokeh lights dark"` returned a PERSON holding a SPARKLER (blurred face + hands → frame-gate REJECT; cost 1 re-query); the re-query `"abstract light leaks dark"` returned clean rising light particles on black (passed, QC 100/100). NOTE the contrast with that run's W1 `"abstract bokeh lights dark"` which returned clean face-free golden bokeh — the `"colorful"` / `"sparkle"` / `"party"` qualifiers are what pull bokeh queries toward people-with-lights footage. Keep `"abstract bokeh lights dark"` acceptable, but never lead a light/glow beat with `"colorful bokeh"` or `"sparkle"`.
+- Pexels API key — auto-resolved from `.claude/keys.md` (`## Pexels` section), or `--api-key`, or `PEXELS_KEY` env.
+
+## OUTPUTS
+- `<downloads>/<VideoName>_broll_manifest.json` — HITS only, in the EXACT format `insert_brolls.py` consumes (`{brolls:[{file,insert_at,duration,...}]}`). Becomes the Phase 7 input.
+- `<downloads>/<VideoName>_stock_N.mp4` — one downloaded clip per HIT (true 1080x1920 portrait).
+- `<scratch>/<VideoName>_stockframe_N.png` — a review frame per HIT.
+- A printed HIT/MISS report. **MISS windows (printed as a list of insert_at seconds) MUST be built as MOTION scenes in Phase 5** — do not leave them empty, do not AI-generate them.
+
+## PROCEDURE
+1. Dry-run to confirm availability (free, no download):
+```bash
+python3 broll-pipeline/select_stock_brolls.py \
+  --plan-file <downloads>/<Name>_visual_plan.json \
+  --queries-file <downloads>/<Name>_broll_queries.json \
+  --video-name <Name> --dry-run
+```
+2. Real run (downloads HITs + frames, writes manifest):
+```bash
+python3 broll-pipeline/select_stock_brolls.py \
+  --plan-file <downloads>/<Name>_visual_plan.json \
+  --queries-file <downloads>/<Name>_broll_queries.json \
+  --video-name <Name> --output-dir <downloads>
+```
+3. **MANDATORY agent relevance gate (the $0 quality control — this is the PRIMARY miss mechanism):** ⚠️ **Pexels NEVER returns empty** — for an unmatched/gibberish query it serves generic fallback clips (verified: the query "zxqwlkjhgfd…" returned a handshake clip). So the script almost never reports a script-level MISS; **YOU decide misses by frame review.** `Read` each `<scratch>/<Name>_stockframe_N.png` and REJECT a clip if it: (a) shows a recognizable **human face** (Pexels license forbids implying endorsement; our b-roll rule bans faces), (b) has **on-screen text / UI / logos**, or (c) is **off-topic** for the beat.
+   - **QCR-032 (verify the ACTUAL mp4, not just the frame PNG):** selection is now deterministic (sorted by pexels id), but as a final guard, after ALL windows are settled and BEFORE `insert_brolls.py`, extract one frame straight from each saved clip and confirm it matches what you gated: `for n in 1 2 3 4; do ffmpeg -y -ss 2 -i <downloads>/<Name>_stock_$n.mp4 -frames:v 1 <scratch>/<Name>_realfile_$n.png; done` then `Read` each. A `<Name>_stockframe_N.png` can go stale if a window was re-run; the `_stock_N.mp4` file is the source of truth that actually gets inserted. **Prefer a clean FULL re-run (delete `*_stock_*.mp4` + manifest first) over chaining many `--only-window` re-queries** — a full pass keeps the manifest, files, and frames consistent in one shot.
+   - To try a better clip, re-run JUST that window with new keywords:
+   ```bash
+   python3 broll-pipeline/select_stock_brolls.py --only-window N \
+     --plan-file ... --queries-file <edited> --video-name <Name> --output-dir <downloads>
+   ```
+   - If no acceptable clip exists after a couple of tries, **drop the window → it becomes a MOTION scene** (one command, deletes the clip + removes it from the manifest):
+   ```bash
+   python3 broll-pipeline/select_stock_brolls.py --drop-window N \
+     --plan-file ... --queries-file ... --video-name <Name> --output-dir <downloads>
+   ```
+   A window that is genuinely 0% servable by stock MUST fall back to motion (house rule) — never ship an off-topic clip just because Pexels returned one.
+4. Record the final HIT windows (→ broll_windows in the plan) and MISS windows (→ extra motion_segments) so Phase 5 builds the composition correctly.
+
+## DEPENDENCIES
+- Python 3 (stdlib only — urllib), ffmpeg (frame extraction). Free Pexels key (Pixabay/Coverr optional). No paid API, no cost.
+
+## COST
+$0. Pexels API is free (~25k req/month, 200/hr; a run uses ~4-12). No per-clip charge, commercial use, no attribution required. Realized b-roll cost per video = **$0** (misses cost nothing — they become motion).
+
+## MISS FALLBACK = MOTION (no AI)
+If stock can't provide an acceptable clip for a window (a MISS), that window becomes a hand-drawn MOTION scene in Stage 5. **There is NO AI-generation fallback** — never generate AI b-roll.

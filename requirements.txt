@@ -1,0 +1,8 @@
+# Python dependencies for the Maestro Video Generator pipeline (python3 -m pip install -r requirements.txt)
+Pillow>=10.0
+numpy>=1.26
+
+# OPTIONAL — word-level local ASR for the measured caption builder (subtitle-pipeline/build_ass_measured.py).
+# Not required: the default caption path (build_srt_from_script.py + srt_to_ass.py) needs no local ASR.
+#   Apple Silicon:  python3 -m pip install mlx-whisper
+#   Other machines: python3 -m pip install faster-whisper

@@ -1,0 +1,30 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+YCbCr Matrix: None
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: White,Arial Black,92,&H00FFFFFF,&H000000FF,&H00000000,&HE0000000,-1,0,0,0,100,100,1,0,4,1,5,2,80,80,180,1
+Style: Yellow,Arial Black,92,&H0000D4FF,&H000000FF,&H00000000,&HE0000000,-1,0,0,0,100,100,1,0,4,1,5,2,80,80,180,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.80,White,,0,0,0,,{\fad(200,0)}A {\rYellow}inteligência artificial{\rWhite}
+Dialogue: 0,0:00:01.80,0:00:03.72,White,,0,0,0,,está substituindo profissões\Nque ninguém imaginava.
+Dialogue: 0,0:00:04.32,0:00:06.50,White,,0,0,0,,Em {\rYellow}2025{\rWhite}, advogados,
+Dialogue: 0,0:00:06.50,0:00:09.52,White,,0,0,0,,designers e até\N{\rYellow}programadores{\rWhite}
+Dialogue: 0,0:00:09.84,0:00:11.52,Yellow,,0,0,0,,começaram a\N{\rYellow}perder espaço{\rWhite}.
+Dialogue: 0,0:00:12.24,0:00:14.72,White,,0,0,0,,Mas aqui vai a {\rYellow}verdade{\rWhite}\Nque ninguém te conta.
+Dialogue: 0,0:00:15.32,0:00:17.00,Yellow,,0,0,0,,{\fscx108\fscy108}Quem dominar a IA
+Dialogue: 0,0:00:17.00,0:00:18.72,White,,0,0,0,,não vai ser {\rYellow}substituído{\rWhite},
+Dialogue: 0,0:00:18.96,0:00:20.50,Yellow,,0,0,0,,{\fscx110\fscy110}vai ser PROMOVIDO,
+Dialogue: 0,0:00:20.50,0:00:22.52,White,,0,0,0,,as empresas {\rYellow}não{\rWhite} querem\Neliminar humanos,
+Dialogue: 0,0:00:22.80,0:00:24.50,White,,0,0,0,,elas querem humanos que\Nsabem usar IA
+Dialogue: 0,0:00:24.50,0:00:26.28,Yellow,,0,0,0,,{\fscx112\fscy112}como SUPERPODER.
+Dialogue: 0,0:00:26.52,0:00:28.00,White,,0,0,0,,Enquanto todo mundo reclama,
+Dialogue: 0,0:00:28.00,0:00:29.80,Yellow,,0,0,0,,{\fscx108\fscy108}os espertos\Nestão aprendendo.
+Dialogue: 0,0:00:30.00,0:00:31.20,White,,0,0,0,,A pergunta é,
+Dialogue: 0,0:00:31.20,0:00:32.56,Yellow,,0,0,0,,{\fscx112\fscy112}de que lado\Nvocê vai estar?

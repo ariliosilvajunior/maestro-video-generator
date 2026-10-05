@@ -1,0 +1,5 @@
+{
+  "_doc": "Reserved CTA keywords, one per video. Written ONLY by manychat-pipeline/set_resource_cta.py (locked, atomic) - never hand-edit.",
+  "used_keywords": [],
+  "history": []
+}

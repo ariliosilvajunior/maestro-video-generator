@@ -1,0 +1,29 @@
+{
+  "generated_by": "gen_lottie_primitives.mjs",
+  "fps": 30,
+  "loop_frames": 60,
+  "size": 200,
+  "recolour": "white→palette accent at runtime via LottieIcon",
+  "assets": {
+    "pulse-ring": {
+      "file": "lottie/pulse-ring.json",
+      "use": "accent ring behind a number/icon; processing/active state",
+      "recommended_size": 360
+    },
+    "orbit-dots": {
+      "file": "lottie/orbit-dots.json",
+      "use": "AI / thinking / agents working; orbiting system",
+      "recommended_size": 360
+    },
+    "arrow-flow": {
+      "file": "lottie/arrow-flow.json",
+      "use": "progression, leads-to, pipeline/flow direction",
+      "recommended_size": 360
+    },
+    "scan-sweep": {
+      "file": "lottie/scan-sweep.json",
+      "use": "analysis, scanning, security/inspection feel",
+      "recommended_size": 360
+    }
+  }
+}

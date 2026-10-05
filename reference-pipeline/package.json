@@ -1,0 +1,9 @@
+{
+  "name": "maestro-video-generator-reference-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Headless Playwright used by yt_watch_shot.cjs / headless_capture.cjs (deterministic reference screenshots). Install once: npm install && npx playwright install chromium",
+  "dependencies": {
+    "playwright": "^1.50.0"
+  }
+}

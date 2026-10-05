@@ -1,0 +1,31 @@
+{
+  "name": "remotion-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Maestro Video Generator motion-graphics Remotion project (lives inside the repo; no symlinks needed)",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "dev": "remotion studio",
+    "studio": "remotion studio",
+    "build": "remotion bundle",
+    "render": "remotion render"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.427",
+    "@remotion/cli": "4.0.427",
+    "@remotion/fonts": "4.0.427",
+    "@remotion/google-fonts": "4.0.427",
+    "@remotion/lottie": "4.0.427",
+    "@remotion/motion-blur": "4.0.427",
+    "@remotion/noise": "4.0.427",
+    "@remotion/renderer": "4.0.427",
+    "remotion": "4.0.427",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "typescript": "5.6.3"
+  }
+}

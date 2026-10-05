@@ -1,0 +1,47 @@
+# ── secrets & sessions (never commit) ──────────────────────────────────────
+.claude/keys.md
+.claude/auth/*
+!.claude/auth/.gitkeep
+config/config.json
+config/doctor-report.json
+.playwright-profile/
+.playwright-mcp/
+
+# ── runtime state (per machine) ────────────────────────────────────────────
+pipeline-runs/*
+!pipeline-runs/.gitkeep
+pipeline-state.json
+*.lock
+*.tmp.*
+alerts.log
+.upload-tmp/
+.debug/
+.work/
+
+# ── generated media (never distribute) ─────────────────────────────────────
+*.mp4
+*.mov
+*.mp3
+*.m4a
+!motion-pipeline/remotion-agent/public/sample_avatar.mp4
+music/*
+!music/README.md
+motion-pipeline/remotion-agent/public/assets/*
+!motion-pipeline/remotion-agent/public/assets/sample/
+motion-pipeline/remotion-agent/public/refs/*
+!motion-pipeline/remotion-agent/public/refs/sample_*.png
+*.png
+!motion-pipeline/remotion-agent/public/assets/sample/*.png
+!motion-pipeline/remotion-agent/public/refs/sample_*.png
+*.srt
+!subtitle-pipeline/examples/*.srt
+
+# ── toolchains ─────────────────────────────────────────────────────────────
+node_modules/
+motion-pipeline/remotion-agent/out/
+motion-pipeline/remotion-agent/.remotion/
+.remotion/
+.cache/
+__pycache__/
+*.pyc
+.DS_Store

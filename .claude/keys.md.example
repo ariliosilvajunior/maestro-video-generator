@@ -1,0 +1,54 @@
+# API Keys (gitignored — copy this file to `.claude/keys.md` and fill it in)
+
+Runtime secrets the pipeline reads through `lib/api_keys.py`. One `## Section` per service,
+one `- API Key: \`...\`` line each. Lines still holding a `PASTE_..._HERE` placeholder are
+ignored, so an unfilled section is simply treated as "not configured".
+
+Environment variables override this file (GEMINI_API_KEY, FAL_KEY, OPENAI_API_KEY, PEXELS_API_KEY,
+PIXABAY_API_KEY, COVERR_API_KEY, METRICOOL_TOKEN).
+
+## Gemini (REQUIRED — transcription of the avatar audio + source videos; optional QC grading)
+- API Key: `PASTE_GEMINI_KEY_HERE`
+- Get one: https://aistudio.google.com/apikey  (enable billing on the project for reliable quotas)
+
+## fal (image provider option A — config images.provider = "fal")
+- API Key: `PASTE_FAL_KEY_HERE`
+- Get one: https://fal.ai/dashboard/keys
+
+## OpenAI (image provider option B — config images.provider = "openai")
+- API Key: `PASTE_OPENAI_KEY_HERE`
+- Get one: https://platform.openai.com/api-keys  (gpt-image-1 may require organisation verification)
+
+<!-- Image provider option C ("google") reuses the Gemini key above — nothing else to add. -->
+
+## Pexels (stock b-roll — free, recommended)
+- API Key: `PASTE_PEXELS_KEY_HERE`
+- Get one: https://www.pexels.com/api/
+
+## Pixabay (stock b-roll — optional second source)
+- API Key: `PASTE_PIXABAY_KEY_HERE`
+- Get one: https://pixabay.com/api/docs/
+
+## Coverr (stock b-roll — optional third source)
+- API Key: `PASTE_COVERR_KEY_HERE`
+- Get one: https://coverr.co/api
+
+## Metricool (optional posting fallback — config posting.metricool.enabled = true)
+- API Key: `PASTE_METRICOOL_TOKEN_HERE`
+- Get one: https://i.mtr.cool/maestrosdaia
+- Header: X-Mc-Auth
+
+## HeyGen (browser login — the pipeline drives the HeyGen web editor, there is no API key)
+- Email: `PASTE_HEYGEN_EMAIL_HERE`
+- Password: `PASTE_HEYGEN_PASSWORD_HERE`
+- Notes: log in once in the pipeline browser; the persistent profile keeps the session.
+- Get one: https://www.heygen.com/?sid=rewardful&utm_content=creator&utm_medium=influencera&via=maestrosdaia
+
+## Instagram (browser login — used only if the saved session expires)
+- Email: `PASTE_INSTAGRAM_EMAIL_HERE`
+- Password: `PASTE_INSTAGRAM_PASSWORD_HERE`
+- Saved session: `.claude/auth/instagram-storage-state.json` (written by the setup wizard after your first login)
+
+## ManyChat (optional — comment→DM automation; Google/Facebook SSO, no password stored)
+- Saved session: `.claude/auth/manychat-storage-state.json`
+- Get one: https://manychat.partnerlinks.io/iyoaakb3km0q

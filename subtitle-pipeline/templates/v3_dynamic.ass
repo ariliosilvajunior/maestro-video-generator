@@ -1,0 +1,30 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+YCbCr Matrix: None
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: White,Arial Black,90,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,1,0,1,6,3,5,80,80,400,1
+Style: Pop,Arial Black,90,&H0000DDFF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,105,105,1,0,1,6,3,5,80,80,400,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.20,White,,0,0,0,,{\fad(150,0)}A inteligência artificial
+Dialogue: 0,0:00:01.20,0:00:03.72,White,,0,0,0,,está substituindo\Nprofissões que\Nninguém imaginava.
+Dialogue: 0,0:00:04.32,0:00:06.50,White,,0,0,0,,Em {\rPop}2025{\rWhite}, advogados,
+Dialogue: 0,0:00:06.50,0:00:09.52,White,,0,0,0,,designers e até\N{\rPop}programadores{\rWhite}
+Dialogue: 0,0:00:09.84,0:00:11.52,Pop,,0,0,0,,começaram a\Nperder espaço.
+Dialogue: 0,0:00:12.24,0:00:14.72,White,,0,0,0,,Mas aqui vai\Na {\rPop}verdade{\rWhite} que\Nninguém te conta.
+Dialogue: 0,0:00:15.32,0:00:17.00,Pop,,0,0,0,,{\fscx110\fscy110}Quem dominar a IA
+Dialogue: 0,0:00:17.00,0:00:18.72,White,,0,0,0,,não vai ser\N{\rPop}substituído{\rWhite},
+Dialogue: 0,0:00:18.96,0:00:20.50,Pop,,0,0,0,,{\fscx110\fscy110}vai ser promovido,
+Dialogue: 0,0:00:20.50,0:00:22.52,White,,0,0,0,,as empresas não querem\Neliminar humanos,
+Dialogue: 0,0:00:22.80,0:00:24.50,White,,0,0,0,,elas querem humanos\Nque sabem usar IA
+Dialogue: 0,0:00:24.50,0:00:26.28,Pop,,0,0,0,,{\fscx115\fscy115}como SUPERPODER.
+Dialogue: 0,0:00:26.52,0:00:28.00,White,,0,0,0,,Enquanto todo mundo\Nreclama,
+Dialogue: 0,0:00:28.00,0:00:29.80,Pop,,0,0,0,,os espertos\Nestão aprendendo.
+Dialogue: 0,0:00:30.00,0:00:31.20,White,,0,0,0,,A pergunta é,
+Dialogue: 0,0:00:31.20,0:00:32.56,Pop,,0,0,0,,{\fscx115\fscy115}de que lado\Nvocê vai estar?

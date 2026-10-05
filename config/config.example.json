@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "brand": {
+    "name": "Your Brand",
+    "instagram_handle": "yourhandle",
+    "language": "pt-BR",
+    "timezone": "America/Sao_Paulo",
+    "niche": "",
+    "audience": ""
+  },
+  "avatar": {
+    "provider": "heygen",
+    "name": "YourAvatar",
+    "look": "YourAvatar -- 1",
+    "fallback_look": "",
+    "voice": "Your Voice",
+    "engine_fallback": "Avatar III"
+  },
+  "images": {
+    "provider": "fal",
+    "fal_model": "fal-ai/nano-banana-pro",
+    "fal_extra": {},
+    "google_model": "gemini-2.5-flash-image",
+    "openai_model": "gpt-image-1",
+    "openai_transparent": true,
+    "width": 1024,
+    "height": 1536
+  },
+  "transcription": {
+    "provider": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "stock": {
+    "sources": "auto"
+  },
+  "discovery": {
+    "enabled": true,
+    "queries": [],
+    "seed_channels": [],
+    "use_creators_roster": true,
+    "languages": [
+      "pt",
+      "en"
+    ],
+    "max_age_days": 30,
+    "min_views": 5000,
+    "min_duration_s": 20,
+    "max_duration_s": 900,
+    "exclude_keywords": [],
+    "per_run": 3,
+    "auto_enqueue": true,
+    "prefer_shorts": false,
+    "search_depth": 15,
+    "channel_depth": 20
+  },
+  "manychat": {
+    "enabled": false,
+    "account_id": "",
+    "template_flow_id": "",
+    "instagram_handle": "",
+    "follow_gate": true,
+    "extra_bubble": {
+      "enabled": false,
+      "text": "",
+      "button_label": "",
+      "url": ""
+    }
+  },
+  "posting": {
+    "method": "browser",
+    "instagram_handle": "yourhandle",
+    "metricool": {
+      "enabled": false,
+      "blog_id": "",
+      "user_id": "",
+      "timezone": "America/Sao_Paulo",
+      "gap_hours": 2
+    }
+  },
+  "qc": {
+    "enabled": false,
+    "threshold": 75,
+    "max_iterations": 3
+  },
+  "notify": {
+    "method": "log",
+    "webhook_url": "",
+    "command": ""
+  },
+  "paths": {
+    "downloads": "~/Downloads",
+    "tmp": "",
+    "ffmpeg": ""
+  },
+  "setup": {
+    "completed": false,
+    "completed_at": ""
+  }
+}
