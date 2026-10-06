@@ -5,18 +5,18 @@ antes desta ferramenta ter sessão própria. Guardado aqui pra não se perder.
 
 - **Cadência inicial: 1 postagem por semana**, não diária. Começar devagar,
   validar o formato antes de aumentar.
-- **Publicação automática (atualizado 06/10/2026):** Instagram sempre automático (via
-  navegador). Facebook/TikTok/YouTube Shorts agora TÊM um caminho automático construído
-  (via Metricool, `config.posting.metricool.networks.facebook/.tiktok/.youtube`, cada um
-  desligado por padrão) — mas falta o dono: (1) ter/criar uma conta Metricool no plano
-  Advanced ou Custom (a API não existe no Free/Starter), (2) conectar Facebook + TikTok +
-  YouTube (além do Instagram) na MESMA marca do Metricool, (3) passar a chave de API pro
-  `.claude/keys.md`. Sem isso feito, essas três redes ficam puladas (`SKIPPED`) e o vídeo
-  precisa ser postado manualmente nelas, como antes. Campos técnicos exatos de cada rede
-  (TikTok/YouTube/Facebook) vieram do Swagger oficial do Metricool
-  (`app.metricool.com/api/swagger.json`) mas **nunca foram testados contra uma conta real**
-  — a primeira postagem em cada rede nova deve ir com `"draft": true` primeiro (ver
-  `how-to-post-videos.md`).
+- **Publicação automática (atualizado 06/10/2026 — RESOLVIDO):** Instagram sempre automático
+  (via navegador). Facebook/TikTok/YouTube Shorts também automáticos agora, via **Buffer**
+  (`config.posting.buffer.*` — conta grátis, sem mensalidade; o Metricool pago foi cogitado
+  primeiro mas descartado por custo, R$265/mês, e o caminho 100% direto por API própria foi
+  descartado porque o Facebook/Meta bloqueou a conta do dono pra criar um app de
+  desenvolvedor — bloqueio persistente, não resolve tentando de novo). As 3 redes já estão
+  conectadas na conta Buffer (`recursoscognitivos`) e os ids salvos em `config/config.json`.
+  Campos técnicos de cada rede vieram do schema oficial do Buffer
+  (`developers.buffer.com`) e o TikTok foi **testado de verdade** (post rascunho criado e
+  apagado com sucesso em 06/10/2026) — Facebook e YouTube ainda não tiveram o primeiro post
+  real verificado, fazer o teste em rascunho (`saveToDraft: true`) antes do primeiro post de
+  verdade em cada um (ver `how-to-post-videos.md`).
 - **Negócio:** "Recursos Cognitivos" — sistema de gestão pra AEE
   (Atendimento Educacional Especializado) / educação especial. Dono é
   professor de AEE de verdade. Contexto completo (se precisar) no

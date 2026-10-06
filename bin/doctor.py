@@ -192,6 +192,13 @@ def check_config():
     if config.get("posting.metricool.enabled", False):
         for k in ("posting.metricool.blog_id", "posting.metricool.user_id"):
             add(S, k, bool(config.get(k)), config.get(k, "(empty)"), f"python3 bin/setup_init.py set {k} <value>")
+    if config.get("posting.buffer.enabled", False):
+        add(S, "posting.buffer.organization_id", bool(config.get("posting.buffer.organization_id")),
+            config.get("posting.buffer.organization_id", "(empty)"), "python3 bin/setup_init.py set posting.buffer.organization_id <id>")
+        any_channel = any(config.get(f"posting.buffer.channels.{n}") for n in ("facebook", "youtube", "tiktok"))
+        add(S, "posting.buffer.channels.* (at least one network)", any_channel,
+            "facebook/youtube/tiktok" if any_channel else "(none set)",
+            "python3 bin/setup_init.py set posting.buffer.channels.<network> <channel_id>", required=False)
     add(S, "posting.instagram_handle", filled("posting.instagram_handle"), config.get("posting.instagram_handle", "(empty)"),
         "python3 bin/setup_init.py set posting.instagram_handle yourhandle", required=False)
     # Niche discovery (Phase 1 "scraping"): the queue is fed from the user's OWN niche, so setup must capture it.
@@ -211,9 +218,9 @@ def check_config():
 
 # ─────────────────────────────── 3. keys ───────────────────────────────────
 
-def _probe(url, headers=None, timeout=15):
+def _probe(url, headers=None, timeout=15, method=None, data=None):
     try:
-        req = urllib.request.Request(url, headers=headers or {})
+        req = urllib.request.Request(url, headers=headers or {}, method=method, data=data)
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return r.status
     except urllib.error.HTTPError as e:
@@ -266,6 +273,13 @@ def check_keys(live):
     if config.exists() and config.get("posting.metricool.enabled", False):
         k = resolve_key("metricool")
         add(S, "Metricool token (posting.metricool.enabled)", bool(k), "present" if k else "missing", "python3 bin/setup_init.py key Metricool <token>")
+    if config.exists() and config.get("posting.buffer.enabled", False):
+        k = resolve_key("buffer")
+        add(S, "Buffer token (posting.buffer.enabled)", bool(k), "present" if k else "missing", "python3 bin/setup_init.py key Buffer <token>")
+        if live and k:
+            st = _probe("https://api.buffer.com", headers={"Authorization": f"Bearer {k}", "Content-Type": "application/json"},
+                         method="POST", data=b'{"query":"query { account { id } }"}')
+            add(S, "Buffer token accepted (live)", st == 200, f"HTTP {st}", "the key was rejected or expired", required=False)
 
 
 # ─────────────────────────────── 4. sessions ───────────────────────────────

@@ -231,10 +231,11 @@ fired the pipeline 3×) space out across the day in healthy intervals instead of
 is computed by `post-pipeline/compute_next_slot.py --auth "$MC_AUTH"` (auth token from `.claude/keys.md`
 `## Metricool` via `lib/api_keys.py`; blog/user ids default to the config values; returns `latest_future_post + gap`,
 or `now+5min`; gap override `--gap-hours N`; fails safe to `now+5min` on any query error so a hiccup never blocks a
-post). Posting platform = Instagram (always-on default); Facebook/TikTok/YouTube Shorts are OPTIONAL
-Metricool-only networks (`config.posting.metricool.networks.<network>`, off by default) posted in the
-same Metricool call. **A Metricool *schedule* is NOT a live post — verify the reel is live or
-HOLD the run**, and only post a network on a Metricool brand that actually has it connected. **This applies
+post). **This 2-hour-gap rule is Instagram/Metricool-specific** — it does not apply to Facebook/TikTok/
+YouTube Shorts (posted via Buffer, `config.posting.buffer.channels.<network>`, whenever a channel id
+is set), since each Buffer channel schedules against its own posting queue (`addToQueue`), not a
+raw `now+5min` slot. **A Metricool *schedule* is NOT a live post — verify the reel is live or
+HOLD the run**, and only post Instagram on a Metricool brand that actually has it connected. **This applies
 identically to BOTH entry points** — "run the pipeline from 0" (`maestro-video-pipeline`) and link /
 reference-video runs (`generate-video-from-link`); both converge on `post-and-log`, which is where the rule lives.
 

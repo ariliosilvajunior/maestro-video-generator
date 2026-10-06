@@ -69,6 +69,16 @@
   "posting": {
     "method": "browser",
     "instagram_handle": "yourhandle",
+    "buffer": {
+      "enabled": false,
+      "organization_id": "",
+      "channels": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": ""
+      },
+      "youtube_category_id": "27"
+    },
     "metricool": {
       "enabled": false,
       "blog_id": "",

@@ -1,26 +1,31 @@
 # How to Post Videos — Instagram, Facebook, TikTok, YouTube Shorts
 
 > **POLICY (house rule): Instagram is the ALWAYS-ON default network; Facebook/TikTok/YouTube are
-> OPTIONAL, each gated by its own config toggle (`config.posting.metricool.networks.<network>`,
-> OFF by default).** X/Twitter is NOT a posting target (no browser attempt, no Metricool call for it —
-> leave it out of `providers` always). Instagram posts via **BROWSER** (`post-browser-manual`) to your
-> account (`config.posting.instagram_handle`) by default; **Metricool is the fallback for Instagram**
-> AND the **only path for Facebook/TikTok/YouTube** (no browser automation exists for those — Metricool
-> or nothing). Requires `config.posting.metricool.enabled` + a Metricool **Advanced or Custom** plan
-> (the API is not available on Free/Starter) + `.blog_id`/`.user_id` on a brand that actually has each
-> target network connected. A Metricool schedule id is NOT a live post — verify LIVE or HOLD for EVERY
-> network in the same post, not just Instagram. See `post-and-log` / `post-browser-manual`.
+> OPTIONAL, each gated by its own config toggle (`config.posting.buffer.channels.<network>` set +
+> `config.posting.buffer.enabled`).** X/Twitter is NOT a posting target — never post to it, in any
+> path. Instagram posts via **BROWSER** (`post-browser-manual`) to your account
+> (`config.posting.instagram_handle`) by default. **Facebook, TikTok and YouTube Shorts post through
+> the Buffer GraphQL API** (`api.buffer.com`, Bearer token) — no browser automation exists for those,
+> Buffer or nothing. Buffer's free plan covers this (`organization_id` + the 3 `channels` ids in
+> `config.posting.buffer.*`) — no paid plan needed, unlike the Metricool path this repo tried first
+> (documented below as an alternative; not the active path). A Buffer post id is NOT a live post until
+> its `status` reads `buffer`/`sent` — verify LIVE or HOLD for EVERY enabled network, same as Instagram.
+> See `post-and-log` / `post-browser-manual`.
 
 > **Paths in this doc:** `<downloads>` = the pipeline output dir (config `paths.downloads`, default `~/Downloads`; `python3 lib/paths.py` prints it). `<scratch>` = the scratch dir (config `paths.tmp` / `MAESTRO_TMPDIR`).
 
 ## Overview
 
-Instagram posts via the pipeline browser by default (Metricool as fallback). Facebook, TikTok and
-YouTube Shorts — each OPTIONAL, config-gated — post via **ONE Metricool API call that can target
-several networks at once** (the same `providers` array can list `instagram` + `facebook` + `tiktok`
-+ `youtube` together), each with its own `*Data` block for network-specific options. Only include a
-network in `providers` when its `config.posting.metricool.networks.<network>` toggle is `true` AND
-you've confirmed (Metricool UI) that network is connected on the brand `blog_id`/`user_id` in use.
+Instagram posts via the pipeline browser by default. Facebook, TikTok and YouTube Shorts — each
+OPTIONAL, config-gated — post via **individual `createPost` mutations to the Buffer API**, one per
+enabled network (Buffer's `createPost` takes a single `channelId`, so there is no single combined
+multi-network call like Metricool's `providers` array — loop over the enabled channels instead).
+Only post to a channel listed in `config.posting.buffer.channels.<network>` AND whose network toggle
+you've confirmed is meant to be active (the id being present IS the toggle — an empty string means
+off). Full field reference verified live against `https://developers.buffer.com` and a real test
+post+delete on this account's TikTok channel on 2026-10-06 — see `types/TikTokPostMetadataInput`,
+`types/YoutubePostMetadataInput`, `types/FacebookPostMetadataInput` for the source of truth if a
+field ever looks wrong.
 
 ---
 
@@ -46,7 +51,7 @@ curl -sI "$PUBLIC_URL" | grep content-length
 # Must show content-length > 0. If 0, the URL is dead — re-upload.
 ```
 
-3. **Always add `"saveExternalMediaFiles": true` to the API call.** This makes Metricool download and host the file on its own CDN (`static.metricool.com`), which prevents "Container Publication failed" errors caused by external URL issues.
+3. **For Instagram's Metricool fallback path (below), add `"saveExternalMediaFiles": true` to the API call** — makes Metricool cache the file on its own CDN, preventing "Container Publication failed" errors. **Buffer has no equivalent flag — it fetches the URL at publish time**, so the hosted URL must stay live until the post actually publishes, not just when `createPost` is called (litterbox's 72h window comfortably covers immediate/near-now posting; never use a short-lived or signed URL).
 
 ---
 
@@ -70,32 +75,37 @@ TRANSCRIPT=$(sed '/^[0-9]*$/d; /^$/d; /-->/d' <scratch>/VideoName.srt | tr '\n' 
 - Include the comment-CTA: `Comenta '<KEYWORD>' que eu te mando o link no direct` (keyword settled in Phase 11 — automated via ManyChat when `config.manychat.enabled`, otherwise you answer by hand)
 - End with exactly 3-5 niche hashtags (IG hard cap = 5, NEVER exceed); no generic tags (#fyp, #viral, #reels); max 1-2 emojis
 
-**When `config.posting.metricool.networks.facebook` / `.tiktok` / `.youtube` is `true`, also write:**
+**When `config.posting.buffer.channels.facebook` / `.tiktok` / `.youtube` is set (non-empty), also write:**
 - **`FB_TEXT`** — same spirit as `IG_TEXT`; Facebook has no hard hashtag cap but keep 3-5, same no-generic-tags rule.
 - **`TIKTOK_TEXT`** — shorter hook (TikTok truncates earlier, ~150 chars before fold too), same comment-CTA, 3-5 hashtags; TikTok audiences read more casually — looser tone is fine.
 - **`YT_TITLE`** — a short, keyword-front-loaded Shorts TITLE (not a caption), ≤ 100 chars, no hashtags needed (YouTube indexes the title/tags fields, not inline hashtags in a Short's title).
 
 **All text in `config.brand.language` (Brazilian Portuguese by default).** (X/Twitter is not a posting target — no fields for it, ever.)
 
-### Step C: Post-call flag check (MANDATORY — Metricool path)
+### Step C: Post-call flag check (MANDATORY)
 
-Right after the POST call, parse the response and assert `"draft": false` AND `"autoPublish": true`.
-If the post comes back as a draft, fix it immediately (PUT update). Live publish is the DEFAULT — draft
-only on explicit user request. (A stale "dry-test default" once caused 3 videos to land as silent drafts
-while the log claimed they were posted.)
+**Instagram's Metricool fallback path:** right after the POST call, parse the response and assert
+`"draft": false` AND `"autoPublish": true`. If the post comes back as a draft, fix it immediately (PUT
+update). Live publish is the DEFAULT — draft only on explicit user request. (A stale "dry-test default"
+once caused 3 videos to land as silent drafts while the log claimed they were posted.)
+
+**Buffer path (Facebook/TikTok/YouTube):** the `createPost` input's `saveToDraft` field must be
+**absent or `false`** for a real post — same failure mode as Metricool's `draft` flag, just a
+different field name. `saveToDraft: true` is ONLY for the once-per-new-channel verification test
+below, never for a real run.
 
 ### Platform Text Specification
 
 | Platform | Text Field | Visible Before Fold | Max Length | Hashtags | Tone |
 |----------|-----------|---------------------|------------|----------|------|
 | **Instagram** (always-on) | `text` (caption) | ~125 chars | 2200 chars | **3-5 max** (IG hard limit = 5) | Keyword-rich hook + save/share CTA. No generic tags. |
-| **Facebook** (optional) | `text` is shared across every network in one `providers` call — if the FB caption needs to differ from IG, post Facebook in a SEPARATE API call with its own `text` | ~100 chars (link/page previews truncate early) | no hard cap | 3-5 (convention, not enforced) | Same hook, slightly more descriptive is fine |
-| **TikTok** (optional) | same `text` sharing caveat as Facebook | ~150 chars | 2200 chars | 3-5 (convention) | Casual, faster hook |
-| **YouTube Shorts** (optional) | `youtubeData.title`, NOT `text` | full title shown | 100 chars | none (use `youtubeData.tags` instead) | Keyword-front-loaded, searchable title |
+| **Facebook** (optional) | `text` on that channel's own `createPost` call | ~100 chars (link/page previews truncate early) | no hard cap | 3-5 (convention, not enforced) | Same hook, slightly more descriptive is fine |
+| **TikTok** (optional) | `text` on that channel's own `createPost` call | ~150 chars | 2200 chars | 3-5 (convention) | Casual, faster hook |
+| **YouTube Shorts** (optional) | `metadata.youtube.title`, NOT `text` (Buffer's YouTube upload has no separate description field exposed — `title` is what shows) | full title shown | 100 chars | none (use the title itself for keywords) | Keyword-front-loaded, searchable title |
 
 **Current platform algorithm rules:**
 - **Instagram**: 5 hashtag hard cap enforced. Natural keywords in caption > hashtags for reach. "Save/share" CTAs most weighted.
-- **One `providers` call = one shared `text`.** If you need per-network caption wording (e.g. a TikTok-specific CTA), split into separate POST calls per network instead of one combined call — the `text` field is NOT per-network, only the `*Data` blocks are.
+- **Buffer's `createPost` is already per-channel** (one `channelId` per call), so each network naturally gets its own `text` — no shared-caption caveat like the old Metricool multi-network call had.
 
 ### API Call Structure
 
@@ -126,94 +136,155 @@ curl -s -X POST "$MC_URL_IG" -H "X-Mc-Auth: $MC_AUTH" -H "Content-Type: applicat
 # AFTER the slot passes: confirm it published LIVE (IG reel shortcode on @<your-handle>). Schedule id != live.
 ```
 
-### Facebook / TikTok / YouTube Shorts — OPTIONAL, each gated by its own config toggle
+### Facebook / TikTok / YouTube Shorts — Buffer API, each gated by its channel id being set
 
-> **Field reference is the live Metricool OpenAPI spec**, not guesswork — pulled from
-> `https://app.metricool.com/api/swagger.json` (schemas `ScheduledPostFacebookData`,
-> `ScheduledPostTikTokData`, `ScheduledPostYoutubeData`). The `type`/`privacy`/`privacyOption` string
-> VALUES below (`REEL`, `public`, `PUBLIC_TO_EVERYONE`) are the standard values used by Meta/TikTok/
-> YouTube's own content APIs that Metricool proxies — **not literally confirmed against a real
-> Metricool response yet** (no network was connected when this was written). **Before the first real
-> post to a newly-enabled network: send the call with `"draft": true` first**, confirm Metricool
-> accepts the payload (no 400 on the `*Data` block) and that the draft shows the right settings in
-> the Metricool UI, THEN repeat with `"draft": false` for the real post. Never skip this once-per-network
-> check — same lesson as the "lost a week of reels" Instagram incident above, just for a network with
-> no prior track record here.
+> **Field reference is the live Buffer GraphQL schema**, not guesswork — pulled from
+> `https://developers.buffer.com/types/{TikTokPostMetadataInput,YoutubePostMetadataInput,
+> FacebookPostMetadataInput}.md` + the enum pages `PostTypeFacebook` / `YoutubePrivacy`, and
+> **confirmed working with a real `createPost` (saveToDraft:true) + `deletePost` round-trip** on this
+> account's TikTok channel on 2026-10-06 (post id `6ac514a16531870e15cd3abc`, created then deleted —
+> see git history for the exact request if this ever needs re-verifying). **Still do the same
+> once-per-new-channel dry run before the FIRST real post on Facebook and YouTube specifically**
+> (only TikTok has been live-tested) — `saveToDraft: true`, confirm no `MutationError`, confirm the
+> draft shows right in the Buffer UI, THEN drop `saveToDraft` for the real post.
 
-> **Multi-network in ONE call** (same `text`, same video) — list every enabled network in `providers`
-> and include each one's `*Data` block:
-> ```json
-> "providers": [{"network": "instagram"}, {"network": "facebook"}, {"network": "tiktok"}, {"network": "youtube"}]
-> ```
-> Only include a network here when BOTH `config.posting.metricool.networks.<network>` is `true` AND
-> you've verified in the Metricool UI that this brand (`blog_id`) has that network connected — including
-> an unconnected network silently publishes nothing for it (same failure mode as the IG case above) while
-> the OTHER networks in the same call still go through.
-
-**Facebook** (`config.posting.metricool.networks.facebook`) — vertical video → Facebook Reels:
-```json
-"facebookData": { "type": "REEL", "title": "FB_TEXT_HERE" }
-```
-
-**TikTok** (`config.posting.metricool.networks.tiktok`) — standard feed video (no Stories via API):
-```json
-"tiktokData": { "privacyOption": "PUBLIC_TO_EVERYONE", "title": "TIKTOK_TEXT_HERE", "disableComment": false, "disableDuet": false, "disableStitch": false, "isAigc": true }
-```
-`isAigc: true` is the TikTok-required AI-generated-content disclosure (this pipeline's videos are
-AI-made end to end — HeyGen avatar, generated motion graphics — never omit it). No custom cover image
-on non-Business accounts (API limitation) — Metricool auto-picks a video frame.
-
-**YouTube Shorts** (`config.posting.metricool.networks.youtube`) — vertical ≤60s video auto-detected as a Short:
-```json
-"youtubeData": { "title": "YT_TITLE_HERE", "type": "SHORT", "privacy": "public", "madeForKids": false, "isAiGeneratedContent": true, "notifySubscribers": true }
-```
-`isAiGeneratedContent: true` — same disclosure requirement as TikTok, same reason (never omit). No
-custom Shorts thumbnail via API (platform limitation, not a Metricool gap).
-
-**Full multi-network example** (all four enabled):
+**Endpoint + auth** (every call):
 ```bash
-curl -s -X POST "$MC_URL_IG" -H "X-Mc-Auth: $MC_AUTH" -H "Content-Type: application/json" \
-  -d '{
-    "text": "IG_CAPTION_HERE",
-    "publicationDate": {"dateTime": "'$SCHEDULE_TIME'", "timezone": "<config.posting.metricool.timezone>"},
-    "providers": [{"network": "instagram"}, {"network": "facebook"}, {"network": "tiktok"}, {"network": "youtube"}],
-    "media": ["MEDIA_URL"],
-    "autoPublish": true, "draft": false, "shortener": false, "saveExternalMediaFiles": true,
-    "instagramData": {"type": "REEL", "showReelOnFeed": true, "collaborators": [], "carouselTags": {}},
-    "facebookData": {"type": "REEL", "title": "FB_TEXT_HERE"},
-    "tiktokData": {"privacyOption": "PUBLIC_TO_EVERYONE", "title": "TIKTOK_TEXT_HERE", "disableComment": false, "disableDuet": false, "disableStitch": false, "isAigc": true},
-    "youtubeData": {"title": "YT_TITLE_HERE", "type": "SHORT", "privacy": "public", "madeForKids": false, "isAiGeneratedContent": true, "notifySubscribers": true}
-  }'
-# AFTER the slot passes: verify LIVE on EVERY enabled network individually (IG reel + FB reel + TikTok
-# video + YouTube Short, each on the matching handle). A schedule id covers the whole call, not a
-# per-network guarantee — one network silently failing (e.g. disconnected) does not fail the others.
+BUFFER_AUTH=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib.api_keys import resolve_key; print(resolve_key("buffer"))')   # .claude/keys.md ## Buffer
+BUFFER_URL="https://api.buffer.com"
+# config.posting.buffer.organization_id / .channels.{facebook,youtube,tiktok} — already resolved for this account, no discovery call needed
 ```
+Every request is a POST to `$BUFFER_URL` with header `Authorization: Bearer $BUFFER_AUTH`,
+`Content-Type: application/json`, body `{"query": "<graphql mutation>"}`. One `createPost` call per
+enabled network — there is no combined multi-network call like Metricool had.
+
+**Facebook** (`config.posting.buffer.channels.facebook`) — vertical video → Facebook Reels:
+```graphql
+mutation {
+  createPost(input: {
+    text: "FB_TEXT_HERE"
+    channelId: "<config.posting.buffer.channels.facebook>"
+    schedulingType: automatic
+    mode: addToQueue
+    assets: [{ video: { url: "MEDIA_URL" } }]
+    metadata: { facebook: { type: reel } }
+  }) {
+    ... on PostActionSuccess { post { id status } }
+    ... on MutationError { message }
+  }
+}
+```
+
+**TikTok** (`config.posting.buffer.channels.tiktok`) — standard feed video (no Stories via API):
+```graphql
+mutation {
+  createPost(input: {
+    text: "TIKTOK_TEXT_HERE"
+    channelId: "<config.posting.buffer.channels.tiktok>"
+    schedulingType: automatic
+    mode: addToQueue
+    assets: [{ video: { url: "MEDIA_URL" } }]
+    metadata: { tiktok: { isAiGenerated: true } }
+  }) {
+    ... on PostActionSuccess { post { id status } }
+    ... on MutationError { message }
+  }
+}
+```
+`isAiGenerated: true` is the TikTok-required AI-generated-content disclosure (this pipeline's videos
+are AI-made end to end — HeyGen avatar, generated motion graphics — never omit it). No custom cover
+image on non-Business accounts (TikTok's own API limitation, not Buffer's) — a video frame is used.
+
+**YouTube Shorts** (`config.posting.buffer.channels.youtube`) — vertical ≤60s video auto-detected as a Short:
+```graphql
+mutation {
+  createPost(input: {
+    text: ""
+    channelId: "<config.posting.buffer.channels.youtube>"
+    schedulingType: automatic
+    mode: addToQueue
+    assets: [{ video: { url: "MEDIA_URL" } }]
+    metadata: {
+      youtube: {
+        title: "YT_TITLE_HERE"
+        categoryId: "<config.posting.buffer.youtube_category_id>"
+        privacy: public
+        isAiGenerated: true
+        madeForKids: false
+        notifySubscribers: true
+      }
+    }
+  }) {
+    ... on PostActionSuccess { post { id status } }
+    ... on MutationError { message }
+  }
+}
+```
+`isAiGenerated: true` — same disclosure requirement as TikTok, same reason (never omit).
+`categoryId` is REQUIRED on create (`config.posting.buffer.youtube_category_id` defaults to `"27"` =
+Education, fits this account's niche) — see `types/YoutubePostMetadataInput.md` for the full id list
+if the niche ever changes. `text` can stay empty for YouTube; `title` is what actually shows.
+
+**Sending a call** (escape the GraphQL string into JSON, e.g. via Python so quoting is safe):
+```bash
+python3 -c '
+import json, urllib.request, os
+query = """mutation { createPost(input: { text: "TIKTOK_TEXT_HERE", channelId: "CHANNEL_ID", schedulingType: automatic, mode: addToQueue, assets: [{ video: { url: "MEDIA_URL" } }], metadata: { tiktok: { isAiGenerated: true } } }) { ... on PostActionSuccess { post { id status } } ... on MutationError { message } } }"""
+req = urllib.request.Request(
+    "https://api.buffer.com",
+    data=json.dumps({"query": query}).encode(),
+    headers={"Authorization": f"Bearer {os.environ[\"BUFFER_AUTH\"]}", "Content-Type": "application/json"},
+)
+print(urllib.request.urlopen(req, timeout=60).read().decode())
+'
+```
+**MANDATORY after every call — check the response for `MutationError` before moving on**, then
+AFTER the slot passes, verify LIVE on that network individually (FB reel on the Page, TikTok video on
+the account, YouTube Short on the channel) — a returned `post.id` with `status: buffer` is "queued",
+not "live"; only `status: sent` (or a confirmed live URL on the platform itself) counts.
 
 ---
 
 ## Important Notes
 
-- **Video must be at a public URL** — Metricool fetches it remotely
-- **Media format in API:** Must be `["url"]` array, NOT `[{"mediaId": "url"}]`
-- **Brand:** `config.posting.metricool.blog_id` / `config.posting.metricool.user_id` — one brand, which must have EVERY enabled network connected (check the Metricool UI). **A network missing from that brand accepts the schedule and publishes nothing for it — the other networks in the same call still go through, so this fails silently per-network, not per-call.**
-- **Plan requirement:** the Metricool API (any call, including the Instagram-only path above) needs an **Advanced or Custom** Metricool plan — Free/Starter have no API access at all.
-- **Timezone:** `config.posting.metricool.timezone` (default America/Sao_Paulo)
-- **saveExternalMediaFiles: true** — ALWAYS use. Makes Metricool cache the video on `static.metricool.com`, preventing "Container Publication failed" errors.
-- **AI-content disclosure:** `tiktokData.isAigc` and `youtubeData.isAiGeneratedContent` must be `true` — every video from this pipeline is AI-generated (HeyGen avatar + generated motion graphics). Never omit these.
+- **Video must be at a public, stable URL** — Buffer fetches it at publish time (not at `createPost`
+  time), so it must still be reachable when the scheduled slot arrives, not just when you call the API.
+- **No media-format quirk on Buffer** — `assets: [{ video: { url: "..." } }]` is the whole shape, no
+  separate normalize step like Metricool needed.
+- **Channels:** `config.posting.buffer.organization_id` + `.channels.{facebook,youtube,tiktok}` — each
+  channel id already resolved for this account (`python3 -c '...account{organizations{id}}...'` /
+  `channels(input:{organizationId})` if they ever need re-fetching, e.g. after reconnecting a channel).
+- **Plan requirement:** none — Buffer's free plan (1 API key, 3,000 requests/month) covers this; no
+  paid upgrade needed, unlike the Metricool path this repo tried first.
+- **`saveToDraft`** — omit it (or `false`) for a real post; `true` only for the once-per-new-channel
+  verification dry run (see above).
+- **AI-content disclosure:** `metadata.tiktok.isAiGenerated` and `metadata.youtube.isAiGenerated` must
+  be `true` — every video from this pipeline is AI-generated (HeyGen avatar + generated motion
+  graphics). Never omit these.
+- **Known Buffer reliability caveat:** Buffer has had real incidents (a March 2026 outage affecting
+  TikTok posting specifically) and occasional sync/duplicate complaints — this is WHY the "verify
+  LIVE, not just a returned id" rule above is non-negotiable here, same as it already was for
+  Metricool/Instagram. At this account's volume (1 video/week) the exposure is low, but never skip
+  the live-verify step on the assumption Buffer "probably worked."
 
 ### Pipeline posting flow
-- **Instagram** → always-on, BROWSER-first (`post-browser-manual`) with Metricool as FALLBACK (`config.posting.metricool.enabled`)
-- **Facebook / TikTok / YouTube Shorts** → each OPTIONAL and OFF by default (`config.posting.metricool.networks.<network>`); Metricool-only, no browser path exists for these — when enabled, posted in the SAME Metricool call as Instagram (see Multi-network section above)
-- **X/Twitter:** not a posting target — no browser attempt, no Metricool call, no alert, ever.
+- **Instagram** → always-on, BROWSER-first (`post-browser-manual`) with Metricool as an optional
+  fallback (`config.posting.metricool.enabled`, off by default — this account doesn't have it active)
+- **Facebook / TikTok / YouTube Shorts** → each OPTIONAL, active when its
+  `config.posting.buffer.channels.<network>` id is set; Buffer-only, no browser path exists for these
+  — one `createPost` call per enabled network (see section above)
+- **X/Twitter:** not a posting target — no browser attempt, no API call, no alert, ever.
 
 ---
 
 ## Credentials Reference
 
 All keys live in `.claude/keys.md` (see `.claude/keys.md.example`); `python3 bin/doctor.py` verifies them.
-The Metricool token (`## Metricool`, header `X-Mc-Auth`) resolves via
-`python3 -c 'import sys; sys.path.insert(0,"."); from lib.api_keys import resolve_key; print(resolve_key("metricool"))'` —
-never hardcode tokens in documentation.
+The Buffer token (`## Buffer`, header `Authorization: Bearer <token>`) resolves via
+`python3 -c 'import sys; sys.path.insert(0,"."); from lib.api_keys import resolve_key; print(resolve_key("buffer"))'`.
+The Metricool token (`## Metricool`, header `X-Mc-Auth`) resolves the same way with `resolve_key("metricool")` —
+only relevant if the Instagram browser fallback is ever needed and Metricool gets enabled.
+Never hardcode tokens in documentation.
 
 ---
 
@@ -221,10 +292,12 @@ never hardcode tokens in documentation.
 
 | Problem | Solution |
 |---------|----------|
-| "Add at least 1 image or video" | Media format is wrong — use `["url"]` not `[{"mediaId": "url"}]` |
-| "Container Publication failed" (Instagram) | Add `"saveExternalMediaFiles": true` to the API call, or verify the media URL returns `content-length > 0` |
+| `MutationError: "Failed to fetch image dimensions: Not Found"` (Buffer) | The video URL isn't public/stable — open it in an incognito window; if it prompts a login or 404s, re-host it (see File Hosting Rules above) |
+| `MutationError: "Channel not found"` (Buffer) | Wrong `channelId` — re-run the channel-listing query against `config.posting.buffer.organization_id` and update config |
+| Buffer post stuck at `status: buffer` past its slot | Check Buffer's own status page / the account's Publish queue — this pipeline has hit real Buffer outages before (see reliability caveat above); HOLD and retry, don't assume it quietly succeeded |
+| "Add at least 1 image or video" (Metricool, Instagram fallback) | Media format is wrong — use `["url"]` not `[{"mediaId": "url"}]` |
+| "Container Publication failed" (Metricool, Instagram fallback) | Add `"saveExternalMediaFiles": true` to the API call, or verify the media URL returns `content-length > 0` |
 | catbox.moe URL returns content-length: 0 | Use `litterbox.catbox.moe` instead (72h temp hosting) — permanent catbox URLs expire silently |
-| Post stuck in PENDING | Wait until scheduled time + 2-5 min — Metricool queues posts and processes them sequentially |
 
 ---
 
@@ -237,10 +310,10 @@ never a raw `echo >>` when other runs may be live). Append-only; never truncate.
 (`config.avatar.voice`) · `script_source` (YouTube/Instagram/TikTok link, or manual — where the SOURCE
 content came from) · `script_rank` (@author) · `script_topic` (~60 chars, no commas/newlines) ·
 `video_duration_s` · `heygen_file` · `motion_file` · `broll_file` · `final_file` · `catbox_url` ·
-`ig_status` · `tiktok_status` (`SKIPPED` unless `config.posting.metricool.networks.tiktok` is `true`,
+`ig_status` · `tiktok_status` (`SKIPPED` unless `config.posting.buffer.channels.tiktok` is set,
 then `LIVE`/`HOLD` like `ig_status`) · `twitter_status` (**DEPRECATED, always `SKIPPED`** — X/Twitter
 is not a posting target, no toggle exists for it) · `youtube_status` (`SKIPPED` unless
-`config.posting.metricool.networks.youtube` is `true`, then `LIVE`/`HOLD`) · `qc_grade` (`DISABLED`
+`config.posting.buffer.channels.youtube` is set, then `LIVE`/`HOLD`) · `qc_grade` (`DISABLED`
 unless `config.qc.enabled`) · `qc_iterations` · `broll_1_timestamp`…`broll_4_timestamp` (seconds) ·
 `fal_model` (legacy header, write `-`) · `notes` (record Facebook's status here too — the row has no
 dedicated `facebook_status` column; write e.g. `fb=LIVE` / `fb=SKIPPED` in `notes`).

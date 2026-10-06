@@ -53,6 +53,13 @@ PIXABAY_API_KEY, COVERR_API_KEY, METRICOOL_TOKEN).
 - Saved session: `.claude/auth/manychat-storage-state.json`
 - Get one: https://manychat.partnerlinks.io/iyoaakb3km0q
 
+## Buffer (optional — Facebook/TikTok/YouTube auto-posting, config posting.buffer.enabled)
+- API Key: `PASTE_BUFFER_KEY_HERE`
+- Get one: https://publish.buffer.com/settings/api (needs the free plan's "Explore Buffer API"
+  first-run flow; key is a GraphQL Bearer token, set a long expiration — e.g. 1 year)
+- Header: Authorization: Bearer <key>
+- organization_id / channel ids go in config/config.json -> posting.buffer.*, not here
+
 ## Painel (dono) — aprovação dos Reels no Painel do Dono (Recursos Cognitivos) antes de publicar
 - API Key: `PASTE_PAINEL_TOKEN_HERE`
 - Mesmo token usado por `content_factory`/`painel` no repositório `ecossistema-ia-recursos-cognitivos`

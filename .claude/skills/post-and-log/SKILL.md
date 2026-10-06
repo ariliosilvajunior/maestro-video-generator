@@ -1,6 +1,6 @@
 ---
 name: post-and-log
-description: Phase 12 of the Maestro Video Generator pipeline — BROWSER posting (runs AFTER Phase 11 settled the comment→DM CTA). Publish the finished video LIVE via the browser (post-browser-manual) to Instagram, then append the run to pipeline-log.csv. Optional Metricool fallback for Instagram (config.posting.metricool.enabled) if the browser session isn't logged in. Facebook/TikTok/YouTube Shorts are OPTIONAL Metricool-only networks, each off by default (config.posting.metricool.networks.<network>) — posted in the same Metricool call when enabled. Triggers — "post this video", "publish to reels", "distribute and log".
+description: Phase 12 of the Maestro Video Generator pipeline — BROWSER posting (runs AFTER Phase 11 settled the comment→DM CTA). Publish the finished video LIVE via the browser (post-browser-manual) to Instagram, then append the run to pipeline-log.csv. Optional Metricool fallback for Instagram (config.posting.metricool.enabled) if the browser session isn't logged in. Facebook/TikTok/YouTube Shorts are OPTIONAL Buffer-only networks, each active when its channel id is set (config.posting.buffer.channels.<network>) — one createPost call per enabled network. Triggers — "post this video", "publish to reels", "distribute and log".
 ---
 
 Precondition: `config/config.json` has `setup.completed: true` (run `/setup` otherwise).
@@ -8,7 +8,7 @@ Precondition: `config/config.json` has `setup.completed: true` (run `/setup` oth
 # Skill: post-and-log (Phase 12 — Post + Log)
 
 > **PLATFORM = Instagram is the always-on default (house rule).** Facebook, TikTok and YouTube Shorts
-> are OPTIONAL, each gated by its own `config.posting.metricool.networks.<network>` toggle (default
+> are OPTIONAL, each gated by its own `config.posting.buffer.channels.<network>` toggle (default
 > `false` — do not post to a disabled network). X/Twitter is NEVER a posting target, no toggle exists
 > for it. (Where a queued source link came from is input, not output — it does not change the posting
 > target.) Full field-level mechanics for the optional networks: `how-to-post-videos.md` §"Facebook /
@@ -38,7 +38,7 @@ Instagram Reels via the platform's own web uploader to your account (`config.pos
 >   (feed/oembed read-back of a real shortcode).** NEVER count a Metricool *schedule* as posted. If no IG
 >   path can be verified LIVE → **HOLD the run** (see Step 2 + the move-to-posted gate below); do NOT
 >   move-to-posted.
-> - **Facebook/TikTok/YouTube (when their `config.posting.metricool.networks.<network>` toggle is
+> - **Facebook/TikTok/YouTube (when their `config.posting.buffer.channels.<network>` toggle is
 >   `true`) → Metricool is the ONLY path (no browser automation exists for them), same brand/call as the
 >   Instagram fallback.** Each one failing to verify live does NOT block Instagram's move-to-posted gate
 >   (see below) — it fires its own alert and gets logged `FAILED` (retry later), independent of Instagram.
@@ -138,23 +138,11 @@ Follow **`.claude/skills/post-browser-manual/SKILL.md`** exactly (it has the Ins
 5. Re-save the session (`storageState({path})`) so cookies stay fresh.
 - **Account target:** Instagram = `config.posting.instagram_handle` (the saved session must belong to that account).
 
-### Step 2 — METRICOOL (Instagram: FALLBACK only if the browser session is gone; Facebook/TikTok/YouTube: the ONLY path, whenever their toggle is `true`)
+### Step 2a — METRICOOL (Instagram ONLY — fallback if the browser session is gone)
 If Step 0 / a post-time login wall shows the Instagram browser session is gone and re-login isn't
-possible, fire the alert, then post via Metricool. Whatever Instagram's path ends up being, ALSO
-include every network whose toggle is `true` in the SAME call (one `providers` array, one `media`,
-one `publicationDate` — see `how-to-post-videos.md` for the full multi-network payload):
-
-| Platform | When | blogId / userId | Connected? |
-|----------|------|-----------------|------------|
-| Instagram | Metricool fallback only (browser session dead) | `config.posting.metricool.blog_id` / `.user_id` | ✅ must have Instagram `@<your-handle>` connected — verify in Metricool before the first fallback |
-| Facebook | `config.posting.metricool.networks.facebook == true` | same blog/user id | ✅ must have the Facebook Page connected — verify before the first post |
-| TikTok | `config.posting.metricool.networks.tiktok == true` | same blog/user id | ✅ must have the TikTok account connected — verify before the first post |
-| YouTube | `config.posting.metricool.networks.youtube == true` | same blog/user id | ✅ must have the YouTube channel connected — verify before the first post |
-
-**🛑 A network missing from the brand accepts the schedule and publishes NOTHING for it — the OTHER
-networks in the same call still go through.** Never add a network to `providers` without first
-verifying it's connected in the Metricool UI. Host on litterbox, then make the Metricool call at
-`$SCHEDULE_TIME` (`saveExternalMediaFiles:true`, `draft:false, autoPublish:true`):
+possible, fire the alert, then post via Metricool, **only on a brand that actually has Instagram
+`@<your-handle>` connected** (`config.posting.metricool.blog_id` / `.user_id`), only when
+`config.posting.metricool.enabled`:
 ```bash
 PUBLIC_URL=$(curl -F "reqtype=fileupload" -F "time=72h" -F "fileToUpload=@<downloads>/<VideoName>_music.mp4" https://litterbox.catbox.moe/resources/internals/api.php)
 curl -sI "$PUBLIC_URL" | grep content-length   # MUST be > 0 (fallback uguu.se if litterbox 500s — see how-to-post-videos.md §1b)
@@ -163,21 +151,40 @@ MC_BLOG=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib import config
 MC_USER=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib import config; print(config.get("posting.metricool.user_id"))')
 MC_URL="https://app.metricool.com/api/v2/scheduler/posts?blogId=$MC_BLOG&userId=$MC_USER"
 SCHEDULE_TIME=$(python3 post-pipeline/compute_next_slot.py --auth "$MC_AUTH")   # near-now (now+5min) for a real publish; ids + timezone from config
-# POST the multi-network payload to MC_URL at $SCHEDULE_TIME, autoPublish:true, draft:false
-# (full JSON — providers + instagramData/facebookData/tiktokData/youtubeData — in how-to-post-videos.md).
+# POST the Instagram payload to MC_URL at $SCHEDULE_TIME, autoPublish:true, draft:false (full JSON in how-to-post-videos.md).
 ```
-**MANDATORY after any Metricool post — confirm EACH posted network published LIVE (a returned id is NOT proof):**
-- **Instagram:** confirm the reel shortcode is live on `@<your-handle>` (Metricool post detail /
-  IG feed API). If it did not publish → **HOLD the whole run** (do NOT move-to-posted).
-- **Facebook / TikTok / YouTube (whichever were enabled):** confirm each independently (FB Page reel,
-  TikTok video on the account, YouTube Short on the channel). A FAILED optional network does NOT hold
-  the run — fire its alert, log it `FAILED` (Step 3), and leave it for a manual re-check; Instagram's
-  own live status is still what gates move-to-posted.
+**MANDATORY — confirm the reel shortcode is live on `@<your-handle>`** (Metricool post detail / IG
+feed API). A returned schedule id is NOT proof. If it did not publish → **HOLD the whole run** (do
+NOT move-to-posted).
+
+### Step 2b — BUFFER (Facebook / TikTok / YouTube — the ONLY path for these, whenever their channel id is set)
+Each enabled network (`config.posting.buffer.channels.<network>` set to a real channel id) gets its
+own `createPost` call to `api.buffer.com` — there is no combined multi-network call like Metricool's.
+Full GraphQL mutations (exact fields, verified against the live schema + a real test post) are in
+`how-to-post-videos.md` § "Facebook / TikTok / YouTube Shorts — Buffer API".
+
+| Platform | When | Channel id source |
+|----------|------|--------------------|
+| Facebook | `config.posting.buffer.channels.facebook` set | `config.posting.buffer.organization_id` + that channel id — verify connected in the Buffer UI before the first post |
+| TikTok | `config.posting.buffer.channels.tiktok` set | same, TikTok channel — live-tested working on this account (2026-10-06) |
+| YouTube | `config.posting.buffer.channels.youtube` set | same, YouTube channel |
+
+```bash
+BUFFER_AUTH=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib.api_keys import resolve_key; print(resolve_key("buffer"))')   # keys.md ## Buffer
+PUBLIC_URL=$(curl -F "reqtype=fileupload" -F "time=72h" -F "fileToUpload=@<downloads>/<VideoName>_music.mp4" https://litterbox.catbox.moe/resources/internals/api.php)
+curl -sI "$PUBLIC_URL" | grep content-length   # MUST be > 0
+# For each enabled network: POST a createPost mutation to https://api.buffer.com with
+# Authorization: Bearer $BUFFER_AUTH — exact per-network mutation body in how-to-post-videos.md.
+```
+**MANDATORY after each Buffer call — confirm no `MutationError`, then after the slot passes confirm
+that network published LIVE** (FB Page reel, TikTok video on the account, YouTube Short on the
+channel). A FAILED optional network does NOT hold the run — fire its alert, log it `FAILED` (Step 3),
+and leave it for a manual re-check; Instagram's own live status is still what gates move-to-posted.
 
 Schedule **near-now** (not a multi-hour-deep slot) so the litterbox 72h host doesn't expire before
-publish, and so every enabled network can be verified within the run. This is the safety net for
-Instagram, not the default; for Facebook/TikTok/YouTube it's simply the only path. X/Twitter is never
-part of this call.
+publish, and so every enabled network can be verified within the run. Metricool is the safety net for
+Instagram only, not the default; Buffer is simply the only path for Facebook/TikTok/YouTube. X/Twitter
+is never part of either.
 
 ### 🛑 MOVE-TO-POSTED GATE (MANDATORY before Steps 3 & 4)
 **Steps 3 (log row) and 4 (queue-done) are the irreversible "move to posted".** They run ONLY when the
@@ -225,7 +232,9 @@ KEEP: `pipeline-runs/`, `pipeline-log.csv`, ledgers, the comp `.tsx`, the Remoti
 ## DEPENDENCIES
 - Browser: Playwright MCP + saved cookies `.claude/auth/instagram-storage-state.json`; helper `browser-post-pipeline/restore_session.py`; skill `post-browser-manual`.
 - Alerts: `post-pipeline/alert.py` (delivered per `config.notify.*`; always logged to `alerts.log`). Fire on any Instagram cookie/login failure.
-- Metricool (optional — `config.posting.metricool.enabled`; `X-Mc-Auth` token in keys.md `## Metricool` via `lib/api_keys.py`; `config.posting.metricool.blog_id` / `.user_id` = the brand with your networks connected). Required for the Instagram fallback AND the only path for Facebook/TikTok/YouTube when `config.posting.metricool.networks.<network>` is `true`. **Needs an Advanced/Custom Metricool plan — the API has no access on Free/Starter.** litterbox.catbox.moe, curl.
+- Metricool (optional — `config.posting.metricool.enabled`; `X-Mc-Auth` token in keys.md `## Metricool` via `lib/api_keys.py`; `config.posting.metricool.blog_id` / `.user_id`). Instagram fallback ONLY. **Needs an Advanced/Custom Metricool plan — the API has no access on Free/Starter.**
+- Buffer (the only path for Facebook/TikTok/YouTube when their `config.posting.buffer.channels.<network>` is set — `Authorization: Bearer` token in keys.md `## Buffer` via `lib/api_keys.py`; `config.posting.buffer.organization_id`). Free plan is enough, no paid upgrade needed.
+- litterbox.catbox.moe, curl — shared public-hosting step for either path.
 
 ## Comment-CTA in the IG caption (resource is shared on ~every video)
 The run state → `resource_cta.enabled` is `true` for essentially every video, so the **Instagram
@@ -238,7 +247,7 @@ you answer the comments by hand. Confirm one of the two here; if it's neither, f
 
 ## RULES
 - **PLATFORM = Instagram is the always-on default (house rule).** Facebook/TikTok/YouTube are OPTIONAL,
-  each gated by its own `config.posting.metricool.networks.<network>` toggle (default off — never post
+  each gated by its own `config.posting.buffer.channels.<network>` toggle (default off — never post
   to a disabled one). X/Twitter is never a posting target, no exceptions.
 - BROWSER is the default for Instagram. **Metricool:** Instagram's fallback only when
   `config.posting.metricool.enabled` and only on a brand with Instagram connected; the ONLY path for

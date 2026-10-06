@@ -37,7 +37,7 @@ program or key — the doctor's fix line is the answer.
 | 10 | QC gate — optional (`config.qc.enabled`) | `qc-gate-gemini` | `qc_grade` |
 | 11 | Comment→DM CTA — optional (`config.manychat.enabled`) | `manage-comment-dm` | `resource_cta.status = live` (or `manual`) |
 | mark-ready | Enqueue for posting + `assert-ready` gate | `post_queue.py add` | `post-queue.jsonl` entry |
-| 12 | POST (separate, on demand): browser posting to Instagram Reels (default) + optional Facebook/TikTok/YouTube Shorts via Metricool (`config.posting.metricool.networks.*`, off by default), log, queue cleanup | `post-now` → `post-and-log` | live reel URL + `pipeline-log.csv` row |
+| 12 | POST (separate, on demand): browser posting to Instagram Reels (default) + optional Facebook/TikTok/YouTube Shorts via Buffer (`config.posting.buffer.channels.*`, off until a channel id is set), log, queue cleanup | `post-now` → `post-and-log` | live reel URL + `pipeline-log.csv` row |
 
 Alternate entry points: a LOCAL video file → `ingest-source` (replaces Phases 1 & 3); a pasted
 link with no instruction → **queued only** (hook-enforced, see §3).

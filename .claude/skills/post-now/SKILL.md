@@ -1,6 +1,6 @@
 ---
 name: post-now
-description: Publish the NEXT ready-to-post video from the post-queue (house rule — posting is separated from creation). The full pipeline BUILDS videos, settles their comment→DM CTA (Phase 11 — ManyChat automation LIVE when config.manychat.enabled, else stamped "manual"), and enqueues them into post-queue.jsonl; this skill is the posting half — it pops the next ready video, posts it to Instagram (default) plus any OPTIONAL Facebook/TikTok/YouTube network enabled in config.posting.metricool.networks, logs it, and removes it from both queues (the final stays in <downloads>). It only re-runs Phase 11 as a defensive fallback for queue entries whose resource_cta.status is neither live nor manual. Triggers — "/post-now", "post now", "post the next video", "publish the next reel in line", "post the queue".
+description: Publish the NEXT ready-to-post video from the post-queue (house rule — posting is separated from creation). The full pipeline BUILDS videos, settles their comment→DM CTA (Phase 11 — ManyChat automation LIVE when config.manychat.enabled, else stamped "manual"), and enqueues them into post-queue.jsonl; this skill is the posting half — it pops the next ready video, posts it to Instagram (default) plus any OPTIONAL Facebook/TikTok/YouTube network whose channel id is set in config.posting.buffer.channels, logs it, and removes it from both queues (the final stays in <downloads>). It only re-runs Phase 11 as a defensive fallback for queue entries whose resource_cta.status is neither live nor manual. Triggers — "/post-now", "post now", "post the next video", "publish the next reel in line", "post the queue".
 ---
 
 Precondition: `config/config.json` has `setup.completed: true` (run `/setup` otherwise).
@@ -19,7 +19,7 @@ Precondition: `config/config.json` has `setup.completed: true` (run `/setup` oth
 
 ## WHAT IT DOES (per video)
 Pop the next ready video → (defensive check: the CTA must be `live` or `manual`) → post to IG
-Reels + any OPTIONAL network enabled (`config.posting.metricool.networks.facebook` / `.tiktok` /
+Reels + any OPTIONAL network enabled (`config.posting.buffer.channels.facebook` / `.tiktok` /
 `.youtube`, all off by default) → log → remove from BOTH queues. **Instagram is the always-on
 default; X/Twitter is never a posting target.** The final stays in `<downloads>` — the pipeline never deletes your media.
 Posting is live/irreversible, but that is the whole point of this command — no re-confirm.
@@ -102,8 +102,8 @@ Invoke the **`post-and-log`** skill for `MAESTRO_RUN`. It runs its pre-post stru
 the browser (`post-browser-manual`) to **Instagram** (Metricool fallback only when
 `config.posting.metricool.enabled` and only on a Metricool brand that actually has Instagram connected;
 a lapsed browser session fires `post-pipeline/alert.py --platform instagram`), PLUS any OPTIONAL
-Facebook/TikTok/YouTube toggle enabled (`config.posting.metricool.networks.<network>` — Metricool-only,
-same call, no browser path). It then applies the **🛑 move-to-posted gate: the log row +
+Facebook/TikTok/YouTube network whose channel id is set (`config.posting.buffer.channels.<network>` —
+Buffer-only, one call per network, no browser path). It then applies the **🛑 move-to-posted gate: the log row +
 `next_videos.py done` run ONLY when Instagram is confirmed LIVE** (a real reel shortcode on
 `@<your-handle>` — a Metricool *schedule* is NOT live). If IG is not verified live, `post-and-log`
 **HOLDs**: no log-posted row, run stays in the next-videos queue. A FAILED optional network does not
