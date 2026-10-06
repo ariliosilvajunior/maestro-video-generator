@@ -1,5 +1,17 @@
 {
   "_doc": "Reserved CTA keywords, one per video. Written ONLY by manychat-pipeline/set_resource_cta.py (locked, atomic) - never hand-edit.",
-  "used_keywords": [],
-  "history": []
+  "used_keywords": [
+    "MEDIACAO"
+  ],
+  "history": [
+    {
+      "keyword": "MEDIACAO",
+      "variants": [
+        "MEDIACAO"
+      ],
+      "video": "MediacaoAutismo",
+      "link": "https://www.martinsfontespaulista.com.br/inclusao-da-crianca-com-autismo-na-educacao-infantil-705400/p",
+      "date": "2026-10-06"
+    }
+  ]
 }
