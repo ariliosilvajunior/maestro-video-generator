@@ -74,7 +74,12 @@
       "blog_id": "",
       "user_id": "",
       "timezone": "America/Sao_Paulo",
-      "gap_hours": 2
+      "gap_hours": 2,
+      "networks": {
+        "facebook": false,
+        "tiktok": false,
+        "youtube": false
+      }
     }
   },
   "painel": {

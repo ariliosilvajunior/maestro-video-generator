@@ -18,9 +18,10 @@ End-to-end automated pipeline: source link (next-videos queue or a manual topic)
 QC gate (**optional**, `config.qc.enabled`, default off) → **Phase 11 arms the comment→DM CTA** (`manage-comment-dm`
 — **optional**, `config.manychat.enabled`; when off the CTA is stamped `"manual"` and you deliver links by hand) →
 **mark ready-to-post (enqueue into `post-queue.jsonl`) → STOP.**
-Publishing is a SEPARATE step: **`/post-now`** posts live to **Instagram Reels ONLY** (browser posting via the
+Publishing is a SEPARATE step: **`/post-now`** posts live to **Instagram Reels** (browser posting via the
 Playwright MCP with the saved session is the default; Metricool is an optional fallback,
-`config.posting.metricool.enabled`) + logs. Build ~25–40 min; posting on your own schedule.
+`config.posting.metricool.enabled`), plus any OPTIONAL Facebook/TikTok/YouTube Shorts toggle enabled
+(`config.posting.metricool.networks.*`, off by default, Metricool-only) + logs. Build ~25–40 min; posting on your own schedule.
 All keys live in `.claude/keys.md` (see `.claude/keys.md.example`); `python3 bin/doctor.py` verifies them —
 **never hardcode keys in docs**.
 **Content sources:** the next-videos queue (links you paste), **niche discovery** (`discover-pipeline/discover_sources.py` —
