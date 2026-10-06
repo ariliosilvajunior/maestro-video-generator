@@ -60,12 +60,22 @@ Classify the video into exactly ONE **topic shape**, then pick the ACTIVE `style
 - **FALLBACK → `hand-drawn-annotation` (automatic, never blocks the run):** emit `hand-drawn-annotation` instead ONLY when premium can't run — the image provider is unavailable (key invalid, quota exhausted, outage) or `config.images.provider` is `"none"` — or a topic genuinely has nothing a premium image depicts. The motion phase ALSO auto-falls-back at build time if asset generation fails. Record the fallback reason in `rationale`.
 - **`premium-snap`** — still a narrow opt-in for dark-premium-HYPE shapes; not part of the default path.
 
-#### Premium COLOR CONCEPT by VIDEO THEME — REQUIRED field `premium_palette`
-The premium look is **no longer a fixed marble+gold**: the font + background color concept now varies per **video theme**. Classify the topic's THEME and emit the matching `premium_palette` id (one of the six `PREMIUM_PALETTES` defined in `src/library/premium.tsx`). The motion phase wraps the whole composition in `<PremiumTheme palette="<id>">` so every premium component (frame, headline, evidence, assets) recolors coherently.
+#### Premium COLOR CONCEPT — REQUIRED field `premium_palette`
+**ACCOUNT OVERRIDE (this installation — Recursos Cognitivos): `premium_palette` is `recursos-cognitivos`
+on EVERY run, full stop.** This account ships ONE branded look across its whole feed — brand
+consistency, not per-topic theme variety, is the house rule here. The brand's own manual forbids
+altering its colors (`recursos-cognitivos` in `src/library/premium.tsx` uses the exact hex: azul
+escuro `#2B4872`, azul `#3E69B7` family, verde-água `#56CAC9` accent). Do NOT theme-classify into
+one of the six generic palettes below for this account — that table exists only for other
+installations of this tool / as a documented fallback if `recursos-cognitivos` is ever missing
+from `PREMIUM_PALETTES` (which should not happen). Record `"premium_palette": "recursos-cognitivos"`
+in the brief every time; `rationale` just notes "conta usa paleta de marca fixa".
+
+<details><summary>Generic theme→palette table (NOT used by this account; reference only)</summary>
 
 | Video theme | `premium_palette` | Look |
 |---|---|---|
-| money · finance · luxury · "ganhar dinheiro" · timeless (DEFAULT when unsure) | `marble-gold` | warm marble paper + antique gold (LIGHT) |
+| money · finance · luxury · "ganhar dinheiro" · timeless | `marble-gold` | warm marble paper + antique gold (LIGHT) |
 | AI · tech · power · "o futuro" · dramatic reveal | `charcoal-gold` | deep charcoal + warm gold (DARK) |
 | data · SaaS · analytics · corporate · trust | `midnight-azure` | midnight navy + azure (DARK) |
 | growth · health · nature · productivity · "economizar tempo" | `ivory-emerald` | ivory + deep emerald (LIGHT) |
@@ -73,6 +83,8 @@ The premium look is **no longer a fixed marble+gold**: the font + background col
 | engineering · hardware · crypto · industry · "construir" | `slate-copper` | slate + copper (DARK) |
 
 Pick the ONE theme that best fits; default to `marble-gold` if genuinely ambiguous. This is independent of the abstract `palette` field below (which feeds subtitle accent cross-checks) — `premium_palette` drives the on-screen background/serif color concept. Record the theme→palette choice in `rationale`. (Hand-drawn fallback ignores `premium_palette`.)
+
+</details>
 
 Feed-freshness = vary the FRESHNESS DIALS (step 7), the `premium_palette` (when the theme legitimately differs run-to-run), and WHICH objects/icons are generated + how scenes are composed, WITHIN premium — not by swapping styles. Record in `rationale` what you varied.
 
@@ -117,7 +129,7 @@ Field rules:
 - `name` — the run's VideoName (same token used across all suffixes).
 - `style_id` — an ACTIVE id from `STYLE_GALLERY.md`.
 - `palette` — one of `ember | voltage | acid | royal | <new>` (a `<new>` value is allowed ONLY if the gallery defines it as an ACTIVE palette; never an ad-hoc color).
-- `premium_palette` — **REQUIRED for `premium-classic`** — the per-theme on-screen color concept (background + serif). One of `marble-gold | charcoal-gold | midnight-azure | ivory-emerald | bordeaux-rose | slate-copper` (the six `PREMIUM_PALETTES` in `src/library/premium.tsx`). Chosen by VIDEO THEME (see the theme→palette table above); default `marble-gold` if ambiguous. The motion phase passes it to `<PremiumTheme palette="…">`. Ignored by the hand-drawn fallback.
+- `premium_palette` — **REQUIRED for `premium-classic`** — the on-screen color concept (background + serif). **This account: always `recursos-cognitivos`** (the brand palette in `src/library/premium.tsx`; see the account-override note above — the other five generic palettes are not used here). The motion phase passes it to `<PremiumTheme palette="…">`. Ignored by the hand-drawn fallback.
 - `palette_pair` — `null`, OR one approved harmonious pair from the gallery's approved-pair list (e.g. `"ember+voltage"`). Never an arbitrary combination.
 - `motion_intensity` — `low | med | high`.
 - `broll_mode` — `stock | motion-heavy` (real stock footage is the only b-roll source; `motion-heavy` leans on hand-drawn Remotion scenes for more windows). **No AI-generated b-roll.**
@@ -137,7 +149,7 @@ Before persisting, assert:
 3. The `subtitle_personality` pack's **accent color is a member of the chosen `palette`** (cross-check the pack's accent against the palette's colors in `STYLE_GALLERY.md` / `style_packs.py`).
 4. `broll_style`, `hook_archetype`, `music_mood` each resolve in their registries.
 
-If **any** assertion fails, a registry is missing, **or the best-matching style is still a `candidate`**: **fall back to the ENFORCED DEFAULT style `premium-classic`** (premium_palette per topic theme — default `marble-gold`; motion_intensity `med`, broll_mode `motion-heavy`, hook_archetype `open-loop`, headline_formula `curiosity-gap`, subtitle_personality `clean-pop`, music_mood `light-friendly`, pacing `balanced`), emit that brief, and **log the intended style** + a warning. (`hand-drawn-annotation` is NOT the creative-direction fallback — it is selected ONLY at the motion phase when image-asset generation genuinely can't run.) **Never block the pipeline on a creative-direction failure** — a safe default always ships.
+If **any** assertion fails, a registry is missing, **or the best-matching style is still a `candidate`**: **fall back to the ENFORCED DEFAULT style `premium-classic`** (premium_palette = `recursos-cognitivos` for this account; motion_intensity `med`, broll_mode `motion-heavy`, hook_archetype `open-loop`, headline_formula `curiosity-gap`, subtitle_personality `clean-pop`, music_mood `light-friendly`, pacing `balanced`), emit that brief, and **log the intended style** + a warning. (`hand-drawn-annotation` is NOT the creative-direction fallback — it is selected ONLY at the motion phase when image-asset generation genuinely can't run.) **Never block the pipeline on a creative-direction failure** — a safe default always ships.
 
 ### 6. PERSIST into the run state (resume-safe)
 Record the brief path so it survives a resume. Write it through `maestro_state.py` (atomic, per-run `pipeline-runs/<Name>.json` — never hand-edit the JSON):

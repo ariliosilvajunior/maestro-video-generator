@@ -90,6 +90,13 @@ export const PREMIUM_PALETTES: Record<string, PremPalette> = {
     cream: "#17161a", ink: "#efe7dc", inkSoft: "#b0a596", gold: "#c2703a", goldLt: "#e0925a",
     line: "rgba(239,231,220,0.15)", shadow: "rgba(0,0,0,0.5)", vignette: "rgba(0,0,0,0.45)", sheen: "rgba(255,255,255,0.05)", dark: true,
   },
+  // BRAND — Recursos Cognitivos (education · AEE · institutional). Exact hex from the brand manual
+  // (azul escuro #2B4872 / azul #3E69B7 / verde-água #56CAC9); ink carries the mandatory 80%-blue
+  // rule, verde-água is the "chamada de atenção" accent — never substitute these two hues. — LIGHT
+  "recursos-cognitivos": {
+    cream: "#f7fafc", ink: "#2b4872", inkSoft: "#4c6b8f", gold: "#56cac9", goldLt: "#8addda",
+    line: "rgba(43,72,114,0.16)", shadow: "rgba(43,72,114,0.26)", vignette: "rgba(43,72,114,0.11)", sheen: "rgba(255,253,250,0.5)",
+  },
 };
 
 /* default = marble-gold; PREM kept as the named default export (back-compat). */

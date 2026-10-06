@@ -67,6 +67,7 @@ PALETTE_MATERIALS = {
     "ivory-emerald": "ivory ceramic body with deep emerald enamel and brass accents",
     "bordeaux-rose": "deep bordeaux lacquer body with soft rose-gold accents",
     "slate-copper": "brushed slate-grey metal body with warm copper accents",
+    "recursos-cognitivos": "matte deep-blue (#2B4872) body with glossy verde-agua teal (#56CAC9) accents, clean modern professional finish, soft rounded edges",
 }
 
 # Proven greenscreen template (keys clean at --t-low 14 --t-high 30 --despill 0.7).
@@ -413,7 +414,7 @@ def main():
     ap.add_argument("--raw-dir", default=None, help="where raw provider PNGs go (default: scratch dir)")
     ap.add_argument("--provider", default=None, help="fal | google | openai (default: config images.provider)")
     ap.add_argument("--model", default=None, help="override the provider's model id")
-    ap.add_argument("--palette", default="charcoal-gold", help="material family: " + " | ".join(PALETTE_MATERIALS))
+    ap.add_argument("--palette", default="recursos-cognitivos", help="material family: " + " | ".join(PALETTE_MATERIALS))
     ap.add_argument("--no-key", action="store_true", help="skip keying; keep raw PNGs")
     ap.add_argument("--seed-salt", default="0", help="vary to re-roll (fal/flux seeds)")
     ap.add_argument("--t-low", type=float, default=14.0)
@@ -442,7 +443,7 @@ def main():
     w = args.width or int(config.get("images.width", 1024))
     h = args.height or int(config.get("images.height", 1536))
     native_alpha = provider == "openai" and bool(config.get("images.openai_transparent", True)) and model.startswith("gpt-image")
-    material = PALETTE_MATERIALS.get(args.palette, PALETTE_MATERIALS["charcoal-gold"])
+    material = PALETTE_MATERIALS.get(args.palette, PALETTE_MATERIALS["recursos-cognitivos"])
     template = TRANSPARENT_TEMPLATE if native_alpha else GREENSCREEN_TEMPLATE
 
     with open(args.beats, encoding="utf-8") as f:

@@ -151,14 +151,20 @@ The background + serif color concept varies per VIDEO THEME. Valid ids (`PREMIUM
 
 | `premium_palette` | Theme | Look |
 |---|---|---|
-| `marble-gold` (DEFAULT) | money · finance · luxury · timeless | warm marble + antique gold (LIGHT) |
+| `recursos-cognitivos` (**ACCOUNT DEFAULT — use unless a theme row below clearly overrides**) | this account's brand (Recursos Cognitivos — AEE/education/institutional) | brand azul-escuro + verde-água, exact hex (LIGHT) |
+| `marble-gold` | money · finance · luxury · timeless | warm marble + antique gold (LIGHT) |
 | `charcoal-gold` | AI · tech · power · dramatic | deep charcoal + warm gold (DARK) |
 | `midnight-azure` | data · SaaS · corporate · trust | midnight navy + azure (DARK) |
 | `ivory-emerald` | growth · health · nature · productivity | ivory + deep emerald (LIGHT) |
 | `bordeaux-rose` | luxury · fashion · beauty · lifestyle | soft rose + bordeaux (LIGHT) |
 | `slate-copper` | engineering · hardware · crypto · industry | slate + copper (DARK) |
 
-The motion phase wraps the comp root in `<PremiumTheme palette={brief.premium_palette}>`; unknown → `marble-gold`.
+The motion phase wraps the comp root in `<PremiumTheme palette={brief.premium_palette}>`; unknown → `recursos-cognitivos` for this account.
+
+> **This account (Recursos Cognitivos) ships branded, not theme-varying, premium videos.**
+> `premium_palette` is `recursos-cognitivos` on every run unless `choose-creative-direction` finds
+> a genuinely strong theme match in the table above (rare for an AEE/education channel) — brand
+> consistency wins over per-topic variety here. See `.claude/skills/choose-creative-direction/SKILL.md`.
 
 **SCREENSHOTS in the UPPER panel:** Section 2 `PremiumEvidence` is a
 SPLIT card — the screenshot fills the top-40% panel WIDTH (a `PremiumFrame` CHILD; avatar below),
