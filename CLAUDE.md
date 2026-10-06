@@ -1,10 +1,12 @@
 # Maestro Video Generator — AI short-form video pipeline
 
 You are the operator of an end-to-end pipeline that turns a source video link (or a topic) into a
-finished, vertical 1080×1920 short: PT-BR script → talking-head avatar (HeyGen, driven through the
-browser) → premium Remotion motion graphics with generated 3D image assets + real reference
+finished, vertical 1080×1920 short: PT-BR script → cheap ElevenLabs draft narration + owner approval
+→ talking-head avatar (HeyGen REST API, lip-synced to that approved audio — see §1a, the browser path
+is dormant) → premium Remotion motion graphics with generated 3D image assets + real reference
 screenshots → viral burned subtitles → sound design → (optional QC) → (optional ManyChat comment→DM
-CTA) → ready-to-post queue → Instagram Reels posting on demand.
+CTA) → ready-to-post queue → Instagram Reels posting on demand. **Fully automated end to end** — the
+only human step is the Phase 2.6 approval of the cheap draft audio, by design (cost gate).
 
 **Everything is personalised through `config/config.json` and `.claude/keys.md`** (created by the
 setup wizard). Read `python3 lib/config.py show` when you need a value; never hardcode an avatar,
@@ -19,6 +21,22 @@ python3 lib/config.py get setup.completed   # must print true
 If either fails, invoke `setup-wizard` (skill `/setup`) and finish it. Do not "work around" a missing
 program or key — the doctor's fix line is the answer.
 
+## 1a. 🛑 HeyGen: API is the default, the browser path is dormant (06/10/2026)
+**Confirmed hard blocker on the browser path, not retry-fixable:** HeyGen's login consistently
+returns "flagged for suspicious activity" (Cloudflare anti-bot) for this environment's automated
+browser — tried repeatedly and carefully; owner reviewed the screenshots and confirmed it's a real
+security block, not a credential/2FA issue. `generate-avatar-heygen`'s browser method (Playwright
+MCP, `/create-v4`) is **DORMANT** — do not attempt it unless the owner explicitly says the browser
+path works again.
+
+**The pipeline is FULLY AUTOMATED via the HeyGen REST API instead** (no browser, no login — an
+authenticated HTTPS call, so the Cloudflare block never comes into play). Same account, same avatar
+(`config.avatar.heygen_avatar_id`) already used live by the sibling project
+`ecossistema-ia-recursos-cognitivos`'s `video_factory` agent — proven pattern: upload the Phase
+2.6-approved ElevenLabs narration as an audio asset, generate the video lip-synced to it (never
+text+voice_id — this avatar's engine rejects that with a cloned voice). Script:
+`heygen-pipeline/generate_avatar_api.py`. Full procedure: `generate-avatar-heygen` SKILL.md.
+
 ## 1. Pipeline map — Stage 0 + Phases 1–12
 | # | Phase | Skill | Output |
 |---|---|---|---|
@@ -26,8 +44,8 @@ program or key — the doctor's fix line is the answer.
 | 1 | Source select — the queue → **niche discovery** (YouTube search driven by `config.discovery.*` from `/setup`, feeds the queue when empty) → a manual topic; nothing → STOP and ask | `discover-sources` / `choose-video-topic` | queued links / topic seed |
 | 2 | PT-BR script + named entities + resource CTA keyword | `write-script-ptbr` / `generate-video-from-link` | `<downloads>/<Name>_script.txt`, `script_entities.json`, `resource_cta` |
 | 2.5 | Creative direction (default `premium-classic`, per-theme `premium_palette`) | `choose-creative-direction` | `<Name>_creative_brief.json` |
-| 2.6 | **🛑 Draft narration + owner approval (MANDATORY, blocking, the one explicit exception to §2's "never stop to ask")** — cheap ElevenLabs TTS of the exact script text (`config.avatar.elevenlabs_voice_id`), sent to the owner; WAIT for explicit approval before Phase 3 ever spends HeyGen credits. See §5. | (inline in `write-script-ptbr` / `generate-video-from-link`, no separate skill yet) | `<scratch>/<Name>_draft_narration.mp3`, owner approval |
-| 3 | Avatar video + SRT (HeyGen browser editor via Playwright MCP; Gemini transcription) | `generate-avatar-heygen` | `<Name>_avatar_1080p.mp4`, `<scratch>/<Name>.srt` |
+| 2.6 | **🛑 Draft narration + owner approval (MANDATORY, blocking, the one explicit exception to §2's "never stop to ask")** — cheap ElevenLabs TTS of the exact script text (`config.avatar.elevenlabs_voice_id`), sent to the owner (chat + Painel do Dono when `config.painel.enabled`); WAIT for explicit approval before Phase 3 ever spends a HeyGen credit. This SAME audio is what Phase 3 lip-syncs to. See §5. | (inline in `write-script-ptbr` / `generate-video-from-link`, no separate skill yet) | `<scratch>/<Name>_draft_narration.mp3`, owner approval |
+| 3 | Avatar video + SRT — HeyGen REST API, lip-synced to the Phase 2.6-approved audio (§1a); Gemini transcription | `generate-avatar-heygen` (`heygen-pipeline/generate_avatar_api.py`) | `<Name>_avatar_1080p.mp4`, `<scratch>/<Name>.srt` |
 | 4 | Visual sourcing: generated image assets + real reference screenshots (+ stock b-roll for the hand-drawn path) | `generate-image-assets`, `capture-references`, `select-brolls-stock` | `public/assets/<Name>/`, `public/refs/`, `<Name>_visual_plan.json` |
 | 4.7 | Edit direction (shadow-mode plan) | `plan-edit-direction` | `<Name>_edit_plan.json` |
 | 5 | Motion graphics — the render IS the merge | `generate-motion-remotion` | `<Name>_motion.mp4` |
@@ -40,8 +58,9 @@ program or key — the doctor's fix line is the answer.
 | mark-ready | Enqueue for posting + `assert-ready` gate | `post_queue.py add` | `post-queue.jsonl` entry |
 | 12 | POST (separate, on demand): browser posting to Instagram Reels (default) + optional Facebook/TikTok/YouTube Shorts via Buffer (`config.posting.buffer.channels.*`, off until a channel id is set), log, queue cleanup | `post-now` → `post-and-log` | live reel URL + `pipeline-log.csv` row |
 
-Alternate entry points: a LOCAL video file → `ingest-source` (replaces Phases 1 & 3); a pasted
-link with no instruction → **queued only** (hook-enforced, see §3).
+Alternate entry points: a LOCAL video file → `ingest-source` (replaces Phases 1 & 3, for editing a
+real recording instead of generating an avatar); a pasted link with no instruction → **queued only**
+(hook-enforced, see §3).
 
 Canonical docs (read the phase doc before executing a phase — never from memory):
 `FULL_PIPELINE.md` (roadmap) · `PIPELINE_DIRECTIVES.md` (the non-negotiable house rules — wins on
@@ -120,7 +139,7 @@ Scheduled/one-shot sessions run every phase INLINE (never background a phase and
   "posted" only when the reel is verified LIVE; `assert-ready` exit 0 before reporting a build.
 - **🛑 Draft-narration-before-HeyGen gate (Phase 2.6, owner directive 06/10/2026, MANDATORY on every
   run):** right after Phase 2's script is finalized (and `choose-creative-direction` if that ran),
-  BEFORE Phase 3 ever opens the HeyGen editor, generate a cheap draft of the EXACT script text via
+  BEFORE Phase 3 ever calls the HeyGen API (§1a), generate a cheap draft of the EXACT script text via
   ElevenLabs TTS (`POST https://api.elevenlabs.io/v1/text-to-speech/<config.avatar.elevenlabs_voice_id>`,
   header `xi-api-key`, body `{"text": "<script>", "model_id": "eleven_multilingual_v2"}`), save it to
   `<scratch>/<Name>_draft_narration.mp3`, send it to the owner (e.g. the `SendUserFile` tool), and
@@ -129,10 +148,14 @@ Scheduled/one-shot sessions run every phase INLINE (never background a phase and
   for script changes: revise the script, regenerate the draft audio, resend, wait again — repeat until
   approved. Only once approved does Phase 3 run, and it narrates the SAME approved script text (never
   silently reword it after approval — the HeyGen avatar must say what was approved, word for word).
-  This exists purely for cost control (HeyGen avatar credits are expensive and hard to undo; ElevenLabs
-  draft audio is cheap) — mirrors the audio-before-video approval pattern used elsewhere in the owner's
-  stack. `config.avatar.elevenlabs_voice_id` is the SAME cloned voice as `config.avatar.voice`, just
-  reached through ElevenLabs directly instead of through HeyGen's editor.
+  This exists purely for cost control (the HeyGen API spends real pay-as-you-go wallet credits per
+  render and is hard to undo; ElevenLabs draft audio is cheap) — mirrors the audio-before-video
+  approval pattern used elsewhere in the owner's stack. `config.avatar.elevenlabs_voice_id` is the
+  SAME cloned voice as `config.avatar.voice`, just reached through ElevenLabs directly. This SAME
+  approved audio file is what Phase 3 uploads and lip-syncs to (§1a) — generated once, never twice.
+  Approval of record: the Painel do Dono when `config.painel.enabled` (verify via
+  `post-pipeline/enviar_audio_preview_painel.py status`, never a chat "pode seguir" alone); the
+  chat-recorded approval is the fallback when the Painel integration is off.
 
 ## 6. Quick references
 - **Paths:** `python3 lib/paths.py` prints `<downloads>` (default `~/Downloads`) and `<scratch>`

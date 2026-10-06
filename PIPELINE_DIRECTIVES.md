@@ -50,7 +50,7 @@ always appended to `alerts.log`).
 | House rules / process compliance | **this file** | must be corrected to match |
 | §1→§3→§3b→§4→§5→§5b→§6 section grammar (full spec) | `motion-pipeline/SECTION_PIPELINE.md` | CLAUDE.md / MOTION_DESIGN_SYSTEM carry summaries + pointers |
 | Motion design bar (V8 springs, fonts, layout) | `motion-pipeline/MOTION_DESIGN_SYSTEM.md` | wins over `MOTION_INSTRUCTIONS.md` on conflict |
-| HeyGen procedure | `heygen-pipeline/HEYGEN_INSTRUCTIONS.md` | CLAUDE.md quick-ref is a summary |
+| HeyGen procedure — **API is default (06/10/2026), browser is dormant** | `.claude/skills/generate-avatar-heygen/SKILL.md` | `heygen-pipeline/HEYGEN_INSTRUCTIONS.md` documents the dormant browser fallback only |
 | Subtitle parameters | `subtitle-pipeline/SUBTITLE_INSTRUCTIONS.md` | CLAUDE.md quick-ref is a summary |
 | B-roll procedure | `broll-pipeline/BROLL_INSTRUCTIONS.md` | — |
 | QC procedure + QCR rules | `qc-pipeline/QC_INSTRUCTIONS.md` + `qc-pipeline/active-rules.md` (index: `qc-pipeline/QCR_INDEX.md`) | — |
@@ -195,8 +195,10 @@ across sections (a rejected cut did exactly this) is a DIRECTIVE VIOLATION. Veri
 motion beat, no two alike, each matches its line.
 
 ## 2d. MANDATORY DRAFT-NARRATION APPROVAL GATE (owner directive, 06/10/2026 — blocks every run)
-**Right after the script is finalized (Phase 2, + Phase 2.5 if it ran), BEFORE Phase 3 ever opens
-the HeyGen editor:** generate a cheap draft of the EXACT script text as audio via ElevenLabs TTS —
+**Right after the script is finalized (Phase 2, + Phase 2.5 if it ran), BEFORE Phase 3 ever calls
+the HeyGen API** (`generate-avatar-heygen` — API is the default method since 06/10/2026, the old
+browser path is dormant, see CLAUDE.md §1a): generate a cheap draft of the EXACT script text as
+audio via ElevenLabs TTS —
 ```
 POST https://api.elevenlabs.io/v1/text-to-speech/<config.avatar.elevenlabs_voice_id>
 Header: xi-api-key: <resolve_key("elevenlabs")>
@@ -206,13 +208,14 @@ Body:   {"text": "<the finalized script, verbatim>", "model_id": "eleven_multili
 WAITING for their explicit approval.** This is the ONE place in the entire pipeline where §7
 ("never ask") and CLAUDE.md §2 ("decide, don't ask") do NOT apply — a human checkpoint here is the
 whole point, not a lapse into asking permission for things that have a documented default. Cost
-rationale: the HeyGen avatar step costs real credits and is expensive to redo; the ElevenLabs draft
-is cheap. If the owner asks for a wording change: revise the script, regenerate the draft, resend,
-wait again — as many rounds as it takes. Only after approval does Phase 3 run, and it must narrate
-the SAME approved text verbatim — never silently reword the script after approval (the point of the
-gate is that what gets approved is exactly what the avatar says). `config.avatar.elevenlabs_voice_id`
-is the same cloned voice as `config.avatar.voice`, reached directly through ElevenLabs instead of
-through HeyGen's own editor UI.
+rationale: the HeyGen API spends real pay-as-you-go wallet credits per render and is expensive to
+redo; the ElevenLabs draft is cheap. If the owner asks for a wording change: revise the script,
+regenerate the draft, resend, wait again — as many rounds as it takes. Only after approval does
+Phase 3 run, and it must narrate the SAME approved text verbatim — never silently reword the script
+after approval (the point of the gate is that what gets approved is exactly what the avatar says).
+`config.avatar.elevenlabs_voice_id` is the same cloned voice as `config.avatar.voice`. **This exact
+approved audio file is what Phase 3 uploads to HeyGen and lip-syncs to** (`audio_asset_id`, not
+text+voice_id) — the narration is generated ONCE, reused, never regenerated a second time.
 
 **06/10/2026 — the approval of record lives in the Painel do Dono when `config.painel.enabled` is
 true**, not chat alone (owner request — same pattern already live for the Canal AEE/Video Factory
@@ -368,7 +371,8 @@ same dialog — the obvious, free, in-reach answer.
 **Canonical fallbacks (each is $0 and in-reach — take automatically, never ask):**
 | Situation | Viable fallback (take it) | Only-then hard blocker |
 |-----------|---------------------------|------------------------|
-| HeyGen **Avatar IV** out of credits ("Switch to Avatar III" offered) | Click **Switch to Avatar III** (`config.avatar.engine_fallback`) — same avatar look/voice, native 1080×1920, $0, QC-passes (QCR-154/QCR-182) | Avatar III ALSO can't submit, or `VOICE_QUOTA_EXCEEDED`, or 2FA/captcha at login |
+| HeyGen API render `failed` (transient) | Re-run `generate_avatar_api.py` once (same approved audio — it's idempotent, no double narration cost) | Fails again with the same error, or the wallet balance is too low (`GET /v2/user/remaining_quota`) |
+| *(dormant, browser path only)* HeyGen **Avatar IV** out of credits ("Switch to Avatar III" offered) | Click **Switch to Avatar III** (`config.avatar.engine_fallback`) — same avatar look/voice, native 1080×1920, $0, QC-passes (QCR-154/QCR-182) | Avatar III ALSO can't submit, or `VOICE_QUOTA_EXCEEDED`, or 2FA/captcha at login |
 | **Image provider** request fails (transient error, timeout, one bad/off-count asset) | **Retry per asset** — the batch is resumable per beat (`generate-image-assets`); re-roll only the failed asset, simplify its prompt on a timeout. A single blip never collapses the video to hand-drawn (QCR-133) | n/a |
 | **Image provider** auth/quota dead (key invalid, quota exhausted, outage after retries) | Build **hand-drawn-annotation** + alert (`alert.py --platform images`, state `images_fallback`/`images_alert_sent`, §1), then continue | n/a — hand-drawn always ships |
 | Stock b-roll **MISS** (no clip / source empty / rate-limited) | That window becomes a **hand-drawn MOTION** scene | n/a — motion always fills |

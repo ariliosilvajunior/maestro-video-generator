@@ -122,3 +122,34 @@ pegou o erro, corrigido na hora (v3 do áudio): sempre por extenso, "Atendimento
 Especializado", e o mesmo vale pra "PEI" (tirado também, virou "Plano Educacional Individualizado"
 na primeira menção e "esse plano" depois). Regra agora também em `how-to-generate-video-scripts.md`
 (regra 9) e `write-script-ptbr` SKILL.md, pra nunca mais esquecer.
+
+## Fase 3 (avatar) — API da HeyGen, navegador aposentado (06/10/2026)
+
+**Decisão final do dia, depois de muita volta:** o login por navegador na HeyGen está bloqueado de
+verdade pelo Cloudflare ("flagged for suspicious activity") — não é 2FA, não é senha errada, é
+anti-bot reconhecendo o navegador automatizado. Tentei várias vezes, com cuidado, confirmado com
+prints pro dono. Ele deixou claro que o propósito do Maestro é automação 100%, nada de solução manual
+(gravar no celular) — então a resposta certa era achar o caminho de API de verdade, não desistir.
+
+Achado: a HeyGen tem API REST paga por uso (carteira pré-paga, separada de assinatura), e o dono **já
+tinha isso configurado** no outro projeto (`ecossistema-ia-recursos-cognitivos`, agente
+`video_factory`) — mesma conta, mesmo avatar ("Bem-vindo, Professor Arilio"), já testado em produção
+lá. Só copiei o padrão: manda o áudio já aprovado (ElevenLabs, Fase 2.6) pra HeyGen como asset, ela
+faz o lip-sync nele (`audio_asset_id`, não texto+voice_id — esse avatar especificamente rejeita
+texto+voice_id com voz clonada do ElevenLabs).
+
+- Script novo: `heygen-pipeline/generate_avatar_api.py`.
+- Chaves em `.claude/keys.md` `## HeyGen`: `HEYGEN_API_KEY` (pega do `.env` da VPS do outro projeto,
+  `grep HEYGEN ~/EcossistemaIA/.env`) + `config.avatar.heygen_avatar_id` =
+  `1db8e24bb7e043159a4297c01373cefb` (mesmo avatar_id do `video_factory`).
+- **Testado de ponta a ponta com o primeiro vídeo real** (`MediacaoAutismo`): 1080x1920, h264+aac,
+  95.6s, evidence gate passou. Saldo na conta: ~1808 créditos (~R$150-160) — dá pra várias semanas
+  nessa cadência.
+- De quebra, achei e corrigi um bug real no `transcribe_gemini_srt.py`: o prompt tinha um exemplo
+  fixo ("~60 segmentos pra um clipe de 1 minuto") que o Gemini lia como limite de TEMPO — cortava a
+  transcrição exatamente aos 60s em qualquer clipe mais longo (visto ao vivo, duas vezes seguidas,
+  no áudio de 95.6s). Corrigido pra informar a duração real e escalar o orçamento de segmentos.
+
+`generate-avatar-heygen` SKILL.md e `CLAUDE.md` §1a documentam o método novo como padrão; o navegador
+(`HEYGEN_INSTRUCTIONS.md`) fica só como fallback dormente, não tentar de novo sem o dono confirmar
+que o bloqueio do Cloudflare sumiu.

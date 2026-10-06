@@ -1,6 +1,13 @@
 # HeyGen Avatar Video Generation — Phase 3
 
-**Phase 3 generates the AI avatar video. There is EXACTLY ONE method: the AI Studio browser editor (`/create-v4`), driven by Playwright MCP.**
+> **🧊 DORMANT since 06/10/2026 — this whole document describes the FALLBACK method.** The default
+> is now the HeyGen REST API (no browser, no Cloudflare login to get blocked by) —
+> `heygen-pipeline/generate_avatar_api.py`, documented in `.claude/skills/generate-avatar-heygen/SKILL.md`.
+> This browser method is kept only in case the API is ever unavailable and the owner explicitly asks
+> to try it; do not use it otherwise (HeyGen's login consistently flags this environment's automated
+> browser as suspicious — confirmed, non-retry-fixable).
+
+**Phase 3 generates the AI avatar video. The method below is the browser editor (`/create-v4`), driven by Playwright MCP — currently dormant (see banner above).**
 
 > **WHY BROWSER (verified live).** The browser AI Studio editor bills the monthly
 > subscription credits (example plan: AvatarIV = 20 credits/min; ~2000/month ≈ ~100 short
