@@ -85,3 +85,29 @@ No CLI. Write the file with the Write tool, then verify:
 mkdir -p <scratch> && cp <downloads>/<VideoName>_script.txt <scratch>/heygen_script.txt
 wc -c -w <scratch>/heygen_script.txt   # <= 2520 chars
 ```
+
+## 🛑 MANDATORY Phase 2.6 — draft narration + owner approval (BEFORE Phase 3, no exceptions)
+Once the script (and Phase 2.5's creative brief, if that already ran) is final, generate a cheap
+ElevenLabs draft of the EXACT script text and send it to the owner — **then STOP and wait for their
+explicit approval.** This is the one deliberate human checkpoint in the whole pipeline (see
+`PIPELINE_DIRECTIVES.md` §2d / `CLAUDE.md` §2's named exception) — never skip it, never treat a past
+run's approval as covering this one.
+```bash
+EL_KEY=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib.api_keys import resolve_key; print(resolve_key("elevenlabs"))')
+VOICE_ID=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib import config; print(config.get("avatar.elevenlabs_voice_id"))')
+mkdir -p <scratch>
+python3 -c "
+import json, urllib.request, os, sys
+text = open('<downloads>/<VideoName>_script.txt', encoding='utf-8').read()
+req = urllib.request.Request(
+    f'https://api.elevenlabs.io/v1/text-to-speech/{os.environ[\"VOICE_ID\"]}',
+    data=json.dumps({'text': text, 'model_id': 'eleven_multilingual_v2'}).encode(),
+    headers={'xi-api-key': os.environ['EL_KEY'], 'Content-Type': 'application/json'},
+)
+with urllib.request.urlopen(req, timeout=60) as r, open('<scratch>/<VideoName>_draft_narration.mp3', 'wb') as f:
+    f.write(r.read())
+"
+```
+Send `<scratch>/<VideoName>_draft_narration.mp3` to the owner (e.g. `SendUserFile`). Do NOT proceed
+to Phase 3 until they explicitly approve. A requested wording change → revise the script → regenerate
+the draft → resend → wait again. Once approved, Phase 3 must narrate this SAME text verbatim.

@@ -26,6 +26,7 @@ program or key — the doctor's fix line is the answer.
 | 1 | Source select — the queue → **niche discovery** (YouTube search driven by `config.discovery.*` from `/setup`, feeds the queue when empty) → a manual topic; nothing → STOP and ask | `discover-sources` / `choose-video-topic` | queued links / topic seed |
 | 2 | PT-BR script + named entities + resource CTA keyword | `write-script-ptbr` / `generate-video-from-link` | `<downloads>/<Name>_script.txt`, `script_entities.json`, `resource_cta` |
 | 2.5 | Creative direction (default `premium-classic`, per-theme `premium_palette`) | `choose-creative-direction` | `<Name>_creative_brief.json` |
+| 2.6 | **🛑 Draft narration + owner approval (MANDATORY, blocking, the one explicit exception to §2's "never stop to ask")** — cheap ElevenLabs TTS of the exact script text (`config.avatar.elevenlabs_voice_id`), sent to the owner; WAIT for explicit approval before Phase 3 ever spends HeyGen credits. See §5. | (inline in `write-script-ptbr` / `generate-video-from-link`, no separate skill yet) | `<scratch>/<Name>_draft_narration.mp3`, owner approval |
 | 3 | Avatar video + SRT (HeyGen browser editor via Playwright MCP; Gemini transcription) | `generate-avatar-heygen` | `<Name>_avatar_1080p.mp4`, `<scratch>/<Name>.srt` |
 | 4 | Visual sourcing: generated image assets + real reference screenshots (+ stock b-roll for the hand-drawn path) | `generate-image-assets`, `capture-references`, `select-brolls-stock` | `public/assets/<Name>/`, `public/refs/`, `<Name>_visual_plan.json` |
 | 4.7 | Edit direction (shadow-mode plan) | `plan-edit-direction` | `<Name>_edit_plan.json` |
@@ -59,6 +60,11 @@ provider request fails → retry per asset; provider genuinely dead → hand-dra
 b-roll miss → motion scene. STOP only on a genuine hard blocker: a 2FA/captcha a human must clear,
 a dead/blocked API key with no alternative, or anything that would cost money (never buy credits or
 upgrade a plan).
+
+**ONE explicit, standing exception (owner directive, 06/10/2026):** Phase 2.6 (draft narration
+approval) ALWAYS blocks and waits for the owner — this is not a "should I continue?" check, it is
+the deliberate cost gate before the expensive HeyGen step. Never skip it, never auto-approve it,
+never treat it as implied by a prior approval of a different run. See §5.
 
 ## 3. The next-videos queue (link-first)
 - **Bare link in → enqueue only.** The `UserPromptSubmit` hook already ran
@@ -112,6 +118,21 @@ Scheduled/one-shot sessions run every phase INLINE (never background a phase and
   (riser peak on the hook end, music drops in after it, clicks on every cut, music at 0.07).
 - **Never fake green:** a phase is done when its artifact exists and its gate passed; a post is
   "posted" only when the reel is verified LIVE; `assert-ready` exit 0 before reporting a build.
+- **🛑 Draft-narration-before-HeyGen gate (Phase 2.6, owner directive 06/10/2026, MANDATORY on every
+  run):** right after Phase 2's script is finalized (and `choose-creative-direction` if that ran),
+  BEFORE Phase 3 ever opens the HeyGen editor, generate a cheap draft of the EXACT script text via
+  ElevenLabs TTS (`POST https://api.elevenlabs.io/v1/text-to-speech/<config.avatar.elevenlabs_voice_id>`,
+  header `xi-api-key`, body `{"text": "<script>", "model_id": "eleven_multilingual_v2"}`), save it to
+  `<scratch>/<Name>_draft_narration.mp3`, send it to the owner (e.g. the `SendUserFile` tool), and
+  **WAIT for their explicit approval before proceeding** — this is a real blocking human checkpoint,
+  the one place in the whole pipeline where "decide, don't ask" (§2) does not apply. If the owner asks
+  for script changes: revise the script, regenerate the draft audio, resend, wait again — repeat until
+  approved. Only once approved does Phase 3 run, and it narrates the SAME approved script text (never
+  silently reword it after approval — the HeyGen avatar must say what was approved, word for word).
+  This exists purely for cost control (HeyGen avatar credits are expensive and hard to undo; ElevenLabs
+  draft audio is cheap) — mirrors the audio-before-video approval pattern used elsewhere in the owner's
+  stack. `config.avatar.elevenlabs_voice_id` is the SAME cloned voice as `config.avatar.voice`, just
+  reached through ElevenLabs directly instead of through HeyGen's editor.
 
 ## 6. Quick references
 - **Paths:** `python3 lib/paths.py` prints `<downloads>` (default `~/Downloads`) and `<scratch>`

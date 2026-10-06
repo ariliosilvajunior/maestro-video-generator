@@ -242,6 +242,15 @@ def check_keys(live):
         st = _probe(f"https://generativelanguage.googleapis.com/v1beta/models?key={gem}")
         add(S, "Gemini key accepted (live)", st == 200, f"HTTP {st}", "the key is invalid or the API is not enabled for its project")
 
+    el = resolve_key("elevenlabs")
+    add(S, "ElevenLabs key (pre-HeyGen draft narration)", bool(el), "present" if el else "missing",
+        "python3 bin/setup_init.py key ElevenLabs <sk_...>   — https://elevenlabs.io/app/settings/api-keys")
+    add(S, "avatar.elevenlabs_voice_id", filled("avatar.elevenlabs_voice_id"), config.get("avatar.elevenlabs_voice_id", "(empty)"),
+        "python3 bin/setup_init.py set avatar.elevenlabs_voice_id <voice_id>   — GET https://api.elevenlabs.io/v1/voices")
+    if live and el:
+        st = _probe("https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": el})
+        add(S, "ElevenLabs key accepted (live)", st == 200, f"HTTP {st}", "the key was rejected")
+
     if prov == "fal":
         k = resolve_key("fal")
         add(S, "fal.ai key (images.provider = fal)", bool(k), "present" if k else "missing", "python3 bin/setup_init.py key fal <key>   — https://fal.ai/dashboard/keys")

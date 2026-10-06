@@ -53,6 +53,12 @@ PIXABAY_API_KEY, COVERR_API_KEY, METRICOOL_TOKEN).
 - Saved session: `.claude/auth/manychat-storage-state.json`
 - Get one: https://manychat.partnerlinks.io/iyoaakb3km0q
 
+## ElevenLabs (REQUIRED — cheap draft narration for the pre-HeyGen audio-approval gate)
+- API Key: `PASTE_ELEVENLABS_KEY_HERE`
+- Get one: https://elevenlabs.io/app/settings/api-keys (same account as the cloned avatar voice)
+- `config.avatar.elevenlabs_voice_id` = the voice_id of your cloned voice (list via
+  `GET https://api.elevenlabs.io/v1/voices` with header `xi-api-key`), same voice as `config.avatar.voice`
+
 ## Buffer (optional — Facebook/TikTok/YouTube auto-posting, config posting.buffer.enabled)
 - API Key: `PASTE_BUFFER_KEY_HERE`
 - Get one: https://publish.buffer.com/settings/api (needs the free plan's "Explore Buffer API"

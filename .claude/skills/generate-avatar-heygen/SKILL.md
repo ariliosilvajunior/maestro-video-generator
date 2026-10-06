@@ -9,6 +9,14 @@ Precondition: `config/config.json` has `setup.completed: true` (run `/setup` oth
 
 **Read `heygen-pipeline/HEYGEN_INSTRUCTIONS.md` before running** — it carries the full, verified browser workflow with current selectors. There is exactly ONE method: the AI Studio browser editor (`/create-v4`) via Playwright MCP.
 
+## 🛑 PRECONDITION — Phase 2.6 draft-narration approval MUST already be confirmed
+**Never open the HeyGen editor for a script the owner has not explicitly approved via the
+Phase 2.6 draft-audio gate** (`write-script-ptbr` § "MANDATORY Phase 2.6", `PIPELINE_DIRECTIVES.md`
+§2d). HeyGen credits are real money and hard to undo — the whole point of Phase 2.6 is to catch
+wording problems on the cheap ElevenLabs draft, not after an expensive avatar render. If you reach
+this skill and Phase 2.6 has not visibly happened (no approval in this conversation / run state),
+STOP and run it first — do not treat this as implied or skippable.
+
 ## WHY BROWSER (no extra cost)
 The browser AI Studio editor uses the monthly subscription credits (example plan: AvatarIV = 20 credits/min, ~2000/mo ≈ ~100 short videos), so a short video is effectively free. A 55s clip drew ~19 credits. This is the only sanctioned generation path — drive it with Playwright MCP.
 

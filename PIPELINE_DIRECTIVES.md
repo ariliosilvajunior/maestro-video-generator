@@ -194,6 +194,26 @@ or if it collapses into the caption↔hero ping-pong. Tag ids honestly by type (
 across sections (a rejected cut did exactly this) is a DIRECTIVE VIOLATION. Verify (at QC when enabled, otherwise by eye): one frame per
 motion beat, no two alike, each matches its line.
 
+## 2d. MANDATORY DRAFT-NARRATION APPROVAL GATE (owner directive, 06/10/2026 — blocks every run)
+**Right after the script is finalized (Phase 2, + Phase 2.5 if it ran), BEFORE Phase 3 ever opens
+the HeyGen editor:** generate a cheap draft of the EXACT script text as audio via ElevenLabs TTS —
+```
+POST https://api.elevenlabs.io/v1/text-to-speech/<config.avatar.elevenlabs_voice_id>
+Header: xi-api-key: <resolve_key("elevenlabs")>
+Body:   {"text": "<the finalized script, verbatim>", "model_id": "eleven_multilingual_v2"}
+```
+— save the response to `<scratch>/<Name>_draft_narration.mp3`, send it to the owner, and **STOP,
+WAITING for their explicit approval.** This is the ONE place in the entire pipeline where §7
+("never ask") and CLAUDE.md §2 ("decide, don't ask") do NOT apply — a human checkpoint here is the
+whole point, not a lapse into asking permission for things that have a documented default. Cost
+rationale: the HeyGen avatar step costs real credits and is expensive to redo; the ElevenLabs draft
+is cheap. If the owner asks for a wording change: revise the script, regenerate the draft, resend,
+wait again — as many rounds as it takes. Only after approval does Phase 3 run, and it must narrate
+the SAME approved text verbatim — never silently reword the script after approval (the point of the
+gate is that what gets approved is exactly what the avatar says). `config.avatar.elevenlabs_voice_id`
+is the same cloned voice as `config.avatar.voice`, reached directly through ElevenLabs instead of
+through HeyGen's own editor UI.
+
 ## 3. THE 100x MOTION BAR (premium explainer, not kinetic text)
 A video must read like a Vox / Cleo-Abram / Kurzgesagt explainer, NOT generic kinetic text over an
 abstract background. Mandatory, enforced in `generate-motion-remotion` + `MOTION_DESIGN_SYSTEM.md`:
@@ -246,6 +266,7 @@ reference-video runs (`generate-video-from-link`); both converge on `post-and-lo
 |-----------|----------|-----------------|
 | Premium-classic default (copy `PremiumSectionRef.tsx`) | `choose-creative-direction` step 3 (emits `premium-classic`) | `generate-motion-remotion` step 0 (reads brief `style_id`; premium-classic default, hand-drawn ONLY on the image-provider-unavailable fallback) + step 5 conformance gate + `assertSectionGrammar` render guard + `check_opening_headline.py` (blocks a silent downgrade) |
 | Tool naming | `write-script-ptbr` RULES (hard gate) → `script_entities.json` | Phase 2.5 derives `reference_capture`; QC #14 (when enabled) |
+| Draft-narration approval before HeyGen (§2d) | `write-script-ptbr` / `generate-video-from-link` (finalized script text) | Phase 2.6 — ElevenLabs TTS draft sent to the owner; `generate-avatar-heygen` (Phase 3) MUST NOT start until approval is confirmed |
 | Reference screenshots | `choose-creative-direction` `references[]` | `maestro-video-pipeline` Stage 4 (`capture-references` non-skippable) + motion step 0/3 + step 5 grep + QC `REFERENCE_MISSING` (when enabled) |
 | 100x motion | `MOTION_DESIGN_SYSTEM.md` §0/§3 | `generate-motion-remotion` step 3 + step 5 |
 | No AI video | root `CLAUDE.md` | this file §4; b-roll is stock-only |

@@ -14,7 +14,9 @@
     "look": "YourAvatar -- 1",
     "fallback_look": "",
     "voice": "Your Voice",
-    "engine_fallback": "Avatar III"
+    "engine_fallback": "Avatar III",
+    "elevenlabs_voice_id": "",
+    "elevenlabs_voice_name": ""
   },
   "images": {
     "provider": "fal",
