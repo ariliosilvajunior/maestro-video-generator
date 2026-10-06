@@ -88,6 +88,7 @@ DEFAULTS = {
         "instagram_handle": "",
         "metricool": {"enabled": False, "blog_id": "", "user_id": "", "timezone": "America/Sao_Paulo", "gap_hours": 2},
     },
+    "painel": {"enabled": False, "url": "https://painel.recursoscognitivos.com.br"},
     "qc": {"enabled": False, "threshold": 75, "max_iterations": 3},
     "notify": {"method": "log", "webhook_url": "", "command": ""},
     "paths": {"downloads": "~/Downloads", "tmp": "", "ffmpeg": ""},

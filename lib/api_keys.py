@@ -27,6 +27,7 @@ ENV_ALIASES = {
     "pixabay": ("PIXABAY_API_KEY", "PIXABAY_KEY"),
     "coverr": ("COVERR_API_KEY", "COVERR_KEY"),
     "metricool": ("METRICOOL_TOKEN", "METRICOOL_API_KEY", "MC_AUTH"),
+    "painel": ("PAINEL_TOKEN", "CONTENT_FACTORY_API_TOKEN"),
 }
 
 # keys.md section headers -> canonical service names (case-insensitive match on the header text)
@@ -39,6 +40,7 @@ SECTION_ALIASES = {
     "pixabay": ("pixabay",),
     "coverr": ("coverr",),
     "metricool": ("metricool",),
+    "painel": ("painel",),
 }
 
 _KEY_LINE = re.compile(r"(?:API\s*Key|Key|Token|Auth)\s*:\s*`?([^`\s]+)`?", re.I)

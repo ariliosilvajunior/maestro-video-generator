@@ -79,7 +79,10 @@ python3 bin/smoke_test.py        # render premium + legendas + som com os assets
 2. Diga **"roda o pipeline"** → o Stage 0 pega o link mais antigo, escreve o roteiro em PT-BR, gera o
    avatar, monta o motion, legenda, mixa o som e deixa o vídeo pronto em `~/Downloads/<Nome>_music.mp4`
    e na fila de postagem (`post-queue.jsonl`). Não publica.
-3. **`/post-now`** → publica o próximo vídeo pronto no Instagram Reels pelo navegador, registra em
+3. **Revisão no Painel do Dono (opcional, recomendado):**
+   `python3 post-pipeline/enviar_para_painel.py` manda o vídeo pronto pra tela "Vídeos Maestro" em
+   `painel.recursoscognitivos.com.br`, pra assistir/aprovar antes de publicar — ver NOTAS_DONO.md.
+4. **`/post-now`** → publica o próximo vídeo pronto no Instagram Reels pelo navegador, registra em
    `pipeline-log.csv` e limpa as filas.
 
 Também dá para começar de um **tema/transcrição** (o pipeline entra na Fase 2) ou de um **arquivo de
