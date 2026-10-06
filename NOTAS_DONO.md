@@ -111,3 +111,14 @@ todo roteiro deve:
 
 Já atualizado em `how-to-generate-video-scripts.md` (regras 3 e 6) e
 `.claude/skills/write-script-ptbr/SKILL.md`.
+
+## Nunca falar a sigla "AEE" na voz do avatar (regra existente, portada pra cá em 06/10/2026)
+
+O dono já tinha dado essa regra antes (03/10/2026), documentada em `.claquete/config.md` no
+repositório `ecossistema-ia-recursos-cognitivos` ("vários erro AEE horrivel nunca dica isso ja que
+não sabe" — a voz do avatar pronuncia a sigla errado) — mas essa sessão não tinha essa regra
+replicada aqui, e o roteiro v2 do `MediacaoAutismo` acabou com "Professor de AEE" no gancho. O dono
+pegou o erro, corrigido na hora (v3 do áudio): sempre por extenso, "Atendimento Educacional
+Especializado", e o mesmo vale pra "PEI" (tirado também, virou "Plano Educacional Individualizado"
+na primeira menção e "esse plano" depois). Regra agora também em `how-to-generate-video-scripts.md`
+(regra 9) e `write-script-ptbr` SKILL.md, pra nunca mais esquecer.

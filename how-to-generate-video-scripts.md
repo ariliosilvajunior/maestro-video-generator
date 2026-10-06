@@ -28,7 +28,15 @@ default `/tmp/claude`; `<downloads>` = `paths.downloads`, default `~/Downloads` 
    instead of it — both can close the script together.
 7. NO CTAs like "se inscreva" or "link na bio" — just value delivery
 8. Clean PT-BR (`config.brand.language`, default `pt-BR`): proper accents (ç, ã, é, ê, ó, ú, í, â, õ), numbers written out, no English jargon, no URLs
-9. TTS-safe: no brackets, no emojis, no formatting
+9. TTS-safe: no brackets, no emojis, no formatting. **Never write the acronym "AEE" in spoken text
+   (owner directive, 03/10/2026, confirmed in a sibling project's `.claquete/config.md`: "vários erro
+   AEE horrivel nunca dica isso ja que não sabe" — the HeyGen/ElevenLabs voice mispronounces it).
+   ALWAYS spell it out: "Atendimento Educacional Especializado".** The same caution applies to ANY
+   acronym that renders badly when spoken — when in doubt (short vowel-heavy acronyms are the worst
+   offenders: AEE, PEI, PDI, TGD, SRM...), spell the term out in full on first mention, then refer
+   back with "esse plano" / "esse atendimento" / etc. rather than repeating the acronym. `brand.niche`
+   literally says "PEI/ACI" but that's shorthand for the CONFIG field, not permission to speak the
+   letters — listen to the rendered audio before approving a script that uses one.
 10. **MANDATORY ACCENT CHECK:** Before saving, verify ALL Portuguese diacritics are present. Common words: você, não, também, já, até, só, está, código, conteúdo, automação, estratégia, gestão, análise, inteligência, prática, padrão, revolução, cérebro, calendário, número
 11. **COMMENT-CTA + UNIQUE KEYWORD — EVERY VIDEO SHIPS A RESOURCE LINK (feeds Phase 11).**
     **HARD RULE: no video from this repo may lack a resource link.** `resource_cta.enabled` is effectively ALWAYS `true`, whether or not the ManyChat automation is on (`config.manychat.enabled`). Phase 11 runs at the END OF CREATION **before the video is even enqueued for posting**: with ManyChat on it arms the dedicated automation (`status=live`); with ManyChat off it stamps `status=manual` and you DM the link by hand — either way the keyword + link go in the caption. A video that can't produce a fitting resource HOLDS THE BUILD.

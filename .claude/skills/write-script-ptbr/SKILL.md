@@ -78,7 +78,11 @@ Takes a topic seed (English transcript/seed allowed) and produces an original **
 - Clean PT-BR: proper accents, numbers written out, no English jargon, no URLs.
 - **NAME REAL ENTITIES (HARD GATE — no genericization; see `PIPELINE_DIRECTIVES.md` §2).** Before writing, scan the topic seed (`transcript`, `hook`, `entities`) for any named real tool / product / app / model / company / GitHub repo / website (e.g. "Anijam", "Claude Code", "Cursor", "Banana Skill"). If the source names a specific real thing, the PT-BR script MUST name it explicitly — you MAY NOT generalize it into a capability/category ("agentes de inteligência artificial", "a própria IA", "uma ferramenta"). A real style-drift run (source named "Anijam", script said only "agentes de IA") destroyed the reference-capture evidence trail and shipped a screenshot-less video — do not repeat it. A tool with no real name in the source is the ONLY case you may speak in category terms.
 - **EMIT the named-entities list.** Write (Write tool) `<downloads>/<VideoName>_entities.json` and copy to `<scratch>/script_entities.json` = a JSON array of `{ "entity": "<exact name as said in the script>", "kind": "tool|product|company|repo|site", "url_hint": "<best canonical URL guess, or empty>" }`. Use `[]` ONLY when the topic genuinely names nothing real. This file drives the MANDATORY `reference_capture` derivation in Phase 2.5 and the non-skippable screenshot capture in Phase 4.
-- TTS-safe: no brackets, no emojis, no formatting, no stage directions.
+- TTS-safe: no brackets, no emojis, no formatting, no stage directions. **Never write "AEE" in
+  spoken text — the voice mispronounces it (owner directive, 03/10/2026). Always spell out
+  "Atendimento Educacional Especializado"; same caution for PEI/PDI/TGD/SRM and any other
+  vowel-heavy acronym — spell out in full on first mention, then refer back with "esse plano" etc.**
+  Full rule + rationale: `how-to-generate-video-scripts.md` rule 9.
 - **MANDATORY ACCENT CHECK** before saving (você, não, também, código, conteúdo, automação...). The agent must self-verify diacritics — re-read the saved file and confirm accents survived before Phase 3. There is no automated gate.
 - **Use the Write tool, NEVER bash heredoc/echo** — bash redirection can silently strip UTF-8 diacritics.
 
