@@ -17,6 +17,17 @@ wording problems on the cheap ElevenLabs draft, not after an expensive avatar re
 this skill and Phase 2.6 has not visibly happened (no approval in this conversation / run state),
 STOP and run it first — do not treat this as implied or skippable.
 
+**Verify, don't assume (06/10/2026).** When `config.painel.enabled` is true, the approval of record
+lives in the Painel do Dono, not the chat — re-confirm it before spending any HeyGen credit:
+```bash
+python3 post-pipeline/enviar_audio_preview_painel.py status --run "$MAESTRO_RUN"
+```
+Proceed ONLY on `audio_aprovado`. If it prints `aguardando_aprovacao_audio`, the owner has not
+approved yet even if they said something encouraging in chat — wait and re-check, never take a
+verbal "pode seguir" as a substitute for the Painel status. `rejeitado` → go back to
+`write-script-ptbr` Phase 2.6, revise, resubmit. When `painel.enabled` is false, the chat-only
+approval recorded in the run state is the fallback approval of record.
+
 ## WHY BROWSER (no extra cost)
 The browser AI Studio editor uses the monthly subscription credits (example plan: AvatarIV = 20 credits/min, ~2000/mo ≈ ~100 short videos), so a short video is effectively free. A 55s clip drew ~19 credits. This is the only sanctioned generation path — drive it with Playwright MCP.
 

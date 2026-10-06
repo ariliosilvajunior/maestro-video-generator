@@ -88,10 +88,18 @@ wc -c -w <scratch>/heygen_script.txt   # <= 2520 chars
 
 ## 🛑 MANDATORY Phase 2.6 — draft narration + owner approval (BEFORE Phase 3, no exceptions)
 Once the script (and Phase 2.5's creative brief, if that already ran) is final, generate a cheap
-ElevenLabs draft of the EXACT script text and send it to the owner — **then STOP and wait for their
-explicit approval.** This is the one deliberate human checkpoint in the whole pipeline (see
-`PIPELINE_DIRECTIVES.md` §2d / `CLAUDE.md` §2's named exception) — never skip it, never treat a past
-run's approval as covering this one.
+ElevenLabs draft of the EXACT script text and send it to the owner via the **Painel do Dono** —
+**then STOP and wait for their explicit approval.** This is the one deliberate human checkpoint in
+the whole pipeline (see `PIPELINE_DIRECTIVES.md` §2d / `CLAUDE.md` §2's named exception) — never
+skip it, never treat a past run's approval as covering this one.
+
+**06/10/2026 — approval now lives in the Painel's "Preview de áudio esperando aprovação — Vídeos
+Maestro" section (owner request), not chat alone.** This mirrors the Canal AEE (Video Factory)
+pattern already live there. Backend: `ecossistema-ia-recursos-cognitivos`,
+`agentes/content_factory/main.py` + `painel/main.py` (branch
+`claude/ecossistema-ia-agentes-retry-oso16t`, commit `e31d200`) — a new `VideoMaestro` status chain
+`aguardando_aprovacao_audio` → `audio_aprovado`.
+
 ```bash
 EL_KEY=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib.api_keys import resolve_key; print(resolve_key("elevenlabs"))')
 VOICE_ID=$(python3 -c 'import sys; sys.path.insert(0,"."); from lib import config; print(config.get("avatar.elevenlabs_voice_id"))')
@@ -108,6 +116,28 @@ with urllib.request.urlopen(req, timeout=60) as r, open('<scratch>/<VideoName>_d
     f.write(r.read())
 "
 ```
-Send `<scratch>/<VideoName>_draft_narration.mp3` to the owner (e.g. `SendUserFile`). Do NOT proceed
-to Phase 3 until they explicitly approve. A requested wording change → revise the script → regenerate
-the draft → resend → wait again. Once approved, Phase 3 must narrate this SAME text verbatim.
+
+Submit it to the Painel (writes `painel_video_id` + `draft_narration_status` into the run state):
+```bash
+python3 post-pipeline/enviar_audio_preview_painel.py enviar --run <VideoName> \
+    --audio <scratch>/<VideoName>_draft_narration.mp3 --tema "<topic/hook in a few words>" \
+    [--keyword <CTA keyword, if resource_cta is already set>]
+```
+Also send `<scratch>/<VideoName>_draft_narration.mp3` to the owner in chat (e.g. `SendUserFile`) as a
+convenience/heads-up — but the Painel is the **authoritative** approval record, not the chat message.
+Tell the owner it's waiting in "Preview de áudio esperando aprovação — Vídeos Maestro" on the Painel.
+
+**Do NOT proceed to Phase 3 on the owner's word alone — verify the Painel status before opening
+HeyGen:**
+```bash
+python3 post-pipeline/enviar_audio_preview_painel.py status --run <VideoName>
+```
+- `aguardando_aprovacao_audio` → still waiting, do not proceed (poll again later — a scheduled
+  check-in every 10-20 min is reasonable; never busy-loop).
+- `audio_aprovado` → proceed to Phase 3, narrating this SAME approved text verbatim.
+- `rejeitado` → the owner rejected it; ask what to change, revise the script, regenerate the draft,
+  resubmit with `enviar` (creates a fresh Painel entry), wait again.
+
+If `config.painel.enabled` is `false` (Painel integration not deployed/configured yet — see
+`NOTAS_DONO.md`), fall back to the chat-only flow: send the file via `SendUserFile` and wait for the
+owner's explicit "aprovado" in the conversation instead. Prefer the Painel path whenever it's enabled.

@@ -214,6 +214,15 @@ gate is that what gets approved is exactly what the avatar says). `config.avatar
 is the same cloned voice as `config.avatar.voice`, reached directly through ElevenLabs instead of
 through HeyGen's own editor UI.
 
+**06/10/2026 — the approval of record lives in the Painel do Dono when `config.painel.enabled` is
+true**, not chat alone (owner request — same pattern already live for the Canal AEE/Video Factory
+agent in `ecossistema-ia-recursos-cognitivos`). Submit with
+`python3 post-pipeline/enviar_audio_preview_painel.py enviar --run <Name> --audio <path> --tema "…"`
+and verify with `... status --run <Name>` before Phase 3 — proceed ONLY on `audio_aprovado`, never
+on a chat "pode seguir" alone. Full procedure: `write-script-ptbr` SKILL.md § Phase 2.6. When
+`painel.enabled` is false, the chat-only flow (send the file, wait for explicit chat approval) is
+the fallback.
+
 ## 3. THE 100x MOTION BAR (premium explainer, not kinetic text)
 A video must read like a Vox / Cleo-Abram / Kurzgesagt explainer, NOT generic kinetic text over an
 abstract background. Mandatory, enforced in `generate-motion-remotion` + `MOTION_DESIGN_SYSTEM.md`:

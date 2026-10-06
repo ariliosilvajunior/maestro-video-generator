@@ -51,3 +51,42 @@ o dono aprovar na tela do Painel antes de publicar de verdade. Ainda não
 existe checagem automática de "o dono já aprovou?" dentro do `/post-now` —
 isso é uma v2, por enquanto é combinado por fora (perguntar/confirmar com
 o dono antes de publicar).
+
+## Preview de áudio (Fase 2.6) também pelo Painel (06/10/2026)
+
+O dono pediu que a aprovação do áudio-rascunho (ElevenLabs, antes da HeyGen
+— ver `PIPELINE_DIRECTIVES.md` §2d) apareça na mesma tela que já existe pro
+Canal AEE ("Preview de áudio esperando aprovação"), não só como arquivo
+solto no chat. Construído e testado nesta sessão:
+
+- `ecossistema-ia-recursos-cognitivos`, branch
+  `claude/ecossistema-ia-agentes-retry-oso16t`, commit `e31d200` — novo
+  status `aguardando_aprovacao_audio` → `audio_aprovado` em `VideoMaestro`
+  (`agentes/content_factory/main.py`), rotas-proxy + seção nova no Painel
+  (`painel/main.py` + `painel/paginas.py`). 82 testes novos/existentes
+  passando lá, suíte inteira (1530 testes) verde.
+- `maestro-video-generator` (este repo): script novo
+  `post-pipeline/enviar_audio_preview_painel.py` (`enviar` / `status`),
+  `post-pipeline/enviar_para_painel.py` atualizado pra linkar o vídeo
+  pronto ao MESMO registro do Painel (`video_id`) quando o áudio já foi
+  aprovado por lá. Skills `write-script-ptbr` (Fase 2.6) e
+  `generate-avatar-heygen` (precondição) atualizadas pra usar/checar o
+  Painel como fonte de verdade da aprovação quando `painel.enabled=true`.
+
+**⚠️ PENDENTE: fazer o deploy na VPS antes disso funcionar de verdade.**
+O código já está no GitHub mas o servidor ainda roda a versão antiga
+(testei: `POST /videos-maestro/audio-preview` no Painel ainda dá 404) —
+ninguém com acesso ao terminal da VPS rodou o deploy ainda. Comando (ver
+`docs/INFRAESTRUTURA.md` no `ecossistema-ia-recursos-cognitivos`):
+```
+cd ~/EcossistemaIA
+git pull origin claude/ecossistema-ia-agentes-retry-oso16t
+docker compose build content_factory painel
+docker compose up -d content_factory painel
+```
+Esta sessão (Maestro) não tem acesso ao terminal da VPS — só o dono (pelo
+Hostinger) ou uma sessão do `ecossistema-ia-recursos-cognitivos` com esse
+acesso consegue rodar isso. Até lá, `config.painel.enabled` continua
+`false` neste repositório (de propósito — evita erro 404 confuso no meio
+de um run) e o primeiro vídeo real (`MediacaoAutismo`) fica pausado na
+Fase 2.6 esperando esse deploy.

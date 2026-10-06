@@ -45,6 +45,7 @@ from lib.api_keys import resolve_key, masked  # noqa: E402
 
 sys.path.insert(0, os.path.join(REPO, "post-queue-pipeline"))
 import post_queue  # noqa: E402
+import maestro_state  # noqa: E402
 
 
 def _expandir(caminho: str) -> str:
@@ -74,6 +75,18 @@ def enviar(entrada: dict) -> dict:
         "video_base64": video_base64,
         "palavra_chave_cta": cta.get("keyword") or None,
     }
+
+    # Se este run passou pelo gate de aprovacao de audio (Fase 2.6,
+    # write-script-ptbr), o registro no Painel ja existe desde la
+    # (status "audio_aprovado") — manda o MESMO video_id pra atualizar
+    # esse registro em vez de criar um novo (ver agentes/content_factory
+    # /main.py no ecossistema-ia-recursos-cognitivos).
+    run_name = entrada.get("run_name")
+    if run_name:
+        estado_run = maestro_state.load(run_name)
+        painel_video_id = estado_run.get("painel_video_id")
+        if painel_video_id is not None:
+            corpo["video_id"] = painel_video_id
 
     req = urllib.request.Request(
         f"{url_base}/videos-maestro",
