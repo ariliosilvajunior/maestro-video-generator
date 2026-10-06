@@ -104,7 +104,21 @@ def wait_active(key, file_name, tries=90):
     raise RuntimeError("Gemini file stuck PROCESSING")
 
 
-def gemini_segments(key, file_uri, language, mime="audio/mp4"):
+def gemini_segments(key, file_uri, language, mime="audio/mp4", duration=None):
+    # QCR-095 follow-up: an earlier fixed "~60 segments for a one-minute clip" example
+    # made Gemini truncate clips LONGER than ~60s at the 60s mark (it read the example
+    # as a hard stop, not an illustration) — seen live on a 95.6s clip, same cutoff both
+    # tries. Telling it the REAL duration and scaling the segment budget from it fixes
+    # the anchoring; the max() floor keeps short clips from getting an absurdly low budget.
+    if duration and duration > 0:
+        segment_budget = max(20, round(duration * 1.0))
+        duration_line = (
+            f"The audio is EXACTLY {duration:.1f} seconds long — transcribe ALL of it, start to finish; "
+            f"do NOT stop early. Keep the array COMPACT: at most ~{segment_budget} segments total "
+            f"(scaled for this clip's real length, not a fixed one-minute example)."
+        )
+    else:
+        duration_line = "Keep the array COMPACT: at most ~60 segments for a one-minute clip."
     prompt = (
         f"Transcribe this spoken audio VERBATIM in its original language (expected: {language}). "
         "Return ONLY a JSON array of segments. Each segment = {\"start\": <seconds float>, "
@@ -112,7 +126,7 @@ def gemini_segments(key, file_uri, language, mime="audio/mp4"):
         "AS ACCURATELY AS POSSIBLE (start/end are real audio timestamps in seconds); break at natural "
         "sentence/clause boundaries; each segment <=12 words and <=6 seconds; do NOT translate, "
         "summarize, paraphrase, or add commentary; keep numbers and punctuation as spoken. "
-        "Keep the array COMPACT: at most ~60 segments for a one-minute clip. "
+        f"{duration_line} "
         "No markdown, no code fences — just the JSON array."
     )
     body = {
@@ -610,7 +624,7 @@ def main():
             fn, uri = upload(key, audio)
             wait_active(key, fn)
             log("[2/4] uploaded + ACTIVE")
-            segs = gemini_segments(key, uri, args.language)
+            segs = gemini_segments(key, uri, args.language, duration=duration)
             log(f"[3/4] {len(segs)} raw segments")
         srt = to_srt(segs, duration, speech_runs)
         open(srt_path, "w", encoding="utf-8").write(srt)

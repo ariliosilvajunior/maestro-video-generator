@@ -38,11 +38,18 @@ PIXABAY_API_KEY, COVERR_API_KEY, METRICOOL_TOKEN).
 - Get one: https://i.mtr.cool/maestrosdaia
 - Header: X-Mc-Auth
 
-## HeyGen (browser login — the pipeline drives the HeyGen web editor, there is no API key)
+## HeyGen (API — the pipeline generates the avatar video via api.heygen.com, not the browser)
+- API Key: `PASTE_HEYGEN_API_KEY_HERE`
+- Get one: https://app.heygen.com -> Settings -> API (pay-as-you-go wallet, separate from the
+  subscription-minutes used by the old browser path)
+- `config.avatar.heygen_avatar_id` = the avatar_id of your avatar (digital twin), found via
+  `GET https://api.heygen.com/v3/avatars/looks?avatar_type=digital_twin&ownership=private`
+  (header `X-Api-Key`) or already known from a sibling project using the same account/avatar.
+- Email/Password below are the FALLBACK browser-login path (`generate-avatar-heygen` skill) — DORMANT
+  since 06/10/2026 (HeyGen's Cloudflare blocks automated browser logins; confirmed hard blocker).
+  Keep filled only in case the browser path is ever revived.
 - Email: `PASTE_HEYGEN_EMAIL_HERE`
 - Password: `PASTE_HEYGEN_PASSWORD_HERE`
-- Notes: log in once in the pipeline browser; the persistent profile keeps the session.
-- Get one: https://www.heygen.com/?sid=rewardful&utm_content=creator&utm_medium=influencera&via=maestrosdaia
 
 ## Instagram (browser login — used only if the saved session expires)
 - Email: `PASTE_INSTAGRAM_EMAIL_HERE`

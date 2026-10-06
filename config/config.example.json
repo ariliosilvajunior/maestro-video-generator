@@ -16,7 +16,8 @@
     "voice": "Your Voice",
     "engine_fallback": "Avatar III",
     "elevenlabs_voice_id": "",
-    "elevenlabs_voice_name": ""
+    "elevenlabs_voice_name": "",
+    "heygen_avatar_id": ""
   },
   "images": {
     "provider": "fal",
