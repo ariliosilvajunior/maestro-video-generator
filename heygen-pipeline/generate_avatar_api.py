@@ -92,22 +92,25 @@ def upload_audio(audio_path: str) -> str:
 
 
 def gerar_video(asset_id: str) -> str:
-    """POST /v3/videos (type=studio, one avatar_video scene lip-synced to the uploaded audio) -> video_id."""
+    """POST /v3/videos (flat type=avatar, lip-synced to the uploaded audio) -> video_id.
+
+    NOT the "studio"/scenes[] wrapper (06/10/2026 — real defect found + fixed): HeyGen's
+    studio scenes ALWAYS fit the avatar's own native (landscape-trained) clip shape inside
+    the requested canvas and PAD the remainder — documented behavior, no scale/offset/crop
+    override exists on that scene type. On a 9:16 canvas this rendered the avatar in only
+    the vertical-center ~32% of the frame with big pale bars top+bottom (confirmed via
+    ffprobe + pixel sampling on a real run's output). The flat (non-studio) avatar request
+    type documents a top-level `fit` param ("cover" fills the canvas, cropping the sides,
+    vs the default "contain" that pads) — the one documented lever that avoids the padding.
+    """
     payload = {
-        "type": "studio",
+        "type": "avatar",
+        "avatar_id": _avatar_id(),
+        "audio_asset_id": asset_id,
         "aspect_ratio": "9:16",
         "resolution": "1080p",
-        "scenes": [
-            {
-                "type": "avatar_video",
-                "input": {
-                    "type": "avatar",
-                    "avatar_id": _avatar_id(),
-                    "audio_asset_id": asset_id,
-                    "engine": {"type": _ENGINE},
-                },
-            }
-        ],
+        "fit": "cover",
+        "engine": {"type": _ENGINE},
     }
     headers = {"X-Api-Key": _key(), "Content-Type": "application/json"}
     resultado = _request("POST", "/v3/videos", headers, data=json.dumps(payload).encode("utf-8"))
