@@ -9,14 +9,21 @@ import {
 } from "remotion";
 import { CameraMotionBlur, Trail } from "@remotion/motion-blur";
 import { noise2D } from "@remotion/noise";
-import { loadFont as loadAnton } from "@remotion/google-fonts/Anton";
-import { loadFont as loadArchivo } from "@remotion/google-fonts/ArchivoBlack";
-import { loadFont as loadSpace } from "@remotion/google-fonts/SpaceGrotesk";
+import { staticFile } from "remotion";
+import { loadFont } from "@remotion/fonts";
 import { PALETTES, TYPE, SPR, AmbientBg } from "../library";
 
-const anton = loadAnton();
-const archivo = loadArchivo();
-const space = loadSpace();
+// BUNDLED LOCALLY (QCR-275/295 fix, same as premium.tsx/design.ts): the old
+// @remotion/google-fonts/* imports fetched over the network at render time, which
+// breaks "Getting composition" for the WHOLE Root.tsx (every comp is evaluated to
+// build the list) in network-restricted environments. Archivo Black has no bundled
+// TTF here (this is a dev-only V7/V8 comparison harness, not a shipped comp), so it
+// falls back to a local system font instead of fetching one.
+loadFont({ family: "Anton", url: staticFile("fonts/Anton-Regular.ttf"), weight: "400" });
+loadFont({ family: "Space Grotesk", url: staticFile("fonts/SpaceGrotesk.ttf"), weight: "500" });
+const anton = { fontFamily: "Anton" };
+const archivo = { fontFamily: "Arial Black, sans-serif" };
+const space = { fontFamily: "Space Grotesk" };
 
 const P = PALETTES.voltage;
 const MH = 768; // real motion area height in the pipeline

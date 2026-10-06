@@ -29,6 +29,7 @@ import { LottieDemoV8 } from "./compositions/LottieDemoV8";
 import { SplitFlowDemo } from "./compositions/SplitFlowDemo";
 import { FullFlowDemo } from "./compositions/FullFlowDemo";
 import { MotionLabBlur, MotionLabType, MotionLabStinger, MotionLabParallax, MotionLabFps } from "./compositions/MotionLabV8";
+import { MediacaoAutismo } from "./compositions/MediacaoAutismo";
 
 const FPS = 25;
 const W = 1080;
@@ -59,6 +60,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="MotionLabParallax" component={MotionLabParallax} durationInFrames={sec(4)} fps={FPS} width={W} height={768} />
       <Composition id="MotionLabFps25" component={MotionLabFps} durationInFrames={sec(4)} fps={25} width={W} height={768} />
       <Composition id="MotionLabFps50" component={MotionLabFps} durationInFrames={200} fps={50} width={W} height={768} />
+      <Composition id="MediacaoAutismo" component={MediacaoAutismo} durationInFrames={Math.round(95.56 * 25)} fps={25} width={1080} height={1920} />
     </>
   );
 };
