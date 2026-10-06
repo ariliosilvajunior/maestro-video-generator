@@ -13,10 +13,19 @@ default `/tmp/claude`; `<downloads>` = `paths.downloads`, default `~/Downloads` 
 
 1. Read the topic seed: the `transcript`, the `hook` idea, and any named entities in it
 2. Write a ~60-second PT-BR script (~140 words, max 2520 chars for HeyGen)
-3. Open with a "Você sabia que..." hook inspired by the source's viral angle
+3. Open with a "Você sabia que..." hook inspired by the source's viral angle. **Owner directive
+   (06/10/2026):** the opening must also GREET the audience directly — but woven INTO the hook
+   sentence itself (e.g. "Professor de AEE, você sabia que...", "Se você é professor de AEE, presta
+   atenção nisso:"), never a throwaway "Oi pessoal, tudo bem?" before it. `brand.audience` names who
+   to address (AEE teachers). This keeps frame-0 impact intact (CLAUDE.md §5 — the clickbait headline
+   still has to land immediately) while making the greeting real, not generic.
 4. Follow the STEPPS framework (Social currency, Triggers, Emotion, Public, Practical value, Stories)
 5. Include the core insight from the source transcript
-6. End with a save/share CTA ("Salva esse vídeo...")
+6. End with a save/share CTA ("Salva esse vídeo...") that also REFERENCES the brand, "Recursos
+   Cognitivos", by name (owner directive, 06/10/2026) — e.g. "Salva esse vídeo e segue a Recursos
+   Cognitivos pra mais dicas assim." Natural phrasing over a fixed template; never stiff/repetitive
+   word-for-word across videos. This sits ALONGSIDE the comment-keyword CTA line (rule 11), not
+   instead of it — both can close the script together.
 7. NO CTAs like "se inscreva" or "link na bio" — just value delivery
 8. Clean PT-BR (`config.brand.language`, default `pt-BR`): proper accents (ç, ã, é, ê, ó, ú, í, â, õ), numbers written out, no English jargon, no URLs
 9. TTS-safe: no brackets, no emojis, no formatting

@@ -90,3 +90,24 @@ acesso consegue rodar isso. Até lá, `config.painel.enabled` continua
 `false` neste repositório (de propósito — evita erro 404 confuso no meio
 de um run) e o primeiro vídeo real (`MediacaoAutismo`) fica pausado na
 Fase 2.6 esperando esse deploy.
+
+**Atualização 06/10/2026 — tudo deployado e testado de ponta a ponta.** O dono rodou os 3 deploys
+pedidos (content_factory + painel, duas vezes — uma migração de coluna faltou no primeiro deploy,
+corrigida e redeployada; e faltava uma rota JSON `/videos-maestro/lista` pro Maestro consultar sem
+sessão de login). `painel.enabled=true` já está em `config/config.json`. O áudio-rascunho do
+`MediacaoAutismo` já foi enviado pro Painel de verdade (`painel_video_id=1`) e está esperando
+aprovação em "Preview de áudio esperando aprovação — Vídeos Maestro".
+
+## Roteiro — saudação + menção à marca no fechamento (06/10/2026)
+
+Pedido do dono, depois de ouvir o primeiro áudio-rascunho (aprovado, "ficou muito bom"): a PARTIR
+DO PRÓXIMO vídeo (este primeiro, `MediacaoAutismo`, vai ao ar com o áudio já aprovado, sem mudar),
+todo roteiro deve:
+1. **Cumprimentar a audiência** — tecido DENTRO da frase de gancho (ex.: "Professor de AEE, você
+   sabia que..."), não um "oi pessoal" solto antes do gancho (preservaria o impacto do frame 0 —
+   ver CLAUDE.md §5).
+2. **Referenciar "Recursos Cognitivos" no fechamento** — junto com a CTA de comentário/palavra-chave
+   já existente, frase natural e variada a cada vídeo, não um texto fixo repetido.
+
+Já atualizado em `how-to-generate-video-scripts.md` (regras 3 e 6) e
+`.claude/skills/write-script-ptbr/SKILL.md`.

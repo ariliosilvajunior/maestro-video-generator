@@ -27,10 +27,16 @@ Takes a topic seed (English transcript/seed allowed) and produces an original **
 
 ## RULES (from how-to-generate-video-scripts.md)
 - Output language: **PT-BR obrigatório** (`config.brand.language`, default `pt-BR`).
-- Open with a "Você sabia que..." style hook inspired by the source's viral angle.
+- Open with a "Você sabia que..." style hook inspired by the source's viral angle. **Owner directive
+  (06/10/2026):** weave a direct greeting to the audience (`brand.audience` — AEE teachers) INTO the
+  hook sentence itself (e.g. "Professor de AEE, você sabia que..."), never a separate "Oi pessoal"
+  before it — frame-0 still has to land as the clickbait headline (CLAUDE.md §5).
 - Follow STEPPS (Social currency, Triggers, Emotion, Public, Practical value, Stories).
 - Include the core insight from the source transcript.
-- End with a save/share CTA ("Salva esse vídeo..."). NO "se inscreva" / "link na bio".
+- End with a save/share CTA ("Salva esse vídeo..."). NO "se inscreva" / "link na bio". **Owner
+  directive (06/10/2026):** also reference the brand "Recursos Cognitivos" by name in the closing
+  (natural phrasing, varies video to video — e.g. "segue a Recursos Cognitivos pra mais dicas
+  assim"), alongside the comment-keyword CTA line below, not instead of it.
 - **CONTENT-SAFETY / PLATFORM-POLICY GATE (canonical: `PIPELINE_DIRECTIVES.md` §11 + rule 12).** The topic AND the rewritten hook/script must NEVER read as an "easy money" / get-rich-quick / guaranteed-income scam or anything that risks an Instagram flag/takedown. FORBIDDEN: earnings/income guarantees ("ganhe R$X", "renda garantida", "fique rico", "dinheiro fácil", "sem trabalhar"), no-risk profit claims, "método secreto/infalível", fake/secret coupons (QCR-165/177), miracle health claims, impersonation, MLM/pyramid framing, or overpromising what the resource delivers. **REFRAME by default** (keep the real tool + the TRUE capability, strip the money-scam wrapper: "faça R$10 mil/mês com IA" → "essa IA cria um app funcional em 10 minutos"); clickbait the curiosity of a TRUE fact, never a financial guarantee. **REJECT the topic** only if the whole premise is the scam with no honest resource under it → take the next queue link (or tell the user, for a manual topic). Log via `maestro_state.py set --field safety_note="…"`.
 - **COMMENT-CTA + UNIQUE KEYWORD — EVERY VIDEO SHIPS A RESOURCE LINK (feeds Phase 11).**
 
