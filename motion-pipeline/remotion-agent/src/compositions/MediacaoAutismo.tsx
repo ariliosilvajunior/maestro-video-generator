@@ -1,11 +1,69 @@
 import React from "react";
-import { AbsoluteFill, Sequence, Audio, staticFile, useVideoConfig } from "remotion";
+import { AbsoluteFill, Sequence, Audio, staticFile, useVideoConfig, useCurrentFrame } from "remotion";
 import {
   PremiumTheme, PremiumBg, PremiumLabel, PremiumAsset, PremiumEvidence, PremiumFrame,
   PremiumKineticCaption, PremiumOpeningHook, PremiumSplitGraphics,
-  PremiumSplitFlow, PremiumFullGraphics, PremiumAvatarCaption,
+  PremiumSplitFlow, PremiumFullGraphics, usePremPalette, SERIF,
   sectionWindows, assertSectionGrammar,
 } from "../library";
+
+/* FramedWordReveal — §5b (avatarcap), WINDOWED instead of full-bleed (06/10/2026 fix).
+   This avatar's HeyGen "look" is landscape-trained (1280x720) and was force-cropped to
+   9:16 at generation time — the body already spans edge-to-edge in the native file at
+   gesture-reaching heights (0px margin confirmed by a frame-by-frame scan of the whole
+   clip), so a FULL-BLEED avatar display (PremiumAvatarCaption) unavoidably reads as
+   asymmetric/cropped (one shoulder flush to the edge, the other with margin — exactly
+   what the owner caught). The bottom-60%-panel PremiumFrame treatment used everywhere
+   ELSE in this video does NOT have this problem (it shows the native width 1:1, no extra
+   zoom/crop), so §5b here reuses that same windowed treatment instead of full-bleed —
+   avatar in the bottom panel, the big word-by-word reveal in the top panel (same spoken-
+   line-verbatim contract as PremiumAvatarCaption, suppress the burned subtitle the same
+   way) — structurally avoids the full-bleed edge-touching look without touching the
+   shared library (keeps the blast radius to this one video). */
+const FramedWordReveal: React.FC<{
+  w: { from: number; durationInFrames: number };
+  avatarSrc: string;
+  text: string;
+  timings?: number[];
+  size?: number;
+}> = ({ w, avatarSrc, text, timings, size = 46 }) => {
+  const { fps } = useVideoConfig();
+  return (
+    <Sequence {...w}>
+      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from}>
+        <FramedWordRevealInner text={text} timings={timings} durFrames={w.durationInFrames} fps={fps} size={size} />
+      </PremiumFrame>
+    </Sequence>
+  );
+};
+const FramedWordRevealInner: React.FC<{ text: string; timings?: number[]; durFrames: number; fps: number; size: number }> = ({
+  text, timings, durFrames, fps, size,
+}) => {
+  const P = usePremPalette();
+  const frame = useCurrentFrame();
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  const nw = Math.max(1, words.length);
+  const startFr = (i: number) => (timings && timings[i] != null ? timings[i] * fps : (i * durFrames) / nw);
+  return (
+    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 80px", boxSizing: "border-box" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", justifyContent: "center",
+        columnGap: "0.26em", rowGap: "0.08em", maxWidth: "100%",
+        fontFamily: SERIF, fontWeight: 800, fontSize: size, textTransform: "uppercase",
+        textAlign: "center", lineHeight: 1.14, letterSpacing: "0.005em" }}>
+        {words.map((wd, i) => {
+          const s = startFr(i);
+          const t = Math.min(1, Math.max(0, (frame - s) / 6));
+          const e = 1 - Math.pow(1 - t, 3);
+          const act = Math.min(1, Math.max(0, (frame - s) / 12));
+          return (
+            <span key={i} style={{ display: "inline-block", color: act < 1 ? (P.goldLt ?? P.gold) : P.ink,
+              opacity: e, transform: `translateY(${(1 - e) * 14}px) scale(${0.9 + 0.1 * e})` }}>{wd}</span>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 /* ════════════════════════════════════════════════════════════════════════════
    MediacaoAutismo — Fase 5 (motion graphics + merge).
@@ -66,12 +124,10 @@ export const MediacaoAutismo: React.FC = () => {
             cy: 792, textColor: "#FFFFFF", accentColor: "#56CAC9", size: 58 }}
         />
 
-        {/* §5b avatarcap — barreiras/metas/diagnóstico */}
-        <Sequence {...W[1]}>
-          <PremiumAvatarCaption w={W[1]} avatarSrc={AVATAR} zone="top"
-            text="Eles descrevem barreiras, metas, diagnóstico, mas tem uma coisa que nenhum documento faz por você:"
-            timings={[0, 0.68, 1.36, 2.04, 2.72, 3.4, 3.7, 4.0, 4.3, 4.6, 4.9, 5.2, 5.5, 5.8, 6.1]} />
-        </Sequence>
+        {/* §5b avatarcap — barreiras/metas/diagnóstico — windowed (avatar bottom panel, no full-bleed crop) */}
+        <FramedWordReveal w={W[1]} avatarSrc={AVATAR}
+          text="Eles descrevem barreiras, metas, diagnóstico, mas tem uma coisa que nenhum documento faz por você:"
+          timings={[0, 0.68, 1.36, 2.04, 2.72, 3.4, 3.7, 4.0, 4.3, 4.6, 4.9, 5.2, 5.5, 5.8, 6.1]} />
 
         {/* §4 heroAsset — mãos formando coração: dar sentido sem palavras */}
         <Sequence {...W[2]}>
@@ -108,12 +164,10 @@ export const MediacaoAutismo: React.FC = () => {
           </AbsoluteFill>
         </Sequence>
 
-        {/* §5b avatarcap — gestos/repetições/ecolalia */}
-        <Sequence {...W[6]}>
-          <PremiumAvatarCaption w={W[6]} avatarSrc={AVATAR} zone="top"
-            text="O desenvolvimento da criança autista depende de como você interpreta os gestos, as repetições, a ecolalia dela."
-            timings={[0, 0.44, 0.88, 1.32, 1.76, 2.2, 2.675, 3.15, 3.625, 4.1, 4.575, 5.05, 5.525, 6.0, 6.475, 6.95, 7.425]} />
-        </Sequence>
+        {/* §5b avatarcap — gestos/repetições/ecolalia — windowed (avatar bottom panel, no full-bleed crop) */}
+        <FramedWordReveal w={W[6]} avatarSrc={AVATAR}
+          text="O desenvolvimento da criança autista depende de como você interpreta os gestos, as repetições, a ecolalia dela."
+          timings={[0, 0.44, 0.88, 1.32, 1.76, 2.2, 2.675, 3.15, 3.625, 4.1, 4.575, 5.05, 5.525, 6.0, 6.475, 6.95, 7.425]} size={42} />
 
         {/* §3b caption reveal — a criança vira só o autismo (aviso duro) */}
         <Sequence {...W[7]}>
