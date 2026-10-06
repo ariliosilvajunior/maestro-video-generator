@@ -97,7 +97,7 @@ def status(run_name: str) -> dict:
         sys.exit(f"ERRO: run '{run_name}' nao tem painel_video_id no estado — rode 'enviar' primeiro.")
 
     req = urllib.request.Request(
-        f"{_url_base()}/videos-maestro",
+        f"{_url_base()}/videos-maestro/lista",
         headers={"Authorization": f"Bearer {_token()}"},
     )
     try:
