@@ -267,15 +267,38 @@ export const PremiumFlow: React.FC<{ items: { src: string; label: string }[]; cy
    (so the avatar lips stay synced to that audio). This decouples the avatar VISUAL from the
    AUDIO so the avatar-frame only exists during split windows → a coverage gap can NEVER expose
    the split between full-frame sections (the structural fix for the "split-screen leak"). */
-export const PremiumFrame: React.FC<{ avatarSrc: string; children: React.ReactNode; muted?: boolean; trimBefore?: number }> = ({ avatarSrc, children, muted, trimBefore }) => {
+export const PremiumFrame: React.FC<{ avatarSrc: string; children: React.ReactNode; muted?: boolean; trimBefore?: number; inset?: boolean }> = ({ avatarSrc, children, muted, trimBefore, inset }) => {
   const P = usePremPalette();
   const { width, height } = useVideoConfig();
   const mH = Math.round(height * 0.4);
   const videoH = height - mH;
+  // `inset` (house rule, added 06/10/2026): some avatar sources are landscape-trained and get
+  // force-cropped to 9:16 at generation time with the subject already touching both frame
+  // edges natively (confirmed via a frame-by-frame scan — zero safe margin to re-center a
+  // full-bleed crop without clipping). A crop+solid-color-pad "fix" for that looks WORSE — the
+  // pad is a flat, noise-free rectangle next to real footage grain/gradient, reads as an
+  // obvious seam, exactly where the body is already tightest to the edge. `inset` sidesteps the
+  // whole problem HONESTLY: render the avatar at its OWN native framing, just smaller (86%),
+  // bordered, centered — the real theme cream shows through the margin (not a fabricated
+  // patch), so there is nothing to seam-match. Default false — zero change for every other
+  // video/composition using PremiumFrame.
+  const videoEl = inset ? (() => {
+    const scale = 0.86;
+    const vw = Math.round(width * scale), vh = Math.round(videoH * scale);
+    const vx = Math.round((width - vw) / 2), vy = Math.round((videoH - vh) / 2);
+    return (
+      <div style={{ position: "absolute", left: vx, top: vy, width: vw, height: vh, overflow: "hidden",
+        borderRadius: 12, border: `2px solid ${P.gold}`, boxShadow: `0 16px 30px ${P.shadow}` }}>
+        <OffthreadVideo src={staticFile(avatarSrc)} muted={muted} trimBefore={trimBefore} style={{ width: vw, height: vh, objectFit: "cover" }} />
+      </div>
+    );
+  })() : (
+    <OffthreadVideo src={staticFile(avatarSrc)} muted={muted} trimBefore={trimBefore} style={{ width, height: videoH, objectFit: "cover" }} />
+  );
   return (
     <AbsoluteFill style={{ background: P.cream, isolation: "isolate" }}>
       <div style={{ position: "absolute", left: 0, top: mH, width, height: videoH, overflow: "hidden" }}>
-        <OffthreadVideo src={staticFile(avatarSrc)} muted={muted} trimBefore={trimBefore} style={{ width, height: videoH, objectFit: "cover" }} />
+        {videoEl}
       </div>
       <div style={{ position: "absolute", left: 0, top: 0, width, height: mH, overflow: "hidden" }}>
         <AbsoluteFill style={{ background: P.cream }} />
@@ -566,10 +589,11 @@ export const PremiumOpeningHook: React.FC<{
     motion?: "scroll" | "zoom" | "static"; zoomTo?: number; scroll?: number;
     focus?: { fx: number; fy: number }; focusR?: { rx: number; ry: number } };
   headline: { lines: PillSeg[][]; cy?: number; textColor?: string; accentColor?: string; size?: number };
-}> = ({ w, avatarSrc, evidence, headline }) => (
+  inset?: boolean;
+}> = ({ w, avatarSrc, evidence, headline, inset }) => (
   <>
     <Sequence {...w}>
-      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from}>
+      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from} inset={inset}>
         <PremiumEvidence src={evidence.src} domain={evidence.domain} stamp={evidence.stamp}
           kicker={evidence.kicker} motion={evidence.motion ?? "zoom"} zoomTo={evidence.zoomTo ?? 1.5}
           scroll={evidence.scroll} durFrames={w.durationInFrames}
@@ -626,13 +650,14 @@ export const PremiumSplitGraphics: React.FC<{
   avatarSrc: string;
   assets: string[];   // 1–3 keyed cutout srcs — graphics only, NO labels/text
   cy?: number;        // panel-relative center (the top-40% panel)
-}> = ({ w, avatarSrc, assets, cy = 330 }) => {
+  inset?: boolean;
+}> = ({ w, avatarSrc, assets, cy = 330, inset }) => {
   const cx = 540;
   const main = assets[0];
   const sats = assets.slice(1, 3);
   return (
     <Sequence {...w}>
-      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from}>
+      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from} inset={inset}>
         <PremRings cx={cx} cy={cy} r={200} rings={3} />
         {main && <PremiumAsset src={main} size={300} cx={cx} cy={cy} delay={4} driftPhase={0.4} />}
         {sats.map((s, i) => (
@@ -659,10 +684,11 @@ export const PremiumSplitFlow: React.FC<{
   avatarSrc: string;
   assets: string[];   // 2–3 keyed cutout srcs — graphics only, NO labels/text (§5 rule)
   cy?: number;        // panel-relative center (the top-40% panel), default 330
-}> = ({ w, avatarSrc, assets, cy = 330 }) => {
+  inset?: boolean;
+}> = ({ w, avatarSrc, assets, cy = 330, inset }) => {
   return (
     <Sequence {...w}>
-      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from}>
+      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from} inset={inset}>
         <SplitFlowGraphics assets={assets} cy={cy} />
       </PremiumFrame>
     </Sequence>

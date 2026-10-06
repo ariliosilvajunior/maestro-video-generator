@@ -30,7 +30,7 @@ const FramedWordReveal: React.FC<{
   const { fps } = useVideoConfig();
   return (
     <Sequence {...w}>
-      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from}>
+      <PremiumFrame avatarSrc={avatarSrc} muted trimBefore={w.from} inset>
         <FramedWordRevealInner text={text} timings={timings} durFrames={w.durationInFrames} fps={fps} size={size} />
       </PremiumFrame>
     </Sequence>
@@ -122,6 +122,7 @@ export const MediacaoAutismo: React.FC = () => {
             stamp: "REAL", kicker: "A MATÉRIA QUE INSPIROU ISSO", motion: "zoom", zoomTo: 1.4 }}
           headline={{ lines: [[{ t: "O PEI E O LAUDO" }], [{ t: "NÃO ENSINAM ISSO", accent: true }]],
             cy: 792, textColor: "#FFFFFF", accentColor: "#56CAC9", size: 58 }}
+          inset
         />
 
         {/* §5b avatarcap — barreiras/metas/diagnóstico — windowed (avatar bottom panel, no full-bleed crop) */}
@@ -149,7 +150,7 @@ export const MediacaoAutismo: React.FC = () => {
 
         {/* §2-style evidence (mid-video) — a capa real do livro da Fernanda Chiote */}
         <Sequence {...W[4]}>
-          <PremiumFrame avatarSrc={AVATAR} muted trimBefore={W[4].from}>
+          <PremiumFrame avatarSrc={AVATAR} muted trimBefore={W[4].from} inset>
             <PremiumEvidence src="refs/LivroChiote.jpg" domain="Fernanda Chiote — o livro"
               stamp="O RECURSO" motion="scroll" scroll={850} durFrames={W[4].durationInFrames} />
           </PremiumFrame>
@@ -196,7 +197,7 @@ export const MediacaoAutismo: React.FC = () => {
         </Sequence>
 
         {/* §5 SPLIT GRAPHICS — alvo com flecha: mediação intencional (contraste com o dia a dia) */}
-        <PremiumSplitGraphics w={W[10]} avatarSrc={AVATAR} assets={[A("splitA_target")]} />
+        <PremiumSplitGraphics w={W[10]} avatarSrc={AVATAR} assets={[A("splitA_target")]} inset />
 
         {/* §6 FULL GRAPHICS — semente brotando + seta ascendente: aposta no que a criança quase consegue */}
         <Sequence {...W[11]}>
@@ -213,7 +214,7 @@ export const MediacaoAutismo: React.FC = () => {
         </Sequence>
 
         {/* §5 SPLIT FLOW (variante) — papel do plano x ampulheta da mediação diária e paciente */}
-        <PremiumSplitFlow w={W[13]} avatarSrc={AVATAR} assets={[A("splitB_paper"), A("splitB_hourglass")]} />
+        <PremiumSplitFlow w={W[13]} avatarSrc={AVATAR} assets={[A("splitB_paper"), A("splitB_hourglass")]} inset />
 
         {/* §4 heroAsset — CTA: salva + segue */}
         <Sequence {...W[14]}>
