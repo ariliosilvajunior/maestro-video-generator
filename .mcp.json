@@ -8,7 +8,11 @@
         "--user-data-dir",
         ".playwright-profile",
         "--caps",
-        "vision"
+        "vision",
+        "--executable-path",
+        "/opt/pw-browsers/chromium",
+        "--no-sandbox",
+        "--ignore-https-errors"
       ]
     }
   }
