@@ -59,8 +59,14 @@ def main():
     frames = f"0-{int(a.seconds * 25) - 1}"
     motion = os.path.join(out_dir, f"{NAME}_motion.mp4")
     npx = shutil.which("npx") or shutil.which("npx.cmd")
-    rc, out = sh([npx, "remotion", "render", "src/index.ts", "PremiumSectionRef", motion,
-                  f"--frames={frames}", "--codec", "h264", "--crf", "20", "--timeout", "300000", "--log", "error"], cwd=rem, timeout=1500)
+    render_cmd = [npx, "remotion", "render", "src/index.ts", "PremiumSectionRef", motion,
+                  f"--frames={frames}", "--codec", "h264", "--crf", "20", "--timeout", "300000", "--log", "error"]
+    if os.environ.get("PLAYWRIGHT_BROWSERS_PATH"):
+        # Sandboxed/cloud sessions of this kind route HTTPS through a local MITM proxy whose CA
+        # Chromium doesn't trust (affects only what the headless browser fetches, e.g. Google Fonts,
+        # not the rendered video's correctness or any non-sandboxed environment).
+        render_cmd.append("--ignore-certificate-errors")
+    rc, out = sh(render_cmd, cwd=rem, timeout=1500)
     ok = rc == 0 and os.path.exists(motion) and os.path.getsize(motion) > 10000
     if not step("Remotion render (PremiumSectionRef, sample assets)", ok, motion if ok else out[-1500:]):
         return 1
