@@ -37,6 +37,16 @@ authenticated HTTPS call, so the Cloudflare block never comes into play). Same a
 text+voice_id — this avatar's engine rejects that with a cloned voice). Script:
 `heygen-pipeline/generate_avatar_api.py`. Full procedure: `generate-avatar-heygen` SKILL.md.
 
+**⚠️ This avatar look is LANDSCAPE-trained (confirmed via `GET /v3/avatars/looks` —
+`preferred_orientation: "landscape"`, 1280x720 native, no vertical variant exists).** A 9:16 render
+force-crops ~68% of the width away, so the body already touches BOTH frame edges natively (verified
+frame-by-frame on `MediacaoAutismo` — zero safe margin at hand-gesture height in every single
+second). **Never show this avatar full-bleed/edge-to-edge** (the owner caught this hard on
+06/10/2026 — see `NOTAS_DONO.md` "PENDÊNCIA pra próxima gravação"): in `generate-motion-remotion`,
+always pass `inset` on every `PremiumFrame`/`PremiumOpeningHook`/`PremiumSplitGraphics`/
+`PremiumSplitFlow` call (shows the avatar unmodified, just scaled ~86% inside a bordered card — zero
+crop, zero fabricated pixels) until the owner records a new vertical-trained look.
+
 ## 1. Pipeline map — Stage 0 + Phases 1–12
 | # | Phase | Skill | Output |
 |---|---|---|---|

@@ -153,3 +153,33 @@ texto+voice_id com voz clonada do ElevenLabs).
 `generate-avatar-heygen` SKILL.md e `CLAUDE.md` §1a documentam o método novo como padrão; o navegador
 (`HEYGEN_INSTRUCTIONS.md`) fica só como fallback dormente, não tentar de novo sem o dono confirmar
 que o bloqueio do Cloudflare sumiu.
+
+## ⚠️ PENDÊNCIA pra próxima gravação — avatar gravado em formato PAISAGEM (06/10/2026)
+
+O dono bateu o pé (com razão) no primeiro vídeo real (`MediacaoAutismo`) sobre o avatar não estar
+centralizado / ombro cortado desigual. Raiz do problema, confirmada direto na conta da HeyGen
+(`GET /v3/avatars/looks`): esse avatar (`Professor Arilio Recursos Cognit`,
+`1db8e24bb7e043159a4297c01373cefb`) foi **gravado/treinado em formato PAISAGEM**
+(`preferred_orientation: "landscape"`, resolução nativa 1280x720) — é o ÚNICO "look" que a conta
+tem pra esse avatar, não existe variante vertical pra trocar.
+
+Quando a API gera um vídeo 9:16 a partir desse material, ela corta ~68% da largura original pra
+caber no quadro vertical — o corpo já encosta nas DUAS bordas do quadro em praticamente todo o
+vídeo (confirmado varrendo os 96 segundos do primeiro vídeo, frame a frame: a mão já toca a borda
+em 100% dos segundos, o ombro tem no máximo ~82px de folga). Não existe parâmetro na API da HeyGen
+pra consertar isso (`fit`, `scale`, `offset`, `expressiveness` — nenhum se aplica, pesquisado e
+confirmado nos docs oficiais). Tentei duas correções de recorte (deslocar a imagem) e as duas
+pioraram as coisas (corte real de verdade / costura de cor artificial visível) — a solução que
+funcionou pro `MediacaoAutismo` foi mostrar o avatar menor, numa moldura com borda, em vez de tela
+cheia (`PremiumFrame` novo parâmetro `inset`, em `motion-pipeline/remotion-agent/src/library/
+premium.tsx` + `src/compositions/MediacaoAutismo.tsx`) — funciona, mas é um "jeito de evitar o
+problema", não uma correção de verdade.
+
+**Pedido do dono: rever isso antes da próxima gravação.** Dois caminhos reais:
+1. **Gravar um novo "look" desse avatar na HeyGen especificamente em formato VERTICAL** (o dono
+   grava um novo vídeo de treino segurando o celular na vertical, ou filmando já pensando em 9:16) —
+   resolve de vez, elimina a necessidade da moldura/inset. Isso é ação do dono na plataforma da
+   HeyGen, não dá pra fazer por aqui.
+2. Enquanto isso não acontece, manter o modo `inset` em todo vídeo novo gerado com esse mesmo
+   avatar_id (já é o padrão no `MediacaoAutismo.tsx` — replicar o mesmo padrão nos próximos
+   roteiros/composições até o avatar vertical existir).
