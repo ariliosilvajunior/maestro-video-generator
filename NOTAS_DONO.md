@@ -44,3 +44,21 @@ o dono aprovar na tela do Painel antes de publicar de verdade. Ainda não
 existe checagem automática de "o dono já aprovou?" dentro do `/post-now` —
 isso é uma v2, por enquanto é combinado por fora (perguntar/confirmar com
 o dono antes de publicar).
+
+## Decisões de 06/10/2026 — tudo roda na nuvem (Claude Code web)
+
+O dono não quer instalar nada no computador: setup e pipeline rodam só na
+sessão de nuvem.
+
+- **Instagram: o dono publica pelo celular.** O pipeline gera o Reel, manda
+  pro Painel do Dono, o dono aprova, baixa e posta pelo app. O agente
+  **não** faz login no Instagram nem roda `/post-now` para publicar. Depois
+  que o dono postar, ele passa o link do Reel e o agente registra
+  (`pipeline-log.csv` + limpeza das filas).
+- **HeyGen: login "às cegas" pelo agente.** E-mail/senha ficam em variáveis
+  de ambiente da nuvem (`HEYGEN_EMAIL`, `HEYGEN_PASSWORD`), nunca no chat.
+  O agente faz o login no navegador headless e manda prints ao dono; o dono
+  só informa o código de verificação quando pedido. Como o container é
+  temporário, o login pode precisar ser refeito em sessões novas.
+- **Chaves de API** (Gemini, fal.ai, Pexels, token do Painel) vão como
+  variáveis de ambiente da nuvem, nunca coladas no chat.
