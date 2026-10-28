@@ -258,8 +258,18 @@ Animação: `The remaining mist drifts low across the road and breaks apart, thi
 
 - **Matriz:** a foto real do Arílio (`avatar-arilio-01`) e a folha `avatar_reference_sheet`, em `02-personagens/00-avatar-narrador`.
 - **Produção:** um único vídeo dele falando os 3:16, com a boca sincronizada com a narração gravada `podcast_1.mp3`, com fundo transparente ou verde (#00FF00) para recorte.
-- **Posição:** canto inferior direito, margem de 5% da borda direita e da borda inferior, fixo do 0:00 ao fim, sem zoom nem movimento de posição.
-- **Tamanho:** de 15% a 18% da largura da tela, enquadrado do peito para cima.
+- **Posição e tamanho (PADRÃO FIXO de todos os vídeos, aprovado pelo dono em 28/10/2026):**
+  - vídeo final 1920×1080;
+  - avatar em quadro de **400×400 px** (foto inteira, sem corte, só reduzida — braços e mãos aparecem);
+  - **80 px** da borda direita;
+  - **encostado na borda de baixo**: o quadro desce 25 px além da borda (`y = H − 400 + 25`), os braços
+    saem pela borda e ele parece sentado, sem nenhum espaço embaixo;
+  - fixo do 0:00 ao fim, sem zoom nem mudança de posição.
+- **Comando de composição (ffmpeg), usar sempre este:**
+  ```
+  [avatar]fps=25,colorkey=0x00FF00:0.30:0.08,despill=type=green,scale=400:400[av];
+  [cenas][av]overlay=W-w-80:H-h+25
+  ```
 - **Movimento:** piscadas naturais, pequenas inclinações de cabeça, ombros e mãos parados.
 - **Cor:** luz principal vinda da esquerda, como nas ilustrações, com leve aquecimento âmbar (3200–3800 K) para combinar com o guache.
 - **Camada:** trilha de vídeo própria, acima das cenas, para ajustar posição e cor sem mexer nas ilustrações.

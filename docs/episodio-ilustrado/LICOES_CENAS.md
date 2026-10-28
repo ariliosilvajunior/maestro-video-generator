@@ -53,7 +53,8 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 2. Fundo verde puro (#00FF00) na foto ANTES de gerar → recorte limpo na montagem.
 3. Modelo atual: fal.ai H3 Max Lip Sync 480P (mãos paradas, natural; Kling Avatar v2 mexe os dedos
    de forma estranha — descartado). Pedaços de áudio de 5 a 15 s cortados nas pausas.
-4. Montagem: avatar ~400 px de largura (1920×1080), encostado na borda de baixo (braços saindo pela
-   borda, "sentado"), ~80 px da borda direita. Nunca flutuando com espaço embaixo.
+4. Montagem — PADRÃO FIXO aprovado (ver Documento Mestre §8): quadro 400×400 px em 1920×1080,
+   80 px da borda direita, 25 px abaixo da borda de baixo (`overlay=W-w-80:H-h+25`), braços saindo
+   pela borda, "sentado". Nunca flutuando com espaço embaixo. Não mudar sem o dono pedir.
 5. Observação aberta: em alguns trechos a boca exagera (estica, mostra muitos dentes). Avaliar no
    tamanho final; se incomodar, refazer só o trecho ou testar Kling Avatar v2 Pro.
