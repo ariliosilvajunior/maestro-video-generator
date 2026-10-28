@@ -292,3 +292,8 @@ Animação: `The remaining mist drifts low across the road and breaks apart, thi
 
 ## 11. Controle de qualidade
 Antes de animar qualquer cena, revisar a imagem e o prompt contra `LICOES_CENAS.md` (nesta mesma pasta).
+
+## 12. Legenda (padrão aprovado em 28/10/2026)
+Estilo documentário discreto: Liberation Sans 46 (base 1920×1080), branco suave com contorno escuro fino e sombra leve,
+centralizada embaixo na área à esquerda do avatar (MarginL 100, MarginR 520, MarginV 55), até ~34 caracteres por linha,
+quebrando nas pausas/pontuação. Tempos tirados da transcrição palavra por palavra da narração.
