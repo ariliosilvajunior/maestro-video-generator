@@ -35,6 +35,11 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
     a lápis — com a folha o Flow devolveu esboço a lápis em fundo branco.
 12. **Mesmo lugar = mesmo prédio.** Se a história se passa na escola já mostrada (p29), toda cena da
     escola usa essa imagem como referência de cenário. Lugares diferentes da mesma época podem mudar.
+14. **Sala criada na altura de criança não serve de base para cena de adulto** (lousa e móveis ficam
+    gigantes e os adultos parecem miniaturas). Cena com adultos: câmera na altura dos olhos de adulto,
+    plano médio (cintura para cima). Erro real (n5-S02).
+15. **No Flow, editar = clicar na imagem (abre grande) → caixa "O que você quer mudar?".** A barra
+    "O que você quer criar?" da tela principal SEMPRE cria imagem nova e muda o cenário.
 13. **Nomes padronizados por projeto:** f01-, f02-… para personagens, c01-… cenários, obj-0X objetos.
 
 ## B. Prompt de animação
