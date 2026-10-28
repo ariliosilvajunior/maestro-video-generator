@@ -15,13 +15,17 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    não perto do chão. Conferir a altura de tudo em relação ao chão e às pessoas.
    Erro real (P05): armário de potes quase encostado no chão.
 4. **Usar o objeto oficial do catálogo.** Sempre anexar a ficha `obj-0X` do objeto como referência e
-   conferir os marcadores (ex.: portão = 4 ripas VERTICAIS de pinho cinza + ferrolho de ferro).
-   Erro real (P11): portão com tábuas horizontais, diferente do `obj-08`.
+   conferir os marcadores contra a IMAGEM da ficha (a imagem da ficha manda sobre a descrição em texto).
 5. **Enquadrar para esconder o que não precisa aparecer.** Se o chão/parede só atrapalha a leitura,
    enquadrar na altura dos olhos e cortar o chão.
 6. **Personagens pelo @ do Flow + ficha.** Rosto visível e igual à ficha; nada de corpo cortado sem
    cabeça quando a cena pede a pessoa.
 7. **Canto inferior direito sempre vazio** (lugar do avatar do narrador).
+8. **Para consertar uma cena, EDITAR a imagem antiga, não gerar do zero.** Abrir a imagem no Flow →
+   "O que você quer mudar?" → anexar a ficha do objeto → pedir só a mudança e terminar com
+   "Keep everything else exactly as it is… Change nothing else." Gerar do zero sem uma imagem do
+   nosso estilo como referência faz o Flow mudar o traço (virou "quadrinho/cartoon").
+   Erro real (P11): imagem nova saiu em outro estilo, com o menino diferente; a edição da antiga deu certo.
 
 ## B. Prompt de animação
 
