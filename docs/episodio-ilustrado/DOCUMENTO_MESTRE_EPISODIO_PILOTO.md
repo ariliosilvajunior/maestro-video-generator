@@ -9,8 +9,8 @@ Este documento é a única referência válida da produção.
 
 - **Formato:** vídeo horizontal 16:9, 3 min 16 s (196 s), 33 cenas ilustradas.
 - **Estilo:** ilustração editorial em guache e lápis de cor, textura de papel visível, interior do Brasil nos anos 80, paleta terrosa (ocre, verde desbotado, bege empoeirado, terracota), luz lateral direcional com sombras longas, poeira suspensa no ar.
-- **Narração:** gravada pelo professor Arílio (arquivo `podcast_1.mp3`, 3:16). É a referência de tempo de todo o vídeo.
-- **Narrador em tela:** o professor Arílio aparece como avatar falante no canto inferior direito, do primeiro ao último segundo (ver seção 8). Ele não aparece dentro das ilustrações.
+- **Narração:** gravada pelo professor Arilio (arquivo `podcast_1.mp3`, 3:16). É a referência de tempo de todo o vídeo.
+- **Narrador em tela:** o professor Arilio aparece como avatar falante no canto inferior direito, do primeiro ao último segundo (ver seção 8). Ele não aparece dentro das ilustrações.
 - **Rostos:** os personagens aparecem com o rosto desenhado, expressivo e igual à sua ficha de referência.
 
 ---
@@ -119,7 +119,7 @@ One single continuous shot, no cuts. Image-to-video animation. Preserve the orig
 Os tempos seguem a narração gravada. "Clipe" é a duração a gerar no Flow; o clipe é cortado no tempo exato na montagem.
 
 **P01 · 0:00,0–0:08,4 · clipe 10 s · imagem `p01`**
-Narração: "Eu sou o professor Arílio, da Recursos Cognitivos, e hoje eu quero contar pra vocês uma história que mexe comigo cada vez que eu releio."
+Narração: "Eu sou o professor Arilio, da Recursos Cognitivos, e hoje eu quero contar pra vocês uma história que mexe comigo cada vez que eu releio."
 Animação: `Slow continuous push-in from 100% to 108% scale. The low ground mist crawls slowly across the dirt road from left to right, thinning into separate drifting threads that curl upward and dissolve. The lamppost halo pulses faintly and its glow bleeds slightly wider into the haze. Fine dust particles drift slowly through the cold blue light. The horizon line brightens by a barely perceptible amount. Nothing else moves.`
 
 **P02 · 0:08,4–0:12,5 · clipe 6 s · imagem `p02`**
@@ -254,9 +254,9 @@ Animação: `The remaining mist drifts low across the road and breaks apart, thi
 
 ---
 
-## 8. Narrador em tela (avatar do professor Arílio)
+## 8. Narrador em tela (avatar do professor Arilio)
 
-- **Matriz:** a foto real do Arílio (`avatar-arilio-01`) e a folha `avatar_reference_sheet`, em `02-personagens/00-avatar-narrador`.
+- **Matriz:** a foto real do Arilio (`avatar-arilio-01`) e a folha `avatar_reference_sheet`, em `02-personagens/00-avatar-narrador`.
 - **Produção:** um único vídeo dele falando os 3:16, com a boca sincronizada com a narração gravada `podcast_1.mp3`, com fundo transparente ou verde (#00FF00) para recorte.
 - **Posição e tamanho (PADRÃO FIXO de todos os vídeos, aprovado pelo dono em 28/10/2026):**
   - vídeo final 1920×1080;
@@ -297,3 +297,11 @@ Antes de animar qualquer cena, revisar a imagem e o prompt contra `LICOES_CENAS.
 Estilo documentário discreto: Liberation Sans 46 (base 1920×1080), branco suave com contorno escuro fino e sombra leve,
 centralizada embaixo na área à esquerda do avatar (MarginL 100, MarginR 520, MarginV 55), até ~34 caracteres por linha,
 quebrando nas pausas/pontuação. Tempos tirados da transcrição palavra por palavra da narração.
+
+## 13. Efeitos da montagem (padrão aprovado em 28/10/2026)
+- Nome do narrador: **Prof. Arilio** (sem acento) + "Recursos Cognitivos", texto branco com sombra leve, SEM caixa/fundo, ao lado do avatar, 0:06–0:12.
+- Título de abertura sobre a P01 (serifa, centralizado) + subtítulo em itálico.
+- Frases-chave em destaque no alto à esquerda (serifa itálica), poucas por episódio.
+- Transição: fade de 0,5 s entre cenas + "whoosh" sintetizado bem baixo.
+- Música: Biblioteca de Áudio do YouTube (sem atribuição), volume 0,20 com ducking leve sob a voz.
+- Sons de ambiente: fal.ai MMAudio v2 (gera o som a partir do próprio clipe), normalizados a ~-30 dB e mixados baixo.
