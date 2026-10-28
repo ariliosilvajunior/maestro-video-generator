@@ -1,0 +1,345 @@
+[
+ {
+  "chave": "piloto",
+  "ordem": 0,
+  "noticia_id": 9,
+  "titulo": "Piloto — \"Não havia pediatra na cidade\" (Jonas)",
+  "conta_flow": "conta atual do piloto",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito",
+   "fichas": "feito",
+   "avatar": "feito",
+   "ambiente": "feito",
+   "montagem": "falta",
+   "publicado": "falta"
+  },
+  "cenas": [
+   {
+    "codigo": "P01",
+    "tempo": "0:00.0–0:08.3",
+    "descricao": "Estrada ao amanhecer",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P02",
+    "tempo": "0:08.3–0:12.4",
+    "descricao": "Mãe e filhos na rua",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P03",
+    "tempo": "0:12.4–0:17.2",
+    "descricao": "Posto de saúde fechado",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P04",
+    "tempo": "0:17.2–0:26.4",
+    "descricao": "Mãe e caixas da mudança",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P05",
+    "tempo": "0:26.4–0:35.0",
+    "descricao": "Armário da avó (imagem nova v2)",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P06",
+    "tempo": "0:35.0–0:39.0",
+    "descricao": "Panela no fogão a lenha",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P07",
+    "tempo": "0:39.0–0:41.5",
+    "descricao": "Sala bagunçada (animação v2)",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P08",
+    "tempo": "0:41.5–0:45.6",
+    "descricao": "Os dois filhos e a bagunça",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P09",
+    "tempo": "0:45.6–0:53.7",
+    "descricao": "Jonas correndo, cadeira (usar a partir de 1,9 s)",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P10",
+    "tempo": "0:53.7–0:55.5",
+    "descricao": "Jonas no telhado (imagem nova)",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P11",
+    "tempo": "0:55.5–0:57.5",
+    "descricao": "Portão aberto e sandália (imagem p34)",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P12",
+    "tempo": "0:57.5–1:00.2",
+    "descricao": "Jonas correndo na estrada",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P13",
+    "tempo": "1:00.2–1:04.5",
+    "descricao": "Jonas entrando na casa do vizinho",
+    "situacao": "video_ok"
+   },
+   {
+    "codigo": "P14",
+    "tempo": "1:04.5–1:11.7",
+    "descricao": "Mão do desconhecido",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P15",
+    "tempo": "1:11.7–1:17.7",
+    "descricao": "Perua à noite",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P16",
+    "tempo": "1:17.7–1:22.7",
+    "descricao": "Mãos dentro do carro",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P17",
+    "tempo": "1:22.7–1:30.5",
+    "descricao": "Objetos enfileirados no quintal",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P18",
+    "tempo": "1:30.5–1:39.6",
+    "descricao": "Professor na sala de recursos",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P19",
+    "tempo": "1:39.6–1:49.3",
+    "descricao": "Terapeuta no portão",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P20",
+    "tempo": "1:49.3–1:52.6",
+    "descricao": "Menino cria vínculo",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P21",
+    "tempo": "1:52.6–1:57.8",
+    "descricao": "Mãos e blocos",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P22",
+    "tempo": "1:57.8–1:59.6",
+    "descricao": "Mão na palma",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P23",
+    "tempo": "1:59.6–2:04.1",
+    "descricao": "Cadeira vazia",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P24",
+    "tempo": "2:04.1–2:08.7",
+    "descricao": "Mãe sozinha com os blocos",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P25",
+    "tempo": "2:08.7–2:15.2",
+    "descricao": "Menino à parte",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P26",
+    "tempo": "2:15.2–2:20.4",
+    "descricao": "Menino incluído",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P27",
+    "tempo": "2:20.4–2:24.8",
+    "descricao": "Quintal cheio",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P28",
+    "tempo": "2:24.8–2:27.5",
+    "descricao": "Crianças brincando em casa",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P29",
+    "tempo": "2:27.5–2:35.9",
+    "descricao": "Portão da escola",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P30",
+    "tempo": "2:35.9–2:45.3",
+    "descricao": "Professor e aluno (vista de cima)",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P31",
+    "tempo": "2:45.3–3:00.8",
+    "descricao": "Mãos com cartões (3 clipes)",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P32",
+    "tempo": "3:00.8–3:04.9",
+    "descricao": "Caminho dividido",
+    "situacao": "falta"
+   },
+   {
+    "codigo": "P33",
+    "tempo": "3:04.9–3:16.0",
+    "descricao": "Estrada ao amanhecer, final (2 clipes)",
+    "situacao": "falta"
+   }
+  ],
+  "custos": [
+   {
+    "item": "Avatar H3 Max (3:16)",
+    "valor": "US$ 9,80"
+   },
+   {
+    "item": "Testes de avatar (Kling + H3)",
+    "valor": "US$ 0,90"
+   },
+   {
+    "item": "Sons de ambiente P01–P13 (MMAudio)",
+    "valor": "< US$ 1"
+   },
+   {
+    "item": "Folha do avatar + transcrição",
+    "valor": "~US$ 0,35"
+   },
+   {
+    "item": "Cenas no Flow",
+    "valor": "R$ 0 (créditos grátis)"
+   }
+  ],
+  "notas": "Prévia montada até a P13 com legenda, música, título, nome, destaques e sons. Faltam animar P14–P33 (créditos renovam todo dia). Detalhes e lições: repositório maestro-video-generator, docs/episodio-ilustrado/."
+ },
+ {
+  "chave": "noticia-3",
+  "ordem": 1,
+  "noticia_id": 3,
+  "titulo": "Antes da sala de recursos: a busca de uma mãe por um diagnóstico",
+  "conta_flow": "Tutor Arilio (utorarilio@gmail.com)",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Família (Autismo e família). Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-4",
+  "ordem": 2,
+  "noticia_id": 4,
+  "titulo": "Quando o casal também precisa de cuidado",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Família (Autismo e família). Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-5",
+  "ordem": 3,
+  "noticia_id": 5,
+  "titulo": "O diagnóstico não é sentença",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Escola especial da cidade pequena. Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-8",
+  "ordem": 4,
+  "noticia_id": 8,
+  "titulo": "\"Eu não sou doente\": o primeiro dia de uma escola diferente",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Escola especial da cidade pequena. Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-1",
+  "ordem": 5,
+  "noticia_id": 1,
+  "titulo": "O que é mediação pedagógica com a criança autista? (Fernanda Chiote)",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Mediação na educação infantil. Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-6",
+  "ordem": 6,
+  "noticia_id": 6,
+  "titulo": "Quando o aluno autista \"não sabe brincar\"",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Mediação na educação infantil. Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-2",
+  "ordem": 7,
+  "noticia_id": 2,
+  "titulo": "O que Ana Beatriz Barbosa Silva ensina sobre autismo na escola",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Autismo na escola. Áudio = podcast já publicado da notícia."
+ },
+ {
+  "chave": "noticia-7",
+  "ordem": 8,
+  "noticia_id": 7,
+  "titulo": "O mito do \"gênio autista\"",
+  "conta_flow": "a definir",
+  "etapas": {
+   "roteiro": "feito",
+   "audio": "feito"
+  },
+  "cenas": [],
+  "notas": "Grupo de personagens: Autismo na escola. Áudio = podcast já publicado da notícia."
+ }
+]
