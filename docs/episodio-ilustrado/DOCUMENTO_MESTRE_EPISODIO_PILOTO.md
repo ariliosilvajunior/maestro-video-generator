@@ -24,7 +24,7 @@ Este documento é a única referência válida da produção.
 | `02-personagens/00-avatar-narrador` | `avatar-arilio-01`, `avatar_reference_sheet` |
 | `03-cenarios` | `c01-casa-interior`, `c02-quintal`, `c03-rua-bairro`, `c04-sala-aee` |
 | `04-objetos` | `obj-01-kit-materiais` a `obj-08-portao` |
-| `05-episodios` | imagens aprovadas das cenas `p01` a `p33` (ex.: `p30-professor-aluno-vista-alta`, `p31-maos-cartoes`, `p32-caminho-dividido`, `p33-estrada-alvorecer-final`); `p34-portao-sandalia` é imagem extra, fora da timeline |
+| `05-episodios` | imagens aprovadas das cenas `p01` a `p33` (ex.: `p30-professor-aluno-vista-alta`, `p31-maos-cartoes`, `p32-caminho-dividido`, `p33-estrada-alvorecer-final`); a P11 usa a imagem `p34-portao-sandalia` |
 | `06-audio` | `podcast_1.mp3` e os cortes por cena `a01`…`a33b` |
 
 ---
@@ -158,7 +158,7 @@ Animação: `The boy runs fast across the room, arms swinging, the raised bare f
 Narração: "Ele escalava telhados…"
 Animação: `The small bare feet step up onto the roof edge, the toes gripping the tile, the loose tile shifting and settling under the weight with a small visible jolt. The small hand on the eave tightens. Dust drifts through the beam and a few grains fall from the plaster. The ladder shifts a few millimetres against the wall. The camera tilts slowly upward along the wall toward the eave.`
 
-**P11 · 0:55,5–0:57,5 · clipe 4 s · imagem `p11`**
+**P11 · 0:55,5–0:57,5 · clipe 4 s · imagem `p34-portao-sandalia` (portão aberto e a sandália largada: o menino já fugiu)**
 Narração: "…abria o portão escondido…"
 Animação: `The rusted gate swings slowly outward on its hinge, opening wider as the small hand pushes it. The bare foot planted in the yard takes the weight and the second foot lifts and crosses through the gap. The rusted bars' shadows sweep across the packed earth as the gate rotates. Dust moves low across the empty street beyond.`
 

@@ -26,6 +26,8 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    "Keep everything else exactly as it is… Change nothing else." Gerar do zero sem uma imagem do
    nosso estilo como referência faz o Flow mudar o traço (virou "quadrinho/cartoon").
    Erro real (P11): imagem nova saiu em outro estilo, com o menino diferente; a edição da antiga deu certo.
+9. **Tamanho do objeto x abertura.** Portão/porta tem que ter a largura do vão. Redimensionar objeto
+   por edição NÃO funciona no Flow; se a proporção estiver errada, trocar de imagem ou de enquadramento.
 
 ## B. Prompt de animação
 
@@ -39,10 +41,13 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 3. **Partes móveis não podem esconder o assunto.** Porta de armário só balança alguns graus e
    "never covering the jars" (ou o que for o foco).
    Erro real (P05): a porta do armário fechou por cima dos potes.
-4. **Um movimento principal + poeira.** Quanto menos ações, menos invenção.
-5. **Duração do clipe ≈ duração da fala da cena** (4/6/8/10 s). Clipe longo demais dá tempo para o
+4. **Nunca pedir personagem atravessando portão, porta ou objeto.** O modelo faz a pessoa passar
+   "por dentro" do objeto. Preferir mostrar o antes ou o depois (ex.: portão aberto com a sandália
+   largada = o menino já fugiu). Erro real (P11): menino atravessou o portão como fantasma.
+5. **Um movimento principal + poeira.** Quanto menos ações, menos invenção.
+6. **Duração do clipe ≈ duração da fala da cena** (4/6/8/10 s). Clipe longo demais dá tempo para o
    modelo inventar coisas; na montagem só se usa o trecho do tempo da fala.
-6. **Testar em 360p** (qualidade aprovada para o estilo guache, que já é suave) e só refazer o que errar.
+7. **Testar em 360p** (qualidade aprovada para o estilo guache, que já é suave) e só refazer o que errar.
 
 ## C. Organização de arquivos
 
