@@ -2,7 +2,7 @@ import sys,json,urllib.request; sys.path.insert(0,__import__('os').path.dirname(
 from base import H,U
 LOCK=(" STYLE (match the attached ref-estilo-p04 exactly): cinematic painterly realism that looks almost like a photograph painted in oil, natural realistic proportions and "
  "adult-looking faces (not cute, not big eyes, not cartoon), fine canvas grain and crosshatched texture over the whole image, muted warm sepia palette, low golden side light "
- "with long shadows, worn weathered surfaces. NOT a clean digital illustration, NOT watercolor, NOT ink line drawing. No readable text anywhere.")
+ "with long shadows, surface condition exactly as this text describes (a NEW place looks new: fresh clean paint, nothing peeling or cracked; an OLD place looks worn). NOT a clean digital illustration, NOT watercolor, NOT ink line drawing. No readable text anywhere.")
 def cen(desc,p3,p4,ident=None):
     base=(f"The attached image {ident} is the identity reference: show exactly this same place. " if ident else "")
     return ("Location reference sheet, same board LAYOUT as the attached ref-layout-cenario (use it ONLY for the layout — NEVER copy that house, its rooms or furniture): a light grey board with a 2x2 grid of four large panels and a thin caption strip "
