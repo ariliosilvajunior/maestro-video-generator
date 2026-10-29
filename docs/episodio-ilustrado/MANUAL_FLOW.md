@@ -13,10 +13,11 @@ estão no Painel do Dono → Roteiro de Vídeo → Episódios em produção → 
 
 `ref-estilo-p04` e `ref-estilo-p08` estão no Drive, pasta `05-episodios`.
 
-## 2. Nosso estilo (o que é certo)
-Pintura realista em **guache + lápis de cor**, textura de pincel e papel visível, luz dourada lateral,
-sombras longas, cores terrosas e quentes. **Errado:** aquarela clara, contorno preto de tinta, cartoon,
-livro infantil, esboço a lápis em fundo branco.
+## 2. Nosso estilo (o padrão é a imagem `ref-estilo-p04`)
+Realismo pintado quase como foto: proporções e rostos realistas, textura granulada sobre a imagem toda,
+tons sépia quentes com paredes azul desbotado e terracota, sol baixo dourado com sombras longas, superfícies gastas.
+**Errado:** desenho digital limpo, cores lisas e vivas, rosto "fofinho", aquarela, contorno de tinta, cartoon.
+Na dúvida, coloque a imagem nova ao lado da `ref-estilo-p04`: tem que parecer do mesmo filme.
 
 ## 3. Os três tipos de cena
 | No Painel diz | O que fazer |
