@@ -5,12 +5,12 @@ LOCK=(" STYLE (match the attached ref-estilo-p04 exactly): cinematic painterly r
  "with long shadows, worn weathered surfaces. NOT a clean digital illustration, NOT watercolor, NOT ink line drawing. No readable text anywhere.")
 def cen(desc,p3,p4,ident=None):
     base=(f"The attached image {ident} is the identity reference: show exactly this same place. " if ident else "")
-    return ("Location reference sheet, same layout as the attached ref-layout-cenario: a light grey board with a 2x2 grid of four large panels and a thin caption strip "
+    return ("Location reference sheet, same board LAYOUT as the attached ref-layout-cenario (use it ONLY for the layout — NEVER copy that house, its rooms or furniture): a light grey board with a 2x2 grid of four large panels and a thin caption strip "
             "at the bottom with no readable text. "+base+f"All four panels show the SAME place, empty of people: {desc}. Panel 1: wide establishing view at adult eye level. "
             f"Panel 2: reverse angle from the other side. Panel 3: {p3}. Panel 4: {p4}. Identical architecture, furniture, materials, colours and light in every panel."+LOCK)
 def per(desc,ident=None):
     base=(f"The attached image {ident} is the identity reference: exactly this same person, same face, hair and clothes. " if ident else "")
-    return ("Character reference sheet of ONE person only, same layout as the attached ref-layout-personagem: a light grey board; top row: full body front view, full body "
+    return ("Character reference sheet of ONE person only, same board LAYOUT as the attached ref-layout-personagem (use it ONLY for the layout — NEVER copy the woman, her face, dress or sandals): a light grey board; top row: full body front view, full body "
             "three-quarter view, full body side profile; bottom row: large face close-up, close-ups of the clothes and shoes. "+base+f"{desc} Same face, hair and clothes in "
             "every panel, plain neutral grey background, no other people, real-world body proportions."+LOCK)
 CRIAR="CRIAR (barra de baixo · Imagem · 16:9 · x2) · ANEXAR ref-estilo-p04 + {lay}"
@@ -31,12 +31,12 @@ kits={
  item("K03","c05-consultorio","c",cen("a simple small-town pediatrician's office in 1980s Brazil: pale green walls, old wooden desk with a lamp, metal examination bed with a white sheet, a weighing scale, a window with warm light","close view of the desk and the weighing scale","view toward the window with the light")),
 ]),
 "kit-tutor":("Kit de referência — conta TUTOR (notícias 5 e 8)","Tutor Arilio (utorarilio@gmail.com)",4,[
- item("K01","f01-educadora","p",per("The educator, founder of the school in 1980s Brazil.",ident="f01-educadora")),
- item("K02","f04-menino","p",per("The small boy.",ident="f04-menino")),
+ item("K01","f01-educadora","p",per("The educator, founder of the school in 1980s Brazil.",ident="f01-educadora"),ident="f01-educadora"),
+ item("K02","f04-menino","p",per("The small boy of about 4 years old, child body proportions.",ident="f04-menino"),ident="f04-menino"),
  item("K03","f02-adolescente","p",per("A Brazilian teenage boy of about 15 in the 1980s with an intellectual disability: medium brown skin, short black hair, slightly chubby, faded yellow t-shirt, worn jeans, old sneakers, shy hurt expression.")),
  item("K04","f03-mae-adolescente","p",per("His mother, a Brazilian woman of about 42 in the 1980s: medium brown skin, black hair tied back, tired firm face, simple floral cotton dress, cardigan, plastic sandals.")),
- item("K05","c02-sala-antiga-adulto","c",cen("the old rented room where the educator first taught","close view of the desks and the blackboard","view toward the window and the door",ident="c02-sala-antiga-adulto")),
- item("K06","c03-sala-nova","c",cen("the classroom of the new school","close view of a student desk with wooden blocks","view toward the windows with the light",ident="c03-sala-nova")),
+ item("K05","c02-sala-antiga-adulto","c",cen("the old rented room where the educator first taught","close view of the desks and the blackboard","view toward the window and the door",ident="c02-sala-antiga-adulto"),ident="c02-sala-antiga-adulto"),
+ item("K06","c03-sala-nova","c",cen("the classroom of the new school","close view of a student desk with wooden blocks","view toward the windows with the light",ident="c03-sala-nova"),ident="c03-sala-nova"),
 ]),
 "kit-conta-c":("Kit de referência — CONTA C (notícias 1 e 6)","Conta C (3º e-mail — escrever aqui qual) — notícias 1 e 6, mesmos personagens",7,[
  item("K01","f01-professora","p",per("A Brazilian early-childhood teacher, about 35: medium brown skin, dark curly hair tied up in a low bun, small gold stud earrings, plain light-blue cotton blouse, beige trousers, flat brown shoes, plain lanyard with a blank badge.")),
