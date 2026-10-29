@@ -13,6 +13,10 @@ estão no Painel do Dono → Roteiro de Vídeo → Episódios em produção → 
 
 `ref-estilo-p04` e `ref-estilo-p08` estão no Drive, pasta `05-episodios`.
 
+## 1b. KIT DE REFERÊNCIA primeiro (obrigatório)
+Cada conta tem no Painel um item "Kit de referência — …" com as FOLHAS (várias vistas) de cada personagem e lugar, como no piloto.
+Nenhuma cena antes do kit pronto. Sobe antes: `ref-estilo-p04`, `ref-layout-cenario` (= c01-casa-interior) e `ref-layout-personagem` (= f01-mae).
+
 ## 2. Nosso estilo (o padrão é a imagem `ref-estilo-p04`)
 Realismo pintado quase como foto: proporções e rostos realistas, textura granulada sobre a imagem toda,
 tons sépia quentes com paredes azul desbotado e terracota, sol baixo dourado com sombras longas, superfícies gastas.
