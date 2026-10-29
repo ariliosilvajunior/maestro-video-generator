@@ -80,3 +80,7 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    pela borda, "sentado". Nunca flutuando com espaço embaixo. Não mudar sem o dono pedir.
 5. Observação aberta: em alguns trechos a boca exagera (estica, mostra muitos dentes). Avaliar no
    tamanho final; se incomodar, refazer só o trecho ou testar Kling Avatar v2 Pro.
+6. **Entrada/saída do avatar (teste aprovado na técnica em 29/10):** Flow → Vídeo → Frames → 16:9 → Omni 1.1 Flash → 360p → 4s,
+   Início = fundo verde vazio, Fim = a MESMA foto verde usada no H3 Max (`avatar_verde.png` centralizada em 1820×1024).
+   Na montagem: entrada SEM recorte (scale 711×400, overlay x=1284, y=H-h+25, só até 4,0 s), entra pela borda direita da tela;
+   a fala do H3 Max começa em 4,0 s (áudio com atraso de 4 s). Emenda sem pulo visível. Saída = o inverso (Início/Fim trocados).
