@@ -53,12 +53,16 @@ kits={
 ]),
 }
 EXTRA_D="\n\nNÃO CRIAR f05-professor-aee nem c04-sala-aee: já são folhas do piloto — baixar do Drive (02-personagens, 03-cenarios) e subir com o mesmo nome."
-for chave,(titulo,conta,ordem,cenas) in kits.items():
-    notas=PREP+(EXTRA_D if chave=="kit-conta-d" else "")
-    if chave=="kit-tutor": notas+="\n\nItens com 'renomear a antiga': as imagens antigas viram só referência de identidade; a FOLHA nova passa a ter o nome que as cenas usam. Depois disso, refazer as cenas já feitas que não parecerem com a ref-estilo-p04."
-    body={"chave":chave,"titulo":titulo,"conta_flow":conta,"ordem":ordem,"cenas":cenas,"notas":notas}
-    r=json.load(urllib.request.urlopen(urllib.request.Request(U,data=json.dumps(body).encode(),headers=H,method='POST')))
-    print(r['chave'],r['cenas_total'])
-for chave,o in {"piloto":0,"noticia-3":2,"noticia-4":3,"noticia-5":5,"noticia-8":6,"noticia-1":8,"noticia-6":9,"noticia-2":11,"noticia-7":12}.items():
-    urllib.request.urlopen(urllib.request.Request(U,data=json.dumps({"chave":chave,"ordem":o}).encode(),headers=H,method='POST'))
-print("ordens ok")
+def _gravar_todos():
+    for chave,(titulo,conta,ordem,cenas) in kits.items():
+        notas=PREP+(EXTRA_D if chave=="kit-conta-d" else "")
+        if chave=="kit-tutor": notas+="\n\nItens com 'renomear a antiga': as imagens antigas viram só referência de identidade; a FOLHA nova passa a ter o nome que as cenas usam. Depois disso, refazer as cenas já feitas que não parecerem com a ref-estilo-p04."
+        body={"chave":chave,"titulo":titulo,"conta_flow":conta,"ordem":ordem,"cenas":cenas,"notas":notas}
+        r=json.load(urllib.request.urlopen(urllib.request.Request(U,data=json.dumps(body).encode(),headers=H,method='POST')))
+        print(r['chave'],r['cenas_total'])
+    for chave,o in {"piloto":0,"noticia-3":2,"noticia-4":3,"noticia-5":5,"noticia-8":6,"noticia-1":8,"noticia-6":9,"noticia-2":11,"noticia-7":12}.items():
+        urllib.request.urlopen(urllib.request.Request(U,data=json.dumps({"chave":chave,"ordem":o}).encode(),headers=H,method='POST'))
+    print("ordens ok")
+
+if __name__ == "__main__":
+    _gravar_todos()
