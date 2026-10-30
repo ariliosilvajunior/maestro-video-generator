@@ -81,6 +81,17 @@ LUGARES = {
 }
 LUGARES["c04-sala-aee@D"]["mapa"] = LUGARES["c04-sala-aee"]["mapa"]
 
+# Estado de conservação (dono, 30/10/2026: "se a escola é nova porque a pintura já está caindo?").
+# A referência de estilo p04 tem parede descascando — sem isto o Flow copia o desgaste para tudo.
+NOVOS = {"c04-sala-aee", "c04-sala-aee@D", "c03-sala-nova", "c04-escola-fachada", "c01-sala-infantil", "c02-patio-infantil",
+         "c03-sala-recursos", "c01-sala-regular", "c05-sala-professores"}
+COND_NOVO = ("CONDITION: this place is well kept and clean — smooth intact paint, NO peeling, NO cracks, NO stains, NO damp patches, NO exposed plaster, "
+             "clean floor, furniture in good shape. The style reference is ONLY for brushwork and grain, NEVER for wall condition, decay or colours. ")
+COND_VELHO = "CONDITION: old and worn, exactly as described. "
+
+
+def cond(chave): return COND_NOVO if chave in NOVOS else COND_VELHO
+
 ESTILO = {"A": "p04-caixas-mudanca", "B": "ref-estilo-p04", "C": "ref-estilo-p04", "D": "ref-estilo-p04"}
 KIT = {"A": "kit-piloto", "B": "kit-tutor", "C": "kit-conta-c", "D": "kit-conta-d"}
 EPISODIOS = {"A": ["noticia-3", "noticia-4"], "B": ["noticia-5", "noticia-8"], "C": ["noticia-1", "noticia-6"], "D": ["noticia-2", "noticia-7"]}
@@ -96,8 +107,15 @@ TRAVA = " Every fixed element keeps exactly this position, size and design in ev
 def nome(chave): return LUGARES[chave].get("nome", chave)
 
 
+def estilo(chave, est):
+    t = STYLE.format(est=est)
+    if chave in NOVOS:
+        t = t.replace("muted warm sepia palette", "natural warm palette with clean colours")
+    return t
+
+
 def lock(chave):
-    return f" PLACE LOCK — {nome(chave)}: {LUGARES[chave]['mapa']}{TRAVA}"
+    return f" PLACE LOCK — {nome(chave)}: {cond(chave)}{LUGARES[chave]['mapa']}{TRAVA}"
 
 
 def placas(chave, codigo_base):
@@ -109,11 +127,11 @@ def placas(chave, codigo_base):
     a = {"codigo": codigo_base + "A", "descricao": n + "-A", "situacao": "falta",
          "obs": f"CRIAR (barra de baixo · Imagem · 16:9 · x2) · ANEXAR {anexos} · salvar como {n}-A (plano principal — TODAS as cenas deste lugar abrem esta imagem)",
          "imagem": f"One single wide 16:9 image of the place shown in {tipo_fonte}{(' ' + fonte) if anexos != est else ''}, seen {L['vista_a']}, at adult eye level, empty of people. "
-                   f"It must be the SAME place with the same architecture, materials and colours. Fixed layout, follow it exactly: {L['mapa']}{TRAVA}" + STYLE.format(est=est)}
+                   f"It must be the SAME place with the same architecture, materials and colours. {cond(chave)}Fixed layout, follow it exactly: {L['mapa']}{TRAVA}" + estilo(chave, est)}
     b = {"codigo": codigo_base + "B", "descricao": n + "-B", "situacao": "falta",
          "obs": f"ABRIR {n}-A · ANEXAR {est} · salvar como {n}-B (contraplano: o mesmo lugar visto do lado oposto)",
          "imagem": f"Keep this exact place, light, materials and painting style. Show the SAME place seen {L['vista_b']}, at adult eye level, empty of people. "
-                   f"Every fixed element stays where it really is (what was on the left is now on the right): {L['mapa']}{TRAVA} Change nothing else." + STYLE.format(est=est)}
+                   f"Every fixed element stays where it really is (what was on the left is now on the right): {cond(chave)}{L['mapa']}{TRAVA} Change nothing else." + estilo(chave, est)}
     return [a, b]
 
 
@@ -123,7 +141,7 @@ def lugar_da_cena(obs, por_codigo, prefixo):
         if L["conta"] != CONTA_ATUAL[0]:
             continue
         for alvo in [nome(chave)] + L.get("alias", []):
-            if alvo and re.search(r"(?<![\w-])" + re.escape(alvo) + r"(?![\w-])", obs):
+            if alvo and re.search(r"(?<![\w-])" + re.escape(alvo) + r"(?:-[AB])?(?![\w-])", obs):
                 return chave
     m = re.search(r"ABRIR (" + re.escape(prefixo) + r"[A-Z]\d+\w*)", obs)
     if m and m.group(1)[len(prefixo):] in por_codigo:
