@@ -90,3 +90,14 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    os traços que ficam (olhos, sobrancelhas, nariz, pele, cabelo, marcas fixas, roupa) e dizer que SÓ a idade muda.
    Erro real (30/10, `f07-jonas-2anos`): pedido só como "o mesmo menino mais novo" com o personagem do Flow anexado → saiu
    outra criança, nada a ver com o Jonas.
+
+## F. Mesmo lugar = mesma imagem de base (30/10/2026)
+1. Erro real (piloto, quintal): 4 cenas no quintal com varal, portão e paredes em posições diferentes — cada cena
+   "inventava" o lugar de novo. Até a folha c02-quintal tem dois portões diferentes entre os quadros.
+2. Regra: cada lugar tem um **MAPA FIXO** (o que existe e onde: parede do fundo, esquerda, direita, portão e de que
+   lado abre, varal com quantos postes e quais roupas em que ordem) e dois **planos fixos**: `cXX-…-A` (vista principal)
+   e `cXX-…-B` (contraplano, feito EDITANDO o -A). Toda cena daquele lugar ABRE o plano -A ou -B e só acrescenta pessoas.
+   Nunca CRIAR o lugar de novo numa cena. O mapa vai no fim do texto de toda cena ("PLACE LOCK").
+3. Animação: partes que giram/abrem (tampa de caixa, portão, porta) ficam PARADAS no texto, a menos que a cena seja
+   justamente abrir — e aí diz o lado da dobradiça. Erros reais: P04 tampa abrindo do lado errado; P28 portão trocando de
+   lado; P19 terapeuta girando sem sentido; P09 menino flutuando e cadeira sem tocar o chão.
