@@ -109,3 +109,6 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    folha própria (`f08-mae-hoje`, `f09-pai-hoje`). Erro evitado: n3 punha a mãe e o pai de 1980 na sala do AEE atual.
 3. Lugar novo = pintura nova; lugar velho = gasto (ver F). Cena que acontece num lugar que se repete ganha plano fixo
    próprio — corredor e sala da equipe NÃO são "a sala de aula" (erro evitado em n8 E17/E20).
+4. **Nos textos do Painel, só o CÓDIGO real da imagem** (`f01-mae`, `f08-mae-hoje`, `c05-consultorio-A`), nunca um
+   apelido ("Mãe", "Filho Jonas", "Professor AEE"). Apelido tem dupla interpretação. Erro real (30/10): n3-E08 e
+   n3-E10 saíram com a mãe de hoje numa cena dos anos 80.
