@@ -149,7 +149,9 @@ def placas(chave, codigo_base):
          "obs": f"ABRIR {n}-A · ANEXAR {est} · salvar como {n}-B (contraplano: o mesmo lugar visto do lado oposto)",
          "imagem": f"Keep this exact place, light, materials and painting style. Show the SAME place seen {L['vista_b']}, at adult eye level, empty of people. "
                    f"Every fixed element stays where it really is (what was on the left is now on the right): {cond(chave)}{L['mapa']}{TRAVA} Change nothing else." + estilo(chave, est)}
-    return [a, b]
+    # 30/10: o contraplano feito EDITANDO o -A não funciona no Flow (a edição mantém a câmera:
+    # saiu a mesma vista com uma porta ou um vaso a mais). Só o plano -A.
+    return [a]
 
 
 def lugar_da_cena(obs, por_codigo, prefixo):

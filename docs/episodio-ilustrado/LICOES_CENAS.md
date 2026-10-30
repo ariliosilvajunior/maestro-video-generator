@@ -95,8 +95,8 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 1. Erro real (piloto, quintal): 4 cenas no quintal com varal, portão e paredes em posições diferentes — cada cena
    "inventava" o lugar de novo. Até a folha c02-quintal tem dois portões diferentes entre os quadros.
 2. Regra: cada lugar tem um **MAPA FIXO** (o que existe e onde: parede do fundo, esquerda, direita, portão e de que
-   lado abre, varal com quantos postes e quais roupas em que ordem) e dois **planos fixos**: `cXX-…-A` (vista principal)
-   e `cXX-…-B` (contraplano, feito EDITANDO o -A). Toda cena daquele lugar ABRE o plano -A ou -B e só acrescenta pessoas.
+   lado abre, varal com quantos postes e quais roupas em que ordem) e um **plano fixo** `cXX-…-A` (vista principal)
+   — sem -B: editar o -A no Flow mantém a câmera, o "contraplano" saía igual (erro real 30/10). Toda cena abre o -A e só acrescenta pessoas.
    Nunca CRIAR o lugar de novo numa cena. O mapa vai no fim do texto de toda cena ("PLACE LOCK").
 3. Animação: partes que giram/abrem (tampa de caixa, portão, porta) ficam PARADAS no texto, a menos que a cena seja
    justamente abrir — e aí diz o lado da dobradiça. Erros reais: P04 tampa abrindo do lado errado; P28 portão trocando de
