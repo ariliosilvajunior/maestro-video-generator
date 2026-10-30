@@ -50,7 +50,7 @@ LUGARES = {
    mapa="the classroom of the brand-new school (1980s, just built): smooth freshly painted white walls with a light-blue band along the bottom, clean shiny terracotta tile floor, nothing peeling or cracked. "
    "BACK WALL: a normal-sized green blackboard centered, the teacher's wooden desk in front of it on the left. LEFT WALL: two large metal-framed windows with sun coming in. RIGHT WALL: the wooden door near the back corner and a low shelf with wooden toys and puzzles. "
    "Simple new wooden-and-metal student desks in three rows facing the blackboard."),
- "c04-escola-fachada": dict(conta="B", origem="ref-escola-nova-p29", alias=["ref-escola-nova-p29"],
+ "c04-escola-fachada": dict(conta="B", origem="ref-escola-nova-p29", alias=["ref-escola-nova-p29", "n5-S06a"],
    vista_a="from the street outside the open gate looking into the courtyard", vista_b="from inside the courtyard looking back at the gate and the street",
    mapa="the front of the new school: a plastered front wall with a wide double gate of metal bars in the middle, opening INTO the courtyard; a courtyard of packed red earth; a single-storey building with clay-tile roof across the back of the courtyard; one big shade tree on the left. Exactly as in the attached image ref-escola-nova-p29."),
  # ---------------- Conta C (notícias 1 e 6) ----------------
@@ -78,12 +78,29 @@ LUGARES = {
  "c05-sala-professores": dict(conta="D", alias=["n7-E01"],
    vista_a="from the door looking at the long table", vista_b="from the window looking back at the door",
    mapa="a simple teachers' room of a Brazilian public school: one long table with chairs in the middle, coffee cups and a thermos on it; a window on the left wall; a cork board and lockers on the back wall; the door on the right wall."),
+
+ # ---- lugares acrescentados na revisão de 30/10 (cenas que se repetiam sem plano fixo) ----
+ "c06-pracinha": dict(conta="A",
+   vista_a="from the dirt path looking at the bench under the tree", vista_b="from behind the bench looking toward the houses",
+   mapa="a small quiet square near the family house in the same 1980s town: packed red earth, ONE big shady mango tree in the middle with ONE long wooden bench under it facing the camera, low dry grass around, the row of clay-roofed houses of the street visible in the background on the left, a wooden power pole on the right."),
+ "c07-corredor-clinica": dict(conta="A",
+   vista_a="from one end of the corridor looking down its length", vista_b="from the far end looking back",
+   mapa="a long plain corridor of a small 1980s clinic: pale green walls with a darker green band at the bottom, worn red tile floor, ONE row of wooden benches along the LEFT wall, closed wooden doors along the RIGHT wall, one window at the far end letting in light."),
+ "c05-corredor-escola": dict(conta="B",
+   vista_a="from one end of the corridor at adult eye level", vista_b="from the other end looking back",
+   mapa="the corridor of the brand-new school: smooth white walls with a light-blue band at the bottom, clean terracotta floor, two open classroom doors side by side on the RIGHT wall, windows to the courtyard on the LEFT wall, sunlight on the floor."),
+ "c06-sala-equipe": dict(conta="B",
+   vista_a="from the door looking at the table", vista_b="from the window looking back at the door",
+   mapa="the small staff room of the brand-new school: smooth white walls with a light-blue band, ONE rectangular wooden table with six chairs in the middle, a window on the LEFT wall, a small cupboard with a coffee pot and cups on the BACK wall, the door on the RIGHT wall."),
+ "c06-palco-escola": dict(conta="D", alias=["n7-E03"],
+   vista_a="from the audience looking at the small stage", vista_b="from the side of the stage looking at the empty chairs",
+   mapa="the small stage of a present-day school hall: a low wooden stage with a dark red curtain pulled to both sides, ONE bright spotlight from above, rows of empty plastic chairs in front, plain light walls."),
 }
 LUGARES["c04-sala-aee@D"]["mapa"] = LUGARES["c04-sala-aee"]["mapa"]
 
 # Estado de conservação (dono, 30/10/2026: "se a escola é nova porque a pintura já está caindo?").
 # A referência de estilo p04 tem parede descascando — sem isto o Flow copia o desgaste para tudo.
-NOVOS = {"c04-sala-aee", "c04-sala-aee@D", "c03-sala-nova", "c04-escola-fachada", "c01-sala-infantil", "c02-patio-infantil",
+NOVOS = {"c05-corredor-escola", "c06-sala-equipe", "c06-palco-escola", "c04-sala-aee", "c04-sala-aee@D", "c03-sala-nova", "c04-escola-fachada", "c01-sala-infantil", "c02-patio-infantil",
          "c03-sala-recursos", "c01-sala-regular", "c05-sala-professores"}
 COND_NOVO = ("CONDITION: this place is well kept and clean — smooth intact paint, NO peeling, NO cracks, NO stains, NO damp patches, NO exposed plaster, "
              "clean floor, furniture in good shape. The style reference is ONLY for brushwork and grain, NEVER for wall condition, decay or colours. ")

@@ -101,3 +101,11 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 3. Animação: partes que giram/abrem (tampa de caixa, portão, porta) ficam PARADAS no texto, a menos que a cena seja
    justamente abrir — e aí diz o lado da dobradiça. Erros reais: P04 tampa abrindo do lado errado; P28 portão trocando de
    lado; P19 terapeuta girando sem sentido; P09 menino flutuando e cadeira sem tocar o chão.
+
+## G. Idade, roupa e época coerentes (30/10/2026)
+1. Mesma pessoa em outra idade: mantém só rosto, pele, cabelo e marcas; a ROUPA é da idade (criança de 2 anos não usa a
+   camiseta do menino de 6). Erro real: f07-jonas-2anos com a roupa do Jonas maior.
+2. Época: cena no presente (sala do AEE de hoje, professor de hoje) não usa os personagens dos anos 80. Pais de hoje têm
+   folha própria (`f08-mae-hoje`, `f09-pai-hoje`). Erro evitado: n3 punha a mãe e o pai de 1980 na sala do AEE atual.
+3. Lugar novo = pintura nova; lugar velho = gasto (ver F). Cena que acontece num lugar que se repete ganha plano fixo
+   próprio — corredor e sala da equipe NÃO são "a sala de aula" (erro evitado em n8 E17/E20).
