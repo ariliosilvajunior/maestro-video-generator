@@ -84,3 +84,9 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    Início = fundo verde vazio, Fim = a MESMA foto verde usada no H3 Max (`avatar_verde.png` centralizada em 1820×1024).
    Na montagem: entrada SEM recorte (scale 711×400, overlay x=1284, y=H-h+25, só até 4,0 s), entra pela borda direita da tela;
    a fala do H3 Max começa em 4,0 s (áudio com atraso de 4 s). Emenda sem pulo visível. Saída = o inverso (Início/Fim trocados).
+
+## E. Folhas de personagem em outra idade
+1. **Mesma pessoa mais nova/velha: anexar a FOLHA dela (ex.: `f02-jonas`) como referência de identidade** e listar no texto
+   os traços que ficam (olhos, sobrancelhas, nariz, pele, cabelo, marcas fixas, roupa) e dizer que SÓ a idade muda.
+   Erro real (30/10, `f07-jonas-2anos`): pedido só como "o mesmo menino mais novo" com o personagem do Flow anexado → saiu
+   outra criança, nada a ver com o Jonas.
