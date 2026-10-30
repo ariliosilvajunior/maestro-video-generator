@@ -6,10 +6,10 @@ estão no Painel do Dono → Roteiro de Vídeo → Episódios em produção → 
 ## 1. Antes de começar (uma vez por conta)
 | Conta do Flow | Projeto | Precisa ter subido |
 |---|---|---|
-| Conta do piloto | RC – Episódio Piloto (piloto, n3, n4) | fichas do piloto + `ref-estilo-p04` (= a cena p04) |
-| Tutor Arilio | RC – Notícias 5 e 8 · Escola especial | `ref-estilo-p04`, `ref-estilo-p08`, fichas da n5 |
-| Conta C | notícias 1 e 6 | `ref-estilo-p04`, `ref-estilo-p08` + fichas listadas nas Notas da n1 |
-| Conta D | notícias 2 e 7 | `ref-estilo-p04`, `ref-estilo-p08`, `f05-professor-aee`, `c04-sala-aee` (do Drive do piloto) + fichas da n2 |
+| Conta A — professorsaladerecursos@gmail.com | RC – Notícias 01, 02, 03 (piloto, n3, n4) | fichas do piloto + `ref-estilo-p04` (= a cena p04) |
+| Conta B — ututorarilio@gmail.com | RC – Notícias 04 e 05 (notícias 5 e 8) | `ref-estilo-p04`, `ref-estilo-p08`, fichas da n5 |
+| Conta C — arilioinstrutor@gmail.com | RC – Notícias 06 e 07 (notícias 1 e 6) | `ref-estilo-p04`, `ref-estilo-p08` + fichas listadas nas Notas da n1 |
+| Conta D — recursoscognitivos.app@gmail.com | RC – Notícias 08 e 09 (notícias 2 e 7) | `ref-estilo-p04`, `ref-estilo-p08`, `f05-professor-aee`, `c04-sala-aee` (do Drive do piloto) + fichas da n2 |
 
 `ref-estilo-p04` e `ref-estilo-p08` estão no Drive, pasta `05-episodios`.
 
