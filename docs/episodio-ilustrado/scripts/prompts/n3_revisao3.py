@@ -118,7 +118,8 @@ def aplicar(E):
             c["imagem"], c["obs"], c["situacao"] = E03_IMG, E03_OBS, "refazer"
         if k == "E25":
             c["imagem"] = E25_IMG
-            c["obs"] = "ABRIR n3-E04 (SOMENTE depois que a nova n3-E04, o close de mãos e livro, for aprovada) · ANEXAR p04-caixas-mudanca"
+            c["obs"] = ("ABRIR n3-E04 (SOMENTE depois que a nova n3-E04, o close de mãos e livro, for aprovada) · ANEXAR p04-caixas-mudanca · apagar a n3-E25 "
+                        "antiga e salvar a nova como n3-E25")
         if k == "E29" and "the sunset light fades very slightly" not in c["animacao"]:
             i = c["animacao"].find("CAMERA") if "CAMERA" in c["animacao"] else c["animacao"].find("No dialogue, no music, no text. ") + len("No dialogue, no music, no text. ")
             c["animacao"] = c["animacao"][:i] + E29_ANIM_TAIL
@@ -139,4 +140,57 @@ def aplicar(E):
         nota = ("RECORTES NA MONTAGEM (sem gerar imagem): E06 livro e mãos (~150%), E11 mão do médico entregando o papel ao pai, E15 rosto da Maria, E18 bebê no berço, "
                 "E22 mãos com a folha de exame sob a lamparina, E23 rosto da Maria encostado na parede.\n") + nota
     ep["notas"] = nota
+    return falhas
+
+
+# ---------- 4ª revisão (confirmação): 7 problemas + avisos ----------
+E07_NOVO = ("OPENED IMAGE = the new n3-E04 insert. Keep this exact insert: table, camera at table height, light, the mother's and father's hands and sleeves. "
+            "Change only: the same off-white hardback book, still exactly where it is in n3-E04 on the camera-left third, now lies open in the middle, its cream "
+            "pages lit by the daylight from the camera-LEFT; the mother's right hand leaves her clasped hands and rests one fingertip on the open page. ONE book "
+            "only. No readable text. Change nothing else.")
+
+
+def aplicar4(E):
+    falhas = []
+    ep = E["noticia-3"]
+
+    def troca(c, campo, velho, novo):
+        if novo in c[campo]:
+            return
+        if velho in c[campo]:
+            c[campo] = c[campo].replace(velho, novo, 1)
+        else:
+            falhas.append(f"{c['codigo']}.{campo}: não achei «{velho[:45]}»")
+    for c in ep["cenas"]:
+        k = c["codigo"]
+        if k == "E07":
+            c["obs"] = ("ABRIR n3-E04 (SOMENTE depois que a nova n3-E04, o close de mãos e livro, for aprovada) · ANEXAR p04-caixas-mudanca · apagar a n3-E07 "
+                        "antiga e salvar a nova como n3-E07")
+            novo, n = re.subn(r"Keep this exact table.*?\(no illustration, no title\)\.", E07_NOVO, c["imagem"], count=1, flags=re.S)
+            if n:
+                c["imagem"] = novo
+            elif E07_NOVO not in c["imagem"]:
+                falhas.append("E07: trecho 'Keep this exact table…(no illustration, no title).' não achado")
+        if k == "E10":
+            troca(c, "imagem", "sitting on a plain wooden chair BEHIND the desk, between the desk and the wall with the anatomy poster, facing the parents across the desk (his face toward the camera);",
+                  "sitting on a plain wooden chair at the desk on the camera-left, in front of its drawers, his chair turned away from the desk toward the parents (his face toward the camera);")
+            troca(c, "imagem", "the doctor's face lit by the window beyond the desk;", "the doctor's face lit from the camera-right by the large window;")
+        if k == "E11":
+            troca(c, "imagem", "the doctor leans over the desk and hands", "the doctor leans forward from his chair and hands")
+        if k == "E25":
+            c["imagem"] = c["imagem"].replace(" The teacher's notebook stays out of frame.", "")
+            troca(c, "animacao", "her shoulders drop as she breathes out", "her fingers loosen and relax under his hand")
+            troca(c, "animacao", "chairs and table do not move", "the book, the wedding ring and the table do not move")
+        if k == "E03":
+            troca(c, "animacao", "the table and the board behind do not move", "the book, the table and the board behind do not move")
+        if k == "E06":
+            c["obs"] = "NÃO GERAR IMAGEM: apagar a n3-E06 antiga, copiar a n3-E05 e salvar como n3-E06 · montagem: recorte no livro e nas mãos (aprox. 150%)"
+        if k == "E16":
+            troca(c, "imagem", "The mother and the boy are tiny in the frame", "The mother and the boy are small in the frame (the mother about one fifth of the frame height)")
+        if k == "E04":
+            troca(c, "imagem", "behind the father's hand, his navy polo shirt.", "behind the father's hand, his navy polo shirt; the window stays out of frame on the camera-left, never behind the parents.")
+        if k == "E05" and c.get("situacao") not in ("refazer", "falta"):
+            c["obs"] = "JÁ APROVADA — não refazer"
+    ep["notas"] = ep["notas"].replace("RECORTES NA MONTAGEM (sem gerar imagem):",
+        "RECORTES NA MONTAGEM (aproximar na edição a imagem da própria cena — não gerar close extra; E06 e E15 não geram imagem (são cópias)):")
     return falhas

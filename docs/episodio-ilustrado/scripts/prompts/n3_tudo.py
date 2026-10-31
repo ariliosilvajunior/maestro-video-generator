@@ -46,6 +46,7 @@ if __name__ == "__main__":
     E["noticia-3"]["cenas"] = [aprovadas.get(c["codigo"], c) for c in E["noticia-3"]["cenas"]]
     # 3ª revisão: inclui as aprovadas que o especialista mostrou que melhoram (E03, E04; animação E29) — dono autorizou
     print("revisao3 falhas:", n3_revisao3.aplicar(E))
+    print("revisao4 falhas:", n3_revisao3.aplicar4(E))
     print("revisao2 falhas:", falhas, "| câmera em:", feitos)
     if "--gravar" not in sys.argv:
         json.dump({k: E[k] for k in ("kit-piloto", "noticia-3")}, open(__import__('os').path.dirname(__file__) + "/../n3fix/dry_tudo.json", "w"), ensure_ascii=False, indent=1)
