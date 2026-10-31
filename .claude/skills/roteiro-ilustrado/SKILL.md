@@ -46,6 +46,7 @@ repetidas em toda cena. Ver lições J.
 - Toda pessoa citada na narração (irmão bebê, médico, avó) entra no Kit antes das cenas.
 - Lugar real: sala do AEE/consultório com mesa e cadeiras de ADULTO; janela de um lado só; porta sempre no batente.
 - Close-up: copiar a imagem e aproximar na montagem (`"recorte"`), nunca editar para "chegar mais perto".
+- Close-up novo (CRIAR): abrir a cena larga JÁ GERADA e descrever o fundo atrás de cada pessoa como está nela (lições M).
 
 **Época, idade, roupa**
 - Cada personagem tem uma época. Cena dos anos 80 só usa personagens dos anos 80; cena de hoje só de hoje.

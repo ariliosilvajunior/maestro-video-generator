@@ -171,3 +171,10 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 1. Toda peça gráfica (capa do YouTube, post, banner) segue a skill `designer-recursos-cognitivos`: cores oficiais
    (azul `#2B4872`/`#3E69B7` em 80% da peça, verde-água `#56CAC9` no destaque), fonte Goodly, ícone/logo oficial.
    A 1ª capa do piloto saiu com amarelo, vermelho e fonte genérica — recusada pelo dono.
+
+## M. Close-up: o fundo vem da IMAGEM aberta, não do mapa (31/10/2026, n3-E03)
+1. A E03 (close da mãe) foi escrita como "atrás dela só a parede e o quadro" — pelo MAPA. Na n3-E02 real, atrás
+   da mãe está a estante alta com caixas e a planta; o quadro azul fica atrás do pai. Resultado: a estante sumiu.
+2. Regra: antes de escrever um close de uma cena que já existe, **abrir a imagem gerada** (Drive) e descrever o
+   fundo de CADA pessoa como ele aparece nela (o que está atrás de quem, de que lado, a planta em cima de qual
+   ombro), na mesma direção de câmera. Nunca "ONLY …" para fundo — dizer o que existe, não o que não existe.
