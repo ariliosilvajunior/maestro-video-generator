@@ -143,3 +143,24 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 5. Realismo do lugar: turma pequena de escola especial = no máximo 2 professoras e 3 alunos.
 6. As folhas do Kit também vão para o Drive (Kit de referência/02-personagens, 03-cenarios) — as da Conta B
    ficaram só no Flow.
+
+## K. Família, época e Kit nos mínimos detalhes (31/10/2026, Notícias 02 — Conta A)
+1. **Antes da narração/roteiro de cenas: avaliar se a MESMA família encaixa.** Se a notícia fala da mesma
+   história (o livro da Maria Stella), usa a mesma família e os mesmos lugares. Se o assunto muda, cria
+   personagens NOVOS (e pode reaproveitar o lugar). Cada cena leva a etiqueta de época na descrição:
+   `[ANOS 80 · livro]` ou `[HOJE · sala do AEE]` — o dono tem que saber de qual história é a cena.
+2. Personagem novo de outra época tem que ser **visualmente diferente** (cabelo, roupa, cor). A f08-mae-hoje
+   parecia a f01-mae e virou "a mesma mãe com outra roupa".
+3. **Idades do casal coerentes**: o pai dos anos 80 (f06) saiu com cara de 50 anos ao lado da esposa de 30 e
+   mais velho que o pai de hoje. Folha de personagem diz idade e "sem cabelo branco, sem rugas fundas".
+4. Toda pessoa que a narração cita entra no Kit ANTES (o irmão bebê de ~4 meses: f10-irmao-bebe). Bebê nunca
+   perto do fogão; berço tem lugar próprio (c08-quarto), não a sala/cozinha.
+5. **Realismo do lugar**: sala do AEE / consultório tem mesa e cadeiras de ADULTO para os responsáveis;
+   adulto nunca senta em cadeira de criança. Janela de um lado só (lateral), dito no mapa: "NO window on the
+   back wall".
+6. Mapa conta TUDO o que se repete: nº de cadeiras e cor, nº de plantas, lado da porta e da janela, a porta
+   SEMPRE no batente (fechada/entreaberta). A rua: casa por casa (cor, nº de janelas, com/sem porta).
+7. Plano -A que sai em desenho limpo não pode virar base: refazer o -A no estilo p04 (sem anexar a folha em
+   desenho). Toda cena herda o estilo do -A.
+8. Close-up feito por EDIÇÃO muda o lugar (a edição mantém a câmera e o Flow inventa o resto). Para aproximar
+   (rosto cansado, bebê no berço): **copiar a imagem e aproximar na montagem** (`"recorte"` no `episodio.json`).

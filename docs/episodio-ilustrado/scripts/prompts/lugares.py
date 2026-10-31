@@ -12,10 +12,11 @@ LUGARES = {
  # ---------------- Conta A (piloto, notícias 3 e 4) ----------------
  "c01-casa-interior": dict(conta="A",
    vista_a="from the front door looking in", vista_b="from the kitchen corner looking back toward the front door",
-   mapa="the main room of a small 1980s rural Brazilian house (living room and kitchen in one). Walls of faded blue lime paint peeling over ochre plaster; floor of red terracotta square tiles; ceiling of dark wooden beams under clay tiles. "
-   "BACK WALL: on the left a dark wooden inner door; in the middle the kitchen corner — an olive-green two-door wall cupboard with cracked paint above a grey concrete sink counter with green doors, a narrow wooden shelf with three tin jars; on the right of it a red-brick wood-burning stove with an iron top, a dented aluminium pot on it and a rusty metal chimney pipe going straight up. "
-   "LEFT WALL: one worn brown fabric three-seat sofa against the wall. RIGHT WALL: one large wooden window with six square panes looking out to a dry fenced field and a lone tree; under the window a rustic wooden table with ONE wooden chair. "
-   "FRONT WALL (behind the camera in the main view): the wooden plank front door. Warm afternoon sun enters ONLY through the right window and draws window-shaped patches on the floor."),
+   mapa="the main room of a small 1980s rural Brazilian house (living room and kitchen in one). Walls of faded blue lime paint, worn, over ochre plaster; floor of red terracotta square tiles; ceiling of dark wooden beams under clay tiles with ONE bare bulb. "
+   "LEFT WALL: near the back corner ONE dark wooden plank door in a deep frame — the back door to the yard; the door leaf is ALWAYS there (closed, or ajar only if the scene says so); in front of the left wall ONE worn brown fabric three-seat sofa. "
+   "BACK WALL: on the left a grey concrete sink counter with two olive-green doors, above it a narrow wooden shelf with small tin jars and ONE olive-green two-door wall cupboard; on the right ONE red-brick wood-burning stove with an iron top, a dented aluminium pot and a rusty chimney pipe going straight up to the ceiling. "
+   "RIGHT WALL: ONE large wooden window with six square panes looking out to a dry fenced field and a tree; in front of it ONE rustic wooden table with ONE wooden chair. "
+   "FRONT WALL (behind the camera): the wooden front door. There is NO crib and NO bed in this room (they are in the bedroom c08-quarto). Daylight enters ONLY through the right window."),
  "c02-quintal": dict(conta="A",
    vista_a="from the house's back door looking out across the yard to the back wall", vista_b="from the back wall looking toward the house",
    mapa="the backyard of the same house: flat packed red earth, dry grass tufts only along the walls. "
@@ -25,14 +26,18 @@ LUGARES = {
    "On the ground: a worn leather ball and a small wooden toy truck. Late sun from the left, long shadows falling to the right."),
  "c03-rua-bairro": dict(conta="A",
    vista_a="standing in the middle of the street near the family house, looking down the street toward the hills", vista_b="from further down the street looking back up toward the family house",
-   mapa="the red dirt street of the small town in the 1980s, no pavement, no cars. The street runs straight away from the camera and gently downhill toward misty blue hills. "
-   "LEFT SIDE: a row of one-storey houses with clay-tile roofs and plastered walls in faded white, yellow and green, each behind a low plastered wall with a rusty green metal gate; the family house is the FIRST on the left (white walls, brown wooden shutters, green gate). Wooden power poles with sagging wires stand along the LEFT side only. "
+   mapa="the red dirt street of the small town in the 1980s, no pavement, no cars. The camera ALWAYS looks DOWN the street toward the misty blue hills (never the reverse view). "
+   "LEFT SIDE, from the camera outward: (1) the family house, FIRST on the left: white plaster walls with worn patches, clay-tile roof, exactly TWO windows with brown wooden shutters facing the street and NO door on the street side, behind a low white plastered wall with ONE rusty green metal double gate; "
+   "(2) a pale-yellow house with ONE wooden window and no visible door; (3) a pale-green house with ONE window; then smaller white and yellow houses further away, each behind a low wall with a gate. Wooden power poles with sagging wires stand along the LEFT side only. "
    "RIGHT SIDE: open dry grass field with a barbed-wire fence on wooden posts and a few scattered trees."),
  "c04-sala-aee": dict(conta="A",
-   vista_a="from the doorway looking at the table and the felt board", vista_b="from the window side looking toward the door",
-   mapa="a present-day resource room (sala de recursos) in a Brazilian public school: off-white walls, light grey tiled floor. "
-   "LEFT WALL: one large window with a roller blind; under it a long low light-wood shelf with transparent plastic boxes and a small potted plant. BACK WALL: a big blue felt board with five blank cream cards pinned in two rows; to its LEFT a tall light-wood shelf with plastic boxes and a plant on top; to its RIGHT a small white rolling cart with a cup of pencils. "
-   "RIGHT WALL: a light-wood door with a narrow vertical glass panel and a tall light-wood wardrobe. CENTER: ONE rectangular light-wood table on a blue rug, with two blue and two yellow children's chairs."),
+   vista_a="from the doorway corner looking across the meeting table to the felt board", vista_b="from the window side looking toward the door",
+   mapa="a present-day resource room (sala de recursos multifuncionais) in a Brazilian public school: smooth off-white walls, light-grey tiled floor. "
+   "LEFT WALL: the ONLY window of the room — one large window with a white roller blind; under it a long low light-wood shelf with transparent plastic boxes and ONE small potted plant. There is NO window on the back wall and NO window on the right wall. "
+   "BACK WALL: a big blue felt board with five blank cream cards pinned in two rows; to its LEFT a tall light-wood shelf with plastic boxes and ONE trailing green plant on top; to its RIGHT a small white rolling cart with a cup of pencils. "
+   "RIGHT WALL: ONE light-wood door with a narrow vertical glass panel near the back corner, then ONE tall light-wood wardrobe. "
+   "MEETING AREA (center-left, in front): ONE rectangular light-wood ADULT-height table (normal office table, 75 cm high) with exactly THREE adult chairs with dark-grey upholstered seats and black metal legs: two chairs side by side on the far side of the table facing the camera (for the parents) and one chair on the near side with its back to the camera (for the teacher). "
+   "CHILDREN'S CORNER (back-right, in front of the felt board): ONE small low children's table with exactly TWO small yellow children's chairs on a round blue rug. Adults NEVER sit on the children's chairs."),
  "c05-consultorio": dict(conta="A",
    vista_a="from the entrance door looking at the desk and the window", vista_b="from behind the desk looking toward the entrance door",
    mapa="a 1980s small-town pediatrician's office: pale green walls with peeling patches and old faded anatomy posters (no readable text); red tile floor. "
@@ -91,6 +96,13 @@ LUGARES = {
  "c07-corredor-clinica": dict(conta="A",
    vista_a="from one end of the corridor looking down its length", vista_b="from the far end looking back",
    mapa="a long plain corridor of a small 1980s clinic: pale green walls with a darker green band at the bottom, worn red tile floor, ONE row of wooden benches along the LEFT wall, closed wooden doors along the RIGHT wall, one window at the far end letting in light."),
+ "c08-quarto": dict(conta="A",
+   vista_a="from the doorway looking at the bed and the crib", vista_b="from the window looking toward the doorway",
+   mapa="the parents' bedroom of the same 1980s house: the same faded blue lime-painted walls over ochre plaster, red terracotta tile floor, dark wooden ceiling beams. "
+   "BACK WALL: ONE double bed with a dark iron headboard and a white crocheted bedspread; beside it ONE small wooden stool with a kerosene lamp. "
+   "BACK-RIGHT CORNER: ONE old wooden baby crib with vertical bars, a white sheet and a small pillow, standing against the two walls. "
+   "LEFT WALL: ONE small wooden window with two open shutters and a thin faded curtain; under it ONE wooden chest. "
+   "FRONT (behind the camera): the open doorway to the main room. There is NO stove, NO kitchen, NO sofa and NO table in this room."),
  "c07-hospital": dict(conta="B",
    vista_a="from the foot of the bed at adult eye level", vista_b="from the window looking at the door",
    mapa="a small 1980s small-town hospital room: pale green walls with a darker green band at the bottom, worn red tile floor, ONE old white metal hospital bed with a thin mattress and white sheet against the LEFT wall, ONE metal bedside table with an enamel cup, ONE window on the BACK wall with a white curtain, ONE wooden door on the RIGHT wall."),
@@ -104,7 +116,9 @@ LUGARES = {
    vista_a="from the audience looking at the small stage", vista_b="from the side of the stage looking at the empty chairs",
    mapa="the small stage of a present-day school hall: a low wooden stage with a dark red curtain pulled to both sides, ONE bright spotlight from above, rows of empty plastic chairs in front, plain light walls."),
 }
-LUGARES["c04-sala-aee@D"]["mapa"] = LUGARES["c04-sala-aee"]["mapa"]
+LUGARES["c04-sala-aee@D"]["mapa"] = ("a present-day resource room (sala de recursos) in a Brazilian public school: off-white walls, light grey tiled floor. "
+   "LEFT WALL: one large window with a roller blind; under it a long low light-wood shelf with transparent plastic boxes and a small potted plant. BACK WALL: a big blue felt board with five blank cream cards pinned in two rows; to its LEFT a tall light-wood shelf with plastic boxes and a plant on top; to its RIGHT a small white rolling cart with a cup of pencils. "
+   "RIGHT WALL: a light-wood door with a narrow vertical glass panel and a tall light-wood wardrobe. CENTER: ONE rectangular light-wood table on a blue rug, with two blue and two yellow children's chairs.")  # Conta D: mapa antigo (31/10)
 
 # Estado de conservação (dono, 30/10/2026: "se a escola é nova porque a pintura já está caindo?").
 # A referência de estilo p04 tem parede descascando — sem isto o Flow copia o desgaste para tudo.

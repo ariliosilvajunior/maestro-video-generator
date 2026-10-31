@@ -36,6 +36,14 @@ TAIL = (round(dur(SAIDA), 2) if SAIDA else 0.8) + 1.5      # saída do avatar + 
 END = OFF + NARR + TAIL
 os.makedirs(P("tmp"), exist_ok=True)
 
+def recorte(k):
+    """Aproximar uma cena sem gerar imagem nova (ex.: n3-E15 = n3-E13 de perto).
+    episodio.json: "recorte": {"15": [cx, cy, zoom]} — centro em fração da largura/altura, zoom até ~1.8."""
+    r = CFG.get("recorte", {}).get(str(k))
+    if not r: return ""
+    cx, cy, z = r
+    return (f"crop=iw/{z}:ih/{z}:'max(0,min(iw-iw/{z},iw*{cx}-iw/{z}/2))':'max(0,min(ih-ih/{z},ih*{cy}-ih/{z}/2))',")
+
 # 1) cada cena no tamanho certo: estica (até 1,6x mais lento) e congela o último quadro se faltar
 inicio = {}
 for i, (k, a, b) in enumerate(cuts):
@@ -49,7 +57,7 @@ for i, (k, a, b) in enumerate(cuts):
     lento = min(max(precisa / d, 1.0), 1.6)
     # -ss e -t ANTES do -i (opção de entrada): depois do -i o segundo -t sobrescreve e o corte some (erro 31/10)
     run(["ffmpeg", "-v", "error", "-y", "-ss", str(ss), "-t", f"{d:.3f}", "-i", src, "-an", "-vf",
-         f"setpts={lento:.4f}*PTS,scale=1920:1080:flags=lanczos,fps=25,tpad=stop_mode=clone:stop_duration=30,format=yuv420p,setsar=1",
+         f"setpts={lento:.4f}*PTS,{recorte(k)}scale=1920:1080:flags=lanczos,fps=25,tpad=stop_mode=clone:stop_duration=30,format=yuv420p,setsar=1",
          "-t", f"{precisa:.3f}", "-c:v", "libx264", "-crf", "17", P("tmp", f"c{k:02d}.mp4")])
 
 # 2) junta com fusão + cor do episódio (referência ShotDeck) + grão 35mm + vinheta

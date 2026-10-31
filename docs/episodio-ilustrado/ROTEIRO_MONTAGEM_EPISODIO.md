@@ -40,6 +40,12 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
 - ⬜ `08-kit-vestuario`: folha de roupas por personagem e época (ainda não existe — criar no próximo episódio
   para cortar erros de roupa: casaco com estampa da camiseta, mãe de hoje em cena dos anos 80).
 - Scripts: `scripts/prompts/kits.py`, `lugares.py`.
+- ✅ Checklist do Kit "nos mínimos detalhes" (31/10, lições K) — só depois disso a 1ª cena:
+  1. A família/época da notícia foi avaliada (mesma história → mesma família; assunto novo → personagens novos e diferentes).
+  2. Uma folha para CADA pessoa citada (inclusive bebê/irmão), com idade, altura, roupa e mãos.
+  3. Um plano -A para cada lugar, no estilo p04, com mapa contado (cadeiras e cor, plantas, porta e janela de que lado).
+  4. Lugar realista (mesa de adulto para os pais; berço no quarto, longe do fogão).
+  5. Tudo salvo no Drive e marcado ✓ no Painel (⛔ "Kit incompleto" some).
 
 ## 3. Ficha de câmera e cor (ShotDeck) 🟡
 - O dono escolhe quadros no ShotDeck e salva o print em `05-referencia cores-lentes`.
@@ -100,6 +106,8 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
   da linha SOM de cada cena no Painel.
 - ✅ Clipes e avatar baixados direto do Drive pelo Painel (token): `GET /producao-videos/drive/pasta/{id}` e
   `/drive/arquivo/{id}` — sem pedir permissão arquivo por arquivo.
+- ✅ Aproximar uma cena sem gerar imagem nova: `"recorte": {"15": [cx, cy, zoom]}` no `episodio.json` (centro em
+  fração da largura/altura, zoom até ~1,8). Usado na Notícias 02: E15 = E13 de perto, E18 = E17 no berço.
 - ⬜ Música escolhida pela paleta/clima da ficha (hoje: trilha fixa da biblioteca do YouTube, escolhida pelo dono).
 
 ## 7b. Conferência obrigatória antes de entregar ✅
@@ -120,5 +128,6 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 | Montagem | ffmpeg (Claude) | R$ 0 |
 
 ## 10. Histórico de mudanças deste doc
+- 31/10/2026 — Notícias 02: checklist do Kit nos mínimos detalhes, etiqueta de época, recorte na montagem.
 - 31/10/2026 — criado na montagem do piloto: estrutura de pastas 00–08, entrada do avatar, cor por ficha ShotDeck,
   montagem automatizada em script único, saída do avatar e kit de vestuário pendentes.

@@ -40,6 +40,13 @@ da parede nem cores.
 planos -A, salvos no Drive). Mapas com quantidades e posições; personagens com idade/altura/condição física
 repetidas em toda cena. Ver lições J.
 
+**Família e época (dono, 31/10/2026 — lições K)**
+- Antes de escrever as cenas: a notícia é a MESMA história (mesma família, mesmos lugares)? Se o assunto muda,
+  personagens NOVOS e visualmente diferentes. Etiqueta em toda descrição: `[ANOS 80 · livro]` / `[HOJE · …]`.
+- Toda pessoa citada na narração (irmão bebê, médico, avó) entra no Kit antes das cenas.
+- Lugar real: sala do AEE/consultório com mesa e cadeiras de ADULTO; janela de um lado só; porta sempre no batente.
+- Close-up: copiar a imagem e aproximar na montagem (`"recorte"`), nunca editar para "chegar mais perto".
+
 **Época, idade, roupa**
 - Cada personagem tem uma época. Cena dos anos 80 só usa personagens dos anos 80; cena de hoje só de hoje.
 - Mesma pessoa em outra idade: anexa a folha original como identidade, mantém rosto/pele/cabelo/marcas,
