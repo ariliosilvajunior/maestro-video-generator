@@ -116,8 +116,11 @@ vf.append(f"{base}[fala]overlay=W-w-80:H-h+25:eof_action=pass[b2]"); base = "[b2
 if SAIDA:
     n = len(vin) // 2
     vin += ["-i", SAIDA]
-    vf.append(f"[{n}:v]fps=25,scale=711:400,{KEY},format=yuva420p,setpts=PTS+{OFF+NARR:.2f}/TB[sai]")
-    vf.append(f"{base}[sai]overlay=1284:H-h+25:eof_action=pass[b3]"); base = "[b3]"
+    # quadro da saída: [largura, altura, x]. Padrão = saída antiga (pessoa ocupa o quadro todo → corta a cabeça ao
+    # levantar). Saída com folga (Av04: pessoa 720px embaixo num quadro 1920x1080) = [1067, 600, 1107].
+    sw, sh, sx = CFG.get("saida_quadro", [711, 400, 1284])
+    vf.append(f"[{n}:v]fps=25,scale={sw}:{sh},{KEY},format=yuva420p,setpts=PTS+{OFF+NARR:.2f}/TB[sai]")
+    vf.append(f"{base}[sai]overlay={sx}:H-h+25:eof_action=pass[b3]"); base = "[b3]"
 vf.append(f"{base}ass={P('tmp', 'fx.ass')}[v]")
 run(["ffmpeg", "-v", "error", "-y", *vin, "-filter_complex", ";".join(vf), "-map", "[v]", "-t", f"{END:.3f}",
      "-c:v", "libx264", "-crf", "19", "-pix_fmt", "yuv420p", P("tmp", "video.mp4")])

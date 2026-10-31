@@ -73,6 +73,10 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
   Texto pronto (copiar):
   `One single continuous shot, no cuts, static camera. Pure flat green screen background (#00FF00) the whole time, no floor, no shadows, no furniture, no props appear. The man from the start frame unclasps his hands, stands up from behind a table that stays below the bottom edge of the frame (never visible), turns to his right and walks out through the right edge of the frame, leaving only the empty green background, ending exactly like the end frame. Natural, unhurried movement, realistic body and hands, same face, glasses, beard and navy t-shirt with the logo. Seen from the waist up. No camera pan, no zoom. No text, no music, no dialogue.`
   Sem esse arquivo, a montagem faz o avatar sumir suave (0,8 s) — foi assim no piloto.
+  ⚠️ (31/10) A 1ª saída cortou a cabeça: a foto ocupava o quadro todo e, ao levantar, a cabeça saiu pelo topo.
+  Correção: Início = `Av04_saida_inicio` (pessoa com 720 px, encostada embaixo, folga de 360 px em cima),
+  Fim = `Av05_saida_fim_vazio`; no texto, "the top of his head stays inside the frame the whole time".
+  Na montagem: `"saida_quadro": [1067, 600, 1107]` no `episodio.json` (o sentado fica do mesmo tamanho da fala).
 - Posição fixa (não mudar sem o dono pedir): quadro 400×400 em 1920×1080, `overlay=W-w-80:H-h+25`.
   Entrada/saída sem recorte: escala 711×400, `overlay=1284:H-h+25` (entra/sai pela borda direita da tela).
 
