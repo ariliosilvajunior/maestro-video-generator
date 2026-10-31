@@ -47,6 +47,10 @@
 - **R31** Proibido descrever fundo por exclusão ("only the wall", "nothing behind") — dizer o que existe.
 - **R32** Se dá para aproximar sem gerar (rosto, bebê no berço): copiar a imagem e usar `"recorte"` na montagem.
 - **R33** Objetos repetidos (livro, ficha) ficam no MESMO lugar da cena larga ("exactly where it is in n3-E02").
+- **R34** Ordem de geração: cena que ABRE outra cena (`ABRIR n3-E04`) só é gerada DEPOIS que essa outra estiver refeita
+  e aprovada — senão herda o erro da antiga. O obs diz isso ("SOMENTE depois que a nova n3-E04…").
+- **R35** Lado sempre do ponto de vista da CÂMERA: "camera-left / camera-right". Nunca "ombro direito dela" (pessoa de
+  frente inverte o lado — erro da 1ª correção da n3-E03).
 
 ## 4. Animação (Omni 1.1 Flash, Frames, 360p)
 - **R40** Toda cena tem os DOIS textos (imagem e animação). Cena sem imagem nova diz de onde copiar.
@@ -74,7 +78,8 @@
 | 2 | Todo código do ABRIR/ANEXAR existe no Drive? | R20 |
 | 3 | Lugar fixo: abre o -A e tem PLACE LOCK? | R21 |
 | 4 | Cada pessoa tem idade e roupa no texto, e lugar exato na cena? | R22 R23 |
-| 5 | Close: abri a imagem larga e o fundo de cada pessoa está descrito como NELA? | R30 R31 R33 |
+| 5 | Close: abri a imagem larga e o fundo de cada pessoa está descrito como NELA (lado pela câmera)? | R30 R31 R33 R35 |
+| 5b | A cena que ela abre já foi refeita/aprovada? | R34 |
 | 6 | O que o texto afirma sobre a imagem aberta bate com a imagem (olhei)? | R15 R30 |
 | 7 | Tem os dois textos, animação no formato, sem pan, sem atravessar? | R40 R41 R42 |
 | 8 | Diz onde salvar com o mesmo nome? | R50 R51 |

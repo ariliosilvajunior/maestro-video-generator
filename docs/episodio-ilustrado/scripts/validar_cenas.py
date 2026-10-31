@@ -86,6 +86,14 @@ def checar(ep, nomes, kit_codigos):
                     e("R20", f"'{nome}' não existe no Drive nem no Kit")
         if APELIDOS.search(re.sub(r"\[[^\]]*\]", "", trecho)):
             e("R20", f"apelido no ABRIR/ANEXAR: {APELIDOS.search(trecho).group(0)} — use o código")
+        # R34: abre outra cena deste episódio que ainda vai ser refeita → avisar a ordem
+        alvo = re.search(r"ABRIR (" + re.escape(pref) + r"[A-Z]\d+\w*)", obs) if pref else None
+        if alvo:
+            dep = next((x for x in ep["cenas"] if pref + x["codigo"] == alvo.group(1)), None)
+            if dep and dep.get("situacao") in ("refazer", "falta") and "SOMENTE depois" not in obs:
+                e("R34", f"abre {alvo.group(1)}, que ainda está para refazer — dizer no obs para gerar SÓ depois dela")
+        if re.search(r"\b(her|his|their) (right|left) (shoulder|side|hand)\b", img) and "camera-" not in img:
+            e("R35", "lado pela pessoa ('her right shoulder') — use camera-left / camera-right")
         if sem_imagem or eh_kit:
             continue
         # R21: lugar fixo aberto → PLACE LOCK
