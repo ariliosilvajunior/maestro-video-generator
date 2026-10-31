@@ -10,8 +10,9 @@ Roteiro de Vídeo** (cada cena: obs ABRIR/CRIAR/ANEXAR, "1. Imagem", "2. Animaç
 Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, token em Senhas) — nunca só na conversa.
 
 ## Antes de escrever qualquer texto
-1. Ler no Painel (`GET /producao-videos/automacao`) o episódio e o Kit da conta, **inclusive o campo `problema`**
-   ("O que saiu errado") de todas as cenas — são as correções do dono. Não repetir nenhum erro anotado.
+1. Ler a **Memória de erros e acertos**: `GET /producao-videos/aprendizado/automacao` (todos os episódios:
+   rejeitados com categoria e nota = NÃO repetir; aprovados = repetir). Depois o episódio e o Kit da conta em
+   `GET /producao-videos/automacao`, inclusive o `historico` de cada cena.
 2. Ler `docs/episodio-ilustrado/LICOES_CENAS.md` (lições A–G) e `MANUAL_FLOW.md`.
 3. Se for episódio novo: pedir ao dono as fichas do ShotDeck (`FICHA_CAMERA_SHOTDECK.md`).
 4. Antes de afirmar como uma imagem está, **abrir a imagem** (Drive) — nunca supor.
