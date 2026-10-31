@@ -1,6 +1,7 @@
 """Envia o vídeo final de um episódio para o Painel do Dono aprovar antes do YouTube.
 
 Uso:  python3 enviar_publicacao.py <video.mp4> <publicacao.json>
+      python3 enviar_publicacao.py --reusar <id> <publicacao.json>   (Facebook: mesmo arquivo já enviado p/ o YouTube)
       (token em CONTENT_FACTORY_API_TOKEN; o .json traz chave, titulo, descricao, tags,
        canal_esperado e privacidade_final — ex.: ../publicacao/piloto_youtube.json)
 
@@ -61,5 +62,14 @@ def main(video, meta_json):
     print("status:", pub["status"], "— aprovar no Painel: Roteiro de Vídeo →", meta["chave"])
 
 
+def reusar(pub_id, meta_json):
+    meta = json.load(open(meta_json, encoding="utf-8"))
+    pub = chamar("POST", "/producao-videos/publicacao/automacao", {**meta, "arquivo_de": int(pub_id)})
+    print("publicação", pub["id"], meta.get("destino"), "— status:", pub["status"])
+
+
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    if sys.argv[1] == "--reusar":
+        reusar(sys.argv[2], sys.argv[3])
+    else:
+        main(sys.argv[1], sys.argv[2])

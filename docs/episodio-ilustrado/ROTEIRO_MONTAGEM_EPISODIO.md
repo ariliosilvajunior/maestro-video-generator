@@ -130,6 +130,16 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
   3. Dono: Roteiro de Vídeo → episódio → **▶ Publicação no YouTube**: assiste, corrige texto, Aprova ou Rejeita com nota.
   4. Aprovado: o Painel sobe privado, confere o canal (`canal_esperado` = UCqHHEf2eAiKKFHwMswa4gFw) e deixa
      público; marca a etapa "publicado". Declara conteúdo sintético (avatar/cenas com IA).
+- ✅ (31/10) **Facebook e Instagram** (só essas duas redes — dono), cada uma com aprovação própria no Painel:
+  - Facebook = episódio inteiro 16:9, reaproveitando o arquivo do YouTube:
+    `python3 scripts/enviar_publicacao.py --reusar <id da publicação do YouTube> publicacao/<ep>_facebook.json`.
+  - Instagram = Reel vertical 60–90 s: `python3 scripts/reel_episodio.py <pasta> <ini_s> <fim_s> "LINHA1|DESTAQUE|LINHA3"`
+    (trecho mais forte da narração, gancho no alto com a palavra-chave em verde-água, cena no meio, legenda Goodly
+    grande, avatar falando embaixo, cartão final "Episódio completo no YouTube"), depois
+    `python3 scripts/enviar_publicacao.py reel.mp4 publicacao/<ep>_instagram.json`. Legenda IG: gancho < 125
+    caracteres, chamada para salvar/compartilhar, no máximo 5 hashtags.
+  - Publicado pelo Buffer (o Painel dá um link público com chave secreta para o Buffer baixar o vídeo).
+  - Desempenho de tudo (YouTube, Facebook, Instagram e impulsionamentos) em Painel → Sistema → Desempenho nas Redes.
 - ✅ Capa (thumbnail) 1280×720 — **sempre pela identidade da marca: skill `designer-recursos-cognitivos`** (o dono
   recusou uma capa fora do padrão em 31/10: "temos um especialista nisso que já tem todas nossas cores, letras").
   Modelo: `scripts/capa_youtube.html` — fundo azul `#2B4872` (80% da peça), cena do episódio puxada para o azul
