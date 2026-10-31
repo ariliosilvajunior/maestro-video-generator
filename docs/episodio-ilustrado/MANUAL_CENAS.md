@@ -31,6 +31,15 @@
   cadeira de criança; bebê nunca perto do fogão; turma especial pequena (≤ 2 professoras, ≤ 3 alunos).
 - **R14** Estado do lugar explícito: novo/de hoje = pintura lisa; velho = gasto.
 - **R15** O mapa descreve a IMAGEM -A que existe (abrir e conferir), não o que eu imaginei.
+- **R16** **Ficha de OBJETO** para todo objeto que aparece em 2+ cenas (livro, berço, lamparina, brinquedo, ficha):
+  `obj-NN-nome`, layout de painéis (frente, lado, trás, close, de cima com régua, detalhes, paleta) — o mesmo do
+  `obj-08-portao`. A cena ANEXA a ficha e diz "exactly the one in obj-NN-…". (O piloto tinha; os episódios novos
+  ficaram sem — dono, 31/10.)
+- **R17** **Ficha de ROUPAS** (`fNN-…-roupas`) para todo personagem que aparece em DIAS diferentes: roupa A = em
+  casa, B = sair (médico, rua, escola), C… se a história pedir. Cada cena diz qual (bloco `OUTFITS`) e anexa a ficha
+  de roupas no lugar da folha base. Mesmo dia = mesma roupa em todas as cenas desse dia. Personagem de um dia só
+  usa a roupa da folha.
+- **R18** Tabela "roupa por cena" no topo das notas do episódio, para o dono conferir de uma vez.
 
 ## 2. Cena larga (ABRIR o plano -A ou a cena anterior)
 - **R20** Só CÓDIGOS reais nos ABRIR/ANEXAR (`f08-mae-hoje`, `c04-sala-aee-A`, `n3-E02`), que EXISTEM no Drive.
@@ -77,7 +86,8 @@
 | 1 | A etiqueta de época está na descrição e os personagens são dessa época? | R02 R03 |
 | 2 | Todo código do ABRIR/ANEXAR existe no Drive? | R20 |
 | 3 | Lugar fixo: abre o -A e tem PLACE LOCK? | R21 |
-| 4 | Cada pessoa tem idade e roupa no texto, e lugar exato na cena? | R22 R23 |
+| 4 | Cada pessoa tem idade e roupa no texto, e lugar exato na cena? A roupa é a do dia (A casa / B sair)? | R17 R22 R23 |
+| 4b | Todo objeto que se repete anexa a ficha obj-NN? | R16 |
 | 5 | Close: abri a imagem larga e o fundo de cada pessoa está descrito como NELA (lado pela câmera)? | R30 R31 R33 R35 |
 | 5b | A cena que ela abre já foi refeita/aprovada? | R34 |
 | 6 | O que o texto afirma sobre a imagem aberta bate com a imagem (olhei)? | R15 R30 |

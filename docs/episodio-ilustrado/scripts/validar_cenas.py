@@ -86,6 +86,14 @@ def checar(ep, nomes, kit_codigos):
                     e("R20", f"'{nome}' não existe no Drive nem no Kit")
         if APELIDOS.search(re.sub(r"\[[^\]]*\]", "", trecho)):
             e("R20", f"apelido no ABRIR/ANEXAR: {APELIDOS.search(trecho).group(0)} — use o código")
+        # R17: personagem com ficha de roupas no Kit → a cena tem que anexar a ficha e dizer a roupa
+        for f in set(re.findall(r"\b(f\d{2}-[\w-]+?)(?:-roupas)?(?=[ \[·+]|$)", trecho)):
+            if f + "-roupas" in kit_codigos and (f + "-roupas" not in obs or "OUTFIT" not in img):
+                e("R17", f"{f} tem ficha de roupas no Kit — anexar {f}-roupas e dizer a roupa (OUTFITS) da cena")
+        # R16: objeto com ficha no Kit citado no texto → anexar a ficha
+        for o in [x for x in kit_codigos if x.startswith("obj-")]:
+            if o in img and o not in obs:
+                e("R16", f"texto cita {o} mas não anexa a ficha")
         # R34: abre outra cena deste episódio que ainda vai ser refeita → avisar a ordem
         alvo = re.search(r"ABRIR (" + re.escape(pref) + r"[A-Z]\d+\w*)", obs) if pref else None
         if alvo:
@@ -122,8 +130,15 @@ def checar(ep, nomes, kit_codigos):
 
 def main(args):
     if args and args[0] == "--arquivo":
-        eps = [json.load(open(args[1], encoding="utf-8"))]
-        nomes, kits = set(), set()
+        # rascunho local ANTES de gravar: um episódio, ou {chave: episódio} com o Kit junto
+        dados = json.load(open(args[1], encoding="utf-8"))
+        eps = list(dados.values()) if "cenas" not in dados else [dados]
+        kits = {c["descricao"] for e in eps if e["chave"].startswith("kit") for c in e["cenas"]}
+        nomes = set()
+        if os.environ.get("CONTENT_FACTORY_API_TOKEN"):
+            for e in eps:
+                nomes |= nomes_no_drive(e["chave"])
+        eps = [e for e in eps if not e["chave"].startswith("kit")] or eps
     else:
         todos = {e["chave"]: e for e in get("/producao-videos/automacao")}
         eps = [todos[k] for k in args]
