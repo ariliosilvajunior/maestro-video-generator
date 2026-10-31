@@ -87,7 +87,7 @@ def checar(ep, nomes, kit_codigos):
         if APELIDOS.search(re.sub(r"\[[^\]]*\]", "", trecho)):
             e("R20", f"apelido no ABRIR/ANEXAR: {APELIDOS.search(trecho).group(0)} — use o código")
         # R17: personagem com ficha de roupas no Kit → a cena tem que anexar a ficha e dizer a roupa
-        for f in set(re.findall(r"\b(f\d{2}-[\w-]+?)(?:-roupas)?(?=[ \[·+]|$)", trecho)):
+        for f in ([] if eh_kit else set(re.findall(r"\b(f\d{2}-[\w-]+?)(?:-roupas)?(?=[ \[·+]|$)", trecho))):
             if f + "-roupas" in kit_codigos and (f + "-roupas" not in obs or "OUTFIT" not in img):
                 e("R17", f"{f} tem ficha de roupas no Kit — anexar {f}-roupas e dizer a roupa (OUTFITS) da cena")
         # R16: objeto com ficha no Kit citado no texto → anexar a ficha
@@ -104,6 +104,9 @@ def checar(ep, nomes, kit_codigos):
             e("R35", "lado pela pessoa ('her right shoulder') — use camera-left / camera-right")
         if sem_imagem or eh_kit:
             continue
+        # R26: cena nova tem a linha de câmera/cor das fichas ShotDeck
+        if "CAMERA & COLOR" not in img:
+            e("R26", "sem linha CAMERA & COLOR (fichas ShotDeck da pasta 05-referencia cores-lentes)")
         # R21: lugar fixo aberto → PLACE LOCK
         lugar = re.search(r"ABRIR (c\d{2}-[\w-]+-A)", obs)
         if lugar and "PLACE LOCK" not in img:
@@ -138,7 +141,7 @@ def main(args):
         if os.environ.get("CONTENT_FACTORY_API_TOKEN"):
             for e in eps:
                 nomes |= nomes_no_drive(e["chave"])
-        eps = [e for e in eps if not e["chave"].startswith("kit")] or eps
+        # o Kit também é conferido (antes era descartado quando havia episódio no arquivo)
     else:
         todos = {e["chave"]: e for e in get("/producao-videos/automacao")}
         eps = [todos[k] for k in args]

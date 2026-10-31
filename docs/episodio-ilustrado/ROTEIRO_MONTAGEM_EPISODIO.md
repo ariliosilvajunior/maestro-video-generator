@@ -37,8 +37,7 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
 - Lugares: MAPA FIXO por lugar (o que existe e onde, lado do portão, varal com N postes e roupas em ordem) +
   **um** plano fixo `cXX-…-A`. Toda cena do lugar ABRE o -A. Sem plano -B (editar não muda a câmera).
   Estado de conservação explícito (novo = pintura lisa; velho = gasto).
-- ⬜ `08-kit-vestuario`: folha de roupas por personagem e época (ainda não existe — criar no próximo episódio
-  para cortar erros de roupa: casaco com estampa da camiseta, mãe de hoje em cena dos anos 80).
+- ✅ `08-kit-vestuario` (31/10): ficha de roupas por personagem que aparece em dias diferentes (A casa / B sair), regra R17.
 - Scripts: `scripts/prompts/kits.py`, `lugares.py`.
 - ✅ Checklist do Kit "nos mínimos detalhes" (31/10, lições K) — só depois disso a 1ª cena:
   1. A família/época da notícia foi avaliada (mesma história → mesma família; assunto novo → personagens novos e diferentes).
@@ -55,7 +54,8 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
   saturado, amarelo), Highway (quente, dessaturado, 35mm), Empire of Light (anos 80, interior noturno, luz prática,
   quente + ciano). Viraram a cor do episódio na montagem (§7): quente, levemente dessaturado, contraste leve,
   grão 35mm, vinheta.
-- ⬜ Nos próximos: a ficha entra também no TEXTO de cada cena (linha CÂMERA) — ver `FICHA_CAMERA_SHOTDECK.md`.
+- ✅ (31/10) A ficha entra no TEXTO de cada cena: linha `CAMERA & COLOR` por grupo de cenas (regra R26, `scripts/prompts/n3_camera.py`).
+  A pasta da Conta A tem 6 fichas: No Country for Old Men, Highway, Opus, Empire of Light, Presence, I Know What You Did Last Summer.
 
 ## 4. Textos de cena (imagem + animação) ✅
 - Toda cena tem SEMPRE os dois textos. Formato da animação (skill `roteiro-ilustrado`):
