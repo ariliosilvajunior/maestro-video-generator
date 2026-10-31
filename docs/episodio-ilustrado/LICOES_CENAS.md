@@ -1,5 +1,8 @@
 # Lições de produção — episódios ilustrados (Recursos Cognitivos)
 
+> **HISTÓRICO.** As regras valendo estão em `MANUAL_CENAS.md` (com códigos R01–R63). Onde houver conflito, vale o manual
+> (ex.: C2 "_v2" foi substituída por R50 — refazer é sempre o MESMO nome).
+
 Regras aprendidas na produção do episódio piloto (out/2026). Valem para TODO episódio novo:
 revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de animação.
 

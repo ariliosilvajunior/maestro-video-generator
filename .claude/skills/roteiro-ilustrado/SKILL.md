@@ -9,11 +9,20 @@ O dono (Arilio) gera as imagens e animações no Google Flow copiando os textos 
 Roteiro de Vídeo** (cada cena: obs ABRIR/CRIAR/ANEXAR, "1. Imagem", "2. Animação", situação, "O que saiu errado").
 Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, token em Senhas) — nunca só na conversa.
 
+## FLUXO OBRIGATÓRIO (dono, 31/10/2026 — "faz um manual… se não consegue cria um especialista")
+1. Ler `docs/episodio-ilustrado/MANUAL_CENAS.md` inteiro (regras R01–R63 + checklist por cena).
+2. Escrever os textos.
+3. `python3 docs/episodio-ilustrado/scripts/validar_cenas.py <chave>` (ou `--arquivo` antes de gravar) → zero ERRO.
+4. Chamar o especialista **revisor-cenas** (`.claude/agents/revisor-cenas.md`): ele abre as imagens reais no Drive e
+   compara com cada texto. Só grava no Painel com **APROVADO**. Reprovado → corrigir → voltar ao passo 3.
+5. Erro apontado pelo dono vira regra no MANUAL_CENAS.md (e, se der para checar sem imagem, no validar_cenas.py)
+   no MESMO commit.
+
 ## Antes de escrever qualquer texto
 1. Ler a **Memória de erros e acertos**: `GET /producao-videos/aprendizado/automacao` (todos os episódios:
    rejeitados com categoria e nota = NÃO repetir; aprovados = repetir). Depois o episódio e o Kit da conta em
    `GET /producao-videos/automacao`, inclusive o `historico` de cada cena.
-2. Ler `docs/episodio-ilustrado/LICOES_CENAS.md` (lições A–G) e `MANUAL_FLOW.md`.
+2. Ler `docs/episodio-ilustrado/MANUAL_CENAS.md` (regras) e `MANUAL_FLOW.md`; `LICOES_CENAS.md` é o histórico dos erros.
 3. Se for episódio novo: pedir ao dono as fichas do ShotDeck (`FICHA_CAMERA_SHOTDECK.md`).
 4. Antes de afirmar como uma imagem está, **abrir a imagem** (Drive) — nunca supor.
 
