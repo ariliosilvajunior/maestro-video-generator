@@ -3,7 +3,7 @@ Uso: python3 n3_tudo.py --dry  (rascunho em n3fix/dry_tudo.json)  |  python3 n3_
 import sys, json, re, urllib.request
 sys.path.insert(0, __import__('os').path.dirname(__file__))
 from base import H, U
-import n3_fichas, n3_revisao2, n3_camera
+import n3_fichas, n3_revisao2, n3_camera, n3_revisao3
 
 PL_DIA = "Daylight enters ONLY through the right window."
 PL_DIA_PORTA = "Daylight enters through the right window and, in this scene, also through the half-open back door on the left wall."
@@ -44,6 +44,8 @@ if __name__ == "__main__":
     feitos = n3_camera.aplicar(E["noticia-3"])
     # cena que o dono já aprovou não muda (o que mudou só vale para o que ainda vai ser gerado)
     E["noticia-3"]["cenas"] = [aprovadas.get(c["codigo"], c) for c in E["noticia-3"]["cenas"]]
+    # 3ª revisão: inclui as aprovadas que o especialista mostrou que melhoram (E03, E04; animação E29) — dono autorizou
+    print("revisao3 falhas:", n3_revisao3.aplicar(E))
     print("revisao2 falhas:", falhas, "| câmera em:", feitos)
     if "--gravar" not in sys.argv:
         json.dump({k: E[k] for k in ("kit-piloto", "noticia-3")}, open(__import__('os').path.dirname(__file__) + "/../n3fix/dry_tudo.json", "w"), ensure_ascii=False, indent=1)

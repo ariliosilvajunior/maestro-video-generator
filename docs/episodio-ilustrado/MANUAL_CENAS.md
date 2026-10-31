@@ -47,6 +47,11 @@
 - **R26** Linha **CAMERA & COLOR** em toda cena nova, tirada das fichas ShotDeck da pasta `05-referencia cores-lentes`
   (frame size, lente, composição, luz, paleta — nunca nome de filme), escolhida por grupo de cenas (rua de dia, casa de
   noite, casa de dia, clínica, sala de hoje). Ver `scripts/prompts/n3_camera.py`.
+- **R27** A linha CAMERA & COLOR nunca briga com a imagem que a cena ABRE: o tamanho do quadro, o lado e a temperatura
+  da luz vêm do `-A`/cena aberta (ex.: rua do -A é sol baixo dourado da direita, não "sol duro"; corredor é perspectiva
+  aberta, não "plano médio"). A ficha ShotDeck dá lente, textura e paleta; a imagem aberta manda no resto.
+- **R28** Decupagem: o episódio alterna plano geral → médio → close/insert na emoção. Close barato = recorte na
+  montagem (anotar nas notas do episódio: "RECORTES NA MONTAGEM"). Animação nunca faz fade para preto (é na montagem).
 
 ## 2. Cena larga (ABRIR o plano -A ou a cena anterior)
 - **R20** Só CÓDIGOS reais nos ABRIR/ANEXAR (`f08-mae-hoje`, `c04-sala-aee-A`, `n3-E02`), que EXISTEM no Drive.
