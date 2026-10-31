@@ -36,6 +36,10 @@ Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, 
 aquarela, contorno de tinta, cartoon. A referência de estilo é só para pincelada/grão — **nunca** para estado
 da parede nem cores.
 
+**Kit primeiro (regra do dono, 31/10/2026)**: nenhuma imagem de cena antes de TODO o Kit pronto (folhas +
+planos -A, salvos no Drive). Mapas com quantidades e posições; personagens com idade/altura/condição física
+repetidas em toda cena. Ver lições J.
+
 **Época, idade, roupa**
 - Cada personagem tem uma época. Cena dos anos 80 só usa personagens dos anos 80; cena de hoje só de hoje.
 - Mesma pessoa em outra idade: anexa a folha original como identidade, mantém rosto/pele/cabelo/marcas,

@@ -42,9 +42,14 @@ LUGARES = {
  # ---------------- Conta B (notícias 5 e 8) ----------------
  "c02-sala-antiga-adulto": dict(conta="B",
    vista_a="from the doorway at adult eye level looking at the blackboard", vista_b="from the blackboard looking back toward the door",
-   mapa="the small old rented room where the educator first taught, 1980s: faded blue lime walls with peeling plaster, red terracotta floor. "
-   "BACK WALL: a small green blackboard in the middle. RIGHT WALL: one wooden window with open wooden shutters, warm light coming in. LEFT WALL: the wooden entrance door. "
-   "Old wooden school desks with chairs in two short rows facing the blackboard. Exactly as in the attached plate — never add or move walls, windows or doors."),
+   mapa="the small old rented room where the educator first taught, 1980s: faded blue lime walls with peeling plaster, worn terracotta tile floor. "
+   "LEFT WALL: ONE large wooden window with six panes, warm sun coming in. "
+   "BACK WALL, from left to right: a large patch of exposed red bricks where the blue paint has fallen off (just right of the window); "
+   "ONE tall EMPTY wooden shelf unit with exactly three shelves (nothing on it, no picture frame, nothing hanging on any wall); "
+   "ONE dark-green blackboard in a wooden frame, nothing written. "
+   "CENTER: ONE rectangular old wooden table with exactly FOUR simple wooden chairs (two on each long side). "
+   "RIGHT SIDE, on the floor near the right wall: ONE rectangular straw mat with exactly TWO cushions (one faded floral, one plain beige). "
+   "RIGHT WALL: the wooden entrance door. No other furniture, no school desks, no pictures."),
  "c03-sala-nova": dict(conta="B",
    vista_a="from the back of the room at adult eye level looking at the blackboard", vista_b="from beside the blackboard looking back at the desks and the door",
    mapa="the classroom of the brand-new school (1980s, just built): smooth freshly painted white walls with a light-blue band along the bottom, clean shiny terracotta tile floor, nothing peeling or cracked. "
@@ -86,6 +91,9 @@ LUGARES = {
  "c07-corredor-clinica": dict(conta="A",
    vista_a="from one end of the corridor looking down its length", vista_b="from the far end looking back",
    mapa="a long plain corridor of a small 1980s clinic: pale green walls with a darker green band at the bottom, worn red tile floor, ONE row of wooden benches along the LEFT wall, closed wooden doors along the RIGHT wall, one window at the far end letting in light."),
+ "c07-hospital": dict(conta="B",
+   vista_a="from the foot of the bed at adult eye level", vista_b="from the window looking at the door",
+   mapa="a small 1980s small-town hospital room: pale green walls with a darker green band at the bottom, worn red tile floor, ONE old white metal hospital bed with a thin mattress and white sheet against the LEFT wall, ONE metal bedside table with an enamel cup, ONE window on the BACK wall with a white curtain, ONE wooden door on the RIGHT wall."),
  "c05-corredor-escola": dict(conta="B",
    vista_a="from one end of the corridor at adult eye level", vista_b="from the other end looking back",
    mapa="the corridor of the brand-new school: smooth white walls with a light-blue band at the bottom, clean terracotta floor, two open classroom doors side by side on the RIGHT wall, windows to the courtyard on the LEFT wall, sunlight on the floor."),

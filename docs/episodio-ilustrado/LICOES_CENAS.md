@@ -126,3 +126,17 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    -show_entries stream=duration`) e nunca congelar o último quadro sem checar o brilho dele.
 2. Antes de entregar qualquer vídeo: conferir quadros do começo, meio, cada troca de bloco e os ÚLTIMOS
    5 segundos (brilho/YAVG de cada cena: queda brusca = quadro escuro congelado). Só entregar depois disso.
+
+## J. Kit completo ANTES de qualquer cena (31/10/2026, Notícias 04)
+1. As cenas da n5 foram feitas antes do Kit: a sala antiga mudava de cena para cena (prateleira, quadro, mesa,
+   cadeiras, rachaduras), a escola mudava de distância, o menino mudava de idade, as mãos da educadora pareciam
+   de idosa. Regra: NENHUMA imagem de cena antes de TODAS as folhas e planos -A do Kit estarem prontos
+   (o Painel mostra ⛔ "Kit incompleto" em cada episódio).
+2. Mapa do lugar com QUANTIDADES e POSIÇÕES (1 prateleira vazia de 3 prateleiras, 1 mesa com 4 cadeiras,
+   esteira com EXATAMENTE 2 almofadas, rachadura de tijolo à direita da janela, nada pendurado nas paredes).
+3. Personagem com IDADE, ALTURA e condição física fixas no texto de TODA cena (menino: 3 anos, ~90 cm, magro,
+   paralisia cerebral — não fica em pé). Mãos: idade da pessoa (educadora 50 anos, não idosa).
+4. Cenas em sequência (S09 → S10a → S10b → S10c) abrem a anterior e repetem as constantes.
+5. Realismo do lugar: turma pequena de escola especial = no máximo 2 professoras e 3 alunos.
+6. As folhas do Kit também vão para o Drive (Kit de referência/02-personagens, 03-cenarios) — as da Conta B
+   ficaram só no Flow.
