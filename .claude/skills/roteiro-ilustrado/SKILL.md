@@ -60,6 +60,22 @@ da parede nem cores.
   corrigir a imagem primeiro (editar) e só depois animar.
 - Duração ≈ duração da fala (4/6/8/10 s).
 
+**Formato do texto de animação** (adaptado do doc de prompts Kling do dono, 30/10/2026 — só o que serve a
+clipe único, calmo, imagem→vídeo; NADA de câmera na mão, chicote, crash zoom, drone, cortes dentro do clipe):
+```
+[BLOCO FIXO]
+CÂMERA (0–Ns): parada | micro push-in 100→104% | rack focus de A para B — um só, com tempo.
+AÇÃO: estado inicial → uma ação → estado final estável (pose em que o clipe termina, para corte seco).
+ATUAÇÃO: 1–2 sinais físicos de emoção (aperta os lábios, baixa o queixo, ombros soltam, olhos marejam) —
+         nunca só "sorri"/"triste".
+LUZ E AMBIENTE: um acontecimento de luz motivado pela fonte que existe (sol na janela anda, chama
+         tremula, sombra de folha) + poeira/vapor.
+INTEGRIDADE: rosto estável, mãos com 5 dedos, roupa sem artefatos; listar os objetos que NÃO se mexem.
+SOM (não vai para o Flow — vira o prompt do MMAudio na montagem): ambiente + 1–2 ruídos da ação.
+```
+Textura final em toda cena: "raw cinematic imperfect realism, subtle motion blur, natural film grain,
+uneven light falloff, lived-in textures" (bate com o estilo p04).
+
 **Ficha de câmera (ShotDeck)** — nos episódios novos, cada cena ganha a linha CÂMERA: plano · composição ·
 lente · de onde vem a luz · hora; paleta por episódio; decupagem geral → médio → close na emoção → geral.
 
