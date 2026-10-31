@@ -18,7 +18,10 @@ ENTRADA = P("avatar_entrada.mp4") if os.path.exists(P("avatar_entrada.mp4")) els
 SAIDA = P("avatar_saida.mp4") if os.path.exists(P("avatar_saida.mp4")) else None
 
 
-def dur(f):
+def dur(f, video=False):
+    """Duração; com video=True usa a trilha de VÍDEO (clipes do Flow têm áudio mais longo que a imagem)."""
+    if video:
+        return float(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=duration", "-of", "csv=p=0", f]).decode())
     return float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]).decode())
 
 
@@ -40,9 +43,12 @@ for i, (k, a, b) in enumerate(cuts):
     fim = END if i == len(cuts) - 1 else OFF + b
     inicio[k] = ini
     precisa = fim - ini + (XF if i < len(cuts) - 1 else 0)
-    src = P("clipes", f"p{k:02d}.mp4"); d = dur(src); ss = CFG.get("inicio_clipe", {}).get(str(k), 0.0); d -= ss
+    src = P("clipes", f"p{k:02d}.mp4"); d = dur(src, video=True); ss = CFG.get("inicio_clipe", {}).get(str(k), 0.0)
+    corte = CFG.get("cortar_fim_clipe", {}).get(str(k), 0.0)   # clipe que termina escurecendo: não congelar no preto
+    d -= ss + corte
     lento = min(max(precisa / d, 1.0), 1.6)
-    run(["ffmpeg", "-v", "error", "-y", "-ss", str(ss), "-i", src, "-an", "-vf",
+    # -ss e -t ANTES do -i (opção de entrada): depois do -i o segundo -t sobrescreve e o corte some (erro 31/10)
+    run(["ffmpeg", "-v", "error", "-y", "-ss", str(ss), "-t", f"{d:.3f}", "-i", src, "-an", "-vf",
          f"setpts={lento:.4f}*PTS,scale=1920:1080:flags=lanczos,fps=25,tpad=stop_mode=clone:stop_duration=30,format=yuv420p,setsar=1",
          "-t", f"{precisa:.3f}", "-c:v", "libx264", "-crf", "17", P("tmp", f"c{k:02d}.mp4")])
 

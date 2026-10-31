@@ -126,6 +126,9 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    -show_entries stream=duration`) e nunca congelar o último quadro sem checar o brilho dele.
 2. Antes de entregar qualquer vídeo: conferir quadros do começo, meio, cada troca de bloco e os ÚLTIMOS
    5 segundos (brilho/YAVG de cada cena: queda brusca = quadro escuro congelado). Só entregar depois disso.
+3. **O corte no fim (`cortar_fim_clipe`) não estava sendo aplicado**: no ffmpeg o `-t` do corte vinha DEPOIS do
+   `-i` e o segundo `-t` (duração da cena) o sobrescrevia — o clipe inteiro, com o fim escuro, era congelado.
+   Regra: `-ss`/`-t` do corte SEMPRE antes do `-i`. Pego pela conferência de brilho (7b) antes de entregar.
 
 ## J. Kit completo ANTES de qualquer cena (31/10/2026, Notícias 04)
 1. As cenas da n5 foram feitas antes do Kit: a sala antiga mudava de cena para cena (prateleira, quadro, mesa,
