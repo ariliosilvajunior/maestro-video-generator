@@ -65,11 +65,11 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
 - Se o vídeo erra porque a IMAGEM já tem o problema (objeto no meio da queda, pé no ar): refazer a imagem antes.
 - ⬜ Automatizar com a extensão Claude no Chrome (teste de 1 cena feito; falta o fluxo completo).
 
-## 6. Avatar do narrador ✅ fala / 🟡 entrada / ⬜ saída
+## 6. Avatar do narrador ✅ fala / ✅ entrada / ✅ saída
 - Fala: fal.ai H3 Max Lip Sync 480P, foto com fundo verde (#00FF00), pedaços de 5–15 s nas pausas
   (`scripts/avatar_h3max.py`) → `avatar_fala.mp4`. ~US$ 0,05/s (~R$ 51 por episódio de 3 min).
 - Entrada: Flow Frames, Início = fundo verde vazio, Fim = a mesma foto da fala, 4 s → `avatar_entrada.mp4`. ✅ piloto
-- ⬜ Saída: Flow Frames, Início = foto da fala, Fim = fundo verde vazio, 4 s (levanta e sai pela direita).
+- ✅ Saída (piloto, 31/10): Flow Frames, Início = foto da fala (Av02_fim_sentado), Fim = fundo verde vazio (Av03_inicio_vazio), 4 s → `avatar_saida.mp4`. Entrada e saída valem para TODOS os episódios (mesma foto).
   Texto pronto (copiar):
   `One single continuous shot, no cuts, static camera. Pure flat green screen background (#00FF00) the whole time, no floor, no shadows, no furniture, no props appear. The man from the start frame unclasps his hands, stands up from behind a table that stays below the bottom edge of the frame (never visible), turns to his right and walks out through the right edge of the frame, leaving only the empty green background, ending exactly like the end frame. Natural, unhurried movement, realistic body and hands, same face, glasses, beard and navy t-shirt with the logo. Seen from the waist up. No camera pan, no zoom. No text, no music, no dialogue.`
   Sem esse arquivo, a montagem faz o avatar sumir suave (0,8 s) — foi assim no piloto.
@@ -89,8 +89,11 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 6. Som: narração atrasada pela entrada; música a 0,20 com ducking (sidechain) sob a voz; ambiente por cena
    (MMAudio a partir do próprio clipe, normalizado ~-30 LUFS, 0,9); whoosh sintetizado em cada fusão.
 7. Fade de entrada 0,6 s e saída 1 s.
-- ⬜ Ambiente MMAudio gerado automaticamente para TODAS as cenas a partir do texto SOM da cena (hoje: script
-  `scripts/ambiente_mmaudio.py` com prompts escritos à mão).
+- ✅ Ambiente MMAudio para todas as cenas: `scripts/gerar_ambiente.py <pasta>` lê `sons.json` (um texto de som por
+  cena) e gera `amb/aNN.wav` a partir do próprio clipe (~US$ 0,01 por cena). ⬜ Próximo: `sons.json` sair sozinho
+  da linha SOM de cada cena no Painel.
+- ✅ Clipes e avatar baixados direto do Drive pelo Painel (token): `GET /producao-videos/drive/pasta/{id}` e
+  `/drive/arquivo/{id}` — sem pedir permissão arquivo por arquivo.
 - ⬜ Música escolhida pela paleta/clima da ficha (hoje: trilha fixa da biblioteca do YouTube, escolhida pelo dono).
 
 ## 8. Revisão e publicação ⬜
