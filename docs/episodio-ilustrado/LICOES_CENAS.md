@@ -112,3 +112,9 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 4. **Nos textos do Painel, só o CÓDIGO real da imagem** (`f01-mae`, `f08-mae-hoje`, `c05-consultorio-A`), nunca um
    apelido ("Mãe", "Filho Jonas", "Professor AEE"). Apelido tem dupla interpretação. Erro real (30/10): n3-E08 e
    n3-E10 saíram com a mãe de hoje numa cena dos anos 80.
+
+## H. Regras de trabalho do dono (31/10/2026)
+1. Refazer = apagar o arquivo errado e salvar o novo com o MESMO nome. Nunca sugerir -v2 / renomear a antiga.
+2. Toda cena tem sempre texto de IMAGEM e de ANIMAÇÃO (vídeo errado quase sempre pede imagem nova).
+3. Erro real P16: mão do menino de 6 anos saiu com cara de mão de bebê, e ele de casaco com a mesma estampa da
+   camiseta. Na folha do personagem e no texto: proporção de mão da idade; roupa = exatamente a da folha.

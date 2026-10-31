@@ -26,6 +26,12 @@ Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, 
 - Cada item diz onde salvar: `Conta X › Kit de referência › 02-personagens|03-cenarios|04-objetos` ou
   `Conta X › <pasta do episódio> › 05-episodios`, com o nome = código da cena.
 
+**Arquivos e textos (regras do dono, 31/10/2026)**
+- Refazer = o dono APAGA a imagem/vídeo errado e salva o novo com o **MESMO nome**. Nunca sugerir `-v2`,
+  `-antiga`, "renomear a antiga" ou "salvar também como".
+- Toda cena tem SEMPRE os dois textos: **imagem** e **animação**. Quando o vídeo dá errado, quase sempre é
+  preciso refazer a imagem primeiro — sem o texto de imagem o dono fica travado.
+
 **Estilo** (padrão = a imagem p04): realismo pintado quase foto, grão, rostos realistas. Proibido: desenho limpo,
 aquarela, contorno de tinta, cartoon. A referência de estilo é só para pincelada/grão — **nunca** para estado
 da parede nem cores.
