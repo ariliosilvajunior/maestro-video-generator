@@ -113,21 +113,25 @@ open(P("tmp", "fx.ass"), "w").write("\n".join(H + E) + "\n")
 # 4) avatar: entrada (sem recorte, entra pela borda) → fala (posição fixa) → saída (ou some suave)
 KEY = "colorkey=0x00FF00:0.30:0.08,despill=type=green"
 vin = ["-i", P("tmp", "cenas.mp4"), "-i", P("avatar_fala.mp4")]
-vf = [f"[1:v]fps=25,{KEY},scale=400:400,format=yuva420p,setpts=PTS+{OFF}/TB" +
-      ("" if SAIDA else f",fade=t=out:st={OFF+NARR:.2f}:d=0.8:alpha=1") + "[fala]"]
+# 31/10 (dono: "quando levanto para sair o avatar some e reaparece"): a fala do avatar (195,84 s) era mais curta
+# que a narração (195,97 s) e a saída só começava no fim da narração → buraco de ~0,15 s sem avatar.
+# Agora a saída começa no ÚLTIMO quadro da fala (SAI) e a fala congela o último quadro até lá, sem sobreposição.
+SAI = OFF + min(NARR, dur(P("avatar_fala.mp4"), video=True))
+vf = [f"[1:v]fps=25,{KEY},scale=400:400,format=yuva420p,tpad=stop_mode=clone:stop_duration=3,setpts=PTS+{OFF}/TB" +
+      ("" if SAIDA else f",fade=t=out:st={SAI:.2f}:d=0.8:alpha=1") + "[fala]"]
 base = "[0:v]"
 if ENTRADA:
     vin += ["-i", ENTRADA]
     vf.append(f"[2:v]fps=25,scale=711:400,{KEY},format=yuva420p[ent]")
     vf.append(f"{base}[ent]overlay=1284:H-h+25:enable='lt(t,{OFF})'[b1]"); base = "[b1]"
-vf.append(f"{base}[fala]overlay=W-w-80:H-h+25:eof_action=pass[b2]"); base = "[b2]"
+vf.append(f"{base}[fala]overlay=W-w-80:H-h+25:eof_action=pass" + (f":enable='lt(t,{SAI:.3f})'" if SAIDA else "") + "[b2]"); base = "[b2]"
 if SAIDA:
     n = len(vin) // 2
     vin += ["-i", SAIDA]
     # quadro da saída: [largura, altura, x]. Padrão = saída antiga (pessoa ocupa o quadro todo → corta a cabeça ao
     # levantar). Saída com folga (Av04: pessoa 720px embaixo num quadro 1920x1080) = [1067, 600, 1107].
     sw, sh, sx = CFG.get("saida_quadro", [711, 400, 1284])
-    vf.append(f"[{n}:v]fps=25,scale={sw}:{sh},{KEY},format=yuva420p,setpts=PTS+{OFF+NARR:.2f}/TB[sai]")
+    vf.append(f"[{n}:v]fps=25,scale={sw}:{sh},{KEY},format=yuva420p,setpts=PTS+{SAI:.3f}/TB[sai]")
     vf.append(f"{base}[sai]overlay={sx}:H-h+25:eof_action=pass[b3]"); base = "[b3]"
 vf.append(f"{base}ass={P('tmp', 'fx.ass')}[v]")
 run(["ffmpeg", "-v", "error", "-y", *vin, "-filter_complex", ";".join(vf), "-map", "[v]", "-t", f"{END:.3f}",

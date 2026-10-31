@@ -129,6 +129,8 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 3. **O corte no fim (`cortar_fim_clipe`) não estava sendo aplicado**: no ffmpeg o `-t` do corte vinha DEPOIS do
    `-i` e o segundo `-t` (duração da cena) o sobrescrevia — o clipe inteiro, com o fim escuro, era congelado.
    Regra: `-ss`/`-t` do corte SEMPRE antes do `-i`. Pego pela conferência de brilho (7b) antes de entregar.
+4. **Avatar sumindo entre a fala e a saída** (dono, 31/10): a saída tem que começar no último quadro REAL da
+   fala (trilha de vídeo do `avatar_fala.mp4`), não no fim da narração. Conferir a troca quadro a quadro.
 
 ## J. Kit completo ANTES de qualquer cena (31/10/2026, Notícias 04)
 1. As cenas da n5 foram feitas antes do Kit: a sala antiga mudava de cena para cena (prateleira, quadro, mesa,

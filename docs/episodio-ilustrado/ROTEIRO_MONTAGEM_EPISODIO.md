@@ -83,6 +83,9 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
   Correção: Início = `Av04_saida_inicio` (pessoa com 720 px, encostada embaixo, folga de 360 px em cima),
   Fim = `Av05_saida_fim_vazio`; no texto, "the top of his head stays inside the frame the whole time".
   Na montagem: `"saida_quadro": [1067, 600, 1107]` no `episodio.json` (o sentado fica do mesmo tamanho da fala).
+- ⚠️ (31/10) O avatar SUMIA ~0,15 s ao levantar: a fala (195,84 s) era mais curta que a narração (195,97 s) e
+  a saída começava no fim da narração. Correção no script: a saída começa no último quadro da fala e a fala
+  congela o último quadro até lá. Conferir quadro a quadro (10 por segundo) a passagem fala → saída.
 - Posição fixa (não mudar sem o dono pedir): quadro 400×400 em 1920×1080, `overlay=W-w-80:H-h+25`.
   Entrada/saída sem recorte: escala 711×400, `overlay=1284:H-h+25` (entra/sai pela borda direita da tela).
 
@@ -115,9 +118,19 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 - Brilho (YAVG) por cena: nenhuma queda brusca para preto fora do fade final.
 - Duração final = entrada + narração + saída + 1,5 s.
 
-## 8. Revisão e publicação ⬜
+## 8. Revisão e publicação no YouTube ✅ (31/10/2026)
 - Dono assiste, anota no Painel o que refazer (cena + vídeo/imagem). Refaz só o que precisa e remonta.
-- ⬜ Publicação (YouTube/Instagram) e capa — ainda manual / outras rotinas.
+- **Sempre passa pela aprovação do dono antes do YouTube** (regra do dono): 
+  1. Texto do YouTube em `publicacao/<episodio>_youtube.json` — modelo: links (notícias, sistema, cursos) →
+     gancho de 1 linha → 2–3 parágrafos do episódio → convite a comentar → **capítulos** (0:00 obrigatório,
+     ≥3, cada um ≥10 s, tempos = narração + entrada do avatar) → livro citado → aviso de IA → parágrafo de
+     busca → hashtags (as 3 primeiras aparecem acima do título). Título ≤ 100, sem `<` `>`.
+  2. `python3 scripts/enviar_publicacao.py final.mp4 publicacao/<episodio>_youtube.json` (token
+     CONTENT_FACTORY_API_TOKEN) — manda em partes de 40 MB para o Painel.
+  3. Dono: Roteiro de Vídeo → episódio → **▶ Publicação no YouTube**: assiste, corrige texto, Aprova ou Rejeita com nota.
+  4. Aprovado: o Painel sobe privado, confere o canal (`canal_esperado` = UCqHHEf2eAiKKFHwMswa4gFw) e deixa
+     público; marca a etapa "publicado". Declara conteúdo sintético (avatar/cenas com IA).
+- ⬜ Capa (thumbnail) do episódio — próximo passo (já existe `definir_thumbnail` no Painel/Video Factory).
 
 ## 9. Custos por episódio (piloto)
 | Item | Como | Custo |
@@ -128,6 +141,7 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 | Montagem | ffmpeg (Claude) | R$ 0 |
 
 ## 10. Histórico de mudanças deste doc
+- 31/10/2026 — publicação no YouTube com aprovação no Painel; corrigido o buraco do avatar entre fala e saída.
 - 31/10/2026 — Notícias 02: checklist do Kit nos mínimos detalhes, etiqueta de época, recorte na montagem.
 - 31/10/2026 — criado na montagem do piloto: estrutura de pastas 00–08, entrada do avatar, cor por ficha ShotDeck,
   montagem automatizada em script único, saída do avatar e kit de vestuário pendentes.
