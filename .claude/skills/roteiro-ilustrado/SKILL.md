@@ -1,0 +1,69 @@
+---
+name: roteiro-ilustrado
+description: Especialista em montar os textos (prompts) de IMAGEM e ANIMAÇÃO das cenas dos episódios ilustrados das notícias da Recursos Cognitivos no Google Flow (Nano Banana 2.1 + Omni 1.1 Flash), e o Kit de referência (folhas de personagem, planos fixos de lugar). Use sempre que o assunto for cena de episódio, prompt de imagem/animação do Flow, refazer uma cena, Kit de referência, lugar/cenário, personagem, ou montagem do episódio ilustrado. Para teaser/Reels/anúncio use video-prompt-builder.
+---
+
+# Roteiro ilustrado — textos do Flow sem erro
+
+O dono (Arilio) gera as imagens e animações no Google Flow copiando os textos do **Painel do Dono →
+Roteiro de Vídeo** (cada cena: obs ABRIR/CRIAR/ANEXAR, "1. Imagem", "2. Animação", situação, "O que saiu errado").
+Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, token em Senhas) — nunca só na conversa.
+
+## Antes de escrever qualquer texto
+1. Ler no Painel (`GET /producao-videos/automacao`) o episódio e o Kit da conta, **inclusive o campo `problema`**
+   ("O que saiu errado") de todas as cenas — são as correções do dono. Não repetir nenhum erro anotado.
+2. Ler `docs/episodio-ilustrado/LICOES_CENAS.md` (lições A–G) e `MANUAL_FLOW.md`.
+3. Se for episódio novo: pedir ao dono as fichas do ShotDeck (`FICHA_CAMERA_SHOTDECK.md`).
+4. Antes de afirmar como uma imagem está, **abrir a imagem** (Drive) — nunca supor.
+
+## Regras que nunca mudam
+**Nomes**
+- Só o **código real** da imagem nos ANEXAR/ABRIR (`f01-mae`, `f08-mae-hoje`, `c05-consultorio-A`, `p04-caixas-mudanca`).
+  Nunca apelido ("Mãe", "Filho Jonas", "Professor AEE"). Época entre colchetes: `f01-mae [anos 80]`, `f08-mae-hoje [hoje]`.
+- Usar só nomes que EXISTEM na conta do Flow daquele episódio (Conta A usa `p04-caixas-mudanca` como estilo;
+  B/C/D usam `ref-estilo-p04`). Na dúvida, perguntar ao dono o nome exato.
+- Cada item diz onde salvar: `Conta X › Kit de referência › 02-personagens|03-cenarios|04-objetos` ou
+  `Conta X › <pasta do episódio> › 05-episodios`, com o nome = código da cena.
+
+**Estilo** (padrão = a imagem p04): realismo pintado quase foto, grão, rostos realistas. Proibido: desenho limpo,
+aquarela, contorno de tinta, cartoon. A referência de estilo é só para pincelada/grão — **nunca** para estado
+da parede nem cores.
+
+**Época, idade, roupa**
+- Cada personagem tem uma época. Cena dos anos 80 só usa personagens dos anos 80; cena de hoje só de hoje.
+- Mesma pessoa em outra idade: anexa a folha original como identidade, mantém rosto/pele/cabelo/marcas,
+  **roupa da idade nova** (criança de 2 anos não usa a roupa do menino de 6).
+
+**Lugares**
+- Todo lugar que se repete tem MAPA FIXO (o que existe e onde, de que lado abre o portão, quantos postes no
+  varal, quais roupas em que ordem) e **um plano fixo `cXX-…-A`** no Kit. Toda cena daquele lugar **ABRE o -A**
+  e só acrescenta pessoas. Nunca recriar o lugar numa cena. O mapa vai no fim do texto ("PLACE LOCK").
+- **Sem plano -B**: editar no Flow mantém a câmera — contraplano por edição não funciona.
+- Estado de conservação explícito: lugar novo/de hoje = pintura lisa, nada descascado; lugar velho = gasto.
+- Corredor, sala da equipe, palco etc. são lugares próprios — não "a sala de aula".
+- Scripts: `docs/episodio-ilustrado/scripts/prompts/lugares.py` (mapas e planos) — rodar só como script.
+
+**Imagem no Flow**
+- ABRIR x = clicar na imagem x → "O que você quer mudar?". CRIAR = barra "O que você quer criar?". Nunca colar
+  texto de ABRIR na barra de CRIAR.
+- Para consertar, editar a imagem errada trocando só o que está errado ("Replace ONLY …, keep everything else").
+- Kit primeiro (folhas de personagem e planos -A), depois as cenas.
+- Folha de personagem = uma pessoa só; anexo de "layout" serve só para o formato ("NEVER copy the woman…").
+
+**Animação (Omni 1.1 Flash, Frames, 360p)**
+- Bloco fixo no início (preservar a ilustração, sem pan, sem revelar fora do quadro, canto inferior direito quieto).
+- Um movimento principal + ambiente (poeira, luz). Câmera parada ou aproximação lenta 2–4%.
+- Objetos com dobradiça (porta, portão, tampa) ficam PARADOS, a menos que a cena seja abrir — e aí diz o lado.
+- Nunca pessoa atravessando portão/porta/objeto. Pés tocam o chão a cada passo, sombra presa ao pé.
+- **Se a IMAGEM já tem o problema** (objeto no meio da queda, pés no ar), a animação não conserta:
+  corrigir a imagem primeiro (editar) e só depois animar.
+- Duração ≈ duração da fala (4/6/8/10 s).
+
+**Ficha de câmera (ShotDeck)** — nos episódios novos, cada cena ganha a linha CÂMERA: plano · composição ·
+lente · de onde vem a luz · hora; paleta por episódio; decupagem geral → médio → close na emoção → geral.
+
+## Depois de escrever
+- Gravar no Painel preservando `situacao` e `problema` do dono (ler → alterar só texto → regravar). Antes de
+  qualquer regravação em massa, salvar um backup do JSON.
+- Conferir que nenhum ANEXAR tem nome que não é código e que toda cena de lugar fixo tem PLACE LOCK.
+- Responder ao dono em português, curto, dizendo exatamente: o código da imagem a abrir, o que anexar, onde salvar.
