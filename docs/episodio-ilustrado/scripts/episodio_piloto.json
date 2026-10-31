@@ -1,0 +1,18 @@
+{
+ "titulo": "Quando falta estrutura",
+ "subtitulo": "Uma história de família, autismo e pontes",
+ "correcoes": {
+  "Arilho,": "Arilio,",
+  "-la": "-la"
+ },
+ "cor": "eq=contrast=1.05:saturation=0.9:gamma=0.98,colorbalance=rs=0.03:gs=0.01:bs=-0.04:rm=0.02:bm=-0.03:rh=0.02:bh=-0.02,noise=alls=7:allf=t,vignette=angle=PI/5",
+ "volume_musica": 0.2,
+ "frases_chave": [
+  "zero estrutura de apoio",
+  "vigilância o tempo inteiro",
+  "duas coisas mudaram o jogo",
+  "vínculo afetivo real",
+  "pontes de socialização",
+  "outro caminho até o mesmo destino"
+ ]
+}
