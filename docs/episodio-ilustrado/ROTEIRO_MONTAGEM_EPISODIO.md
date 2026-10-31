@@ -130,7 +130,12 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
   3. Dono: Roteiro de Vídeo → episódio → **▶ Publicação no YouTube**: assiste, corrige texto, Aprova ou Rejeita com nota.
   4. Aprovado: o Painel sobe privado, confere o canal (`canal_esperado` = UCqHHEf2eAiKKFHwMswa4gFw) e deixa
      público; marca a etapa "publicado". Declara conteúdo sintético (avatar/cenas com IA).
-- ⬜ Capa (thumbnail) do episódio — próximo passo (já existe `definir_thumbnail` no Painel/Video Factory).
+- ✅ Capa (thumbnail) 1280×720 — `scripts/capa_youtube.py`: cena mais forte do episódio em alta (do Drive), foto do
+  Prof. Arilio (`avatar-arilio-01`, fundo cinza recortado) à direita com contorno branco, 3 linhas grandes
+  (Inter Display Black, branco + palavra-chave amarela, contorno preto) e uma faixa vermelha com o complemento.
+  Conferir também em 320×180 (celular). Envio: `POST /thumbnails-externas` (token) com o `youtube_video_id` →
+  dono aprova em Painel → Aprovações → "Capas de vídeo (YouTube)" e a capa vai direto pro vídeo.
+  ⬜ Juntar capa e vídeo numa aprovação só (hoje são duas: vídeo no Roteiro de Vídeo, capa em Aprovações).
 
 ## 9. Custos por episódio (piloto)
 | Item | Como | Custo |
