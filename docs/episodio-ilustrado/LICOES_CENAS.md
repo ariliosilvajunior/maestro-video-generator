@@ -118,3 +118,11 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 2. Toda cena tem sempre texto de IMAGEM e de ANIMAÇÃO (vídeo errado quase sempre pede imagem nova).
 3. Erro real P16: mão do menino de 6 anos saiu com cara de mão de bebê, e ele de casaco com a mesma estampa da
    camiseta. Na folha do personagem e no texto: proporção de mão da idade; roupa = exatamente a da folha.
+
+## I. Montagem — ERRO GRAVE (31/10/2026, piloto)
+1. **Clipe do Flow tem áudio mais longo que a imagem** (ex.: p33 = 10 s de áudio e só 8 s de vídeo) e muitos
+   clipes de "fim" escurecem no último segundo. A montagem media pela duração do ARQUIVO e congelou o quadro
+   PRETO no fim do episódio. Regra: medir SEMPRE a trilha de VÍDEO (`ffprobe -select_streams v:0
+   -show_entries stream=duration`) e nunca congelar o último quadro sem checar o brilho dele.
+2. Antes de entregar qualquer vídeo: conferir quadros do começo, meio, cada troca de bloco e os ÚLTIMOS
+   5 segundos (brilho/YAVG de cada cena: queda brusca = quadro escuro congelado). Só entregar depois disso.

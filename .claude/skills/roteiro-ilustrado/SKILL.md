@@ -85,6 +85,10 @@ uneven light falloff, lived-in textures" (bate com o estilo p04).
 **Ficha de câmera (ShotDeck)** — nos episódios novos, cada cena ganha a linha CÂMERA: plano · composição ·
 lente · de onde vem a luz · hora; paleta por episódio; decupagem geral → médio → close na emoção → geral.
 
+## Montagem (erro grave já ocorrido — 31/10/2026)
+- Duração de clipe do Flow = trilha de VÍDEO, nunca a do arquivo (áudio é maior). Clipe que escurece no fim:
+  cortar antes de congelar. Conferir quadros e brilho dos últimos 5 s antes de entregar. Ver lições I.
+
 ## Depois de escrever
 - Gravar no Painel preservando `situacao` e `problema` do dono (ler → alterar só texto → regravar). Antes de
   qualquer regravação em massa, salvar um backup do JSON.

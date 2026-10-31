@@ -80,6 +80,8 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
 Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4, avatar_entrada.mp4,
 [avatar_saida.mp4], musica.mp3, [amb/aNN.wav], episodio.json` (título, subtítulo, cor, frases-chave, correções).
 1. Cada cena no tamanho da fala: estica até 1,6× mais lento e congela o último quadro se faltar.
+   ⚠️ ERRO GRAVE já ocorrido: medir a duração pela trilha de VÍDEO (o clipe do Flow tem áudio maior que a imagem);
+   clipe que escurece no fim → `cortar_fim_clipe` no `episodio.json`. Conferir brilho dos últimos quadros.
 2. Fusão de 0,5 s entre cenas; cor do episódio (§3): `eq` + `colorbalance` + grão (`noise`) + `vignette`.
 3. Linha do tempo: entrada do avatar (4 s) → narração começa → fala → saída/some → 1,5 s de respiro → fade.
 4. Legenda documental: Liberation Sans 46, margem esquerda 100 / direita 520 (não cobre o avatar) / baixo 55,
@@ -95,6 +97,11 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 - ✅ Clipes e avatar baixados direto do Drive pelo Painel (token): `GET /producao-videos/drive/pasta/{id}` e
   `/drive/arquivo/{id}` — sem pedir permissão arquivo por arquivo.
 - ⬜ Música escolhida pela paleta/clima da ficha (hoje: trilha fixa da biblioteca do YouTube, escolhida pelo dono).
+
+## 7b. Conferência obrigatória antes de entregar ✅
+- Quadros: abertura, entrada do avatar, 1 por bloco, saída do avatar e os últimos 5 s.
+- Brilho (YAVG) por cena: nenhuma queda brusca para preto fora do fade final.
+- Duração final = entrada + narração + saída + 1,5 s.
 
 ## 8. Revisão e publicação ⬜
 - Dono assiste, anota no Painel o que refazer (cena + vídeo/imagem). Refaz só o que precisa e remonta.
