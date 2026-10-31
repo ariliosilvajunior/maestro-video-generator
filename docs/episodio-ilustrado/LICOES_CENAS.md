@@ -166,3 +166,8 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    desenho). Toda cena herda o estilo do -A.
 8. Close-up feito por EDIÇÃO muda o lugar (a edição mantém a câmera e o Flow inventa o resto). Para aproximar
    (rosto cansado, bebê no berço): **copiar a imagem e aproximar na montagem** (`"recorte"` no `episodio.json`).
+
+## L. Identidade visual (31/10/2026)
+1. Toda peça gráfica (capa do YouTube, post, banner) segue a skill `designer-recursos-cognitivos`: cores oficiais
+   (azul `#2B4872`/`#3E69B7` em 80% da peça, verde-água `#56CAC9` no destaque), fonte Goodly, ícone/logo oficial.
+   A 1ª capa do piloto saiu com amarelo, vermelho e fonte genérica — recusada pelo dono.

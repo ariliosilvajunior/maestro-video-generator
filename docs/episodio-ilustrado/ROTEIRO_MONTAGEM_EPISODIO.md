@@ -130,11 +130,14 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
   3. Dono: Roteiro de Vídeo → episódio → **▶ Publicação no YouTube**: assiste, corrige texto, Aprova ou Rejeita com nota.
   4. Aprovado: o Painel sobe privado, confere o canal (`canal_esperado` = UCqHHEf2eAiKKFHwMswa4gFw) e deixa
      público; marca a etapa "publicado". Declara conteúdo sintético (avatar/cenas com IA).
-- ✅ Capa (thumbnail) 1280×720 — `scripts/capa_youtube.py`: cena mais forte do episódio em alta (do Drive), foto do
-  Prof. Arilio (`avatar-arilio-01`, fundo cinza recortado) à direita com contorno branco, 3 linhas grandes
-  (Inter Display Black, branco + palavra-chave amarela, contorno preto) e uma faixa vermelha com o complemento.
-  Conferir também em 320×180 (celular). Envio: `POST /thumbnails-externas` (token) com o `youtube_video_id` →
-  dono aprova em Painel → Aprovações → "Capas de vídeo (YouTube)" e a capa vai direto pro vídeo.
+- ✅ Capa (thumbnail) 1280×720 — **sempre pela identidade da marca: skill `designer-recursos-cognitivos`** (o dono
+  recusou uma capa fora do padrão em 31/10: "temos um especialista nisso que já tem todas nossas cores, letras").
+  Modelo: `scripts/capa_youtube.html` — fundo azul `#2B4872` (80% da peça), cena do episódio puxada para o azul
+  à direita, ícone da marca no alto à esquerda, título em **Goodly Bold** branco com a palavra-chave em
+  verde-água `#56CAC9` (máx. 5 palavras), barra verde-água, foto do Prof. Arilio recortada à direita (canto
+  inferior direito sem nada importante: a duração cobre). Nada de amarelo/vermelho/contorno preto.
+  Render: `NODE_PATH=$(npm root -g) node scripts/render_capa.cjs capa.html capa.png 1280 720` e conferir em 320×180.
+  Envio: `POST /thumbnails-externas` (token) com o `youtube_video_id` → dono aprova em Painel → Aprovações.
   ⬜ Juntar capa e vídeo numa aprovação só (hoje são duas: vídeo no Roteiro de Vídeo, capa em Aprovações).
 
 ## 9. Custos por episódio (piloto)
