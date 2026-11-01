@@ -147,7 +147,7 @@ def main(args):
         # rascunho local ANTES de gravar: um episódio, ou {chave: episódio} com o Kit junto
         dados = json.load(open(args[1], encoding="utf-8"))
         eps = list(dados.values()) if "cenas" not in dados else [dados]
-        kits = {c["descricao"] for e in eps if e["chave"].startswith("kit") for c in e["cenas"]}
+        kits = {c["descricao"] for e in eps if e["chave"].startswith("kit") for c in e["cenas"] if c.get("situacao") in ("falta", "refazer")}
         nomes = set()
         if os.environ.get("CONTENT_FACTORY_API_TOKEN"):
             for e in eps:
@@ -156,7 +156,9 @@ def main(args):
     else:
         todos = {e["chave"]: e for e in get("/producao-videos/automacao")}
         eps = [todos[k] for k in args]
-        kits = {c["descricao"] for e in todos.values() if e["chave"].startswith("kit") for c in e["cenas"]}
+        # 01/11 (revisor): item do Kit só vale como "existe" se ainda vai ser gerado (falta/refazer);
+        # item marcado pronto tem que ESTAR no Drive — senão é nome que não existe (f03-mae-adolescente).
+        kits = {c["descricao"] for e in todos.values() if e["chave"].startswith("kit") for c in e["cenas"] if c.get("situacao") in ("falta", "refazer")}
         nomes = set()
         for k in args:
             nomes |= nomes_no_drive(k)
