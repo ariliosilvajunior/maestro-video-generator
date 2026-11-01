@@ -84,8 +84,9 @@
 - **R24b** **Escala e direção de quem se move** (erro grave, dono 01/11, n5-S04: "os funcionários da obra parecem
   pequeninos e o portão parece de gigante… e em vez de irem para o lado da construção estão vindo para fora do
   portão"). (1) Todo lugar com portão/porta/muro em primeiro plano tem no PLACE LOCK uma linha **SCALE** com tamanho real
-  (portão ~2 m, travessa na cintura de um adulto na linha do portão, criança de 8–9 um pouco acima da travessa, adulto
-  junto ao prédio da altura das portas; mais longe = menor só pela distância). (2) Pessoa que anda/carrega/corre leva
+  MEDIDA NO `-A` REAL (onde fica a travessa em relação à altura dos olhos da câmera, onde o portão termina; ex. c04 da
+  Conta B: portão ~3,5 m, travessa no ombro do adulto na linha do portão), criança em relação ao adulto, adulto junto ao
+  prédio da altura das portas; mais longe = menor só pela distância. Nunca número genérico que contradiz a imagem (R15). (2) Pessoa que anda/carrega/corre leva
   **DIREÇÃO em relação à câmera e ao destino** ("walking AWAY from the camera toward the building, seen from behind") e
   o que NÃO pode ("nobody walks toward the gate"), na imagem E na animação. Nunca "carry bricks a few steps" sem direção.
 
