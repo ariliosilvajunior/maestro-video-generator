@@ -45,3 +45,7 @@ motion-pipeline/remotion-agent/.remotion/
 __pycache__/
 *.pyc
 .DS_Store
+
+# rascunhos locais da Bíblia (gerados a cada execução)
+docs/episodio-ilustrado/scripts/biblia_dry.json
+docs/episodio-ilustrado/scripts/eps_antes_biblia.json
