@@ -326,6 +326,9 @@ if __name__ == "__main__":
     Ep = {e["chave"]: e for e in eps}
     json.dump(eps, open(__import__('os').path.dirname(__file__) + "/../eps_antes_biblia.json", "w"), ensure_ascii=False)
     mapas = mapas_do_kit(Ep["kit-tutor"])
+    # revisor 01/11: na c06-sala-equipe-A gerada a faixa azul sobe e corta a janela (o texto do Kit, já aprovado, diz "lower third")
+    mapas["c06-sala-equipe"] = mapas["c06-sala-equipe"].replace("light-blue band on the lower third", "light-blue band on the lower part of the walls; on the left wall its top edge crosses the window at about one third of its height, so the lower panes sit inside the blue band")
+    assert "lower third" not in mapas["c06-sala-equipe"]
     KIT_PEND.update(c["descricao"] for c in Ep["kit-tutor"]["cenas"] if c["situacao"] in ("falta", "refazer"))
     lugares_das_cenas("n5-", N5); lugares_das_cenas("n8-", N8)
     for chave, pref, specs in (("noticia-5", "n5-", N5), ("noticia-8", "n8-", N8)):
