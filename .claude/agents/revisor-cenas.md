@@ -28,6 +28,14 @@ Responda sempre em português, direto.
    - Realismo: adulto em cadeira de adulto, bebê longe do fogão, turma pequena? (R13)
    - O mapa (PLACE LOCK) descreve a imagem `-A` que existe, ou algo diferente dela? (R15)
    - Close: daria para aproximar na montagem em vez de gerar? (R32)
+3b. **Sentido da história e estado normal do lugar** (dono, 01/11 — passou um portão aberto num plano fixo):
+   - Plano `-A` do Kit = estado NEUTRO: porta e portão FECHADOS, sem pessoas, sem objeto fora do lugar (R11b). Se a imagem
+     de origem tem porta/portão aberto, o texto tem que mandar FECHAR.
+   - Para cada cena: isso faz sentido na história e na época? (escola fechada × portão aberto, criança no lugar errado,
+     pessoa que não estaria ali). Leia a descrição e as notas do episódio antes de aprovar.
+   - **Você não enxerga o Flow, só o Drive.** Toda imagem que o texto manda ABRIR/ANEXAR e que veio de OUTRA conta ou de fora
+     (ex.: p29-portao-escola na Conta B) exige no obs o passo "SUBIR no Flow antes". Na dúvida se existe no Flow daquela
+     conta: escreva a pergunta para o dono na resposta — nunca suponha.
 4. **Animação:** um movimento, sem pan, ninguém atravessa nada, objetos parados listados (R41/R42). Se o
    problema já está na imagem, a correção é na imagem (R43).
 5. **Histórico:** leia `GET /producao-videos/aprendizado/automacao` e o `historico` da cena — erro já anotado
