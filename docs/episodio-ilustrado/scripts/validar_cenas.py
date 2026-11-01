@@ -97,6 +97,13 @@ def checar(ep, nomes, kit_codigos):
                     a("R20", f"'{nome}' existe no Drive com sufixo ({nomes_sujos[nome]}) — renomear o arquivo para '{nome}'")
                 else:
                     e("R20", f"'{nome}' NÃO existe no Drive — use o nome real de uma imagem que existe")
+        # R20b (revisor 01/11, n8-E20: "same walls ... as the attached c03-sala-nova-A" sem a c03 no ANEXAR):
+        # toda imagem que o texto chama de "attached" tem que estar no ABRIR/ANEXAR da própria cena.
+        if not sem_imagem:
+            for nome in set(re.findall(r"\battached ([fc]\d{2}-[\w-]+|obj-\d{2}-[\w-]+|n\d+-[A-Z]\d+\w*|ref-[\w-]+|p\d{2}-[\w-]+)", img)):
+                nome = nome.rstrip("-")
+                if nome not in trecho:
+                    e("R20", f"texto diz 'attached {nome}', mas {nome} não está no ABRIR/ANEXAR da cena")
         if APELIDOS.search(re.sub(r"\[[^\]]*\]", "", trecho)):
             e("R20", f"apelido no ABRIR/ANEXAR: {APELIDOS.search(trecho).group(0)} — use o código")
         # R17: personagem com ficha de roupas no Kit → a cena tem que anexar a ficha e dizer a roupa
