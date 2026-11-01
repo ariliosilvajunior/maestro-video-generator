@@ -28,8 +28,11 @@ def get(caminho):
         return json.load(r)
 
 
+NOMES_SUJOS = {}  # "f04-menino" → "f04-menino_0b6cf5c9 (1)" (arquivo salvo com sufixo do Flow/download)
+
+
 def nomes_no_drive(chave):
-    """Nomes (sem extensão) de tudo que existe no Kit da conta e na pasta do episódio."""
+    """Nomes (sem extensão) de tudo que existe no Kit da conta e na pasta do episódio (inclui subpastas)."""
     nomes = set()
     for conta in get("/producao-videos/contas/automacao"):
         eps = {e["chave"]: e for e in conta.get("episodios", [])}
@@ -38,10 +41,18 @@ def nomes_no_drive(chave):
         pastas = list((conta.get("pastas") or {}).values())
         for e in conta.get("episodios", []):
             pastas += list((e.get("pastas") or {}).values())
-        for pid in pastas:
+        fila = list(pastas)
+        while fila:
+            pid = fila.pop()
             try:
                 for f in get(f"/producao-videos/drive/pasta/{pid}"):
-                    nomes.add(re.sub(r"\.\w+$", "", f["nome"]).strip())
+                    if f.get("tipo", "").endswith("folder"):
+                        fila.append(f["id"]); continue
+                    n = re.sub(r"\.\w+$", "", f["nome"]).strip()
+                    nomes.add(n)
+                    limpo = re.sub(r"(_[0-9a-f]{8})?( \(\d+\))?$", "", n)
+                    if limpo != n:
+                        NOMES_SUJOS[limpo] = n
             except Exception:
                 pass
     return nomes
@@ -52,7 +63,7 @@ def checar(ep, nomes, kit_codigos):
     pref = PREFIXO.get(ep["chave"], "")
     codigos_ep = {pref + c["codigo"] for c in ep["cenas"]}
     eh_kit = ep["chave"].startswith("kit")
-    faltam_ref = set()
+    nomes_sujos = NOMES_SUJOS
     for c in ep["cenas"]:
         if c.get("situacao") not in ("refazer", "falta"):
             continue  # só o que ainda vai ser gerado
@@ -80,10 +91,12 @@ def checar(ep, nomes, kit_codigos):
             if nome in ("a", "o", "e", "com", "imagem"):
                 continue
             if nome not in nomes and nome not in codigos_ep and nome not in kit_codigos:
-                if nome.startswith("ref-") or nome == "p04-caixas-mudanca":
-                    faltam_ref.add(nome)  # referência de estilo: um aviso por episódio, não por cena
+                # 01/11 (dono: "ja disse para nunca mandar ... ref-layout-personagem ... e sim a porra do nome da
+                # imagem"): nome que não existe é ERRO, inclusive referência de estilo/layout — sem exceção.
+                if nome in nomes_sujos:
+                    a("R20", f"'{nome}' existe no Drive com sufixo ({nomes_sujos[nome]}) — renomear o arquivo para '{nome}'")
                 else:
-                    e("R20", f"'{nome}' não existe no Drive nem no Kit")
+                    e("R20", f"'{nome}' NÃO existe no Drive — use o nome real de uma imagem que existe")
         if APELIDOS.search(re.sub(r"\[[^\]]*\]", "", trecho)):
             e("R20", f"apelido no ABRIR/ANEXAR: {APELIDOS.search(trecho).group(0)} — use o código")
         # R17: personagem com ficha de roupas no Kit → a cena tem que anexar a ficha e dizer a roupa
@@ -126,8 +139,6 @@ def checar(ep, nomes, kit_codigos):
                 e("—", "frase 'OPENED IMAGE' repetida no texto")
         if re.search(r"-v2\b|renomear|salv\w+ (também )?como .{0,30}antig", obs + img, re.I):
             e("R50", "fala em -v2/renomear — refazer é mesmo nome")
-    for nome in sorted(faltam_ref):
-        avisos.append(f"[R12] Kit: '{nome}' é usado nas cenas mas não está salvo no Drive (pasta 01-estilo) — salvar lá")
     return erros, avisos
 
 

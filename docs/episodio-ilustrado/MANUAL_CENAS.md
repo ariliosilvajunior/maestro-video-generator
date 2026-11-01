@@ -54,8 +54,11 @@
   montagem (anotar nas notas do episódio: "RECORTES NA MONTAGEM"). Animação nunca faz fade para preto (é na montagem).
 
 ## 2. Cena larga (ABRIR o plano -A ou a cena anterior)
-- **R20** Só CÓDIGOS reais nos ABRIR/ANEXAR (`f08-mae-hoje`, `c04-sala-aee-A`, `n3-E02`), que EXISTEM no Drive.
-  Nunca apelido ("Mãe", "Professor").
+- **R20** Só NOMES DE IMAGENS QUE EXISTEM no Drive DAQUELA CONTA nos ABRIR/ANEXAR (`f08-mae-hoje`, `c04-sala-aee-A`,
+  `n3-E02`). Nunca apelido ("Mãe", "Professor") e nunca nome inventado de referência (`ref-layout-personagem`,
+  `ref-layout-cenario`, `ref-escola-nova-p29` — erro grave repetido, dono 01/11). Formato de folha se DESCREVE no texto
+  ("laid out as follows: …"), não se anexa. A imagem de estilo fica em `Kit › 01-estilo` de cada conta
+  (`p04-caixas-mudanca` na A, `ref-estilo-p04` na B/C/D). O verificador barra qualquer nome que não exista.
 - **R21** Cena de lugar fixo ABRE o -A e termina com o PLACE LOCK (mapa). Nunca CRIAR o lugar de novo.
 - **R22** Cada personagem citado com idade e roupa no texto ("about 38 years old", "exactly 2 years old").
 - **R23** Diz onde cada pessoa está (qual cadeira, de que lado), e o que NÃO pode acontecer ("nobody on the

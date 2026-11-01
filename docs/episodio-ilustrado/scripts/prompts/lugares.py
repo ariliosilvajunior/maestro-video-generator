@@ -82,7 +82,7 @@ LUGARES = {
    mapa="a regular classroom of a simple Brazilian public elementary school: walls cream above and green below, grey cement floor. "
    "BACK WALL (main view): a green chalkboard with nothing written, the teacher's desk in front of it on the right. LEFT WALL: two big windows with afternoon light. RIGHT WALL: the door near the front and a shelf with books and boxes (no letters). "
    "Five rows of student desks with chairs facing the chalkboard. ONE ceiling fan in the middle."),
- "c04-sala-aee@D": dict(conta="D", nome="c04-sala-aee",
+ "c04-sala-aee@D": dict(conta="D", nome="c04-sala-aee", sem_folha=True,
    vista_a="from the doorway looking at the table and the felt board", vista_b="from the window side looking toward the door",
    mapa=None),  # mesmo mapa do c04-sala-aee da Conta A (preenchido abaixo)
  "c05-sala-professores": dict(conta="D", alias=["n7-E01"],
@@ -160,6 +160,9 @@ def lock(chave):
 def placas(chave, codigo_base):
     L = LUGARES[chave]; n = nome(chave); est = ESTILO[L["conta"]]
     fonte = L.get("origem") or n
+    # 01/11: a folha só vale se existe NO DRIVE DAQUELA CONTA (c04-sala-aee é só da Conta A)
+    if L.get("sem_folha"):
+        fonte = "__nenhuma__"
     tipo_fonte = "the attached reference sheet" if fonte in FOLHA_EXISTE else "the attached image"
     anexos = f"{est} + {fonte}" if (fonte in FOLHA_EXISTE or L.get("origem")) else est
     tipo_fonte = tipo_fonte if anexos != est else "this description"
