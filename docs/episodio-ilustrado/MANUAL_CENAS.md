@@ -59,6 +59,10 @@
   `ref-layout-cenario`, `ref-escola-nova-p29` — erro grave repetido, dono 01/11). Formato de folha se DESCREVE no texto
   ("laid out as follows: …"), não se anexa. A imagem de estilo fica em `Kit › 01-estilo` de cada conta
   (`p04-caixas-mudanca` na A, `ref-estilo-p04` na B/C/D). O verificador barra qualquer nome que não exista.
+  **Existir no Drive não basta: tem que existir no FLOW daquela conta** (dono, 01/11: "vc pede para abrir no flow
+  p29-portao-escola, mas isso não existe" — foi gerada no Flow da Conta A). Imagem que veio de outra conta ou de fora
+  (cópia no Drive, foto, ficha ShotDeck) leva no obs o passo "SUBIR no Flow: baixar do Drive (link) → + / Enviar imagem →
+  conferir o nome" ANTES do ABRIR/ANEXAR.
 - **R21** Cena de lugar fixo ABRE o -A e termina com o PLACE LOCK (mapa). Nunca CRIAR o lugar de novo.
 - **R22** Cada personagem citado com idade e roupa no texto ("about 38 years old", "exactly 2 years old").
 - **R23** Diz onde cada pessoa está (qual cadeira, de que lado), e o que NÃO pode acontecer ("nobody on the
