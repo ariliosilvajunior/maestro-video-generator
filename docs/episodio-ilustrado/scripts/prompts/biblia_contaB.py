@@ -23,13 +23,17 @@ CAMERA = {
  "c07-hospital": "medium-wide interior frame from the doorway, medium lens, balanced composition, soft daylight from the window on the back wall through the half-curtain, muted green-grey and white palette, fine 35mm film grain",
  "c05-corredor-escola": "wide one-point-perspective frame along the veranda, wide lens, balanced composition, low golden sun from the camera-LEFT casting column shadows across the floor, warm white and terracotta palette, fine film grain",
  "c06-sala-equipe": "medium-wide interior frame along the table, medium lens, balanced composition, warm daylight from the window on the camera-LEFT, clean warm palette, fine film grain",
- "rua": "wide establishing frame of the small-town red dirt street, wide lens, balanced composition, hard warm daylight with long shadows, warm desaturated ochre palette, fine 35mm film grain",
+ "rua": "wide establishing frame of the small-town red dirt street, wide lens, balanced composition, low golden sun at the far end of the street, soft warm haze, long shadows toward the camera, warm desaturated ochre palette, fine 35mm film grain",
  "instituicao": "wide interior frame, wide lens, symmetrical cold composition, flat cold blue-grey light from small high windows, desaturated cold palette, fine 35mm film grain",
 }
 ROT_LUGAR = {"c02-sala-antiga-adulto": "sala antiga", "c03-sala-nova": "escola nova — sala", "c04-escola-fachada": "escola nova — fachada",
              "c07-hospital": "hospital", "c05-corredor-escola": "escola nova — corredor", "c06-sala-equipe": "escola nova — sala da equipe",
              "rua": "rua da cidade", "instituicao": "outra instituição"}
 MAPA_EXTRA = {
+ "c03-sala-nova": "PLACE LOCK — c03-sala-nova-A: [ANOS 80 · escola nova] CONDITION: new and clean — smooth fresh paint, nothing peeling or cracked. Walls white above, light-blue band on the lower third (up to just below the window sills), terracotta skirting, shiny terracotta tile floor. LEFT WALL: exactly TWO tall windows with grey metal frames and many small panes, sun coming in. BACK WALL: ONE green blackboard in a thin wooden frame near the middle of the back wall; NO teacher's desk. RIGHT WALL: ONE brown wooden panel door near the back corner, closed, with a light switch to its left; ONE wall-mounted wooden shelf on two brackets near the front, holding a stack of coloured wooden blocks and one wooden shape-puzzle board. CENTER: exactly TEN single student desks (light wooden tops, metal legs) facing the blackboard: THREE in the camera-LEFT column, THREE in the camera-RIGHT column and FOUR in the middle column; the middle column's nearest desk, closest to the camera, has NO chair; each of the other nine desks has ONE chair (grey metal tube frame, wooden seat and back)." + " Every fixed element keeps exactly this position, size and design: never add, move, duplicate or redesign walls, doors, windows, gates or furniture.",
+ "c04-escola-fachada": "PLACE LOCK — c04-escola-fachada-A: [ANOS 80 · fachada da escola nova] CONDITION: well kept. Camera on the street just outside the gate, adult eye level; the gate fills almost the whole frame, a strip of pale pavement in front of it at the bottom of the frame. FOREGROUND: ONE thick off-white plastered wall section on each side (camera-left and camera-right); between them ONE double gate of vertical grey metal bars with ONE horizontal crossbar at mid-height and a metal latch with a small padlock where the two leaves meet in the centre; CLOSED by default — both leaves shut, the courtyard and the building visible through the bars; it is open ONLY in a scene that says so, and then both leaves swing inward into the courtyard. COURTYARD: wide, flat, pale beige packed ground; a low plastered side wall runs along camera-left, leafy trees behind it. BACK: ONE long single-storey building, white walls with a light-blue band at the bottom, red clay-tile roof, louvered windows; on camera-right a wing with an open veranda of square white columns. TREES: the young slender trees exactly as they are in c04-escola-fachada-A, just right of the gate's centre line, the nearest one in a small square planter; branches of one big tree overhang the top-right corner from outside the wall." + " Every fixed element keeps exactly this position, size and design: never add, move, duplicate or redesign walls, doors, windows, gates or furniture.",
+ "c07-hospital": "PLACE LOCK — c07-hospital-A: [ANOS 80 · hospital da cidade] A small 1980s ward room seen from its open doorway at adult eye level: the dark wooden door frame shows along the left and right edges of the image. CONDITION: old but clean — pale cream-green walls above, darker green paint on the lower half, cracks and a few peeling patches, worn red-brown tile floor. ONE old white-painted metal hospital bed with rust spots stands on the camera-LEFT half along the back wall, headboard at the camera-left, foot rail toward the camera-RIGHT; thin mattress, white sheet, one white pillow at the camera-left end. At the head of the bed, against the left wall: ONE small white metal bedside cabinet with ONE white enamel cup. Behind the head of the bed: ONE metal IV drip stand with one glass bottle. BACK WALL, right of centre: ONE window with a white half-curtain. Back-right corner, against the back wall: ONE simple dark wooden chair. Nothing else; the lower-right corner is plain tiled floor." + " Every fixed element keeps exactly this position, size and design: never add, move, duplicate or redesign walls, doors, windows, gates or furniture.",
+ "c05-corredor-escola": "PLACE LOCK — c05-corredor-escola-A: [ANOS 80 · escola nova] The covered veranda corridor seen from one end at adult eye level, one-point perspective. RIGHT SIDE: white wall with a light-blue band on the lower part and terracotta skirting, with TWO brown wooden panel doors, both open (the nearest swung into its room, the second a few metres further); at the far end of the corridor ONE small dark door, closed. LEFT SIDE: open to the sunny courtyard between a row of SIX square white columns on terracotta bases, the nearest one large at the camera-left edge; beyond them the pale courtyard, one young tree in a square planter, the low perimeter wall and a white single-storey wing with a light-blue band and red tile roof. FLOOR: shiny terracotta tiles. CEILING: red clay tiles on dark wooden rafters. Low golden sun from the camera-LEFT casting the column shadows across the floor." + " Every fixed element keeps exactly this position, size and design: never add, move, duplicate or redesign walls, doors, windows, gates or furniture.",
  "rua": "PLACE LOCK — rua (the street of n5-S03a): keep exactly the same red dirt street, the same houses on both sides, doors, windows, walls and poles as in n5-S03a.",
  "instituicao": "",
 }
@@ -62,7 +66,7 @@ OBJETO = {
  "obj-15-blocos-madeira": "the small painted wooden cubes in red, yellow, blue and green from obj-15-blocos-madeira",
  "obj-14-cadeira-de-rodas": "the simple metal wheelchair with large spoked wheels from obj-14-cadeira-de-rodas",
 }
-ESTADO = {"portao-aberto": "THE GATE IS OPEN in this shot: both grey metal leaves swung inward into the courtyard.",
+ESTADO = {"portao-aberto": "THE GATE IS OPEN in this shot: both grey metal leaves swung fully inward against the inner side of the walls, the latch and padlock hanging open; the courtyard is seen through the empty gateway.",
           "portao-fechado": "THE GATE IS CLOSED in this shot."}
 
 # ---------------- CENAS: base + plano + pessoas (código, roupa, onde) + objetos + estado + ação + animação ----------------
@@ -70,31 +74,31 @@ ESTADO = {"portao-aberto": "THE GATE IS OPEN in this shot: both grey metal leave
 # "COPIA:<img>" não gera imagem (recorte na montagem). plano: GERAL / MÉDIO / CLOSE / INSERT.
 E = "f01-educadora"; J = "f05-professora-jovem"; M = "f04-menino"; T = "f02-adolescente"; MT = "f03-mae-adolescente"
 N5 = {
- "S01a": ("A:c02-sala-antiga-adulto", "GERAL", [(E, "A", "standing by the window on the camera-LEFT wall, seen in three-quarter profile")], [], None,
+ "S01a": ("A:c02-sala-antiga-adulto", "GERAL", [(E, "A", "standing at the camera-LEFT end of the old wooden table, one hand resting on a large blank sheet of paper on the table, seen in three-quarter profile, the window on the camera-LEFT behind her")], [], None,
           "the educator looks around the empty old room with quiet determination, morning light", "she turns her head slowly from the window toward the room; end still"),
  "S01b": ("C:n5-S01a", "INSERT", [(E, "A", "only her hands and chambray sleeves in frame")], [], None,
           "close insert on the small old wooden table: the educator's hands sketch a simple floor plan of a school building (lines and rectangles only, no letters, no numbers) with a pencil on a large sheet of paper", "the pencil draws one more line; end still"),
  "S02": ("A:c02-sala-antiga-adulto", "MÉDIO", [(E, "A", "standing at the camera-LEFT end of the table"), (J, None, "standing at the camera-RIGHT end of the table")], [], None,
          "the two women talk across the table with warm, motivated expressions; only these two people", "the educator gestures with one open hand, the young teacher nods; end still"),
  "S04": ("A:c04-escola-fachada", "GERAL", [], [], "portao-aberto",
-         "earlier in time: the building is half built — exposed red bricks, wooden scaffolding, roof frame without tiles; inside the courtyard three ordinary 1980s townspeople (adults in simple work clothes) carry bricks and push a wheelbarrow; piles of bricks on the ground", "the volunteers carry the bricks a few steps, dust in the sun; end still"),
+         "This shot OVERRIDES the BACK building of the PLACE LOCK only: same position and size, but under construction — earlier in time: the building is half built — exposed red bricks, wooden scaffolding, roof frame without tiles; inside the courtyard three ordinary 1980s townspeople (adults in simple work clothes) carry bricks and push a wheelbarrow; piles of bricks on the ground", "the volunteers carry the bricks a few steps, dust in the sun; end still"),
  "S05": ("A:c02-sala-antiga-adulto", "GERAL", [(E, "A", "standing behind the table on the camera-LEFT"), (J, None, "standing behind the table on the camera-RIGHT"),
-          ("f08-aluna-down", None, "sitting on the near-left school chair"), ("f09-aluna-cadeira", None, "in her wheelchair at the near-right side of the table"), ("f11-aluno-quebra-cabeca", None, "sitting on the far chair")],
-         ["obj-15-blocos-madeira"], None,
-         "a small special class: the three students work with the wooden cubes and picture cards on the table, the two teachers help; exactly two teachers and three students, nobody else", "the students move the cubes slowly, a teacher points to a card; end still"),
- "S06a": ("COPIA:c04-escola-fachada-A", "GERAL", [], [], None, "", "nothing moves except dust in the low sun and the leaves of the three young trees; end still"),
+          ("f08-aluna-down", None, "sitting on the school chair at the camera-LEFT side of the table"), ("f09-aluna-cadeira", None, "in her wheelchair at the camera-RIGHT side of the table; exception to the PLACE LOCK in this shot only: that side's school chair stands against the back wall to the left of the straw mat"), ("f11-aluno-quebra-cabeca", None, "sitting on the far chair, facing the camera")],
+         ["obj-15-blocos-madeira", "obj-14-cadeira-de-rodas"], None,
+         "the near chair (back to the camera) stays empty; a small special class: the three students work with the wooden cubes and picture cards on the table, the two teachers help; exactly two teachers and three students, nobody else", "the students move the cubes slowly, a teacher points to a card; end still"),
+ "S06a": ("COPIA:c04-escola-fachada-A", "GERAL", [], [], None, "", "nothing moves except dust in the low sun and the leaves of the young trees; end still"),
  "S07a": ("A:c03-sala-nova", "MÉDIO", [(E, "A", "kneeling beside the front-left desk"), ("f11-aluno-quebra-cabeca", None, "sitting at the front-left desk")], [], None,
           "the educator watches with full attention while the boy fits a wooden puzzle piece; both faces visible", "the boy presses the puzzle piece into place, she smiles a little; end still"),
  "S08a": ("A:c07-hospital", "GERAL", [(M, "B", "lying on the hospital bed under the white sheet, head on the pillow")], [], None,
           "the little boy, interned for severe malnutrition, lies calm with his eyes open; nobody else", "his chest rises and falls slowly, his eyes blink; end still"),
- "S08b": ("S:n5-S08a", "GERAL", [(M, "B", "same place on the bed"), ("f06-medico", None, "standing between the bed and the wooden chair, on the camera-RIGHT side of the bed")], [], None,
+ "S08b": ("S:n5-S08a", "GERAL", [(M, "B", "same place on the bed"), ("f06-medico", None, "standing at the foot rail of the bed, between the bed and the wooden chair, facing the boy")], [], None,
           "add only the doctor, holding a clipboard (no readable text), serious, looking at the chart", "the doctor turns one page of the chart; end still"),
  "S09": ("A:c02-sala-antiga-adulto", "GERAL", [(M, "A", "sitting on the straw mat under the right half of the blackboard, propped by the two cushions"),
-          (E, "A", "kneeling beside him on his camera-LEFT"), (J, None, "standing at the camera-RIGHT end of the table, watching")], [], None,
+          (E, "A", "kneeling beside him on his camera-LEFT"), (J, None, "standing behind the table in front of the empty shelf, looking toward the boy")], [], None,
          "the team around the little boy; only these three people", "the educator rests a hand on the cushion beside him; end still"),
  "S10a": ("S:n5-S09", "GERAL", [(M, "A", "same place on the mat"), (E, "A", "kneeling beside him")], [], None,
           "remove the young teacher; the educator gently feeds the boy with a spoon from a simple white enamel bowl of porridge", "the spoon comes slowly to his mouth; end still"),
- "S10b": ("S:n5-S09", "GERAL", [(M, "A", "now lying on his back on the mat, head on the floral cushion"), (E, "A", "kneeling at his feet")], [], None,
+ "S10b": ("S:n5-S09", "GERAL", [(M, "A", "lying on his back along the straw mat, parallel to the back wall, head on the floral cushion, feet toward the camera-RIGHT; the beige cushion stays against the wall"), (E, "A", "kneeling on the floor on the camera side of the mat, beside his knees, turned three-quarters toward him so her face is visible")], [], None,
           "remove the young teacher; the educator gently bends and stretches his thin legs in a simple physiotherapy exercise; he smiles a little", "she bends his knee slowly and stretches it back; end still"),
  "S10c": ("C:n5-S10b", "INSERT", [(M, "A", "only his small thin hands"), (E, "A", "only her hands and chambray sleeve")], ["obj-15-blocos-madeira"], None,
           "close insert on the straw mat: the boy's small thin hands touch the wooden cubes held out by the educator's hands (hands of a 50-year-old woman, not elderly)", "his fingers close slowly around one cube; end still"),
@@ -113,14 +117,19 @@ N5 = {
          "nobody in the image; the same school at sunset, warm orange sky, longer shadows, a few windows softly lit", "the sky glows slightly deeper; end still"),
 }
 N8 = {
+ "E01": ("COPIA:n5-S06a", "GERAL", [], [], None, "", "nothing moves except dust in the low sun and the leaves of the young trees; end still"),
+ "E18": ("COPIA:n5-S07a", "MÉDIO", [], [], None, "", "the boy presses the puzzle piece into place, she smiles a little; end still"),
+ "E19": ("COPIA:n5-S14", "INSERT", [], [], None, "", "dust floats in the window light; nothing moves; end still"),
+ "E34": ("COPIA:n5-S13", "GERAL", [], [], None, "", "the light through the open gate grows slightly warmer, dust in the beam; end still"),
+ "E37": ("COPIA:n5-S17", "GERAL", [], [], None, "", "the sunset sky glows slightly deeper; end still"),
  "E02": ("A:c03-sala-nova", "GERAL", [(E, "A", "at the front-left desks"), (J, None, "at the back-right desks")], ["obj-15-blocos-madeira"], None,
          "first day ready: the two women place new materials (the wooden cubes, pencils, paper) on the desks; only these two", "they set one more item on a desk; end still"),
- "E03": ("A:c04-escola-fachada", "GERAL", [(MT, None, "on the street side just in front of the open gate, camera-left, pulling the boy by the arm"), (T, "A", "beside her on the camera-right, leaning back, resisting")], [], "portao-aberto",
+ "E03": ("A:c04-escola-fachada", "GERAL", [(MT, None, "on the street side at the open gateway, just left of the centre line, facing the courtyard, pulling the boy by the arm"), (T, "A", "just right of the centre line, facing the camera with his back to the school, leaning back, resisting; keep the lower-right corner empty pavement")], [], "portao-aberto",
          "the mother pulls her teenage son toward the school; he resists, crying; both stay on the street side of the gate, nobody passes through it", "she tugs his arm once, he leans back; end still"),
  "E04": ("C:n8-E03", "CLOSE", [(T, "A", "head and shoulders, centered")], [], None,
-         "medium close-up of the teenage boy's crying face, tears on his cheeks, hurt and defiant; behind him, soft and out of focus, the grey gate bars and the courtyard exactly as in n8-E03", "a tear runs down, he presses his lips together; end still"),
- "E05": ("A:c04-escola-fachada", "GERAL", [(E, "A", "standing at the edge of the veranda on the camera-RIGHT wing, small in the frame")], [], "portao-fechado",
-         "the educator who founded the school looks out toward the gate with calm attention; nobody else", "she lifts her chin slightly; end still"),
+         "medium close-up of the teenage boy's crying face, tears on his cheeks, hurt and defiant; behind him, soft and out of focus, the open gateway: the pale courtyard and the white building with the light-blue band, one open grey gate leaf at the edge of the frame, exactly as in n8-E03", "a tear runs down, he presses his lips together; end still"),
+ "E05": ("S:n8-E03", "GERAL", [(MT, None, "same place"), (T, "A", "same place"), (E, "A", "small in the frame at the edge of the veranda on the camera-RIGHT wing, looking toward the gate")], [], "portao-aberto",
+         "add only the educator, far away on the veranda, watching the mother and the boy with calm attention; they stay exactly where they are", "she lifts her chin slightly as she watches; end still"),
  "E06": ("S:n8-E03", "GERAL", [(MT, None, "same place"), (T, "A", "same place"), (E, "A", "standing just inside the open gate, facing them")], [], "portao-aberto",
          "add only the educator, bending slightly toward the boy with an open, calm hand; the mother and the boy stay exactly where they are", "her open hand moves a little toward him; end still"),
  "E07": ("COPIA:n8-E06", "MÉDIO", [], [], None, "", "the educator speaks gently, the mother listens, the boy slowly looks up; end still"),
@@ -129,17 +138,17 @@ N8 = {
  "E09": ("COPIA:n8-E08", "MÉDIO", [], [], None, "", "one of the two women covers her mouth and whispers to the other; end still"),
  "E10": ("A:c03-sala-nova", "MÉDIO", [(E, "A", "standing alone by the first window on the camera-LEFT wall")], [], None,
          "the educator stands alone in the empty classroom, thinking, looking out of the window", "she breathes slowly, her fingers touch the window frame; end still"),
- "E11": ("A:c03-sala-nova", "GERAL", [(T, "A", "sitting alone at the middle desk of the front row")], [], None,
+ "E11": ("A:c03-sala-nova", "GERAL", [(T, "A", "sitting at the front desk of the camera-LEFT column")], [], None,
          "the teenage boy sits alone, arms crossed, looking away, closed; nobody else", "he shifts slightly and keeps looking away; end still"),
- "E12": ("S:n8-E11", "GERAL", [(T, "A", "same place"), (E, "A", "sitting on a chair pulled beside his desk, on his camera-LEFT, turned toward him")], [], None,
+ "E12": ("S:n8-E11", "GERAL", [(T, "A", "same place"), (E, "A", "sitting on the chair of the middle-column desk right next to him, on his camera-RIGHT, turned toward him (no chair is moved)")], [], None,
          "add only the educator, explaining something calmly with open hands", "her hands open slowly as she talks; end still"),
  "E13": ("S:n8-E12", "GERAL", [(T, "A", "same place"), (E, "A", "same place")], [], None,
          "change only the boy: his arms are now uncrossed, he nods slightly with a small tentative smile", "he nods once; end still"),
- "E14": ("A:c03-sala-nova", "GERAL", [(J, None, "beside the front-left desks, helping"), ("f08-aluna-down", None, "at the front-left desk"), ("f09-aluna-cadeira", None, "in her wheelchair at the second-left desk"),
-          ("f10-aluno-muletas", None, "at the front-right desk"), ("f11-aluno-quebra-cabeca", None, "at the second-right desk"), ("f12-aluno-crise", None, "at the back-right desk"), (E, "A", "standing in the middle aisle between the two groups")], [], None,
+ "E14": ("A:c03-sala-nova", "GERAL", [(J, None, "beside the front-left desks, helping"), ("f08-aluna-down", None, "at the front-left desk"), ("f09-aluna-cadeira", None, "in her wheelchair at the second desk of the camera-LEFT column; that desk's chair stands against the camera-LEFT wall below the window"),
+          ("f10-aluno-muletas", None, "at the front-right desk"), ("f11-aluno-quebra-cabeca", None, "at the second-right desk"), ("f12-aluno-crise", None, "at the back-right desk"), (E, "A", "standing in the middle column beside the nearest (chair-less) desk, between the two groups")], ["obj-14-cadeira-de-rodas"], None,
          "two groups by autonomy, not by label: on the camera-left the students who need constant help with the young teacher beside them; on the camera-right a group working more independently", "the young teacher guides a hand, the educator looks from one group to the other; end still"),
- "E15": ("S:n8-E14", "GERAL", [], [], None, "change only the camera-left group: the young teacher helps the girl with Down syndrome eat with a spoon; the educator pushes the girl's wheelchair a little closer to her desk", "the wheelchair rolls a few centimetres, the spoon rises; end still"),
- "E16": ("S:n8-E14", "GERAL", [], [], None, "change only the camera-right group: the three boys draw and write in notebooks (no readable letters) and the young teacher walks among them", "a pencil moves, the young teacher bends over a desk; end still"),
+ "E15": ("S:n8-E14", "GERAL", [], [], None, "the young teacher helps the girl with Down syndrome eat with a spoon; the educator steps from the middle to behind the wheelchair and pushes it a little closer to the desk", "the wheelchair rolls a few centimetres, the spoon rises; end still"),
+ "E16": ("S:n8-E14", "GERAL", [], [], None, "change only the camera-right group: the three boys draw and write in notebooks (no readable letters) and the educator (not the young teacher) walks among them; the young teacher stays with the camera-left group", "a pencil moves, the educator bends over a desk; end still"),
  "E17": ("A:c05-corredor-escola", "GERAL", [], [], None,
          "two open classroom doors side by side; through each open door a glimpse of a few students at desks; nobody in the corridor itself", "dust floats in the sun between the columns; end still"),
  "E20": ("A:c06-sala-equipe", "GERAL", [(E, "A", "sitting at the far end of the table facing the camera"), (J, None, "sitting on the camera-LEFT side of the table"), ("f07-merendeira", None, "sitting on the camera-RIGHT side of the table")], [], None,
@@ -150,17 +159,17 @@ N8 = {
          "every adult treats the student the same way: the cook and the young teacher greet the boy with the same warm smile", "they raise a hand to greet him; end still"),
  "E24": ("S:n8-E11", "GERAL", [(T, "A", "same place, now relaxed")], [], None, "change only the boy: he now sits relaxed at the desk, drawing on a sheet of paper, with a calm small smile", "his pencil moves slowly; end still"),
  "E25": ("CRIAR:instituicao", "GERAL", [], [], None,
-         "a cold grey 1980s institution hallway with bare walls, high small windows, a few children sitting silently on a long bench, sad atmosphere", "nothing moves except dust in the cold light; end still"),
- "E26": ("A:c04-escola-fachada", "GERAL", [("f08-aluna-down", None, "camera-left, laughing"), ("f09-aluna-cadeira", None, "center, laughing with the puzzle boy"), ("f11-aluno-quebra-cabeca", None, "beside the wheelchair"), ("f10-aluno-muletas", None, "camera-right, on his crutches")], [], "portao-aberto",
-         "the school remembered for its joy: these four children and three more ordinary children play and laugh in the courtyard, some running", "children run a few steps, the wheelchair turns; end still"),
- "E27": ("A:c03-sala-nova", "GERAL", [(T, "A", "front-center desk"), ("f08-aluna-down", None, "front-left desk"), ("f10-aluno-muletas", None, "front-right desk"), ("f11-aluno-quebra-cabeca", None, "second-left desk"), ("f12-aluno-crise", None, "second-right desk"), (J, None, "standing among the desks"), (E, "A", "standing by the blackboard")], [], None,
+         "(in this shot the light is cold and flat, not golden) a cold grey 1980s institution hallway with bare walls, high small windows, a few children sitting silently on a long bench, sad atmosphere", "nothing moves except dust in the cold light; end still"),
+ "E26": ("A:c04-escola-fachada", "GERAL", [("f08-aluna-down", None, "camera-left, laughing"), ("f09-aluna-cadeira", None, "center, laughing with the puzzle boy"), ("f11-aluno-quebra-cabeca", None, "beside the wheelchair"), ("f10-aluno-muletas", None, "camera-right, on his crutches")], ["obj-14-cadeira-de-rodas"], "portao-fechado",
+         "the school remembered for its joy, seen through the bars of the closed gate: these four children and three more ordinary children play and laugh in the courtyard, some running", "children run a few steps, the wheelchair turns; end still"),
+ "E27": ("A:c03-sala-nova", "GERAL", [(T, "A", "the middle-column desk just behind the nearest (chair-less) desk"), ("f08-aluna-down", None, "front-left desk"), ("f10-aluno-muletas", None, "front-right desk"), ("f11-aluno-quebra-cabeca", None, "second-left desk"), ("f12-aluno-crise", None, "second-right desk"), (J, None, "standing among the desks"), (E, "A", "standing by the blackboard")], [], None,
          "the classroom full of warm light, all students engaged and smiling in their activities", "heads bend over the work, small smiles; end still"),
  "E28": ("A:c04-escola-fachada", "GERAL", [(T, "A", "already inside the courtyard, walking toward the building, seen from behind"), (MT, None, "on the street side outside the open gate, waving")], [], "portao-aberto",
          "next morning: the teenage boy walks to school on his own, smiling slightly; his mother waves from outside the gate; nobody passes through the gate in this shot", "he walks two steps away, she waves; end still"),
  "E29": ("A:c04-escola-fachada", "GERAL", [], [], "portao-aberto",
          "the courtyard decorated for a festa junina: colourful paper flag garlands (bandeirinhas) strung across, a small unlit bonfire structure of logs, late afternoon light; nobody yet", "the bandeirinhas flutter in the breeze; end still"),
- "E30": ("S:n8-E29", "GERAL", [("f08-aluna-down", None, "dancing with the puzzle boy"), ("f11-aluno-quebra-cabeca", None, "dancing with her"), ("f09-aluna-cadeira", None, "in her wheelchair"), ("f12-aluno-crise", None, "holding her hands, dancing beside her wheelchair"), (T, "B", "dancing with an ordinary girl")], [], "portao-aberto",
-         "pairs of students dance a quadrilha in festa junina clothes (checked shirts, straw hats, simple dresses), plus two more ordinary pairs of children", "the pairs step and turn; end still"),
+ "E30": ("S:n8-E29", "GERAL", [("f08-aluna-down", None, "dancing with the puzzle boy"), ("f11-aluno-quebra-cabeca", None, "dancing with her"), ("f09-aluna-cadeira", None, "in her wheelchair"), ("f12-aluno-crise", None, "holding her hands, dancing beside her wheelchair"), (T, "B", "dancing with an ordinary girl")], ["obj-14-cadeira-de-rodas"], "portao-aberto",
+         "pairs of students dance a quadrilha; the named children wear the clothes of their sheets plus a small straw hat; only the two more ordinary pairs of children wear checked shirts and simple dresses", "the pairs step and turn; end still"),
  "E31": ("S:n8-E30", "GERAL", [], [], "portao-aberto", "change only the dance: it has become joyfully messy, pairs going in different directions, laughing", "the pairs bump and laugh; end still"),
  "E32": ("S:n8-E30", "GERAL", [(E, "B", "standing in the foreground on the camera-LEFT, just inside the gate")], [], "portao-aberto",
          "add only the educator watching the dance, hands together near her chest, moved and smiling", "her eyes fill a little, she smiles; end still"),
@@ -187,6 +196,9 @@ def mapas_do_kit(kit):
     return out
 
 
+KIT_PEND = set()  # itens do Kit B ainda a gerar (lido do Painel)
+
+
 def montar(pref, cod, spec, mapas, pend):
     base, plano, pessoas, objs, estado, acao, anim = spec
     tipo, alvo = base.split(":", 1)
@@ -198,7 +210,9 @@ def montar(pref, cod, spec, mapas, pend):
     elif tipo == "CRIAR":
         lugar = alvo
     anexos = []
-    for p, letra, _ in pessoas:
+    for p, letra, onde in pessoas:
+        if tipo == "S" and onde.startswith("same place"):
+            continue  # já está na imagem aberta: anexar de novo faz o Flow redesenhar
         f = FOLHA_ROUPA.get(p) if letra else None
         nome = f or p
         if nome not in anexos:
@@ -207,11 +221,19 @@ def montar(pref, cod, spec, mapas, pend):
         anexos.append(o)
     epoca = f"[ANOS 80 · {ROT_LUGAR.get(lugar, 'escola nova')} · {plano}]"
     if tipo == "COPIA":
-        obs = f"NÃO GERAR IMAGEM: copiar a imagem {alvo} e salvar como {pref}{cod} · ANIMAR com o texto abaixo · montagem: recorte (aproximar) conforme a cena"
+        espera = f" (SOMENTE depois que a nova {alvo} estiver pronta)" if alvo in pend else ""
+        obs = f"NÃO GERAR IMAGEM: apagar a {pref}{cod} antiga (se existir), copiar a imagem {alvo}{espera} e salvar como {pref}{cod} · ANIMAR com o texto abaixo · montagem: recorte (aproximar) conforme a cena"
         return epoca, obs, "NÃO GERAR IMAGEM — cópia de " + alvo, BLOCO + f"CAMERA: static, no pan. ACTION: {anim}. ACTING: one small physical sign of the emotion. LIGHT AND AMBIENCE: the existing light only. INTEGRITY: stable faces, hands with five fingers; walls, doors, gate and furniture do not move; nobody passes through doors or gates." + FIM_ANIM
     if tipo == "A":
-        obs = f"ABRIR {alvo}-A"
-        abertura = f"OPENED IMAGE = {alvo}-A. Keep the place, camera position, walls, doors, windows, gate, furniture and light exactly as they are; only add or change what the SHOT says."
+        espera = f" (SOMENTE depois que o Kit {alvo}-A estiver pronto e salvo)" if f"{alvo}-A" in KIT_PEND else ""
+        obs = f"ABRIR {alvo}-A{espera}"
+        if estado == "portao-aberto":
+            abertura = (f"OPENED IMAGE = {alvo}-A. Keep the place, camera position, walls, building, trees and light exactly; the ONLY change to the fixed "
+                        "elements is the gate, which is OPEN in this shot.")
+        else:
+            abertura = f"OPENED IMAGE = {alvo}-A. Keep the place, camera position, walls, doors, windows, gate, furniture and light exactly as they are; only add or change what the SHOT says."
+        if plano == "MÉDIO":
+            obs += " · montagem: recorte (aproximar) para plano médio"
     elif tipo == "S":
         espera = f" (SOMENTE depois que a nova {alvo} estiver pronta e salva com o mesmo nome)" if alvo in pend else ""
         obs = f"ABRIR {alvo}{espera}"
@@ -220,11 +242,15 @@ def montar(pref, cod, spec, mapas, pend):
         espera = f" (SOMENTE depois que a nova {alvo} estiver pronta)" if alvo in pend else ""
         obs = f"CRIAR (barra de baixo · Imagem · 16:9) · ANEXAR {alvo}{espera}"
         anexos = [a for a in anexos if a != alvo]
-        abertura = f"The attached image {alvo} is the SAME moment and place seen wider: same light, same people, same clothes. New closer framing as described in the SHOT; BACKGROUND EXACTLY AS IN {alvo}."
+        if alvo.endswith("-A"):
+            abertura = f"The attached image {alvo} is the same empty place seen wider; BACKGROUND EXACTLY AS IN {alvo}."
+        else:
+            abertura = f"The attached image {alvo} is the SAME moment and place seen wider: same light, same people, same clothes. New closer framing as described in the SHOT; BACKGROUND EXACTLY AS IN {alvo}."
     else:
         obs = "CRIAR (barra de baixo · Imagem · 16:9)"
         abertura = "One single 16:9 image."
-    obs += " · ANEXAR " + " + ".join(anexos + ["ref-estilo-p04"]) if "ANEXAR" not in obs else " + " + " + ".join(anexos + ["ref-estilo-p04"])
+    marcados = [a + (" (SOMENTE depois que o Kit " + a + " estiver pronto no Flow da Conta B)" if a in KIT_PEND else "") for a in anexos]
+    obs += " · ANEXAR " + " + ".join(marcados + ["ref-estilo-p04"]) if "ANEXAR" not in obs else " + " + " + ".join(marcados + ["ref-estilo-p04"])
     linhas_pessoas = []
     for p, letra, onde in pessoas:
         txt = PESSOA[p]
@@ -242,12 +268,13 @@ def montar(pref, cod, spec, mapas, pend):
     if lugar in CAMERA:
         # o tamanho do plano manda no enquadramento; a luz e a paleta são sempre as do lugar (nunca "wide" num close)
         luz = ", ".join(CAMERA[lugar].split(", ")[3:])
-        enq = {"GERAL": ", ".join(CAMERA[lugar].split(", ")[:3]),
-               "MÉDIO": "medium frame at adult eye level (waist up), medium lens, balanced composition",
+        geral = ", ".join(CAMERA[lugar].split(", ")[:3])
+        enq = {"GERAL": geral,
+               "MÉDIO": geral if tipo in ("A", "S") else "medium frame at adult eye level (waist up), medium lens, balanced composition",
                "CLOSE": "close-up frame at eye level (head and shoulders), medium-long lens, shallow depth of field, background soft",
                "INSERT": "close insert frame, medium-long lens, shallow depth of field, hands and object sharp, background soft"}[plano]
         partes.append(f"CAMERA & COLOR (ShotDeck sheets in 05-referencia cores-lentes): {enq}, {luz}.")
-    mapa = mapas.get(lugar) or MAPA_EXTRA.get(lugar, "")
+    mapa = MAPA_EXTRA.get(lugar) or mapas.get(lugar, "")
     if mapa:
         if plano in ("CLOSE", "INSERT"):
             mapa = mapa.replace("PLACE LOCK — ", "PLACE LOCK (this is the place behind them; keep the close framing) — ", 1)
@@ -299,10 +326,11 @@ if __name__ == "__main__":
     Ep = {e["chave"]: e for e in eps}
     json.dump(eps, open(__import__('os').path.dirname(__file__) + "/../eps_antes_biblia.json", "w"), ensure_ascii=False)
     mapas = mapas_do_kit(Ep["kit-tutor"])
+    KIT_PEND.update(c["descricao"] for c in Ep["kit-tutor"]["cenas"] if c["situacao"] in ("falta", "refazer"))
     lugares_das_cenas("n5-", N5); lugares_das_cenas("n8-", N8)
     for chave, pref, specs in (("noticia-5", "n5-", N5), ("noticia-8", "n8-", N8)):
         ep = Ep[chave]
-        pend = {pref + c["codigo"] for c in ep["cenas"] if c["situacao"] in ("falta", "refazer")} | {"n8-" + c["codigo"] for c in Ep["noticia-8"]["cenas"] if c["situacao"] in ("falta", "refazer")}
+        pend = {"n5-" + c["codigo"] for c in Ep["noticia-5"]["cenas"] if c["situacao"] in ("falta", "refazer")} | {"n8-" + c["codigo"] for c in Ep["noticia-8"]["cenas"] if c["situacao"] in ("falta", "refazer")}
         for c in ep["cenas"]:
             if c["codigo"] not in specs or c["situacao"] not in ("falta", "refazer"):
                 continue
