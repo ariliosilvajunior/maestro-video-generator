@@ -10,6 +10,16 @@
 
 ---
 
+## ★ Método: BÍBLIA + BLOCOS FIXOS (dono, 01/11 — "padrão descritivo e não no achômetro", modelo video-prompt-builder)
+- Cada conta tem uma **Bíblia** (`scripts/prompts/biblia_conta<X>.py`): UM texto fixo para cada LUGAR (mapa do -A real), PESSOA
+  (idade, rosto, roupa fixa), ROUPA A/B, OBJETO, CÂMERA do lugar e ESTADO (portão aberto/fechado).
+- Cada cena é só uma linha de dados: base (abre o -A / abre outra cena / close com o fundo de outra / cópia), PLANO (geral,
+  médio, close, insert), pessoas (código + roupa + ONDE), objetos, estado, AÇÃO e ação da animação. O texto do Flow é
+  MONTADO pelo gerador copiando os blocos palavra por palavra — ninguém reescreve lugar/pessoa à mão.
+- A câmera do close/insert/médio muda só o enquadramento; luz e paleta são sempre as do lugar.
+- O gerador escreve nas notas o INVENTÁRIO MESTRE (quem/o quê aparece em quais cenas + plano de cada cena).
+- Fluxo: gerador → validar_cenas.py → revisor-cenas (com as imagens reais) → Painel. Sem pular.
+
 ## 0. Antes de tudo: família, época, personagens
 - **R01** A notícia é a MESMA história de um episódio já feito? → mesma família, mesmos lugares, mesmas folhas.
   Assunto diferente → personagens NOVOS (pode reaproveitar lugar).
