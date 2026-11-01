@@ -26,6 +26,9 @@
 - **R11** Lugar que se repete = MAPA FIXO contado: cada móvel com quantidade, cor e posição (parede do fundo /
   esquerda / direita), lado da porta e da janela ("NO window on the back wall"), porta SEMPRE no batente,
   nº de plantas, nº e cor de cadeiras. Rua: casa por casa.
+- **R11b** No plano `-A`, porta e portão ficam **FECHADOS** (estado neutro). Só a cena que precisa abre, e diz isso no
+  texto ("the gate is open, both leaves swung inward"). Erro do 01/11: o plano da fachada copiou o portão aberto da
+  imagem de origem.
 - **R12** Cada lugar tem UM plano `cXX-…-A`, estilo p04 (nunca desenho limpo). Sem plano -B.
 - **R13** Realismo: sala do AEE/consultório com mesa e cadeiras de ADULTO para os pais; adulto nunca em
   cadeira de criança; bebê nunca perto do fogão; turma especial pequena (≤ 2 professoras, ≤ 3 alunos).
