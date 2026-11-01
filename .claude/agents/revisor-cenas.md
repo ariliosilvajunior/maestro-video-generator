@@ -31,6 +31,9 @@ Responda sempre em português, direto.
 3b. **Sentido da história e estado normal do lugar** (dono, 01/11 — passou um portão aberto num plano fixo):
    - Plano `-A` do Kit = estado NEUTRO: porta e portão FECHADOS, sem pessoas, sem objeto fora do lugar (R11b). Se a imagem
      de origem tem porta/portão aberto, o texto tem que mandar FECHAR.
+   - **Escala e direção (R24b, n5-S04):** gente perto de portão/porta/muro tem tamanho real dito no texto (linha SCALE)?
+     Quem anda/carrega/corre tem direção em relação à câmera e ao destino ("walking AWAY from the camera toward the building")
+     e o que NÃO pode ("nobody walks toward the gate"), na imagem e na animação? Sem isso: REPROVADO.
    - Para cada cena: isso faz sentido na história e na época? (escola fechada × portão aberto, criança no lugar errado,
      pessoa que não estaria ali). Leia a descrição e as notas do episódio antes de aprovar.
    - **Você não enxerga o Flow, só o Drive.** Toda imagem que o texto manda ABRIR/ANEXAR e que veio de OUTRA conta ou de fora

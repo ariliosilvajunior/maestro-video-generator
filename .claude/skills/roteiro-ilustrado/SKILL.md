@@ -66,6 +66,10 @@ repetidas em toda cena. Ver lições J.
 - Todo lugar que se repete tem MAPA FIXO (o que existe e onde, de que lado abre o portão, quantos postes no
   varal, quais roupas em que ordem) e **um plano fixo `cXX-…-A`** no Kit. Toda cena daquele lugar **ABRE o -A**
   e só acrescenta pessoas. Nunca recriar o lugar numa cena. O mapa vai no fim do texto ("PLACE LOCK").
+- **Escala e direção (R24b, erro grave n5-S04):** lugar com portão/porta/muro em primeiro plano leva linha SCALE no
+  PLACE LOCK (portão ~2 m, travessa na cintura do adulto, criança um pouco acima da travessa). Toda pessoa que se move
+  leva direção em relação à câmera e ao destino ("walking AWAY from the camera toward the building") e o que não pode
+  ("nobody walks toward the gate") — no texto da imagem E da animação.
 - **Sem plano -B**: editar no Flow mantém a câmera — contraplano por edição não funciona.
 - Estado de conservação explícito: lugar novo/de hoje = pintura lisa, nada descascado; lugar velho = gasto.
 - Corredor, sala da equipe, palco etc. são lugares próprios — não "a sala de aula".

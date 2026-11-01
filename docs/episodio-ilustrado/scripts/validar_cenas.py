@@ -127,6 +127,16 @@ def checar(ep, nomes, kit_codigos):
         # R26: cena nova tem a linha de câmera/cor das fichas ShotDeck
         if "CAMERA & COLOR" not in img:
             e("R26", "sem linha CAMERA & COLOR (fichas ShotDeck da pasta 05-referencia cores-lentes)")
+        # R24b (dono 01/11, n5-S04: trabalhadores pequeninos ao lado de portão gigante, andando para fora):
+        # portão no PLACE LOCK → linha SCALE; quem anda/carrega/corre/empurra → direção (para onde, em relação à câmera)
+        if "PLACE LOCK" in img and re.search(r"double gate|gate of|the gate fills", img, re.I) and "SCALE" not in img:
+            e("R24b", "lugar com portão sem linha SCALE (tamanho real do portão × pessoas)")
+        for campo, txt in (("imagem", img), ("animação", anim)):
+            for frase in re.split(r"[.;]", txt):
+                if re.search(r"\b(walk\w*|carr(y|ies|ying)|runs?|running|push\w*)\b", frase, re.I) and \
+                        not re.search(r"\bnever\b|\btears?\b|push-in", frase, re.I) and \
+                        not re.search(r"\b(toward\w*|away|across|sideways|into|out of|along|beside|among|closer|past|side by side|in place|on the spot|to (school|the|his|her|their))\b", frase, re.I):
+                    e("R24b", f"movimento sem direção na {campo}: '{frase.strip()[:70]}' — dizer para onde, em relação à câmera")
         # R21: lugar fixo aberto → PLACE LOCK
         lugar = re.search(r"ABRIR (c\d{2}-[\w-]+-A)", obs)
         if lugar and "PLACE LOCK" not in img:

@@ -181,3 +181,9 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 2. Regra: antes de escrever um close de uma cena que já existe, **abrir a imagem gerada** (Drive) e descrever o
    fundo de CADA pessoa como ele aparece nela (o que está atrás de quem, de que lado, a planta em cima de qual
    ombro), na mesma direção de câmera. Nunca "ONLY …" para fundo — dizer o que existe, não o que não existe.
+
+## N. Escala e direção de quem se move (01/11/2026, n5-S04 — Conta B)
+1. A S04 (comunidade construindo a escola) dizia só "three townspeople carry bricks". O Flow desenhou os
+   trabalhadores pequeninos ao lado de um portão gigante, e andando para FORA do portão, não para a obra.
+2. Regra R24b: lugar com portão/porta/muro em primeiro plano tem linha SCALE no PLACE LOCK (tamanho real), e toda
+   pessoa que se move tem direção em relação à câmera e ao destino, mais o que não pode — na imagem e na animação.

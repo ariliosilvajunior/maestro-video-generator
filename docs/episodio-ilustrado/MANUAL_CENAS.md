@@ -81,6 +81,13 @@
 - **R23** Diz onde cada pessoa está (qual cadeira, de que lado), e o que NÃO pode acontecer ("nobody on the
   children's chairs").
 - **R24** Canto inferior direito vazio (avatar). Escala de adulto.
+- **R24b** **Escala e direção de quem se move** (erro grave, dono 01/11, n5-S04: "os funcionários da obra parecem
+  pequeninos e o portão parece de gigante… e em vez de irem para o lado da construção estão vindo para fora do
+  portão"). (1) Todo lugar com portão/porta/muro em primeiro plano tem no PLACE LOCK uma linha **SCALE** com tamanho real
+  (portão ~2 m, travessa na cintura de um adulto na linha do portão, criança de 8–9 um pouco acima da travessa, adulto
+  junto ao prédio da altura das portas; mais longe = menor só pela distância). (2) Pessoa que anda/carrega/corre leva
+  **DIREÇÃO em relação à câmera e ao destino** ("walking AWAY from the camera toward the building, seen from behind") e
+  o que NÃO pode ("nobody walks toward the gate"), na imagem E na animação. Nunca "carry bricks a few steps" sem direção.
 
 ## 3. Close-up / detalhe (o erro da n3-E03)
 - **R30** Close de cena que já existe: **abrir a imagem larga GERADA** e escrever `BACKGROUND EXACTLY AS IN <código>`
