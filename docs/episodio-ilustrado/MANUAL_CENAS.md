@@ -116,6 +116,10 @@
   feito"): `ABRIR x · ANEXAR y + z`, `CRIAR (Imagem · 16:9) · ANEXAR …`, `NÃO GERAR IMAGEM · copiar x · animar`, e
   `(SOMENTE depois de x)` quando depende. Nada de explicação, motivo, recorte de montagem ou "salvar como" (o Painel já
   mostra onde salvar).
+- **R54** Criança em cena (o Flow bloqueia "conteúdo prejudicial a menores", dono 02/11, n5-S08a): nunca
+  "malnutrition", "very thin", "thin legs", "barefoot" com camisola, criança deitada sem roupa dita. Dizer o
+  cuidado ("rests peacefully, tucked under the sheet up to his chest, calm and safe"), roupa completa (pijama de manga
+  longa) e adulto ao lado de forma cuidadora. Se bloquear: trocar as palavras de corpo/doença por cuidado e roupa.
 - **R52** Quando o dono avisa que uma cena saiu errada (dono, 01/11: "é só excluir a errada e colocar em refazer que o
   restante eu faço"): Claude (1) olha a imagem no Drive para confirmar que é a errada, (2) manda o arquivo errado para a
   lixeira do Drive (imagem e vídeo daquela cena), (3) põe a cena em **refazer** no Painel, (4) corrige o texto se o erro
