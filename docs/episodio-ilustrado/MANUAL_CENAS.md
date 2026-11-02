@@ -134,6 +134,8 @@
   **Animação também é bloqueada** (dono, 02/11, n5-S08a): com criança deitada ou em cama de hospital, o texto do VÍDEO
   não descreve corpo, rosto nem gesto da criança (piscar, virar a cabeça, mãos, peito). Só movimento do AMBIENTE:
   cortina, luz, poeira no sol; "everything else stays calm and still".
+  Se mesmo assim bloquear, o filtro é pela IMAGEM: **não animar no Flow** — a cena fica `video_ok` com `sem_video_flow`
+  e a montagem faz zoom lento (Ken Burns) na imagem com ffmpeg. Não gastar tentativas.
 - **R52** Quando o dono avisa que uma cena saiu errada (dono, 01/11: "é só excluir a errada e colocar em refazer que o
   restante eu faço"): Claude (1) olha a imagem no Drive para confirmar que é a errada, (2) manda o arquivo errado para a
   lixeira do Drive (imagem e vídeo daquela cena), (3) põe a cena em **refazer** no Painel, (4) corrige o texto se o erro

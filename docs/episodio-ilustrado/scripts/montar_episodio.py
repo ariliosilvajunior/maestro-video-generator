@@ -52,7 +52,17 @@ for i, (k, a, b) in enumerate(cuts):
     fim = END if i == len(cuts) - 1 else OFF + b
     inicio[k] = ini
     precisa = fim - ini + (XF if i < len(cuts) - 1 else 0)
-    src = P("clipes", f"p{k:02d}.mp4"); d = dur(src, video=True); ss = CFG.get("inicio_clipe", {}).get(str(k), 0.0)
+    src = P("clipes", f"p{k:02d}.mp4")
+    if not os.path.exists(src):
+        # R54 (02/11): cena que o Flow não deixa animar (criança deitada/hospital) — zoom lento (Ken Burns) na imagem
+        img = next((P("clipes", f"p{k:02d}.{e}") for e in ("jpg", "png", "jpeg") if os.path.exists(P("clipes", f"p{k:02d}.{e}"))), None)
+        if img is None:
+            raise SystemExit(f"cena {k}: falta clipes/p{k:02d}.mp4 (ou a imagem .jpg/.png para o zoom lento)")
+        quadros = int((precisa + 1) * 25)
+        run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-i", img, "-vf",
+             f"scale=3840:2160:flags=lanczos,zoompan=z='min(1+0.0006*on,1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={quadros}:s=1920x1080:fps=25,format=yuv420p",
+             "-t", f"{precisa + 1:.3f}", "-c:v", "libx264", "-crf", "17", src])
+    d = dur(src, video=True); ss = CFG.get("inicio_clipe", {}).get(str(k), 0.0)
     corte = CFG.get("cortar_fim_clipe", {}).get(str(k), 0.0)   # clipe que termina escurecendo: não congelar no preto
     d -= ss + corte
     lento = min(max(precisa / d, 1.0), 1.6)
