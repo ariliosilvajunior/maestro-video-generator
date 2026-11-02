@@ -134,7 +134,7 @@ def checar(ep, nomes, kit_codigos):
         for campo, txt in (("imagem", img), ("animação", anim)):
             for frase in re.split(r"[.;]", txt):
                 if re.search(r"\b(walk\w*|carr(y|ies|ying)|runs?|running|push\w*)\b", frase, re.I) and \
-                        not re.search(r"\bnever\b|\btears?\b|push-in", frase, re.I) and \
+                        not re.search(r"\bnever\b|\bnot\b|\bcannot\b|\btears?\b|push-in", frase, re.I) and \
                         not re.search(r"\b(toward\w*|away|across|sideways|into|out of|along|beside|among|closer|past|side by side|in place|on the spot|to (school|the|his|her|their))\b", frase, re.I):
                     e("R24b", f"movimento sem direção na {campo}: '{frase.strip()[:70]}' — dizer para onde, em relação à câmera")
         # R21: lugar fixo aberto → PLACE LOCK
