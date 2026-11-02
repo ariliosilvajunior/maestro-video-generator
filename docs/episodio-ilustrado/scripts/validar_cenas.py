@@ -17,7 +17,7 @@ import urllib.request
 BASE = os.environ.get("PAINEL_URL", "https://painel.recursoscognitivos.com.br")
 PREFIXO = {"noticia-3": "n3-", "noticia-4": "n4-", "noticia-5": "n5-", "noticia-8": "n8-",
            "noticia-1": "n1-", "noticia-6": "n6-", "noticia-2": "n2-", "noticia-7": "n7-", "piloto": ""}
-CODIGO = re.compile(r"(?<![\w-])((?:[fc]\d{2}|obj-\d{2}|p\d{2}|n\d+-[A-Z]\d+\w*|ref)-?[\w-]*)")
+CODIGO = re.compile(r"(?<![\w-])((?:(?:AV|ES|PE|CE|OB|CL)\d{2}(?:-[RF])?)|(?:(?:[fc]\d{2}|obj-\d{2}|p\d{2}|n\d+-[A-Z]\d+\w*|ref)-?[\w-]*))")
 APELIDOS = re.compile(r"\b(Mãe|Pai|Filho|Filha|Professor|Professora|Menino|Menina|Jonas|Maria)\b")
 IDADE = re.compile(r"\b(\d+|one|two|three|four|five|six|seven|eight|nine|ten)[- ](years?|months?)[- ]old|\bexactly \d+ years|\babout \d+\b", re.I)
 
@@ -100,18 +100,18 @@ def checar(ep, nomes, kit_codigos):
         # R20b (revisor 01/11, n8-E20: "same walls ... as the attached c03-sala-nova-A" sem a c03 no ANEXAR):
         # toda imagem que o texto chama de "attached" tem que estar no ABRIR/ANEXAR da própria cena.
         if not sem_imagem:
-            for nome in set(re.findall(r"\battached ([fc]\d{2}-[\w-]+|obj-\d{2}-[\w-]+|n\d+-[A-Z]\d+\w*|ref-[\w-]+|p\d{2}-[\w-]+)", img)):
+            for nome in set(re.findall(r"\battached ((?:AV|ES|PE|CE|OB|CL)\d{2}(?:-[RF])?|[fc]\d{2}-[\w-]+|obj-\d{2}-[\w-]+|n\d+-[A-Z]\d+\w*|ref-[\w-]+|p\d{2}-[\w-]+)", img)):
                 nome = nome.rstrip("-")
                 if nome not in trecho:
                     e("R20", f"texto diz 'attached {nome}', mas {nome} não está no ABRIR/ANEXAR da cena")
         if APELIDOS.search(re.sub(r"\[[^\]]*\]", "", trecho)):
             e("R20", f"apelido no ABRIR/ANEXAR: {APELIDOS.search(trecho).group(0)} — use o código")
         # R17: personagem com ficha de roupas no Kit → a cena tem que anexar a ficha e dizer a roupa
-        for f in ([] if eh_kit else set(re.findall(r"\b(f\d{2}-[\w-]+?)(?:-roupas)?(?=[ \[·+]|$)", trecho))):
-            if f + "-roupas" in kit_codigos and (f + "-roupas" not in obs or "OUTFIT" not in img):
-                e("R17", f"{f} tem ficha de roupas no Kit — anexar {f}-roupas e dizer a roupa (OUTFITS) da cena")
+        for f in ([] if eh_kit else set(re.findall(r"\b(PE\d{2})(?:-R)?(?=[ \[·+(]|$)", trecho))):
+            if f + "-R" in kit_codigos and (f + "-R" not in obs or "OUTFIT" not in img):
+                e("R17", f"{f} tem ficha de roupas no Kit — anexar {f}-R e dizer a roupa (OUTFITS) da cena")
         # R16: objeto com ficha no Kit citado no texto → anexar a ficha
-        for o in [x for x in kit_codigos if x.startswith("obj-")]:
+        for o in [x for x in kit_codigos if x.startswith("OB")]:
             if o in img and o not in obs:
                 e("R16", f"texto cita {o} mas não anexa a ficha")
         # R34: abre outra cena deste episódio que ainda vai ser refeita → avisar a ordem
@@ -138,11 +138,11 @@ def checar(ep, nomes, kit_codigos):
                         not re.search(r"\b(toward\w*|away|across|sideways|into|out of|along|beside|among|closer|past|side by side|in place|on the spot|to (school|the|his|her|their))\b", frase, re.I):
                     e("R24b", f"movimento sem direção na {campo}: '{frase.strip()[:70]}' — dizer para onde, em relação à câmera")
         # R21: lugar fixo aberto → PLACE LOCK
-        lugar = re.search(r"ABRIR (c\d{2}-[\w-]+-A)", obs)
+        lugar = re.search(r"ABRIR (CE\d{2})\b", obs)
         if lugar and "PLACE LOCK" not in img:
             e("R21", f"abre {lugar.group(1)} mas o texto não tem PLACE LOCK")
         # R22: personagem anexado → idade no texto
-        if re.search(r"ANEXAR[^·]*\bf\d{2}-", obs) and not IDADE.search(img):
+        if re.search(r"ANEXAR[^·]*\bPE\d{2}", obs) and not IDADE.search(img):
             e("R22", "anexa personagem mas o texto não diz a idade")
         # R30/R31: close criado a partir de uma cena → fundo descrito pela imagem
         if obs.startswith("CRIAR") and re.search(r"ANEXAR[^·]*\b" + re.escape(pref) + r"[A-Z]\d+", obs):

@@ -18,7 +18,7 @@ Responda sempre em português, direto.
 2. **Para cada cena a revisar, abra as imagens reais** (isto é o que o script não faz):
    - `GET /producao-videos/contas/automacao` → ids das pastas; `GET /producao-videos/drive/pasta/{id}` → arquivos;
      `GET /producao-videos/drive/arquivo/{id}` → baixe para um diretório temporário e OLHE com Read.
-   - Baixe: a imagem do ABRIR, toda imagem de cena citada no ANEXAR, o plano `-A` do lugar e as folhas dos
+   - Baixe: a imagem do ABRIR, toda imagem de cena citada no ANEXAR, o plano fixo `CEnn` do lugar (o antigo `-A`) e as folhas dos
      personagens citados.
 3. **Compare frase por frase o que o texto afirma com o que a imagem mostra.** Pergunte para cada item:
    - O fundo descrito atrás de CADA pessoa é o que está atrás dela na imagem? (R30/R31 — erro n3-E03)
@@ -26,6 +26,7 @@ Responda sempre em português, direto.
    - Os objetos repetidos (livro, ficha, brinquedo) estão no mesmo lugar da cena de origem? (R33)
    - Personagens: idade, roupa, cabelo iguais à folha? Época certa? Pessoa de outra família visualmente diferente? (R03/R05/R22)
    - Realismo: adulto em cadeira de adulto, bebê longe do fogão, turma pequena? (R13)
+   - Nomes: só os códigos da R55 (AV/ES/PE/PE-R/CE/CE-F/OB/CL e as cenas nN-…); nome antigo ou apelido = erro.
    - O mapa (PLACE LOCK) descreve a imagem `-A` que existe, ou algo diferente dela? (R15)
    - Close: daria para aproximar na montagem em vez de gerar? (R32)
 3b. **Sentido da história e estado normal do lugar** (dono, 01/11 — passou um portão aberto num plano fixo):

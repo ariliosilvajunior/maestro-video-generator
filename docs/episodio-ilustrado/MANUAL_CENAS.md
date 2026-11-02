@@ -39,7 +39,7 @@
 - **R11b** No plano `-A`, porta e portão ficam **FECHADOS** (estado neutro). Só a cena que precisa abre, e diz isso no
   texto ("the gate is open, both leaves swung inward"). Erro do 01/11: o plano da fachada copiou o portão aberto da
   imagem de origem.
-- **R12** Cada lugar tem UM plano `cXX-…-A`, estilo p04 (nunca desenho limpo). Sem plano -B.
+- **R12** Cada lugar tem UM plano fixo `CEnn` (antes `cNN-…-A`; "plano -A" neste manual = esse `CEnn`), estilo ES01 (nunca desenho limpo). Sem plano -B.
 - **R13** Realismo: sala do AEE/consultório com mesa e cadeiras de ADULTO para os pais; adulto nunca em
   cadeira de criança; bebê nunca perto do fogão; turma especial pequena (≤ 2 professoras, ≤ 3 alunos).
 - **R14** Estado do lugar explícito: novo/de hoje = pintura lisa; velho = gasto.
@@ -67,11 +67,11 @@
   montagem (anotar nas notas do episódio: "RECORTES NA MONTAGEM"). Animação nunca faz fade para preto (é na montagem).
 
 ## 2. Cena larga (ABRIR o plano -A ou a cena anterior)
-- **R20** Só NOMES DE IMAGENS QUE EXISTEM no Drive DAQUELA CONTA nos ABRIR/ANEXAR (`f08-mae-hoje`, `c04-sala-aee-A`,
+- **R20** Só NOMES DE IMAGENS QUE EXISTEM no Drive DAQUELA CONTA nos ABRIR/ANEXAR (`PE08`, `CE04`,
   `n3-E02`). Nunca apelido ("Mãe", "Professor") e nunca nome inventado de referência (`ref-layout-personagem`,
   `ref-layout-cenario`, `ref-escola-nova-p29` — erro grave repetido, dono 01/11). Formato de folha se DESCREVE no texto
   ("laid out as follows: …"), não se anexa. A imagem de estilo fica em `Kit › 01-estilo` de cada conta
-  (`p04-caixas-mudanca` na A, `ref-estilo-p04` na B/C/D). O verificador barra qualquer nome que não exista.
+  (`ES01` em todas as contas, ver R55). O verificador barra qualquer nome que não exista.
   **Existir no Drive não basta: tem que existir no FLOW daquela conta** (dono, 01/11: "vc pede para abrir no flow
   p29-portao-escola, mas isso não existe" — foi gerada no Flow da Conta A). Imagem que veio de outra conta ou de fora
   (cópia no Drive, foto, ficha ShotDeck) leva no obs o passo "SUBIR no Flow: baixar do Drive (link) → + / Enviar imagem →
@@ -113,6 +113,13 @@
   texto pedia ursinho que a imagem não tinha e ele apareceu do nada) — a ação usa só o que já está no 1º quadro.
 
 ## 5. Arquivos e nomes
+- **R55** **Códigos por categoria** (dono, 02/11: "um cód para cada coisa ... fica fácil de saber quando está em um
+  lugar errado"). Nome do arquivo = código, igual no Drive e no Flow da conta: `AV01…` avatar (00-avatar-narrador),
+  `ES01` estilo (01-estilo), `PE04` personagem e `PE04-R` roupas (02-personagens), `CE03` plano fixo do lugar e
+  `CE03-F` folha-base (03-cenarios), `OB15` objeto (04-objetos), `CL01…` cores e lentes (05-referencia cores-lentes).
+  Cenas: `n5-S08b`, `n3-E04`. Código fora da pasta da sua categoria = lugar errado; o que não tem código = lixo.
+  O número é por conta (PE01 da Conta A é outra pessoa que PE01 da Conta B). Os textos citam o código, e a
+  descrição da pessoa vem no próprio texto ("THE LITTLE BOY (PE04): …").
 - **R50** Refazer = apagar o errado e salvar o novo com o MESMO nome. Nunca -v2, nunca "renomear a antiga".
 - **R51** Cada item diz onde salvar (conta › pasta) com o nome = código.
 - **R53** A linha de instrução da cena (obs) é CURTA e só diz o que o dono faz (dono, 02/11: "só o que é para ser

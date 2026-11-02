@@ -14,8 +14,9 @@ D = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else ".")
 P = lambda *x: os.path.join(D, *x)
 CFG = json.load(open(P("episodio.json")))
 XF = 0.5                      # fusão entre cenas (s)
-ENTRADA = P("avatar_entrada.mp4") if os.path.exists(P("avatar_entrada.mp4")) else None
-SAIDA = P("avatar_saida.mp4") if os.path.exists(P("avatar_saida.mp4")) else None
+# 02/11: no Drive o avatar virou AV03 (entrada) e AV04 (saída); aceita os dois nomes
+ENTRADA = next((P(n) for n in ("AV03.mp4", "avatar_entrada.mp4") if os.path.exists(P(n))), None)
+SAIDA = next((P(n) for n in ("AV04.mp4", "avatar_saida.mp4") if os.path.exists(P(n))), None)
 
 
 def dur(f, video=False):

@@ -28,10 +28,9 @@ Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, 
 
 ## Regras que nunca mudam
 **Nomes**
-- Só o **código real** da imagem nos ANEXAR/ABRIR (`f01-mae`, `f08-mae-hoje`, `c05-consultorio-A`, `p04-caixas-mudanca`).
-  Nunca apelido ("Mãe", "Filho Jonas", "Professor AEE"). Época entre colchetes: `f01-mae [anos 80]`, `f08-mae-hoje [hoje]`.
-- Usar só nomes que EXISTEM na conta do Flow daquele episódio (Conta A usa `p04-caixas-mudanca` como estilo;
-  B/C/D usam `ref-estilo-p04`). Na dúvida, perguntar ao dono o nome exato.
+- Só o **código real** da imagem nos ANEXAR/ABRIR (`PE01`, `PE08`, `CE05`, `ES01`, `OB09`, `n3-E04` — códigos da R55).
+  Nunca apelido ("Mãe", "Filho Jonas", "Professor AEE"). A época vai na etiqueta da descrição da cena, não no nome.
+- Usar só nomes que EXISTEM na conta do Flow daquele episódio (todas as contas usam `ES01` como estilo; códigos em R55 do MANUAL_CENAS). Na dúvida, perguntar ao dono o nome exato.
 - Cada item diz onde salvar: `Conta X › Kit de referência › 02-personagens|03-cenarios|04-objetos` ou
   `Conta X › <pasta do episódio> › 05-episodios`, com o nome = código da cena.
 
