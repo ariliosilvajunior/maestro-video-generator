@@ -85,7 +85,8 @@
   pequeninos e o portão parece de gigante… e em vez de irem para o lado da construção estão vindo para fora do
   portão"). (1) Todo lugar com portão/porta/muro em primeiro plano tem no PLACE LOCK uma linha **SCALE** com tamanho real
   MEDIDA NO `-A` REAL (onde fica a travessa em relação à altura dos olhos da câmera, onde o portão termina; ex. c04 da
-  Conta B: portão ~3,5 m, travessa no ombro do adulto na linha do portão), criança em relação ao adulto, adulto junto ao
+  Conta B: portão de 2 m, travessa na cintura do adulto). Se o `-A` tem portão/porta fora de escala humana ("portão de
+  gigante"), o erro está no `-A`: corrigir o PLANO primeiro (R43), nunca compensar no texto da cena, criança em relação ao adulto, adulto junto ao
   prédio da altura das portas; mais longe = menor só pela distância. Nunca número genérico que contradiz a imagem (R15). (2) Pessoa que anda/carrega/corre leva
   **DIREÇÃO em relação à câmera e ao destino** ("walking AWAY from the camera toward the building, seen from behind") e
   o que NÃO pode ("nobody walks toward the gate"), na imagem E na animação. Nunca "carry bricks a few steps" sem direção.
