@@ -221,11 +221,11 @@ def montar(pref, cod, spec, mapas, pend):
         anexos.append(o)
     epoca = f"[ANOS 80 · {ROT_LUGAR.get(lugar, 'escola nova')} · {plano}]"
     if tipo == "COPIA":
-        espera = f" (SOMENTE depois que a nova {alvo} estiver pronta)" if (alvo in pend or alvo in KIT_PEND) else ""
-        obs = f"NÃO GERAR IMAGEM: apagar a {pref}{cod} antiga (se existir), copiar a imagem {alvo}{espera} e salvar como {pref}{cod} · ANIMAR com o texto abaixo · montagem: recorte (aproximar) conforme a cena"
+        espera = f" (SOMENTE depois de {alvo})" if (alvo in pend or alvo in KIT_PEND) else ""
+        obs = f"NÃO GERAR IMAGEM · copiar {alvo}{espera} · animar"
         return epoca, obs, "NÃO GERAR IMAGEM — cópia de " + alvo, BLOCO + f"CAMERA: static, no pan. ACTION: {anim}. ACTING: one small physical sign of the emotion. LIGHT AND AMBIENCE: the existing light only. INTEGRITY: stable faces, hands with five fingers; walls, doors, gate and furniture do not move; nobody passes through doors or gates." + FIM_ANIM
     if tipo == "A":
-        espera = f" (SOMENTE depois que o Kit {alvo}-A estiver pronto e salvo)" if f"{alvo}-A" in KIT_PEND else ""
+        espera = f" (SOMENTE depois de {alvo}-A)" if f"{alvo}-A" in KIT_PEND else ""
         obs = f"ABRIR {alvo}-A{espera}"
         if estado == "portao-aberto":
             abertura = (f"OPENED IMAGE = {alvo}-A. Keep the place, camera position, walls, building, trees and light exactly; the ONLY change to the fixed "
@@ -233,21 +233,21 @@ def montar(pref, cod, spec, mapas, pend):
         else:
             abertura = f"OPENED IMAGE = {alvo}-A. Keep the place, camera position, walls, doors, windows, gate, furniture and light exactly as they are; only add or change what the SHOT says."
         if plano == "MÉDIO":
-            obs += " · montagem: recorte (aproximar) para plano médio"
+            pass  # plano médio: o recorte é feito na montagem (Claude), não aparece para o dono
     elif tipo == "S":
-        espera = f" (SOMENTE depois que a nova {alvo} estiver pronta e salva com o mesmo nome)" if alvo in pend else ""
+        espera = f" (SOMENTE depois de {alvo})" if alvo in pend else ""
         obs = f"ABRIR {alvo}{espera}"
         abertura = f"OPENED IMAGE = {alvo}. Keep the place, camera, light, every person already in it (same faces, same clothes, same positions) and every object exactly; only add or change what the SHOT says."
     elif tipo == "C":
-        espera = f" (SOMENTE depois que a nova {alvo} estiver pronta)" if alvo in pend else ""
-        obs = f"CRIAR (barra de baixo · Imagem · 16:9) · ANEXAR {alvo}{espera}"
+        espera = f" (SOMENTE depois de {alvo})" if alvo in pend else ""
+        obs = f"CRIAR (Imagem · 16:9) · ANEXAR {alvo}{espera}"
         anexos = [a for a in anexos if a != alvo]
         if alvo.endswith("-A"):
             abertura = f"The attached image {alvo} is the same empty place seen wider; BACKGROUND EXACTLY AS IN {alvo}."
         else:
             abertura = f"The attached image {alvo} is the SAME moment and place seen wider: same light, same people, same clothes. New closer framing as described in the SHOT; BACKGROUND EXACTLY AS IN {alvo}."
     else:
-        obs = "CRIAR (barra de baixo · Imagem · 16:9)"
+        obs = "CRIAR (Imagem · 16:9)"
         abertura = "One single 16:9 image."
     marcados = [a + (" (SOMENTE depois que o Kit " + a + " estiver pronto no Flow da Conta B)" if a in KIT_PEND else "") for a in anexos]
     obs += " · ANEXAR " + " + ".join(marcados + ["ref-estilo-p04"]) if "ANEXAR" not in obs else " + " + " + ".join(marcados + ["ref-estilo-p04"])

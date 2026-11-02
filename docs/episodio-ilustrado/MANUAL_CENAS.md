@@ -112,6 +112,10 @@
 ## 5. Arquivos e nomes
 - **R50** Refazer = apagar o errado e salvar o novo com o MESMO nome. Nunca -v2, nunca "renomear a antiga".
 - **R51** Cada item diz onde salvar (conta › pasta) com o nome = código.
+- **R53** A linha de instrução da cena (obs) é CURTA e só diz o que o dono faz (dono, 02/11: "só o que é para ser
+  feito"): `ABRIR x · ANEXAR y + z`, `CRIAR (Imagem · 16:9) · ANEXAR …`, `NÃO GERAR IMAGEM · copiar x · animar`, e
+  `(SOMENTE depois de x)` quando depende. Nada de explicação, motivo, recorte de montagem ou "salvar como" (o Painel já
+  mostra onde salvar).
 - **R52** Quando o dono avisa que uma cena saiu errada (dono, 01/11: "é só excluir a errada e colocar em refazer que o
   restante eu faço"): Claude (1) olha a imagem no Drive para confirmar que é a errada, (2) manda o arquivo errado para a
   lixeira do Drive (imagem e vídeo daquela cena), (3) põe a cena em **refazer** no Painel, (4) corrige o texto se o erro
