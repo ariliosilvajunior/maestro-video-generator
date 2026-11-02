@@ -44,7 +44,7 @@ PESSOA = {
  "f05-professora-jovem": "THE YOUNG TEACHER (f05-professora-jovem): Brazilian woman of about 30, medium-brown skin, long black hair in a single braid, no grey hair; cream short-sleeved blouse, dark-grey knee-length skirt, flat black shoes",
  "f06-medico": "THE DOCTOR (f06-medico): Brazilian man of about 45, short dark hair, no grey; white coat over a light shirt and dark tie, stethoscope, dark trousers",
  "f07-merendeira": "THE SCHOOL COOK (f07-merendeira): Brazilian woman of about 50, dark skin, short curly black hair under a white headscarf; white apron over a light-green cotton dress with a small faded floral print, flip-flops",
- "f04-menino": "THE LITTLE BOY (f04-menino): EXACTLY 3 years old (85–90 cm), small for his age, a calm toddler who is always shown sitting, propped on cushions or pillows (he does not stand or walk); light-brown skin, dark messy hair",
+ "f04-menino": "THE LITTLE BOY (f04-menino): EXACTLY 3 years old (85–90 cm), small for his age, a calm toddler who is always shown propped on cushions or pillows, or resting in bed (he does not stand or walk); light-brown skin, dark messy hair",
  "f02-adolescente": "THE TEENAGE BOY (f02-adolescente): about 15, thin, light-brown skin, short dark hair",
  "f03-mae-adolescente": "THE TEEN'S MOTHER (f03-mae-adolescente): Brazilian woman of about 42, medium-brown skin, black hair in a low ponytail; plain dark-red cotton dress, beige cardigan, flat brown shoes",
  "f08-aluna-down": "THE GIRL WITH DOWN SYNDROME (f08-aluna-down): about 8, dark-brown chin-length bob with straight bangs, light-blue short-sleeved cotton dress with a small faded floral print, white ankle socks, black Mary-Jane shoes",
@@ -89,8 +89,8 @@ N5 = {
  "S06a": ("COPIA:c04-escola-fachada-A", "GERAL", [], [], None, "", "nothing moves except dust in the low sun and the leaves of the young trees; end still"),
  "S07a": ("A:c03-sala-nova", "MÉDIO", [(E, "A", "kneeling beside the front-left desk"), ("f11-aluno-quebra-cabeca", None, "sitting at the front-left desk")], [], None,
           "the educator watches with full attention while the boy fits a wooden puzzle piece; both faces visible", "the boy presses the puzzle piece into place, she smiles a little; end still"),
- "S08a": ("A:c07-hospital", "GERAL", [(M, "B", "sitting up in the hospital bed, propped against the white pillow, the sheet over his legs")], [], None,
-          "a calm, cheerful toddler sits up in the hospital bed holding a small cloth teddy bear, looking toward the sunny window; a gentle, hopeful moment; no other person in the room", "he hugs the teddy bear a little and blinks; end still"),
+ "S08a": ("A:c07-hospital", "GERAL", [(M, "B", "resting in the hospital bed under the white sheet, head on the pillow, exactly as in the opened image")], [], None,
+          "a calm, cheerful toddler sits up in the hospital bed holding a small cloth teddy bear, looking toward the sunny window; a gentle, hopeful moment; no other person in the room", "he blinks slowly and turns his head a little toward the window; nothing is added to his hands or to the bed; end still"),
  "S08b": ("S:n5-S08a", "GERAL", [(M, "B", "same place on the bed"), ("f06-medico", None, "standing at the foot rail of the bed, between the bed and the wooden chair, facing the boy")], [], None,
           "add only the doctor, holding a clipboard (no readable text), serious, looking at the chart", "the doctor turns one page of the chart; end still"),
  "S09": ("A:c02-sala-antiga-adulto", "GERAL", [(M, "A", "sitting on the straw mat under the right half of the blackboard, propped by the two cushions"),
@@ -223,7 +223,7 @@ def montar(pref, cod, spec, mapas, pend):
     if tipo == "COPIA":
         espera = f" (SOMENTE depois de {alvo})" if (alvo in pend or alvo in KIT_PEND) else ""
         obs = f"NÃO GERAR IMAGEM · copiar {alvo}{espera} · animar"
-        return epoca, obs, "NÃO GERAR IMAGEM — cópia de " + alvo, BLOCO + f"CAMERA: static, no pan. ACTION: {anim}. ACTING: one small physical sign of the emotion. LIGHT AND AMBIENCE: the existing light only. INTEGRITY: stable faces, hands with five fingers; walls, doors, gate and furniture do not move; nobody passes through doors or gates." + FIM_ANIM
+        return epoca, obs, "NÃO GERAR IMAGEM — cópia de " + alvo, BLOCO + f"CAMERA: static, no pan. ACTION: {anim}. ACTING: one small physical sign of the emotion. LIGHT AND AMBIENCE: the existing light only. INTEGRITY: every person keeps exactly the same age, face, hair colour, hairstyle and glasses as in the first frame from start to end (nobody grows older or younger); stable faces, hands with five fingers; walls, doors, gate and furniture do not move; nobody passes through doors or gates." + FIM_ANIM
     if tipo == "A":
         espera = f" (SOMENTE depois de {alvo}-A)" if f"{alvo}-A" in KIT_PEND else ""
         obs = f"ABRIR {alvo}-A{espera}"
@@ -283,7 +283,7 @@ def montar(pref, cod, spec, mapas, pend):
     img = " ".join(partes)
     fixos = "walls, doors, windows, gate and furniture"
     anim_txt = (BLOCO + f"CAMERA: static, no pan, no zoom. ACTION: {anim}. ACTING: one small physical sign of the emotion of the shot (lips pressed, shoulders "
-                f"dropping, eyes softening). LIGHT AND AMBIENCE: the existing light only, dust in the sun. INTEGRITY: stable faces, hands with five fingers, "
+                f"dropping, eyes softening). LIGHT AND AMBIENCE: the existing light only, dust in the sun. INTEGRITY: every person keeps exactly the same age, face, hair colour, hairstyle and glasses as in the first frame from start to end (nobody grows older or younger); stable faces, hands with five fingers, "
                 f"clothes without artifacts; {fixos} do not move; nobody new appears; nobody passes through doors or gates." + FIM_ANIM)
     return epoca, obs, img, anim_txt
 

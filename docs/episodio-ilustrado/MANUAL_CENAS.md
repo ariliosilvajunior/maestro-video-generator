@@ -108,6 +108,9 @@
   ACTING (1–2 sinais físicos) + LIGHT + INTEGRITY (rosto, 5 dedos, objetos que NÃO se mexem).
 - **R42** Nada de pan, ninguém atravessa porta/portão/objeto, porta/portão parados salvo se a cena é abrir.
 - **R43** Problema que já está na IMAGEM não se conserta na animação: refazer a imagem primeiro.
+- **R44** Animação sempre trava IDADE, rosto, cor e penteado do cabelo e óculos de cada pessoa do 1º ao último quadro
+  (n5-S05, 02/11: a educadora ficou de cabelo branco no fim). E nunca pede objeto que não está na imagem (n5-S08a: o
+  texto pedia ursinho que a imagem não tinha e ele apareceu do nada) — a ação usa só o que já está no 1º quadro.
 
 ## 5. Arquivos e nomes
 - **R50** Refazer = apagar o errado e salvar o novo com o MESMO nome. Nunca -v2, nunca "renomear a antiga".
