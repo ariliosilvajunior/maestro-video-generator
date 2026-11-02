@@ -131,6 +131,9 @@
   cuidado ("rests peacefully, tucked under the sheet up to his chest, calm and safe"), roupa completa (pijama de manga
   longa) e adulto ao lado de forma cuidadora. Se bloquear: trocar as palavras de corpo/doença por cuidado e roupa. Bloqueou de novo com criança DEITADA sozinha na
   cama + "cerebral palsy": criança SENTADA, segurando um brinquedo, olhando a janela; sem nome de doença no texto.
+  **Animação também é bloqueada** (dono, 02/11, n5-S08a): com criança deitada ou em cama de hospital, o texto do VÍDEO
+  não descreve corpo, rosto nem gesto da criança (piscar, virar a cabeça, mãos, peito). Só movimento do AMBIENTE:
+  cortina, luz, poeira no sol; "everything else stays calm and still".
 - **R52** Quando o dono avisa que uma cena saiu errada (dono, 01/11: "é só excluir a errada e colocar em refazer que o
   restante eu faço"): Claude (1) olha a imagem no Drive para confirmar que é a errada, (2) manda o arquivo errado para a
   lixeira do Drive (imagem e vídeo daquela cena), (3) põe a cena em **refazer** no Painel, (4) corrige o texto se o erro
