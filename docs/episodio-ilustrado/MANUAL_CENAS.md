@@ -134,13 +134,14 @@
   **Animação também é bloqueada** (dono, 02/11, n5-S08a): com criança deitada ou em cama de hospital, o texto do VÍDEO
   não descreve corpo, rosto nem gesto da criança (piscar, virar a cabeça, mãos, peito). Só movimento do AMBIENTE:
   cortina, luz, poeira no sol; "everything else stays calm and still".
-  **Modelo que PASSOU no Flow** (dono via ChatGPT, 02/11, n5-S08a) — usar em toda cena com criança deitada/hospital
-  ou que bloqueie: (1) não citar pessoa nenhuma — nada de criança, rosto, mãos, idade, "ninguém envelhece", cama,
-  hospital; (2) frases calmas e positivas em parágrafos ("Maintain…", "Preserve…"), não lista de proibições;
-  (3) só movimento do ambiente (cortina, poeira no sol, luz); (4) objetos no genérico ("All furniture, architectural
-  elements and objects remain completely stationary"); (5) "Finish with all movement gradually settling into a still
-  image." Texto completo em `scripts/prompts/anim_ambiente.txt`. Só se ESSE modelo também bloquear: sem vídeo no Flow
-  (`sem_video_flow`) e zoom lento na montagem.
+  **Animação de cena com criança (deitada, hospital, cuidado) — o que o Flow aceita** (dono via ChatGPT, 02/11, n5-S08a
+  e n5-S08b; os meus textos foram recusados 4 vezes). Meus ERROS: texto longo; citar qualquer pessoa (até o adulto:
+  "the man in the white coat turns a page" foi recusado); dizer o lugar ("hospital", "bed", "room"); lista de
+  proibições ("Do not…", "No…", "nobody grows older", faces, hands, age); bloco fixo de integridade. O que PASSA:
+  UM parágrafo curto (~70 palavras), "peaceful interior scene" sem dizer que lugar é, ZERO pessoas, só cortina + luz
+  + partículas, frases suaves e positivas, "The camera stays fixed", termina em "ending in a peaceful still frame".
+  Texto exato em `scripts/prompts/anim_ambiente.txt` — usar como está, sem acrescentar o bloco fixo. Só se esse
+  também falhar: sem vídeo no Flow (`sem_video_flow`) e zoom lento na montagem.
 - **R52** Quando o dono avisa que uma cena saiu errada (dono, 01/11: "é só excluir a errada e colocar em refazer que o
   restante eu faço"): Claude (1) olha a imagem no Drive para confirmar que é a errada, (2) manda o arquivo errado para a
   lixeira do Drive (imagem e vídeo daquela cena), (3) põe a cena em **refazer** no Painel, (4) corrige o texto se o erro
