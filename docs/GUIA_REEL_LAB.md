@@ -23,7 +23,8 @@ imagem, abra o link da seção.
 | 08 Consistência | [#consistency](https://reel-lab.com/craft/#consistency) | Folha com 3 vistas (corpo de frente, perfil, rosto). Descreva o personagem uma vez e depois só a cena. O que se repete entre cenas precisa de plano fixo. |
 | 09 Vídeo | [#video](https://reel-lab.com/craft/#video) · [#scene](https://reel-lab.com/craft/#scene) · [#moves](https://reel-lab.com/craft/#moves) | Quadro inicial = onde começa; referência = o que não pode mudar. No máximo 3 pessoas descritas, quem sai do quadro sumiu, sem espelho, lados ditos de novo após o corte, emoção em corpo, sem letreiro. Diga se a câmera se move ou só a lente (pan ≠ travelling, zoom ≠ aproximar). Gere de novo antes de reescrever. Vídeo pede frase curta sobre o que se mexe. Frases exatas dos 20 movimentos: `docs/MOVIMENTOS_CAMERA.md`. |
 | 10 O processo | [#pipeline](https://reel-lab.com/craft/#pipeline) | Ordem: projeto → cena → plano → tentativa. Refaça tentativas, não cenas. 6 quadros que se encaixam valem mais que 20 soltos. 80% entregue vale mais que 95% abandonado. |
+| 10b A ordem | [#order](https://reel-lab.com/craft/#order) | 7 passos: história → visual → Kit → explorar 3×3 → imagens → movimento → finalização. O app Reel Lab (pago, US$ 49, roda no Claude Code com chaves fal/Higgsfield, não usa o Flow) não foi comprado — usamos só o método (dono, 03/11). |
 | 11 Bancada | [#bench](https://reel-lab.com/craft/#bench) | Montador de prompt, catálogo de termos, cola e vídeos do processo completo. |
 
-Já viraram regra no `docs/episodio-ilustrado/MANUAL_CENAS.md`: R25, R29, R36, R37, R38, R46, R47, R48, R56, R57,
+Já viraram regra no `docs/episodio-ilustrado/MANUAL_CENAS.md`: R00 (ordem #order), R01b, R13b, R64, R25, R29, R36, R37, R38, R46, R47, R48, R56, R57,
 R58 e R59. Quando uma parte nova do guia virar regra, anote aqui e no Manual.

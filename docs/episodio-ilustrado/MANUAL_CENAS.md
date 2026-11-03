@@ -47,6 +47,16 @@
 - **R48** **Animação: quem sai do quadro sumiu.** Ninguém sai e volta no mesmo vídeo. O que se mexe = 1 ação e
   1 movimento por vídeo, sem redescrever o lugar (a imagem já diz). O bloco fixo de integridade (R44) continua.
 
+- **R00** **Ordem do Reel Lab (#order), sem pular passo** — cada passo custa ~10× o anterior: 1 história numa frase →
+  2 visual (ES01 + ficha) → 3 Kit → 4 explorar 3×3 → 5 imagens das cenas → 6 animação → 7 finalização.
+- **R01b** **História numa frase** no topo de cada episódio (o que muda, para quem), antes do roteiro de cenas. Sem
+  ela, o episódio não começa. Trava com a skill `intention-builder` (modo QUICK).
+- **R13b** **Explorar antes de gerar:** cena nova ou que errou 2 vezes → primeiro UMA imagem com grade 3×3 de ângulos
+  daquela cena (mesmo Kit anexado). O dono escolhe o quadro; só ele vira a imagem de verdade. Não vale para cena
+  que só copia outra.
+- **R64** **Finalização na montagem:** igualar a luz entre as cenas, UMA cor para o episódio inteiro, grão leve
+  (R59) e som. Nunca corrigir cena por cena na cor.
+
 ## 0. Antes de tudo: família, época, personagens
 - **R01** A notícia é a MESMA história de um episódio já feito? → mesma família, mesmos lugares, mesmas folhas.
   Assunto diferente → personagens NOVOS (pode reaproveitar lugar).
@@ -203,4 +213,5 @@
 | 7 | Tem os dois textos, animação no formato, sem pan, sem atravessar? | R40 R41 R42 |
 | 8 | Diz onde salvar com o mesmo nome? | R50 R51 |
 | 9 | Luz com fonte e lado, pessoa com lugar no quadro, sem adjetivo de sentimento? Refazer mudou só o que errou? | R56 R57 R58 R46 R47 |
+| 0 | O episódio tem a frase da história? Cena nova/difícil passou pela grade 3×3? | R01b R13b |
 | 10 | No máximo 3 pessoas descritas, lados ditos de novo, emoção em corpo, sem letreiro, ninguém sai e volta? | R25 R36 R37 R38 R48 |
