@@ -34,6 +34,19 @@
 - **R47** **Uma mudança por correção.** Ao refazer, muda só o que errou e mantém o resto do texto igual, palavra por
   palavra — assim se sabe o que resolveu.
 
+- **R25** **No máximo 3 pessoas descritas por cena** (reel-lab #scene, 03/11). Passou de 3, o Flow troca rosto e
+  roupa entre elas. As outras ficam genéricas e sem nome ("outros alunos ao fundo, de costas"). Turma grande = 3 em
+  destaque + grupo genérico.
+- **R29** **Espelho não carrega a cena.** Nunca filmar dentro do espelho; se houver, fica de lado, em ângulo raso.
+- **R36** **Lados repetidos a cada cena.** Depois de cada corte, o texto diz de novo quem está à esquerda/direita da
+  câmera e para onde olha. A câmera fica sempre do mesmo lado da conversa (não cruzar o eixo).
+- **R37** **Emoção é corpo, não rótulo.** Nada de "triste", "preocupada": "ombros caídos, olhar no chão, mãos
+  apertadas no colo". (Complementa R58.)
+- **R38** **Sem letreiro gerado.** O Flow erra texto escrito. Se precisar de texto, o prompt reserva um espaço limpo
+  ("o terço direito fica livre, parede lisa") e o texto entra na montagem.
+- **R48** **Animação: quem sai do quadro sumiu.** Ninguém sai e volta no mesmo vídeo. O que se mexe = 1 ação e
+  1 movimento por vídeo, sem redescrever o lugar (a imagem já diz). O bloco fixo de integridade (R44) continua.
+
 ## 0. Antes de tudo: família, época, personagens
 - **R01** A notícia é a MESMA história de um episódio já feito? → mesma família, mesmos lugares, mesmas folhas.
   Assunto diferente → personagens NOVOS (pode reaproveitar lugar).
@@ -190,3 +203,4 @@
 | 7 | Tem os dois textos, animação no formato, sem pan, sem atravessar? | R40 R41 R42 |
 | 8 | Diz onde salvar com o mesmo nome? | R50 R51 |
 | 9 | Luz com fonte e lado, pessoa com lugar no quadro, sem adjetivo de sentimento? Refazer mudou só o que errou? | R56 R57 R58 R46 R47 |
+| 10 | No máximo 3 pessoas descritas, lados ditos de novo, emoção em corpo, sem letreiro, ninguém sai e volta? | R25 R36 R37 R38 R48 |

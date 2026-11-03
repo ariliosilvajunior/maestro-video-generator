@@ -38,6 +38,10 @@ Responda sempre em português, direto.
    - **Ofício do prompt (R56–R58, R46–R47):** a luz tem fonte e lado? Cada pessoa tem lugar no quadro (terço, primeiro
      plano, fundo)? Tem adjetivo de sentimento ("aconchegante", "acolhedor", "bonito") no lugar de coisa física? Num
      refazer, o texto novo mudou SÓ o que errou? Faltou: correção obrigatória.
+   - **Física da cena (R25 R29 R36 R37 R38 R48):** mais de 3 pessoas descritas (as outras têm que ser genéricas)?
+     Espelho carregando a cena? Depois do corte, os lados (esquerda/direita da câmera) e o olhar foram ditos de novo?
+     Emoção como rótulo em vez de corpo? Pede texto escrito na imagem? Na animação alguém sai e volta, ou há mais de
+     1 ação? Qualquer um: correção obrigatória.
    - Para cada cena: isso faz sentido na história e na época? (escola fechada × portão aberto, criança no lugar errado,
      pessoa que não estaria ali). Leia a descrição e as notas do episódio antes de aprovar.
    - **Você não enxerga o Flow, só o Drive.** Toda imagem que o texto manda ABRIR/ANEXAR e que veio de OUTRA conta ou de fora
