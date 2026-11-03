@@ -13,6 +13,14 @@ Vídeo feito em código, nítido em 1080p, sem gastar crédito.
 
 Uma propaganda pode misturar as duas: abre com uma tomada de cinema e mostra o sistema em Remotion.
 
+## Ordem da história (referência: sales decks, contentbeta.com e moonb.io)
+1. **Mudança**: o que mudou no AEE (abre com isso, não com o produto).
+2. **Dor**: o problema do professor, nas palavras dele.
+3. **Solução em uso**: a tela do sistema funcionando (Remotion).
+4. **Prova**: depoimento real ou número real. Nunca inventar.
+5. **Um único próximo passo**: o CTA.
+Uma frase por tela, curta e afirmativa, com uma prova visual para cada frase.
+
 ## Regras
 - Tela do sistema é recriada em código a partir do print do dono. Nunca usar o print direto.
 - Dados e foto sempre fictícios (o print real tem dados de aluno, LGPD).
