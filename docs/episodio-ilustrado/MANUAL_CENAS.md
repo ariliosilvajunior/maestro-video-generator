@@ -103,6 +103,10 @@
   frente inverte o lado — erro da 1ª correção da n3-E03).
 
 ## 4. Animação (Omni 1.1 Flash, Frames, 360p)
+- **R45** **Vídeo em 720p daqui para frente** (dono, 03/11): o 720p gasta ~2x crédito (720p 10 s = 15 créditos), mas uma
+  conta faz ~1 episódio por semana e as 4 contas fazem 4 — a meta é 1 por semana. Piloto, Notícias 02 e Notícias 04
+  terminam em 360p (já estavam quase prontos; não misturar dentro do episódio). Não usar IA de ampliar (Real-ESRGAN
+  deformou e deixou com cara de desenho no teste da n5-S07a). Refazer em 720p = animar de novo a MESMA imagem.
 - **R40** Toda cena tem os DOIS textos (imagem e animação). Cena sem imagem nova diz de onde copiar.
 - **R41** Formato: bloco fixo + CAMERA (uma só, parada ou push-in 2–4%) + ACTION (início → ação → pose final) +
   ACTING (1–2 sinais físicos) + LIGHT + INTEGRITY (rosto, 5 dedos, objetos que NÃO se mexem).
