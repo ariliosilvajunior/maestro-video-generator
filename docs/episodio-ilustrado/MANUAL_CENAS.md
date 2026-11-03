@@ -107,6 +107,9 @@
   conta faz ~1 episódio por semana e as 4 contas fazem 4 — a meta é 1 por semana. Piloto, Notícias 02 e Notícias 04
   terminam em 360p (já estavam quase prontos; não misturar dentro do episódio). Não usar IA de ampliar (Real-ESRGAN
   deformou e deixou com cara de desenho no teste da n5-S07a). Refazer em 720p = animar de novo a MESMA imagem.
+  **Onde publica** (dono, 03/11): os episódios em 360p (Notícias 02 e Notícias 04) vão SÓ para Instagram/Facebook, no
+  vertical com o vídeo 16:9 inteiro no meio e a marca em volta (nunca cortar para tela cheia). O YouTube começa com os
+  episódios em 720p.
 - **R40** Toda cena tem os DOIS textos (imagem e animação). Cena sem imagem nova diz de onde copiar.
 - **R41** Formato: bloco fixo + CAMERA (uma só, parada ou push-in 2–4%) + ACTION (início → ação → pose final) +
   ACTING (1–2 sinais físicos) + LIGHT + INTEGRITY (rosto, 5 dedos, objetos que NÃO se mexem).
