@@ -5,6 +5,8 @@ description: Especialista em montar os textos (prompts) de IMAGEM e ANIMAÇÃO d
 
 # Roteiro ilustrado — textos do Flow sem erro
 
+> **Antes de começar (dono, 03/11/2026):** consulte `docs/GUIA_REEL_LAB.md` (resumo de https://reel-lab.com/craft/) e aplique a parte que vale para este trabalho.
+
 O dono (Arilio) gera as imagens e animações no Google Flow copiando os textos do **Painel do Dono →
 Roteiro de Vídeo** (cada cena: obs ABRIR/CRIAR/ANEXAR, "1. Imagem", "2. Animação", situação, "O que saiu errado").
 Tudo o que você escrever vai para lá (rota `POST /producao-videos/automacao`, token em Senhas) — nunca só na conversa.

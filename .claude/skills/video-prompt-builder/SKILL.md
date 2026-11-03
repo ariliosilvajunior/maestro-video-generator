@@ -5,6 +5,8 @@ description: Shot-by-shot prompts for SHORT high-energy promo videos (Seedance 2
 
 # Video Prompt Builder for Seedance 2.0
 
+> **Antes de começar (dono, 03/11/2026):** consulte `docs/GUIA_REEL_LAB.md` (resumo de https://reel-lab.com/craft/) e aplique a parte que vale para este trabalho.
+
 > Recursos Cognitivos (30/10/2026): usar só para TEASER/Reels de 15–30 s de cada episódio e anúncios. Nunca para as cenas dos episódios ilustrados (ver skill roteiro-ilustrado). Saída em português quando o dono pedir.
 > Propaganda do sistema (03/11/2026): as TELAS do sistema são feitas em Remotion (`propaganda-sistema/`, ver README); esta skill cuida das tomadas de cinema. As duas são as referências oficiais de propaganda.
 

@@ -182,6 +182,10 @@ Scheduled/one-shot sessions run every phase INLINE (never background a phase and
   snapshots; never `browser_navigate` to a content-heavy page (use `page.goto` inside `run_code`);
   poll long renders every 2–4 min, not every 30 s; read the phase doc's exact CLI flags.
 
+## 6b. Guia de partida (dono, 03/11/2026)
+Antes de iniciar QUALQUER material visual (episódio ilustrado, Kit, propaganda, Reels, peça com imagem), consulte
+`docs/GUIA_REEL_LAB.md` — resumo de https://reel-lab.com/craft/ — e aplique a parte que vale para o trabalho.
+
 ## 7. Integrity principles
 - Correct misconceptions — if a premise is wrong, say so.
 - Never claim a phase passed, a file exists, or a reel is live without having verified it.

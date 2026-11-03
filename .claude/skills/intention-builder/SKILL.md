@@ -5,6 +5,8 @@ description: Interrogate a filmmaker until the intention is locked, then write i
 
 # Intention Builder — lock what they actually want, before a single pixel
 
+> **Antes de começar (dono, 03/11/2026):** consulte `docs/GUIA_REEL_LAB.md` (resumo de https://reel-lab.com/craft/) e aplique a parte que vale para este trabalho.
+
 > **Recursos Cognitivos (03/11/2026, skill comprada pelo dono — adaptação):**
 > - Sempre em **português** e sempre no modo **QUICK** (o dono quer direto ao ponto). Perguntas por clique, com a
 >   recomendada primeiro.

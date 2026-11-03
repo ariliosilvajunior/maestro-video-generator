@@ -14,6 +14,7 @@ Vídeo feito em código, nítido em 1080p, sem gastar crédito.
 Uma propaganda pode misturar as duas: abre com uma tomada de cinema e mostra o sistema em Remotion.
 
 ## Passo 0: travar a ideia
+Leia `docs/GUIA_REEL_LAB.md` (guia oficial de partida).
 Antes do roteiro, rode a skill `intention-builder` (modo QUICK, português). Ela trava o que é o vídeo, como termina, a luz, a cor e o que ele NÃO pode ser.
 
 ## Ordem da história (referência: sales decks, contentbeta.com e moonb.io)
