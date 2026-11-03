@@ -35,6 +35,9 @@ Responda sempre em português, direto.
    - **Escala e direção (R24b, n5-S04):** gente perto de portão/porta/muro tem tamanho real dito no texto (linha SCALE)?
      Quem anda/carrega/corre tem direção em relação à câmera e ao destino ("walking AWAY from the camera toward the building")
      e o que NÃO pode ("nobody walks toward the gate"), na imagem e na animação? Sem isso: REPROVADO.
+   - **Ofício do prompt (R56–R58, R46–R47):** a luz tem fonte e lado? Cada pessoa tem lugar no quadro (terço, primeiro
+     plano, fundo)? Tem adjetivo de sentimento ("aconchegante", "acolhedor", "bonito") no lugar de coisa física? Num
+     refazer, o texto novo mudou SÓ o que errou? Faltou: correção obrigatória.
    - Para cada cena: isso faz sentido na história e na época? (escola fechada × portão aberto, criança no lugar errado,
      pessoa que não estaria ali). Leia a descrição e as notas do episódio antes de aprovar.
    - **Você não enxerga o Flow, só o Drive.** Toda imagem que o texto manda ABRIR/ANEXAR e que veio de OUTRA conta ou de fora

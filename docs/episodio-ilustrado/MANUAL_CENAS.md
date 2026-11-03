@@ -20,6 +20,20 @@
 - O gerador escreve nas notas o INVENTÁRIO MESTRE (quem/o quê aparece em quais cenas + plano de cada cena).
 - Fluxo: gerador → validar_cenas.py → revisor-cenas (com as imagens reais) → Painel. Sem pular.
 
+## ★ Ofício do prompt (dono, 03/11 — guia reel-lab.com/craft, aprovado: "pode sim")
+- **R56** **Luz com fonte e lado.** Toda cena diz de onde vem a luz e de que lado da câmera ("luz da janela à
+  esquerda, quente, fim de tarde"). Nunca "luz bonita"/"cinematic lighting".
+- **R57** **Lugar da pessoa no quadro.** Toda pessoa tem posição no quadro (terço esquerdo/direito, primeiro plano,
+  fundo). Sem isso o Flow põe no meio.
+- **R58** **Nomes e coisas físicas, não adjetivos.** "Cortina amarela parada, mesa de madeira gasta" — nunca
+  "ambiente aconchegante", "clima acolhedor". Adjetivo de sentimento sai do texto.
+- **R59** **Grão leve de filme na montagem** (junto com a cor do episódio, ficha ShotDeck). Imagem limpa demais tem
+  cara de IA. No texto de imagem não: o estilo é o ES01 ilustrado.
+- **R46** **Saiu errado: gere de novo antes de reescrever.** Mesmo texto, 1 nova tentativa. Errou de novo: reescreve
+  UMA vez, firme, no ponto que errou.
+- **R47** **Uma mudança por correção.** Ao refazer, muda só o que errou e mantém o resto do texto igual, palavra por
+  palavra — assim se sabe o que resolveu.
+
 ## 0. Antes de tudo: família, época, personagens
 - **R01** A notícia é a MESMA história de um episódio já feito? → mesma família, mesmos lugares, mesmas folhas.
   Assunto diferente → personagens NOVOS (pode reaproveitar lugar).
@@ -175,3 +189,4 @@
 | 6 | O que o texto afirma sobre a imagem aberta bate com a imagem (olhei)? | R15 R30 |
 | 7 | Tem os dois textos, animação no formato, sem pan, sem atravessar? | R40 R41 R42 |
 | 8 | Diz onde salvar com o mesmo nome? | R50 R51 |
+| 9 | Luz com fonte e lado, pessoa com lugar no quadro, sem adjetivo de sentimento? Refazer mudou só o que errou? | R56 R57 R58 R46 R47 |
