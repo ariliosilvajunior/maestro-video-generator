@@ -2,6 +2,7 @@
 
 Uso:  python3 enviar_publicacao.py <video.mp4> <publicacao.json>
       python3 enviar_publicacao.py --reusar <id> <publicacao.json>   (Facebook: mesmo arquivo já enviado p/ o YouTube)
+      python3 enviar_publicacao.py --capa <id> <capa.png>          (capa 1280x720 da publicação do YouTube)
       (token em CONTENT_FACTORY_API_TOKEN; o .json traz chave, titulo, descricao, tags,
        canal_esperado e privacidade_final — ex.: ../publicacao/piloto_youtube.json)
 
@@ -60,6 +61,7 @@ def main(video, meta_json):
             print(f"  {pub['recebido'] // 1048576}/{tamanho // 1048576} MB")
     pub = chamar("POST", f"/producao-videos/publicacao/{pid}/finalizar")
     print("status:", pub["status"], "— aprovar no Painel: Roteiro de Vídeo →", meta["chave"])
+    print("id:", pid)
 
 
 def reusar(pub_id, meta_json):
@@ -68,8 +70,15 @@ def reusar(pub_id, meta_json):
     print("publicação", pub["id"], meta.get("destino"), "— status:", pub["status"])
 
 
+def capa(pub_id, png):
+    r = chamar("PUT", f"/producao-videos/publicacao/{int(pub_id)}/capa", open(png, "rb").read(), "image/png")
+    print("capa da publicação", pub_id, "—", "ok" if r.get("ok") else r)
+
+
 if __name__ == "__main__":
-    if sys.argv[1] == "--reusar":
+    if sys.argv[1] == "--capa":
+        capa(sys.argv[2], sys.argv[3])
+    elif sys.argv[1] == "--reusar":
         reusar(sys.argv[2], sys.argv[3])
     else:
         main(sys.argv[1], sys.argv[2])
