@@ -26,7 +26,7 @@ CORR = {"Arilho": "Arilio", "Estela": "Stella", "Sciotti": "Chiote", "Chiotti": 
 # 04/11/2026: o revisor-montagem reprovou pontuação/caixa vindas da transcrição — "Pela repetição" depois de vírgula etc.
 MINUSCULAS = {"a", "as", "o", "os", "um", "uma", "uns", "umas", "e", "eu", "pela", "pelo", "pelas", "pelos", "de", "do", "da",
               "dos", "das", "em", "no", "na", "nos", "nas", "que", "se", "mas", "ou", "com", "para", "por", "ele", "ela", "eles",
-              "elas", "isso", "isto", "esse", "essa", "este", "esta", "não", "também", "tem", "só", "quando", "como"}
+              "elas", "é", "isso", "isto", "esse", "essa", "este", "esta", "não", "também", "tem", "só", "quando", "como"}
 
 # ---- fundo fixo (PIL)
 img = Image.new("RGB", (W, H), AZUL)
@@ -81,6 +81,9 @@ for c in w:
         b0 = a0 + 0.1
     if toks and t.lower() == toks[-1][0].lower():
         continue
+    if toks and t.startswith("-"):  # "histórico" + "-cultural", "enxergá" + "-la": uma palavra só (2ª revisão, 04/11)
+        toks[-1][0] += t; toks[-1][2] = b0; ultimo_fim = b0
+        continue
     toks.append([t, a0, b0]); ultimo_fim = b0
 for corr in manual:              # [errado, certo] ou [errado, certo, palavra seguinte] quando a palavra se repete
     errado, certo = corr[0], corr[1]
@@ -90,7 +93,7 @@ for corr in manual:              # [errado, certo] ou [errado, certo, palavra se
             break
 for i in range(1, len(toks)):    # caixa: maiúscula depois de . ? ! ; minúscula (palavras comuns) depois de vírgula/meio de frase
     ant, t = toks[i - 1][0], toks[i][0]
-    if re.search(r"[.?!]$", ant) and t[:1].islower():
+    if re.search(r"[.?!]$", ant) and not ant.endswith("...") and t[:1].islower():
         toks[i][0] = t[:1].upper() + t[1:]
     elif not re.search(r"[.?!:]$", ant) and t[:1].isupper() and t.lower().strip(",.") in MINUSCULAS:
         toks[i][0] = t[:1].lower() + t[1:]
