@@ -1,0 +1,46 @@
+---
+name: propaganda-rc
+description: Vídeos de MARKETING DO SISTEMA Recursos Cognitivos (propaganda, anúncio, tutorial do sistema, review/depoimento, comercial de 15–30 s, Reels/YouTube do produto). Escolhe o formato (Tutorial, Review, Comercial), escreve o roteiro tomada a tomada com a ordem mudança → dor → solução → prova → CTA, diz de onde vem cada tomada (tela em Remotion, cena no Flow, avatar) e entrega o pacote (título, capa, legenda, cortes curtos). Use quando o dono pedir propaganda, anúncio, vídeo do sistema, "Pedir roteiro" no Estúdio RC, ou um vídeo de marketing do produto. Não use para os episódios ilustrados das notícias (skill roteiro-ilustrado).
+---
+
+# Propaganda RC — vídeos de marketing do sistema
+
+> Dono, 04/11/2026: "isso ajuda a criarmos nossos vídeos para marketing do sistema? … bora". Método adaptado do
+> pacote "Marketing Studio Skills Bank" (marketing-studio-director, higgsfield-content-factory, higgsfield-explainer),
+> sem o Higgsfield (pago por crédito): as tomadas saem das NOSSAS ferramentas.
+> Antes de começar: `docs/GUIA_REEL_LAB.md` (guia de partida) e, se a ideia estiver vaga, a skill `intention-builder` (QUICK).
+
+## Onde roda
+- Pedido do dono no **Estúdio RC → Propaganda do sistema** (funcionalidade, público, **tipo de anúncio**, duração,
+  formato, tom, CTA). A sessão lê `GET /estudio/automacao` (peças `tipo=propaganda` com `dados.tomadas` vazio), escreve
+  o roteiro e grava `dados.tomadas` + `dados.atos` com `POST /estudio/automacao` (ver `docs/ESTUDIO_RC.md`).
+- Vídeo de tela: `maestro-video-generator/propaganda-sistema/` (Remotion, kit `src/kit/kit.tsx`, README).
+
+## 1. Escolher o formato (um por vídeo; girar os três na semana — nunca o mesmo duas vezes seguidas)
+| Tipo | Para quê | Estrutura (30 s) | De onde vêm as tomadas |
+|---|---|---|---|
+| **Tutorial** | mostrar uma tarefa resolvida no sistema | gancho com a tarefa (0–3 s) → 3 a 5 passos na tela, cursor clicando (3–24 s) → resultado pronto + CTA (24–30 s) | **Remotion** (tela recriada a partir do print do dono, dados fictícios) |
+| **Review** | prova social: o antes e o depois de um professor | "eu perdia X horas com…" (0–4 s) → o problema concreto (4–10 s) → o sistema na tela (10–22 s) → resultado em número real + CTA | **avatar do Prof. Arilio** ou depoimento real (Painel → Depoimentos) + **Remotion** |
+| **Comercial** | marca e desejo | mudança no AEE (0–3 s) → dor do professor (3–10 s) → o sistema resolvendo (10–22 s) → prova + CTA (22–30 s) | **cenas no Flow** (pessoas, escola) + **Remotion** (telas) + logo |
+
+Regras: 15 s = corta os passos do meio; 9:16 para Reels, 16:9 para YouTube/Facebook (Facebook com laterais
+desfocadas se o original for vertical); 1 frase curta por tela com uma prova visual; nunca prometer resultado que não
+é fato (`docs/CONTEXTO_NEGOCIO.md`); número só se for real.
+
+## 2. Roteiro tomada a tomada (formato gravado no Estúdio)
+Cada tomada: `nome`, `tempo` (ex.: "0–3 s"), `origem` ("Remotion — tela X" / "Flow — cena" / "Avatar"), `descricao`
+(o que se vê), `camera` (frase exata de `docs/MOVIMENTOS_CAMERA.md`; tela = parada ou zoom leve), `transicao`, `prompt`
+(para o Flow/Remotion, em inglês quando for imagem) e `pronta: false`. `atos` = 3 blocos com `nome` e `peso`
+(gancho+dor / sistema resolvendo / prova+CTA).
+
+## 3. Antes de gerar (antes de qualquer crédito)
+- Pesquisa rápida do que está funcionando no nicho (Reels/YouTube de professores de AEE, educação inclusiva): ganchos
+  e formatos que repetem. Ferramentas em Painel → Ferramentas e referências → "Estudar concorrência".
+- Telas: pedir ao dono o PRINT da tela; recriar em código com dados fictícios (LGPD — nunca dado real de aluno).
+
+## 4. Pacote de entrega (todo vídeo sai com)
+- Título (≤ 100, sem `<` `>`), legenda com gancho < 125 caracteres + CTA + até 5 hashtags, capa pela skill
+  `designer-recursos-cognitivos` (azul, verde-água no destaque, Goodly, foto do professor).
+- Corte curto 9:16 de 15 s quando o vídeo for maior.
+- **Revisor obrigatório** (`revisor-montagem`) antes de enviar ao Painel; publicação pelo Calendário (1 por rede por
+  dia, Buffer 2 dias antes).
