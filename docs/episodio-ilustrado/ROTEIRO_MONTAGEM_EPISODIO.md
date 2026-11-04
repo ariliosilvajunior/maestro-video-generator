@@ -135,8 +135,12 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
   4. Aprovado: o Painel sobe privado, confere o canal (`canal_esperado` = UCqHHEf2eAiKKFHwMswa4gFw) e deixa
      público; marca a etapa "publicado". Declara conteúdo sintético (avatar/cenas com IA).
 - ✅ (31/10) **Facebook e Instagram** (só essas duas redes — dono), cada uma com aprovação própria no Painel:
-  - Facebook = episódio inteiro 16:9, reaproveitando o arquivo do YouTube:
+  - Facebook = SEMPRE o episódio inteiro 16:9 (nunca o vertical: num player deitado o vertical fica com faixas
+    pretas — dono, 04/11: "não é profissional"). Sem YouTube (Notícias 02/04): enviar o final.mp4 16:9 direto.
+    Com YouTube, reaproveitar o arquivo:
     `python3 scripts/enviar_publicacao.py --reusar <id da publicação do YouTube> publicacao/<ep>_facebook.json`.
+  - Instagram, episódio inteiro (Notícias 02/04, 04/11): `scripts/vertical_episodio.py` — 16:9 inteiro no meio,
+    marca em volta, legenda grande embaixo, até 179,5 s.
   - Instagram = Reel vertical 60–90 s: `python3 scripts/reel_episodio.py <pasta> <ini_s> <fim_s> "LINHA1|DESTAQUE|LINHA3"`
     (trecho mais forte da narração, gancho no alto com a palavra-chave em verde-água, cena no meio, legenda Goodly
     grande, avatar falando embaixo, cartão final "Episódio completo no YouTube"), depois
