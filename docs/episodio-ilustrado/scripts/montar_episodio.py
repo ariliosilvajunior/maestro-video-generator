@@ -128,7 +128,7 @@ vin = ["-i", P("tmp", "cenas.mp4"), "-i", P("avatar_fala.mp4")]
 # que a narração (195,97 s) e a saída só começava no fim da narração → buraco de ~0,15 s sem avatar.
 # Agora a saída começa no ÚLTIMO quadro da fala (SAI) e a fala congela o último quadro até lá, sem sobreposição.
 SAI = OFF + min(NARR, dur(P("avatar_fala.mp4"), video=True))
-vf = [f"[1:v]fps=25,{KEY},scale=400:400,format=yuva420p,tpad=stop_mode=clone:stop_duration=3,setpts=PTS+{OFF}/TB" +
+vf = [f"[1:v]fps=25,crop='min(iw,ih)':'min(iw,ih)',{KEY},scale=400:400,format=yuva420p,tpad=stop_mode=clone:stop_duration=3,setpts=PTS+{OFF}/TB" +
       ("" if SAIDA else f",fade=t=out:st={SAI:.2f}:d=0.8:alpha=1") + "[fala]"]
 base = "[0:v]"
 if ENTRADA:
