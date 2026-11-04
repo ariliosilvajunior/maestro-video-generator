@@ -20,6 +20,9 @@ ENT, SAI, TITULO = sys.argv[1], sys.argv[2], sys.argv[3]
 SUB = sys.argv[4] if len(sys.argv) > 4 else ""
 MAX = float(sys.argv[5]) if len(sys.argv) > 5 and sys.argv[5] else None
 PASTA = sys.argv[6] if len(sys.argv) > 6 else None
+# 04/11 (dono: "não era para ter capa? horrível aparecer em preto"): o episódio começa com fade do preto e o Reel usa o
+# 1º quadro como capa. O vertical pula esse fade — começa já com a cena e o título.
+PULA = 0.8
 ASSETS = glob.glob("/root/.claude/skills/synced/*/designer-recursos-cognitivos/assets")[0]
 F = lambda peso, tam: ImageFont.truetype(f"{ASSETS}/fonts/Goodly-{peso}.otf", tam)
 AZUL, AQUA, BRANCO = (43, 72, 114), (86, 202, 201), (255, 255, 255)
@@ -87,8 +90,8 @@ if PASTA:
         grupo.append((txt, c["timestamp"][0], c["timestamp"][1]))
         fim_frase = txt.endswith((".", "?", "!", ","))
         if len(grupo) == 3 or fim_frase or i == len(ch) - 1:
-            a, b = grupo[0][1] + off, grupo[-1][2] + off
-            nxt = ch[i + 1]["timestamp"][0] + off if i + 1 < len(ch) else b + 0.3
+            a, b = grupo[0][1] + off - PULA, grupo[-1][2] + off - PULA
+            nxt = ch[i + 1]["timestamp"][0] + off - PULA if i + 1 < len(ch) else b + 0.3
             frase = " ".join(t for t, _, _ in grupo).rstrip(",")
             for x, y in cfg.get("correcoes", {}).items():  # correções valem para o texto do bloco (pegam 2 palavras)
                 frase = frase.replace(x, y)
@@ -106,7 +109,7 @@ fade = []
 if MAX:
     dur = MAX
     fade = [f",fade=t=out:st={dur - 1:.2f}:d=1"]
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-i", "/tmp/moldura_vertical.png", "-i", ENT,
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-i", "/tmp/moldura_vertical.png", "-ss", str(PULA), "-i", ENT,
                 "-filter_complex", f"[1:v]scale={W}:{VH}:flags=lanczos[v];[0:v][v]overlay=0:{VY}:shortest=1" + legenda + "".join(fade) + "[o]",
                 "-map", "[o]", "-map", "1:a", *t, "-r", "30", "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p",
                 "-c:a", "aac", "-b:a", "160k", "-af", (f"afade=t=out:st={MAX - 1:.2f}:d=1" if MAX else "anull"),
