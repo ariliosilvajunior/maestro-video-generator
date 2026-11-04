@@ -84,14 +84,15 @@ if PASTA:
     ev, grupo = [], []
     for i, c in enumerate(ch):
         txt = c["text"].strip()
-        for a, b in cfg.get("correcoes", {}).items():
-            txt = txt.replace(a, b)
         grupo.append((txt, c["timestamp"][0], c["timestamp"][1]))
         fim_frase = txt.endswith((".", "?", "!", ","))
         if len(grupo) == 3 or fim_frase or i == len(ch) - 1:
             a, b = grupo[0][1] + off, grupo[-1][2] + off
             nxt = ch[i + 1]["timestamp"][0] + off if i + 1 < len(ch) else b + 0.3
-            ev.append(f"Dialogue: 0,{ts(a)},{ts(min(max(b, a + 0.4), nxt))},Leg,,0,0,0,,{' '.join(t for t, _, _ in grupo).rstrip(',')}")
+            frase = " ".join(t for t, _, _ in grupo).rstrip(",")
+            for x, y in cfg.get("correcoes", {}).items():  # correções valem para o texto do bloco (pegam 2 palavras)
+                frase = frase.replace(x, y)
+            ev.append(f"Dialogue: 0,{ts(a)},{ts(min(max(b, a + 0.4), nxt))},Leg,,0,0,0,,{frase}")
             grupo = []
     ass = ["[Script Info]", "PlayResX: 1080", "PlayResY: 1920", "WrapStyle: 0", "", "[V4+ Styles]",
            "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
