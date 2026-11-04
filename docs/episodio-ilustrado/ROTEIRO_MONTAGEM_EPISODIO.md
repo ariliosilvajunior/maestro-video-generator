@@ -29,6 +29,10 @@ O Painel (Roteiro de Vídeo) lê essas pastas ao vivo e marca 🖼 ✓ / 🎬 �
 2. Baixar a narração para `06-audio`. 🟡 (Claude: `GET /producao-videos/drive/pasta/{id}` + `/drive/arquivo/{id}`)
 3. Transcrição palavra por palavra: fal.ai Whisper (chunk_level word) → `words.json`. ✅ (`scripts/transcricao_whisper.py`)
 4. Cortar em cenas de 2–10 s nas pausas → `cuts.json` `[n, início, fim, duração, clipe_s]`. ✅ (`scripts/corte_audio_cenas.py`)
+5. ⚠️ **Na montagem, os cortes vêm SEMPRE dos tempos do Painel** (`scripts/cortes_do_painel.py <pasta> <chave>` →
+   `cuts.json` + `cenas_painel.json`). Erro grave de 04/11 (Notícias 04): os cortes foram recalculados pelas pausas
+   e saíram até ~10 s fora do Painel — cenas fora da fala, clipe de 4 s esticado numa vaga de 8 s ("personagem some
+   e aparece do nada"). Agora o `montar_episodio.py` confere cuts × Painel e PARA se algum corte fugir mais de 1,5 s.
 
 ## 2. Kit de referência (antes de qualquer cena) ✅ regras / 🟡 geração no Flow
 - Estilo: a imagem p04 é o padrão (realismo pintado quase foto, grão). Nunca desenho limpo/aquarela/cartoon.

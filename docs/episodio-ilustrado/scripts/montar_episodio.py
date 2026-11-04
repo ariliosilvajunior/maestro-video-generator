@@ -31,6 +31,20 @@ def run(cmd):
 
 
 cuts = [(int(k), a, b) for k, a, b, *_ in json.load(open(P("cuts.json")))]
+
+# 04/11/2026 (Notícias 04, cenas fora da narração): os cortes TÊM que vir do Painel (scripts/cortes_do_painel.py).
+# Confere cada corte contra o tempo do Painel e para se algum fugir mais de 1,5 s, ou se a lista não existir.
+if not CFG.get("sem_conferencia_painel"):
+    if not os.path.exists(P("cenas_painel.json")):
+        raise SystemExit("Falta cenas_painel.json — rode scripts/cortes_do_painel.py <pasta> <chave> antes de montar.")
+    _s = lambda t: int(t.split(":")[0]) * 60 + int(t.split(":")[1])
+    _erros = []
+    for (k, a, b), c in zip(cuts, json.load(open(P("cenas_painel.json")))):
+        i_txt, f_txt = c["tempo"].replace("-", "–").split("–")
+        if c["n"] != k or abs(a - _s(i_txt)) > 1.5 or (k != cuts[-1][0] and abs(b - _s(f_txt)) > 1.5):
+            _erros.append(f"p{k:02d} {c['codigo']}: corte {a:.1f}–{b:.1f} × Painel {c['tempo']}")
+    if _erros or len(cuts) != len(json.load(open(P("cenas_painel.json")))):
+        raise SystemExit("Cortes fora dos tempos do Painel:\n" + "\n".join(_erros or ["número de cenas diferente"]))
 NARR = dur(P("narracao.mp3"))
 OFF = round(dur(ENTRADA), 2) if ENTRADA else 0.0         # a narração começa depois da entrada
 TAIL = (round(dur(SAIDA), 2) if SAIDA else 0.8) + 1.5      # saída do avatar + respiro final

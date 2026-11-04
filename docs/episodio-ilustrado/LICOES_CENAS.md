@@ -187,3 +187,10 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
    trabalhadores pequeninos ao lado de um portão gigante, e andando para FORA do portão, não para a obra.
 2. Regra R24b: lugar com portão/porta/muro em primeiro plano tem linha SCALE no PLACE LOCK (tamanho real), e toda
    pessoa que se move tem direção em relação à câmera e ao destino, mais o que não pode — na imagem e na animação.
+
+## O. Montagem fora da narração (Notícias 04, 04/11/2026)
+- Erro: os cortes da montagem foram recalculados pelas pausas da narração em vez de vir do Painel. A diferença
+  cresceu até ~10 s; cenas entraram na frase errada e clipes curtos foram esticados e congelados.
+- Regra: cortes só do Painel (`scripts/cortes_do_painel.py`); a montagem confere e para se fugir mais de 1,5 s.
+- Conferência antes de entregar: imprimir, por cena, a descrição do Painel ao lado do texto da narração naquela vaga.
+
