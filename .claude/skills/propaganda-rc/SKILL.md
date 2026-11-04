@@ -36,7 +36,9 @@ Cada tomada: `nome`, `tempo` (ex.: "0–3 s"), `origem` ("Remotion — tela X" /
 ## 3. Antes de gerar (antes de qualquer crédito)
 - Pesquisa rápida do que está funcionando no nicho (Reels/YouTube de professores de AEE, educação inclusiva): ganchos
   e formatos que repetem. Ferramentas em Painel → Ferramentas e referências → "Estudar concorrência".
-- Telas: pedir ao dono o PRINT da tela; recriar em código com dados fictícios (LGPD — nunca dado real de aluno).
+- Telas: pasta do Drive **"Telas do sistema"** (dono, 04/11/2026) com um print de cada tela, nome
+  `TLnn-nome-da-tela.png` (estados: `TL03a-…`, `TL03b-…`). O roteiro cita a tela pelo código (ex.: "Remotion — TL03").
+  Recriar em código com dados fictícios (LGPD — nunca dado real de aluno).
 
 ## 4. Pacote de entrega (todo vídeo sai com)
 - Título (≤ 100, sem `<` `>`), legenda com gancho < 125 caracteres + CTA + até 5 hashtags, capa pela skill
