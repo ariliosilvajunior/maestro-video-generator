@@ -11,6 +11,10 @@ Doc vivo: docs/episodio-ilustrado/ROTEIRO_MONTAGEM_EPISODIO.md
 import json, os, re, subprocess, sys
 
 D = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else ".")
+# 04/11 (dono): o vertical já tem a legenda grande embaixo — a pequena dentro do 16:9 sobra. "--sem-legenda" gera
+# final_sem_legenda.mp4 (título, nome e destaques ficam) para o vertical_episodio.py / facebook_episodio.py.
+SEM_LEGENDA = "--sem-legenda" in sys.argv
+SAIDA_FINAL = "final_sem_legenda.mp4" if SEM_LEGENDA else "final.mp4"
 P = lambda *x: os.path.join(D, *x)
 CFG = json.load(open(P("episodio.json")))
 XF = 0.5                      # fusão entre cenas (s)
@@ -118,7 +122,8 @@ H = ["[Script Info]", "ScriptType: v4.00+", "PlayResX: 1920", "PlayResY: 1080", 
 E = []
 for i, c in enumerate(cues):
     a = c[0][1]; b = min(c[-1][2] + 0.25, cues[i + 1][0][1] if i + 1 < len(cues) else NARR)
-    E.append(f"Dialogue: 0,{ts(OFF+a)},{ts(OFF+b)},Doc,,0,0,0,," + " ".join(x[0] for x in c))
+    if not SEM_LEGENDA:
+        E.append(f"Dialogue: 0,{ts(OFF+a)},{ts(OFF+b)},Doc,,0,0,0,," + " ".join(x[0] for x in c))
 E.append(rf"Dialogue: 1,{ts(0.4)},{ts(OFF+2.0)},Title,,0,0,0,,{{\fad(900,700)\pos(960,470)}}{CFG['titulo']}")
 E.append(rf"Dialogue: 1,{ts(1.2)},{ts(OFF+2.0)},Sub,,0,0,0,,{{\fad(900,700)\pos(960,570)}}{CFG['subtitulo']}")
 E.append(rf"Dialogue: 1,{ts(OFF+0.4)},{ts(OFF+6.0)},Name,,0,0,0,,{{\fad(400,500)}}Prof. Arilio")
@@ -184,5 +189,5 @@ run(["ffmpeg", "-v", "error", "-y", *ain, "-filter_complex", ";".join(af), "-map
 # 6) junta e termina com fade para preto
 run(["ffmpeg", "-v", "error", "-y", "-i", P("tmp", "video.mp4"), "-i", P("tmp", "audio.wav"), "-vf",
      f"fade=t=in:d=0.6,fade=t=out:st={END-1.0:.2f}:d=1.0", "-af", f"afade=t=out:st={END-1.5:.2f}:d=1.5",
-     "-c:v", "libx264", "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest", P("final.mp4")])
+     "-c:v", "libx264", "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", P(SAIDA_FINAL)])
 print("ok", round(END, 2), "s")

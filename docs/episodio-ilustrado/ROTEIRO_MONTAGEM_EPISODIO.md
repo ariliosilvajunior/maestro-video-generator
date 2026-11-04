@@ -118,6 +118,14 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 - ⬜ Música escolhida pela paleta/clima da ficha (hoje: trilha fixa da biblioteca do YouTube, escolhida pelo dono).
 
 ## 7b. Conferência obrigatória antes de entregar ✅
+- 🛑 **REVISOR OBRIGATÓRIO (dono, 04/11/2026: "tem que ter um revisor antes de me enviar")**: nenhum vídeo vai para o
+  dono nem para o Painel sem o agente `revisor-montagem` responder APROVADO. Passos:
+  `python3 scripts/revisar_montagem.py <pasta> <episodio_painel.json>` → folhas em `<pasta>/revisao/` → agente
+  `revisor-montagem` (narração × cena, pessoas que somem/aparecem em cena e nas emendas, rosto/idade/roupa, preto ou
+  congelado, avatar, textos, vertical/Facebook). REPROVADO = corrigir e revisar de novo; o que exigir Flow vai ao dono
+  como pergunta, com a lista.
+- Vertical e Facebook saem do `final_sem_legenda.mp4` (`montar_episodio.py <pasta> --sem-legenda`): a legenda grande
+  fica só embaixo, no azul (dono, 04/11: "por que colocou ela no vídeo também").
 - Quadros: abertura, entrada do avatar, 1 por bloco, saída do avatar e os últimos 5 s.
 - Brilho (YAVG) por cena: nenhuma queda brusca para preto fora do fade final.
 - Duração final = entrada + narração + saída + 1,5 s.

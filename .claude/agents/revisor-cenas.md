@@ -40,6 +40,9 @@ Responda sempre em português, direto.
      refazer, o texto novo mudou SÓ o que errou? Faltou: correção obrigatória.
    - **Ordem (R00 R01b R13b):** o episódio tem a frase da história no topo? Cena nova ou que errou 2 vezes: o texto
      manda primeiro a grade 3×3 de ângulos? Faltou: correção obrigatória.
+   - **Continuidade (R49):** compare cada cena com a ANTERIOR: mesmo lugar e mesmo ângulo → as mesmas pessoas
+     (mesmo rosto e roupa) estão no texto? Se alguém some, o texto tem que mudar o plano (close/insert) ou mostrar a
+     saída. Faltou: correção obrigatória.
    - **Física da cena (R25 R29 R36 R37 R38 R48):** mais de 3 pessoas descritas (as outras têm que ser genéricas)?
      Espelho carregando a cena? Depois do corte, os lados (esquerda/direita da câmera) e o olhar foram ditos de novo?
      Emoção como rótulo em vez de corpo? Pede texto escrito na imagem? Na animação alguém sai e volta, ou há mais de

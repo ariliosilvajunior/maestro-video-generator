@@ -44,6 +44,9 @@
   apertadas no colo". (Complementa R58.)
 - **R38** **Sem letreiro gerado.** O Flow erra texto escrito. Se precisar de texto, o prompt reserva um espaço limpo
   ("o terço direito fica livre, parede lisa") e o texto entra na montagem.
+- **R49** **Continuidade entre cenas seguidas no MESMO lugar e ângulo** (Notícias 04, 04/11: 3 alunos e uma
+  professora "somem do nada" entre S06b→S07a e S09→S10a). Quem estava na cena anterior continua na seguinte (mesmo
+  lugar, roupa e rosto) ou a seguinte troca de ângulo/plano (close, insert) — nunca o mesmo ângulo com gente a menos.
 - **R48** **Animação: quem sai do quadro sumiu.** Ninguém sai e volta no mesmo vídeo. O que se mexe = 1 ação e
   1 movimento por vídeo, sem redescrever o lugar (a imagem já diz). O bloco fixo de integridade (R44) continua.
 
@@ -214,4 +217,5 @@
 | 8 | Diz onde salvar com o mesmo nome? | R50 R51 |
 | 9 | Luz com fonte e lado, pessoa com lugar no quadro, sem adjetivo de sentimento? Refazer mudou só o que errou? | R56 R57 R58 R46 R47 |
 | 0 | O episódio tem a frase da história? Cena nova/difícil passou pela grade 3×3? | R01b R13b |
+| 10b | Cena seguinte no mesmo lugar e ângulo mantém as mesmas pessoas (ou muda o plano)? | R49 |
 | 10 | No máximo 3 pessoas descritas, lados ditos de novo, emoção em corpo, sem letreiro, ninguém sai e volta? | R25 R36 R37 R38 R48 |
