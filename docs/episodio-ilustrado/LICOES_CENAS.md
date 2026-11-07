@@ -194,3 +194,10 @@ revisar cada imagem e cada prompt contra esta lista ANTES de gastar crédito de 
 - Regra: cortes só do Painel (`scripts/cortes_do_painel.py`); a montagem confere e para se fugir mais de 1,5 s.
 - Conferência antes de entregar: imprimir, por cena, a descrição do Painel ao lado do texto da narração naquela vaga.
 
+
+## P. Pessoa andando atrás de móvel some e reaparece (07/11/2026, n3-E26 — Conta A)
+- 1ª versão: "straightens a card" → o professor largou a caixa e foi ao quadro com a mão vazia (ação a mais vira gesto inventado).
+- 2ª versão: caminhada até a mesinha passando atrás da cadeira e na frente do quadro → "o professor some e aparece em outro lugar".
+- **Regra:** no Omni 1.1 Flash, NUNCA pedir caminhada que passe atrás de móvel/pessoa ou atravesse o quadro. Ação no lugar
+  (pés parados, mexe só mãos/cabeça). Se a história precisa de deslocamento, isso vira CORTE: outra imagem com a pessoa já
+  no lugar novo. Toda ação com objeto aberto diz que o conteúdo fica dentro ("no block falls out or floats").
