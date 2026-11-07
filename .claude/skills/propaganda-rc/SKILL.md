@@ -41,6 +41,9 @@ Cada tomada: `nome`, `tempo` (ex.: "0–3 s"), `origem` ("Remotion — tela X" /
   Recriar em código com dados fictícios (LGPD — nunca dado real de aluno).
 
 ## 4. Pacote de entrega (todo vídeo sai com)
+- **Som padrão da marca** (dono, 07/11/2026): voz do dono já tratada (narração do podcast ou gravação aprovada, nunca
+  voz nova) + trilha `painel/static/musicas/padrao.mp3` a 0,06 por baixo da voz (0,25 sem voz) — igual ao Reels e ao
+  videocast. Detalhe em `ecossistema-ia-recursos-cognitivos/docs/ESTUDIO_RC.md`.
 - Título (≤ 100, sem `<` `>`), legenda com gancho < 125 caracteres + CTA + até 5 hashtags, capa pela skill
   `designer-recursos-cognitivos` (azul, verde-água no destaque, Goodly, foto do professor).
 - Corte curto 9:16 de 15 s quando o vídeo for maior.
