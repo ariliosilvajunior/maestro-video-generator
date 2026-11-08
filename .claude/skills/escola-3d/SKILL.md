@@ -80,7 +80,16 @@ avatar, sem texto, sem logotipo].
 7. **Um documento mestre só** por episódio (o Painel) — nunca vários arquivos que se contradizem.
 8. Guiar o dono **um passo por vez, direto, sem explicação longa**: "abra X → anexe Y → cole Z → salve como W".
 
-## 7. Antes de gerar qualquer coisa de C/D
+## 7. Elenco × episódio (dono, 08/11/2026)
+O elenco P1–P13 foi criado pelo dono ANTES dos roteiros, então cada episódio começa por um **mapa de elenco**:
+1. Listar quem a história do livro precisa (criança, mãe, pai, irmão, professora, diretor, terapeuta…), com idade e papel.
+2. Casar cada um com um personagem existente que combine (idade, jeito, família) — ex.: "a mãe do livro → P9 mãe do Davi".
+3. O que NÃO casar com ninguém: **avisar o dono antes de qualquer cena**, com a lista do que criar (papel, idade, aparência
+   sugerida, roupa) **na mesma linha dos personagens dele** (mesmo estilo 3D, mesma folha de 4 colunas) — nunca inventar
+   personagem por conta própria nem forçar um personagem que não combina.
+4. O mesmo vale para cenário, roupa e objeto que a história pedir e ainda não existam na pasta.
+
+## 8. Antes de gerar qualquer coisa de C/D
 - Bíblia de C/D (folha de cada P e plano fixo de cada C, gravados com código) — sem ela, nenhuma cena.
 - Escolher no Drive UMA versão de cada cenário repetido (C2, C3, C8 têm duas) — pergunta ao dono.
 - Revisor `revisor-cenas` aprova os textos; só então o Painel.
