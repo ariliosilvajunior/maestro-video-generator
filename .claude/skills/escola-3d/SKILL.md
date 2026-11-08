@@ -89,7 +89,13 @@ O elenco P1–P13 foi criado pelo dono ANTES dos roteiros, então cada episódio
    personagem por conta própria nem forçar um personagem que não combina.
 4. O mesmo vale para cenário, roupa e objeto que a história pedir e ainda não existam na pasta.
 
-## 8. Antes de gerar qualquer coisa de C/D
+## 8. Famílias conectadas na mesma escola (dono, 08/11/2026)
+- O ambiente escolar (C1–C12) é SEMPRE o mesmo. Casa, roupas e estilo de cada família o dono cria por personagem.
+- Cada episódio tem uma família no centro, mas as outras aparecem na mesma escola: colegas de turma, irmãos, pais no
+  portão, os mesmos professores — as histórias se cruzam (ex.: Davi é colega do protagonista da semana).
+- 1º episódio (08/11): TDAH 2.0, caso de Samuel e Lily (notícia 13) — protagonista sugerido P5 Téo.
+
+## 9. Antes de gerar qualquer coisa de C/D
 - Bíblia de C/D (folha de cada P e plano fixo de cada C, gravados com código) — sem ela, nenhuma cena.
 - Escolher no Drive UMA versão de cada cenário repetido (C2, C3, C8 têm duas) — pergunta ao dono.
 - Revisor `revisor-cenas` aprova os textos; só então o Painel.
