@@ -199,6 +199,7 @@
 - **R61** Saída do avatar começa no último quadro real da fala; conferir a troca quadro a quadro.
 - **R62** Vídeo e capa passam pela aprovação do dono no Painel antes do YouTube.
 - **R63** Capa e qualquer peça gráfica: skill `designer-recursos-cognitivos` (azul 80%, verde-água, Goodly, ícone).
+- **R65** (08/11/2026, n8-E06/E07 recusadas pelo Flow: "política de menor") Cena com menor: nenhum adulto encosta, segura, puxa, se inclina ou estende a mão para ele; o menor de rosto calmo. Escrever em frase POSITIVA o espaço entre as pessoas e as mãos junto ao próprio corpo — nunca negar palavras de choro, lágrima ou toque (a palavra negada ainda dispara o filtro) e não citar idade no INTEGRITY. Na animação, só o adulto se mexe, ou o menor num gesto neutro mínimo. Imagem com menor em sofrimento ou contido fisicamente = refazer a IMAGEM antes do vídeo.
 
 ---
 
