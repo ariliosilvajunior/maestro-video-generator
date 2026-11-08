@@ -4,10 +4,9 @@
 > e você está misturando tudo... aqui eu fiz novos personagens e em formato bem diferente que vai para conta C e D".
 
 ## O que mudou
-- 07/11 os episódios de C/D (n1, n6, n2, n7) foram para A/B; **08/11 voltaram para C/D** (dono: "dá para aplicar novas
-  famílias nestes também") — n1 e n6 (Daniel, Chiote) na Conta C, n2 (Mundo Singular) e n7 (hiperfoco) na Conta D, em 3D
-  com o elenco da escola. As cenas antigas NÃO valem: mapa de elenco + cenas novas pela skill `escola-3d`.
-- 1º episódio novo da escola 3D: notícia 13, TDAH 2.0 (Samuel e Lily), protagonista P5 Téo.
+- Os episódios que estavam nas Contas C e D (n1, n6 → **Conta B**; n2, n7 → **Conta A**) usavam os mesmos personagens
+  de A/B e foram transferidos (Painel + Calendário em 07/11). As cenas deles ainda citam os códigos do Kit antigo de C/D
+  e **precisam ser reescritas com a Bíblia da conta nova** (roteiro-ilustrado + revisor-cenas) antes de gerar.
 - **Contas C e D agora = uma escola só, com elenco próprio, em estilo 3D estilizado** (tipo animação de cinema:
   proporções de criança, olhos grandes, materiais realistas, luz de cinema). Nada do estilo pintado (ES01) de A/B.
 - Cada episódio de C/D conta a história do livro da semana **com este elenco, nesta escola** — nunca personagem de A/B.
