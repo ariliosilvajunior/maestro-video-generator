@@ -83,7 +83,8 @@ for i, (k, a, b) in enumerate(cuts):
     d = dur(src, video=True); ss = CFG.get("inicio_clipe", {}).get(str(k), 0.0)
     corte = CFG.get("cortar_fim_clipe", {}).get(str(k), 0.0)   # clipe que termina escurecendo: não congelar no preto
     d -= ss + corte
-    lento = min(max(precisa / d, 1.0), 1.6)
+    # 09/11: "esticar_max" por cena no episodio.json (ex.: E01 com a abertura falada, que fica mais longa)
+    lento = min(max(precisa / d, 1.0), float(CFG.get("esticar_max", {}).get(str(k), 1.6)))
     # -ss e -t ANTES do -i (opção de entrada): depois do -i o segundo -t sobrescreve e o corte some (erro 31/10)
     run(["ffmpeg", "-v", "error", "-y", "-ss", str(ss), "-t", f"{d:.3f}", "-i", src, "-an", "-vf",
          f"setpts={lento:.4f}*PTS,{recorte(k)}scale=1920:1080:flags=lanczos,fps=25,tpad=stop_mode=clone:stop_duration=30,format=yuv420p,setsar=1",
@@ -124,10 +125,13 @@ for i, c in enumerate(cues):
     a = c[0][1]; b = min(c[-1][2] + 0.25, cues[i + 1][0][1] if i + 1 < len(cues) else NARR)
     if not SEM_LEGENDA:
         E.append(f"Dialogue: 0,{ts(OFF+a)},{ts(OFF+b)},Doc,,0,0,0,," + " ".join(x[0] for x in c))
-E.append(rf"Dialogue: 1,{ts(0.4)},{ts(OFF+2.0)},Title,,0,0,0,,{{\fad(900,700)\pos(960,470)}}{CFG['titulo']}")
-E.append(rf"Dialogue: 1,{ts(1.2)},{ts(OFF+2.0)},Sub,,0,0,0,,{{\fad(900,700)\pos(960,570)}}{CFG['subtitulo']}")
-E.append(rf"Dialogue: 1,{ts(OFF+0.4)},{ts(OFF+6.0)},Name,,0,0,0,,{{\fad(400,500)}}Prof. Arilio")
-E.append(rf"Dialogue: 1,{ts(OFF+0.6)},{ts(OFF+6.0)},Role,,0,0,0,,{{\fad(400,500)}}Recursos Cognitivos")
+# 09/11: abertura falada ("Olá, pessoal! Vamos para mais um episódio: <título>") — o título fica até o fim dela e a
+# plaquinha do nome entra quando ele diz "Eu sou o professor Arilio" ("abertura_falada" = duração em s no episodio.json)
+AB = float(CFG.get("abertura_falada", 0.0))
+E.append(rf"Dialogue: 1,{ts(0.4)},{ts(OFF+2.0+AB)},Title,,0,0,0,,{{\fad(900,700)\pos(960,470)}}{CFG['titulo']}")
+E.append(rf"Dialogue: 1,{ts(1.2)},{ts(OFF+2.0+AB)},Sub,,0,0,0,,{{\fad(900,700)\pos(960,570)}}{CFG['subtitulo']}")
+E.append(rf"Dialogue: 1,{ts(OFF+0.4+AB)},{ts(OFF+6.0+AB)},Name,,0,0,0,,{{\fad(400,500)}}Prof. Arilio")
+E.append(rf"Dialogue: 1,{ts(OFF+0.6+AB)},{ts(OFF+6.0+AB)},Role,,0,0,0,,{{\fad(400,500)}}Recursos Cognitivos")
 def achar(frase):
     alvo = [re.sub(r"\W", "", x).lower() for x in frase.split()]
     pal = [(re.sub(r"\W", "", c["text"]).lower(), c["timestamp"]) for c in w]

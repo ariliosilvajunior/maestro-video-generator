@@ -130,6 +130,12 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
 - Brilho (YAVG) por cena: nenhuma queda brusca para preto fora do fade final.
 - Duração final = entrada + narração + saída + 1,5 s.
 
+## 7c. Reprovou → apaga na hora (dono, 09/11/2026) ✅
+- Toda cena que o revisor (ou o dono) reprova: o arquivo errado vai para a lixeira do Drive NA HORA — só o vídeo quando
+  a imagem está boa; imagem E vídeo quando a imagem também está errada. A cena fica 🔴 refazer no Painel com o motivo e
+  o texto novo. Dono: "se está errada excluir já do painel e do drive para não dar este problema" (arquivo velho no
+  Drive confunde o que já foi refeito e entra na montagem por engano).
+
 ## 8. Revisão e publicação no YouTube ✅ (31/10/2026)
 - Dono assiste, anota no Painel o que refazer (cena + vídeo/imagem). Refaz só o que precisa e remonta.
 - **Sempre passa pela aprovação do dono antes do YouTube** (regra do dono): 
