@@ -167,27 +167,47 @@ const Apresentador: React.FC<{ f: number; layout: Layout; desde: number }> = ({ 
   };
   const p = pos[layout];
   return (
-    <div style={{ position: "absolute", left: p.x, top: p.y + (1 - pop) * 160, width: p.w, height: p.w, opacity: Math.min(1, pop * 1.4),
+    <div style={{ position: "absolute", left: p.x, top: p.y + (1 - pop) * 160, width: p.w, height: p.w, opacity: Math.min(1, 0.6 + pop * 0.6),
       filter: "drop-shadow(0 20px 40px rgba(0,0,0,.45))" }}>
       <OffthreadVideo src={staticFile("prop1/avatar_alpha.webm")} transparent muted style={{ width: "100%", height: "100%" }} />
     </div>
   );
 };
 
-// ---------------------------------------------------------------- legenda cinética (1–2 palavras)
+// ---------------------------------------------------------------- legenda cinética (1–2 palavras, respeita a frase)
+const PEQUENAS = new Set(["e", "o", "a", "no", "na", "do", "da", "de", "num", "ao", "com", "em", "os", "as"]);
+const GRUPOS: { pal: [string, number, number][]; ini: number; fim: number }[] = (() => {
+  const ps: [string, number, number][] = [];
+  for (const [p, a, b] of palavras as [string, number, number][]) {
+    if (p.startsWith("-") && ps.length) { const u = ps[ps.length - 1]; ps[ps.length - 1] = [u[0] + p, u[1], b]; continue; }
+    ps.push([CORRIGE[p] ?? p, a, b]);
+  }
+  const out: [string, number, number][][] = [];
+  let g: [string, number, number][] = [];
+  ps.forEach((w, k) => {
+    g.push(w);
+    const pont = /[.,?!;:]$/.test(w[0]);
+    const ultimaPequena = PEQUENAS.has(w[0].toLowerCase()) && k + 1 < ps.length;
+    if (pont || (g.length >= 2 && !ultimaPequena) || g.length >= 3) { out.push(g); g = []; }
+  });
+  if (g.length) out.push(g);
+  return out.map((gr, k) => ({ pal: gr, ini: gr[0][1], fim: k + 1 < out.length ? out[k + 1][0][1] : gr[gr.length - 1][2] + 0.4 }));
+})();
+const limpa = (p: string) => p.replace(/[.,?!;:]+$/, "");
+
 const Legenda: React.FC<{ f: number; y: number; cor?: string }> = ({ f, y, cor = "#fff" }) => {
   const { fps } = useVideoConfig();
   const t = f / FPS;
-  const ps = (palavras as [string, number, number][]).map(([p, a, b]) => [CORRIGE[p] ?? p, a, b] as [string, number, number]);
-  const idx = ps.findIndex(([, a], k) => t >= a - 0.05 && (k + 1 >= ps.length || t < ps[k + 1][1] - 0.05));
-  if (idx < 0 || t > ps[ps.length - 1][2] + 0.4) return null;
-  const ini = idx % 2 === 0 ? idx : idx - 1;
-  const grupo = ps.slice(ini, ini + 2);
-  const pop = spring({ frame: f - Math.round(ps[ini][1] * FPS), fps, config: { damping: 12, stiffness: 220 } });
+  const g = GRUPOS.find((x) => t >= x.ini - 0.05 && t < x.fim - 0.05);
+  if (!g) return null;
+  const pop = spring({ frame: f - Math.round(g.ini * FPS), fps, config: { damping: 12, stiffness: 220 } });
+  const atual = g.pal.reduce((acc, [, a], k) => (t >= a - 0.05 ? k : acc), 0);
+  const total = g.pal.map(([p]) => limpa(p)).join(" ").length;
+  const tam = total > 16 ? 66 : 86;
   return (
-    <div style={{ position: "absolute", left: 60, right: 60, top: y, display: "flex", justifyContent: "center", gap: 22, fontFamily, transform: `scale(${0.85 + 0.15 * pop})` }}>
-      {grupo.map(([p], k) => (
-        <span key={k} style={{ fontSize: 86, fontWeight: 700, color: ini + k === idx ? C.teal : cor, textShadow: "0 6px 18px rgba(0,0,0,.7), 0 0 2px #000", letterSpacing: -1 }}>{p}</span>
+    <div style={{ position: "absolute", left: 96, right: 96, top: y, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20, fontFamily, transform: `scale(${0.85 + 0.15 * pop})` }}>
+      {g.pal.map(([p], k) => (
+        <span key={k} style={{ fontSize: tam, fontWeight: 700, color: k === atual ? C.teal : cor, textShadow: "0 6px 18px rgba(0,0,0,.7), 0 0 2px #000", letterSpacing: -1 }}>{limpa(p)}</span>
       ))}
     </div>
   );
@@ -231,7 +251,7 @@ const PillsAbas: React.FC<{ f: number }> = ({ f }) => {
         const a = spring({ frame: f - s(ts), fps, config: { damping: 12, stiffness: 180 } });
         if (f < s(ts)) return null;
         return (
-          <div key={t} style={{ position: "absolute", right: 60, top: 760 + k * 150, padding: "22px 40px", background: k % 2 ? C.teal : "#fff", color: k % 2 ? "#fff" : C.marca,
+          <div key={t} style={{ position: "absolute", right: 60, top: 760 + k * 120, padding: "22px 40px", background: k % 2 ? C.teal : "#fff", color: k % 2 ? "#fff" : C.marca,
             fontFamily, fontSize: 52, fontWeight: 700, borderRadius: 60, transform: `translateX(${(1 - a) * 700}px) rotate(${(1 - a) * 12}deg)`, boxShadow: "0 18px 40px rgba(0,0,0,.4)" }}>✓ {t}</div>
         );
       })}
@@ -241,7 +261,7 @@ const PillsAbas: React.FC<{ f: number }> = ({ f }) => {
 
 const Contador: React.FC<{ f: number }> = ({ f }) => {
   const { fps } = useVideoConfig();
-  const n = Math.round(lerp(f, [s(17.2), s(18.3)], [0, 24]));
+  const n = Math.round(lerp(f, [s(17.2), s(18.03)], [0, 20]));
   const a = spring({ frame: f - s(17.2), fps, config: { damping: 10 } });
   if (f < s(17.0)) return null;
   return (
@@ -287,11 +307,13 @@ const PastaUnica: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
 
 const Frase: React.FC<{ f: number }> = ({ f }) => {
   const { fps } = useVideoConfig();
-  const a = spring({ frame: f - s(22.3), fps, config: { damping: 12 } });
-  const b = spring({ frame: f - s(23.8), fps, config: { damping: 12 } });
+  const a = spring({ frame: f - s(23.2), fps, config: { damping: 12 } });
+  const b = spring({ frame: f - s(24.85), fps, config: { damping: 12 } });
+  const risco = lerp(f, [s(23.45), s(23.45) + 8], [0, 100]);
   return (
     <div style={{ position: "absolute", left: 0, right: 0, top: 230, textAlign: "center", fontFamily, fontWeight: 800, lineHeight: 1.05 }}>
-      <div style={{ fontSize: 130, color: "#fff", transform: `scale(${a})`, textDecoration: "line-through", textDecorationColor: C.verm, textDecorationThickness: 12 }}>PAPEL</div>
+      <div style={{ fontSize: 130, color: "#fff", transform: `scale(${a})`, position: "relative", display: "inline-block" }}>PAPEL
+        <div style={{ position: "absolute", left: 0, top: "52%", height: 14, width: `${risco}%`, background: C.verm, borderRadius: 7 }} /></div>
       <div style={{ fontSize: 150, color: C.teal, transform: `scale(${b})`, textShadow: "0 0 50px rgba(46,196,201,.5)" }}>ALUNO</div>
     </div>
   );
@@ -299,11 +321,11 @@ const Frase: React.FC<{ f: number }> = ({ f }) => {
 
 const BotaoBio: React.FC<{ f: number }> = ({ f }) => {
   const { fps } = useVideoConfig();
-  const a = spring({ frame: f - s(26.4), fps, config: { damping: 10 } });
+  const a = spring({ frame: f - s(27.05), fps, config: { damping: 10 } });
   const pulso = 1 + 0.05 * Math.sin(f / 4);
-  if (f < s(26.3)) return null;
+  if (f < s(27.0)) return null;
   return (
-    <div style={{ position: "absolute", right: 70, top: 1250, padding: "34px 50px", background: C.teal, color: "#fff", fontFamily, fontSize: 56, fontWeight: 800, borderRadius: 80,
+    <div style={{ position: "absolute", right: 70, top: 1500, padding: "34px 50px", background: C.teal, color: "#fff", fontFamily, fontSize: 56, fontWeight: 800, borderRadius: 80,
       transform: `scale(${a * pulso})`, boxShadow: "0 0 0 10px rgba(46,196,201,.25), 0 20px 50px rgba(0,0,0,.45)" }}>👉 Link na bio</div>
   );
 };
@@ -325,25 +347,25 @@ const Final: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
 export const FichaDoAluno: React.FC = () => {
   const f = useCurrentFrame();
   const { ini, layout, cena } = segAtual(f);
-  const flash = interpolate(f - ini, [0, 3], [0.35, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const flash = ini === 0 ? 0 : interpolate(f - ini, [0, 3], [0.15, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const zoomLeve = lerp(f - ini, [0, 140], [1, 1.06]);
   const acesas = cena === "abas" ? [12.0, 12.9, 14.1, 14.9].filter((t) => f >= s(t)).length * 3 + 1 : Math.round(lerp(f, [s(15.6), s(18.3)], [12, 24]));
   return (
     <AbsoluteFill style={{ background: C.marca, fontFamily }}>
       <Fundo f={f} />
-      {cena === "pergunta" && <CartaoPergunta f={f - ini} />}
+      {cena === "pergunta" && <CartaoPergunta f={f - ini + 75} />}
       {cena === "lista" && <Janela x={40} y={170} w={1000} foco={[1200, 330, 1.35 * zoomLeve]}><TelaLista f={f} /></Janela>}
-      {cena === "abas" && <Janela x={-420} y={140} w={1700} foco={[1000, 300, 1.25 * zoomLeve]}><TelaFicha f={f} acesas={acesas} /></Janela>}
+      {cena === "abas" && <Janela x={40} y={140} w={1000} foco={[700, 175, 2.4 * zoomLeve]}><TelaFicha f={f} acesas={acesas} /></Janela>}
       {cena === "contador" && <Janela x={40} y={150} w={1000} foco={[1100, 220, 1.6]}><TelaFicha f={f} acesas={acesas} /></Janela>}
       {cena === "pasta" && <PastaUnica f={f} ini={ini} />}
-      {cena === "cta" && <Janela x={40} y={180} w={1000} foco={[1095, 250, 1.28 * zoomLeve]}><TelaInicio /></Janela>}
+      {cena === "cta" && <Janela x={40} y={180} w={1000} foco={[1095, 250, 1.08 * zoomLeve]}><TelaInicio /></Janela>}
       {cena === "final" && <Final f={f} ini={ini} />}
       {cena === "abas" && <PillsAbas f={f} />}
       {cena === "contador" && <Contador f={f} />}
       {cena === "frase" && <Frase f={f} />}
-      <Apresentador f={f} layout={layout} desde={ini} />
+      <Apresentador f={f} layout={layout} desde={ini === 0 ? -30 : ini} />
       {cena === "cta" && <BotaoBio f={f} />}
-      {cena !== "final" && cena !== "contador" && cena !== "frase" && <Legenda f={f} y={layout === "L1" ? 1010 : layout === "L2" ? 300 : layout === "L4" ? 1180 : layout === "L5" ? 200 : 900} />}
+      {cena !== "final" && cena !== "frase" && !(cena === "contador" && f >= s(17.0)) && <Legenda f={f} y={cena === "pasta" ? 1600 : cena === "contador" ? 770 : cena === "abas" ? 1250 : cena === "cta" ? 1050 : layout === "L1" ? 1010 : layout === "L2" ? 300 : 900} />}
       <AbsoluteFill style={{ background: "#fff", opacity: flash, pointerEvents: "none" }} />
       <Audio src={staticFile("prop1/narracao.mp3")} />
       <Audio src={staticFile("prop1/musica.mp3")} volume={(fr) => (fr < s(28.3) ? 0.06 : interpolate(fr, [s(28.3), s(28.8), s(29.4), s(30)], [0.06, 0.25, 0.25, 0], { extrapolateRight: "clamp" }))} />
