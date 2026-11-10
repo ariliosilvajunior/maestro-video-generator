@@ -14,7 +14,7 @@ export const DURACAO_FICHA = s(33.5);
 
 // [início em s, cena]
 const SEG: [number, string][] = [
-  [0, "pergunta"], [4.0, "dor"], [9.3, "lista"], [13.0, "abasA"], [16.8, "abasB"], [20.3, "contador"],
+  [0, "pergunta"], [3.45, "dor"], [9.3, "lista"], [13.0, "abasA"], [16.8, "abasB"], [20.3, "contador"],
   [23.85, "pasta"], [25.4, "frase"], [28.9, "cta"], [31.6, "final"],
 ];
 const segAtual = (f: number) => {
@@ -104,16 +104,25 @@ const ABAS = ["01 - Ficha/Aluno", "02 - Entrevista/Responsável", "03 - Concord�
   "14 - AtaAEE/Reunião", "15 - Monitor/Intérprete", "16 - Parecer/1ºSemestre", "17 - Parecer/2ºSemestre", "18 - Dashboard/Aulas", "19 - Dashboard/Rastreio",
   "20 - Relatório/Rastreio", "21 - Terminalidade", "22 - Plano/Adaptação", "24 - Checklist/Prof.AEE", "Documentos"];
 
+// posição de cada aba (largura pelo tamanho do texto, quebra de linha a 1600 px) — o foco da câmera vai até a aba citada
+const POS_ABAS = (() => {
+  let x = 290, y = 84; const out: { x: number; y: number; w: number }[] = [];
+  for (const a of ABAS) { const w = Math.round(a.length * 9.4 + 32); if (x + w > 1890) { x = 290; y += 42; } out.push({ x, y, w }); x += w; }
+  return out;
+})();
+const centroAba = (k: number) => [POS_ABAS[k].x + POS_ABAS[k].w / 2, POS_ABAS[k].y + 21] as const;
 // anel por FORA da aba citada (não muda cor nem formato do botão)
 const TelaFicha: React.FC<{ f: number; citada: number }> = ({ f, citada }) => (
   <div style={{ position: "absolute", width: 1920, height: 1080, background: C.fundo, fontFamily, overflow: "hidden" }}>
     <Barra /><Topo />
-    <div style={{ position: "absolute", left: 290, right: 30, top: 84, display: "flex", flexWrap: "wrap", gap: 0 }}>
+    <div style={{ position: "absolute", left: 0, top: 0 }}>
       {ABAS.map((a, k) => {
         const ativa = k === 0;
         const anel = k === citada ? 0.5 + 0.5 * Math.abs(Math.sin(f / 5)) : 0;
-        return <div key={a} style={{ padding: "9px 15px", fontSize: 17, borderRadius: "4px 4px 0 0", color: ativa ? "#212529" : "#fff", background: ativa ? C.abaAtiva : C.azul,
-          border: "1px solid rgba(255,255,255,.08)", position: "relative", zIndex: k === citada ? 2 : 1,
+        const p = POS_ABAS[k];
+        return <div key={a} style={{ position: "absolute", left: p.x, top: p.y, width: p.w, height: 42, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center",
+          whiteSpace: "nowrap", fontSize: 17, borderRadius: "4px 4px 0 0", color: ativa ? "#212529" : "#fff", background: ativa ? C.abaAtiva : C.azul,
+          border: "1px solid rgba(255,255,255,.08)", zIndex: k === citada ? 2 : 1,
           boxShadow: k === citada ? `0 0 0 5px rgba(46,196,201,${anel}), 0 0 30px rgba(46,196,201,${anel})` : "none" }}>{a}</div>;
       })}
     </div>
@@ -133,20 +142,30 @@ const TelaFicha: React.FC<{ f: number; citada: number }> = ({ f, citada }) => (
   </div>
 );
 
+const Icone: React.FC<{ tipo: string }> = ({ tipo }) => (
+  <svg width="74" height="60" viewBox="0 0 74 60" style={{ position: "absolute", right: 24, bottom: 22 }}>
+    {tipo === "escola" ? (<g fill="#fff"><path d="M37 4 L70 20 H4 Z" /><rect x="8" y="24" width="8" height="24" /><rect x="23" y="24" width="8" height="24" /><rect x="43" y="24" width="8" height="24" /><rect x="58" y="24" width="8" height="24" /><rect x="4" y="50" width="66" height="7" /></g>)
+      : (<g fill="#fff"><circle cx="37" cy="16" r="10" /><path d="M20 56 C20 38 54 38 54 56 Z" /><circle cx="14" cy="22" r="7" /><path d="M2 54 C2 40 24 40 24 50 Z" /><circle cx="60" cy="22" r="7" /><path d="M50 50 C50 40 72 40 72 54 Z" /></g>)}
+  </svg>
+);
+const Cartao: React.FC<{ t: string; n: string; cor: string; x: number; y: number; w: number; ic: string }> = ({ t, n, cor, x, y, w, ic }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: w, height: 160, background: cor, color: "#fff", borderRadius: 14, padding: "20px 24px", boxSizing: "border-box" }}>
+    <div style={{ fontSize: 20, opacity: 0.85 }}>{t}</div><div style={{ fontSize: 46, fontWeight: 400, marginTop: 4 }}>{n}</div><Icone tipo={ic} />
+  </div>
+);
 const TelaInicio: React.FC = () => (
   <div style={{ position: "absolute", width: 1920, height: 1080, background: C.fundo, fontFamily, overflow: "hidden" }}>
     <Barra /><Topo />
-    <div style={{ position: "absolute", left: 300, right: 40, top: 100, height: 90, background: C.azul, color: "#fff", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38, fontWeight: 600 }}>Seja bem vindo ao Recursos Cognitivos!</div>
-    {[["ALUNOS", "38", C.azul], ["ESCOLAS", "2", C.azul2], ["TURMAS", "14", C.tealSis]].map(([t, n, cor], k) => (
-      <div key={t} style={{ position: "absolute", left: 300 + k * 536, top: 220, width: 512, height: 170, background: cor, color: "#fff", borderRadius: 6, padding: 24 }}>
-        <div style={{ fontSize: 22, opacity: 0.9 }}>{t}</div><div style={{ fontSize: 60, fontWeight: 600 }}>{n}</div>
-      </div>
-    ))}
-    {[["SUPERVISORES", "3", C.azul], ["PROFESSORES SALA", "17", C.azul2]].map(([t, n, cor], k) => (
-      <div key={t} style={{ position: "absolute", left: 300 + k * 804, top: 410, width: 780, height: 170, background: cor, color: "#fff", borderRadius: 6, padding: 24 }}>
-        <div style={{ fontSize: 22, opacity: 0.9 }}>{t}</div><div style={{ fontSize: 60, fontWeight: 600 }}>{n}</div>
-      </div>
-    ))}
+    <div style={{ position: "absolute", left: 300, right: 40, top: 96, height: 92, background: C.azul, color: "#fff", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38, fontWeight: 400 }}>Seja bem vindo ao Recursos Cognitivos!</div>
+    <Cartao t="ALUNOS" n="38" cor={C.azul} x={300} y={212} w={515} ic="pessoas" />
+    <Cartao t="ESCOLAS" n="2" cor={C.azul2} x={835} y={212} w={515} ic="escola" />
+    <Cartao t="TURMAS" n="14" cor={C.tealSis} x={1370} y={212} w={510} ic="pessoas" />
+    <Cartao t="SUPERVISORES" n="3" cor={C.azul} x={300} y={392} w={780} ic="pessoas" />
+    <Cartao t="PROFESSORES SALA" n="17" cor={C.azul2} x={1100} y={392} w={780} ic="pessoas" />
+    <div style={{ position: "absolute", left: 300, right: 40, top: 574, height: 180, background: "#fff", borderRadius: 14, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "#222" }}>
+      <div style={{ fontSize: 30 }}>Sistema de Assinaturas</div><div style={{ fontSize: 18, color: "#666", marginTop: 4 }}>Gerencie suas assinaturas com praticidade!</div>
+      <span style={{ marginTop: 14, background: C.azul, color: "#fff", borderRadius: 4, padding: "8px 26px", fontSize: 20 }}>Acessar</span>
+    </div>
   </div>
 );
 
@@ -162,7 +181,7 @@ const Previa: React.FC = () => (
         ))}
       </div>
     </div>
-    <div style={{ display: "flex", justifyContent: "flex-end", padding: "0 30px 26px" }}><span style={{ background: C.cinza, color: "#fff", borderRadius: 4, padding: "10px 26px", fontSize: 24 }}>Fechar</span></div>
+    <div style={{ display: "flex", justifyContent: "flex-end", padding: "0 30px 26px" }}><span style={{ background: "#6c757d", color: "#fff", borderRadius: 4, padding: "10px 26px", fontSize: 24 }}>Fechar</span></div>
   </div>
 );
 
@@ -173,7 +192,8 @@ const Janela: React.FC<{ children: React.ReactNode; x: number; y: number; w: num
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, height: hh, borderRadius: 26, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,.55), 0 0 0 3px rgba(46,196,201,.5)",
       transform: `perspective(1600px) rotateY(${rot}deg) translateY(${(1 - entrou) * 260}px) scale(${0.9 + 0.1 * entrou})`, opacity: Math.min(1, entrou * 1.5) }}>
-      <div style={{ position: "absolute", left: w / 2 - foco[0] * esc, top: hh / 2 - foco[1] * esc, width: 1920, height: 1080, transform: `scale(${esc})`, transformOrigin: "0 0" }}>{children}</div>
+      <div style={{ position: "absolute", left: Math.min(0, Math.max(w - 1920 * esc, w / 2 - foco[0] * esc)), top: Math.min(0, Math.max(hh - 1080 * esc, hh / 2 - foco[1] * esc)),
+        width: 1920, height: 1080, transform: `scale(${esc})`, transformOrigin: "0 0" }}>{children}</div>
     </div>
   );
 };
@@ -195,6 +215,10 @@ const GRUPOS: { pal: [string, number, number][]; ini: number; fim: number }[] = 
     if (pont || (g.length >= 2 && !ultimaPequena) || g.length >= 3) { out.push(g); g = []; }
   });
   if (g.length) out.push(g);
+  for (let k = 0; k < out.length - 1; k++) {
+    const dur = out[k + 1][0][1] - out[k][0][1];
+    if (dur < 0.5 && out[k].length + out[k + 1].length <= 4) { out[k] = [...out[k], ...out[k + 1]]; out.splice(k + 1, 1); k--; }
+  }
   return out.map((gr, k) => ({ pal: gr, ini: gr[0][1], fim: k + 1 < out.length ? out[k + 1][0][1] : gr[gr.length - 1][2] + 0.4 }));
 })();
 const limpa = (p: string) => p.replace(/[.,?!;:]+$/, "");
@@ -228,7 +252,7 @@ const CartaoPergunta: React.FC<{ f: number }> = ({ f }) => {
         const a = spring({ frame: f - 10 - k * 9, fps, config: { damping: 11 } });
         const balanca = Math.sin((f + k * 20) / 9) * 6;
         return (
-          <div key={k} style={{ position: "absolute", left: 540 + dx * a - 190, top: y + (1 - a) * 300, width: 380, padding: "26px 22px", background: "#fff", borderRadius: 18,
+          <div key={k} style={{ position: "absolute", left: 540 + dx * a - 215, top: y + (1 - a) * 300, width: 430, whiteSpace: "nowrap", padding: "26px 22px", background: "#fff", borderRadius: 18,
             transform: `rotate(${(k % 2 ? 7 : -8) + balanca}deg) scale(${a})`, boxShadow: "0 20px 50px rgba(0,0,0,.4)", fontFamily, fontSize: 36, fontWeight: 600, color: C.marca, display: "flex", gap: 14, alignItems: "center" }}>
             <span style={{ fontSize: 50 }}>{ic}</span>{txt}
           </div>
@@ -251,6 +275,7 @@ const Busca: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
   const { fps } = useVideoConfig();
   const texto = "parecer do Lucas";
   const n = Math.round(lerp(f, [s(7.1), s(7.9)], [0, texto.length]));
+  const mail = spring({ frame: f - s(6.45), fps, config: { damping: 11 } });
   const res = spring({ frame: f - s(8.2), fps, config: { damping: 10 } });
   const ent = spring({ frame: f - ini, fps, config: { damping: 14 } });
   return (
@@ -261,6 +286,9 @@ const Busca: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
       ))}
       <div style={{ position: "absolute", left: 80, right: 80, top: 520, background: "#fff", borderRadius: 50, padding: "30px 40px", fontSize: 48, color: "#222", display: "flex", gap: 20, alignItems: "center",
         boxShadow: "0 24px 60px rgba(0,0,0,.45)", transform: `scale(${ent})` }}>🔍 <span>{texto.slice(0, n)}<span style={{ opacity: Math.round(f / 8) % 2 ? 1 : 0 }}>|</span></span></div>
+      {f >= s(6.4) && f < s(8.15) && <div style={{ position: "absolute", left: 0, right: 0, top: 700, display: "flex", justifyContent: "center" }}>
+        <div style={{ background: "#fff", borderRadius: 18, padding: "20px 30px", fontSize: 40, color: C.marca, fontWeight: 600, transform: `scale(${mail}) rotate(-3deg)`, boxShadow: "0 18px 40px rgba(0,0,0,.4)" }}>✉️ Caixa de entrada (238)</div>
+      </div>}
       <div style={{ position: "absolute", left: 0, right: 0, top: 700, textAlign: "center", fontSize: 64, fontWeight: 800, color: "#ff6b6b", transform: `scale(${res})`, textShadow: "0 6px 18px rgba(0,0,0,.6)" }}>0 resultados</div>
     </AbsoluteFill>
   );
@@ -300,17 +328,18 @@ const PastaUnica: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
   const { fps } = useVideoConfig();
   const g = f - ini;
   const nomes = ["Entrevista", "Estudo de caso", "Rastreio", "Plano Educacional", "Chamada", "Parecer"];
-  const ab = spring({ frame: g - 22, fps, config: { damping: 12 } });
+  const ab = spring({ frame: g - 19, fps, config: { damping: 12 } });
+  const somePasta = lerp(g, [13, 20], [0, 1]);
   return (
     <AbsoluteFill style={{ fontFamily }}>
       {nomes.map((n, k) => {
         const ang = (k / nomes.length) * Math.PI * 2;
         const t = lerp(g, [k * 2, 14 + k * 2], [0, 1]);
-        return <div key={n} style={{ position: "absolute", left: 540 + Math.cos(ang) * 470 * (1 - t) - 160, top: 900 + Math.sin(ang) * 400 * (1 - t) - 50, width: 320, padding: "18px 0", textAlign: "center",
+        return <div key={n} style={{ position: "absolute", left: 540 + Math.cos(ang) * 360 * (1 - t) - 160, top: 900 + Math.sin(ang) * 400 * (1 - t) - 50, width: 320, padding: "18px 0", textAlign: "center",
           background: "#fff", color: C.marca, borderRadius: 14, fontSize: 32, fontWeight: 700, transform: `scale(${1 - 0.6 * t}) rotate(${(1 - t) * (k % 2 ? 20 : -20)}deg)`,
           opacity: 1 - lerp(g, [12 + k * 2, 16 + k * 2], [0, 1]), boxShadow: "0 14px 30px rgba(0,0,0,.35)" }}>{n}</div>;
       })}
-      <div style={{ position: "absolute", left: 540 - 200, top: 800, width: 400, height: 300, transform: `scale(${(0.6 + 0.4 * spring({ frame: g, fps, config: { damping: 14 } })) * (1 - 0.6 * ab)})`, opacity: 1 - ab }}>
+      <div style={{ position: "absolute", left: 540 - 200, top: 800, width: 400, height: 300, transform: `scale(${(0.6 + 0.4 * spring({ frame: g, fps, config: { damping: 14 } })) * (1 - 0.4 * somePasta)})`, opacity: 1 - somePasta }}>
         <div style={{ position: "absolute", left: 0, top: 0, width: 170, height: 60, background: "#f5b942", borderRadius: "16px 16px 0 0" }} />
         <div style={{ position: "absolute", left: 0, top: 40, width: 400, height: 260, background: "#fbc95a", borderRadius: 18, boxShadow: "0 24px 60px rgba(0,0,0,.45)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 40, fontWeight: 800, color: C.marca }}>Lucas · Ficha</div>
       </div>
@@ -334,6 +363,7 @@ const Frase: React.FC<{ f: number }> = ({ f }) => {
       <div style={{ position: "absolute", top: 940, textAlign: "center", fontWeight: 800, lineHeight: 1.05 }}>
         <div style={{ fontSize: 140, color: "#fff", transform: `scale(${a})`, position: "relative", display: "inline-block" }}>PAPEL
           <div style={{ position: "absolute", left: 0, top: "52%", height: 16, width: `${risco}%`, background: C.verm, borderRadius: 8 }} /></div>
+        <div style={{ fontSize: 56, color: "#fff", fontWeight: 600, marginTop: 20, opacity: lerp(f, [s(27.25), s(27.45)], [0, 1]) }}>mais tempo com o seu</div>
         <div style={{ fontSize: 160, color: C.teal, transform: `scale(${b})`, textShadow: "0 0 50px rgba(46,196,201,.5)" }}>ALUNO</div>
       </div>
     </AbsoluteFill>
@@ -376,22 +406,28 @@ export const FichaDoAluno: React.FC = () => {
   const zl = lerp(f - ini, [0, 150], [1, 1.06]);
   const citadaA = ([[14.2, 1], [14.9, 4], [16.0, 5]] as [number, number][]).reduce((acc, [t, k]) => (f >= s(t) ? k : acc), -1);
   const citadaB = ([[16.9, 9], [19.1, 12], [19.6, 15]] as [number, number][]).reduce((acc, [t, k]) => (f >= s(t) ? k : acc), 9);
+  const focoLista: [number, number, number] = [lerp(f, [s(10.4), s(11.1)], [760, 1640]), 430, 2.0];
+  const focoAba = (marcas: [number, number][], z: number): [number, number, number] => {
+    const xs = marcas.map(([, k]) => centroAba(k)[0]); const ys = marcas.map(([, k]) => centroAba(k)[1]);
+    const ts = marcas.map(([t]) => s(t));
+    return [lerp(f, ts, xs), lerp(f, ts, ys) + 60, z];
+  };
   const legY: Record<string, number> = { pergunta: 1350, dor: 300, lista: 1300, abasA: 1460, abasB: 300, contador: 860, pasta: 1380, frase: 300, cta: 1060 };
   return (
     <AbsoluteFill style={{ background: C.marca, fontFamily }}>
       <Fundo f={f} />
       {cena === "pergunta" && <CartaoPergunta f={f - ini + 75} />}
       {cena === "dor" && <Busca f={f} ini={ini} />}
-      {cena === "lista" && <Janela x={40} y={220} w={1000} h={1000} foco={[1180, 430, 1.4 * zl]} entrou={entrou}><TelaLista f={f} /></Janela>}
-      {cena === "abasA" && <Janela x={40} y={160} w={1000} h={760} foco={[1000, 150, 1.8 * zl]} rot={-8} entrou={entrou}><TelaFicha f={f} citada={citadaA} /></Janela>}
+      {cena === "lista" && <Janela x={40} y={220} w={1000} h={1000} foco={focoLista} entrou={entrou}><TelaLista f={f} /></Janela>}
+      {cena === "abasA" && <Janela x={40} y={160} w={1000} h={760} foco={focoAba([[13.0, 1], [14.6, 4], [15.8, 5]], 2.6)} rot={-8} entrou={entrou}><TelaFicha f={f} citada={citadaA} /></Janela>}
       {cena === "abasA" && <Pilulas f={f} itens={[["Entrevista", 14.2], ["Estudo de caso", 14.9], ["Rastreio", 16.0]]} top={1000} />}
-      {cena === "abasB" && <Janela x={40} y={820} w={1000} h={760} foco={[1000, 165, 1.8 * zl]} rot={8} entrou={entrou}><TelaFicha f={f} citada={citadaB} /></Janela>}
+      {cena === "abasB" && <Janela x={40} y={820} w={1000} h={760} foco={focoAba([[16.8, 9], [18.9, 12], [19.4, 15]], 2.6)} rot={8} entrou={entrou}><TelaFicha f={f} citada={citadaB} /></Janela>}
       {cena === "abasB" && <Pilulas f={f} itens={[["Plano Educacional Individualizado", 16.9], ["Chamada", 19.1], ["Parecer", 19.6]]} top={430} />}
       {cena === "contador" && <Janela x={140} y={180} w={800} h={560} foco={[1090, 300, 0.95]} entrou={entrou}><TelaFicha f={f} citada={-1} /></Janela>}
       {cena === "contador" && <Contador f={f} />}
       {cena === "pasta" && <PastaUnica f={f} ini={ini} />}
       {cena === "frase" && <Frase f={f} />}
-      {cena === "cta" && <Janela x={40} y={170} w={1000} h={760} foco={[1095, 360, 1.08 * zl]} entrou={entrou}><TelaInicio /></Janela>}
+      {cena === "cta" && <Janela x={40} y={190} w={1000} h={675} foco={[1100, 540, 1.2]} entrou={entrou}><TelaInicio /></Janela>}
       {cena === "cta" && <BotaoBio f={f} />}
       {cena === "final" && <Final f={f} ini={ini} />}
       {cena !== "final" && cena !== "contador" && !(cena === "frase" && f >= s(26.6)) && <Legenda f={f} desde={ini} y={legY[cena] ?? 1300} />}
