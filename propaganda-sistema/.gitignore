@@ -1,2 +1,4 @@
 node_modules
 out
+public/prop1/*.mp3
+public/prop1/*.webm
