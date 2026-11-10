@@ -59,6 +59,16 @@ iguais.** Cada tomada do roteiro diz o seu `layout`:
   (`propaganda-sistema/src/kit/`) monta as cinco posições com o mesmo recorte do avatar.
 - 16:9 (YouTube/Facebook): L3 vira tela à esquerda / apresentador à direita; L4 igual (canto de baixo à direita).
 
+### Regras fixas do dono (09/11/2026, depois do 1º teste)
+- **Sem siglas na fala:** sempre por extenso — "Atendimento Educacional Especializado" (não AEE), "Plano Educacional
+  Individualizado" (não PEI). Na legenda também. Rótulo real do sistema na tela pode ficar como está.
+- **Cores e formatos dos botões do sistema NUNCA mudam** na tela recriada ("mantenha as mesmas cores e formatos dos
+  botões do sistema original, não altere isso nunca"). Cores medidas nos prints estão em `propaganda-sistema/src/kit/kit.tsx`
+  (`C`). Para destacar algo: anel/seta/brilho POR FORA do botão, nunca recolorir.
+- **Avatar só se a boca bater com a fala.** Trecho antigo do avatar (boca fora de sincronia) não serve nem para teste —
+  sem avatar sincronizado, a dinâmica vem da TELA mudando de posição, inclinação e tamanho a cada 3–5 s + motion
+  graphics (1º teste aprovado assim). Os layouts L1–L4 acima valem quando houver avatar gerado com a fala da peça.
+
 ## 3. Antes de gerar (antes de qualquer crédito)
 - Pesquisa rápida do que está funcionando no nicho (Reels/YouTube de professores de AEE, educação inclusiva): ganchos
   e formatos que repetem. Ferramentas em Painel → Ferramentas e referências → "Estudar concorrência".
