@@ -167,7 +167,7 @@ const Apresentador: React.FC<{ f: number; layout: Layout; desde: number }> = ({ 
   };
   const p = pos[layout];
   return (
-    <div style={{ position: "absolute", left: p.x, top: p.y + (1 - pop) * 160, width: p.w, height: p.w, opacity: Math.min(1, 0.6 + pop * 0.6),
+    <div style={{ position: "absolute", left: p.x, top: p.y + (1 - pop) * 160, width: p.w, height: p.w, opacity: 1,
       filter: "drop-shadow(0 20px 40px rgba(0,0,0,.45))" }}>
       <OffthreadVideo src={staticFile("prop1/avatar_alpha.webm")} transparent muted style={{ width: "100%", height: "100%" }} />
     </div>
@@ -195,11 +195,11 @@ const GRUPOS: { pal: [string, number, number][]; ini: number; fim: number }[] = 
 })();
 const limpa = (p: string) => p.replace(/[.,?!;:]+$/, "");
 
-const Legenda: React.FC<{ f: number; y: number; cor?: string }> = ({ f, y, cor = "#fff" }) => {
+const Legenda: React.FC<{ f: number; y: number; cor?: string; desde?: number }> = ({ f, y, cor = "#fff", desde = 0 }) => {
   const { fps } = useVideoConfig();
   const t = f / FPS;
   const g = GRUPOS.find((x) => t >= x.ini - 0.05 && t < x.fim - 0.05);
-  if (!g) return null;
+  if (!g || Math.round(g.ini * FPS) < desde - 1) return null; // sobra da frase da cena anterior: não pisca
   const pop = spring({ frame: f - Math.round(g.ini * FPS), fps, config: { damping: 12, stiffness: 220 } });
   const atual = g.pal.reduce((acc, [, a], k) => (t >= a - 0.05 ? k : acc), 0);
   const total = g.pal.map(([p]) => limpa(p)).join(" ").length;
@@ -251,7 +251,7 @@ const PillsAbas: React.FC<{ f: number }> = ({ f }) => {
         const a = spring({ frame: f - s(ts), fps, config: { damping: 12, stiffness: 180 } });
         if (f < s(ts)) return null;
         return (
-          <div key={t} style={{ position: "absolute", right: 60, top: 760 + k * 120, padding: "22px 40px", background: k % 2 ? C.teal : "#fff", color: k % 2 ? "#fff" : C.marca,
+          <div key={t} style={{ position: "absolute", right: 140, top: 760 + k * 120, padding: "22px 40px", background: k % 2 ? C.teal : "#fff", color: k % 2 ? "#fff" : C.marca,
             fontFamily, fontSize: 52, fontWeight: 700, borderRadius: 60, transform: `translateX(${(1 - a) * 700}px) rotate(${(1 - a) * 12}deg)`, boxShadow: "0 18px 40px rgba(0,0,0,.4)" }}>✓ {t}</div>
         );
       })}
@@ -325,8 +325,10 @@ const BotaoBio: React.FC<{ f: number }> = ({ f }) => {
   const pulso = 1 + 0.05 * Math.sin(f / 4);
   if (f < s(27.0)) return null;
   return (
-    <div style={{ position: "absolute", right: 70, top: 1500, padding: "34px 50px", background: C.teal, color: "#fff", fontFamily, fontSize: 56, fontWeight: 800, borderRadius: 80,
-      transform: `scale(${a * pulso})`, boxShadow: "0 0 0 10px rgba(46,196,201,.25), 0 20px 50px rgba(0,0,0,.45)" }}>👉 Link na bio</div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1460, display: "flex", justifyContent: "center" }}>
+      <div style={{ padding: "34px 50px", background: C.teal, color: "#fff", fontFamily, fontSize: 56, fontWeight: 800, borderRadius: 80,
+        transform: `scale(${a * pulso})`, boxShadow: "0 0 0 10px rgba(46,196,201,.25), 0 20px 50px rgba(0,0,0,.45)" }}>👉 Link na bio</div>
+    </div>
   );
 };
 
@@ -365,7 +367,7 @@ export const FichaDoAluno: React.FC = () => {
       {cena === "frase" && <Frase f={f} />}
       <Apresentador f={f} layout={layout} desde={ini === 0 ? -30 : ini} />
       {cena === "cta" && <BotaoBio f={f} />}
-      {cena !== "final" && cena !== "frase" && !(cena === "contador" && f >= s(17.0)) && <Legenda f={f} y={cena === "pasta" ? 1600 : cena === "contador" ? 770 : cena === "abas" ? 1250 : cena === "cta" ? 1050 : layout === "L1" ? 1010 : layout === "L2" ? 300 : 900} />}
+      {cena !== "final" && !(cena === "frase" && f >= s(23.2)) && !(cena === "contador" && f >= s(17.0)) && <Legenda f={f} desde={ini} y={cena === "pasta" ? 1350 : cena === "contador" ? 770 : cena === "abas" ? 1250 : cena === "cta" ? 1050 : layout === "L1" ? 1010 : layout === "L2" ? 300 : 900} />}
       <AbsoluteFill style={{ background: "#fff", opacity: flash, pointerEvents: "none" }} />
       <Audio src={staticFile("prop1/narracao.mp3")} />
       <Audio src={staticFile("prop1/musica.mp3")} volume={(fr) => (fr < s(28.3) ? 0.06 : interpolate(fr, [s(28.3), s(28.8), s(29.4), s(30)], [0.06, 0.25, 0.25, 0], { extrapolateRight: "clamp" }))} />
