@@ -438,7 +438,8 @@ export const FichaDoAluno: React.FC = () => {
       {cena !== "final" && cena !== "contador" && !(cena === "frase" && f >= s(26.6)) && <Legenda f={f} desde={ini} y={legY[cena] ?? 1300} />}
       <AbsoluteFill style={{ background: "#fff", opacity: flash, pointerEvents: "none" }} />
       <Audio src={staticFile("prop1/narracao.mp3")} />
-      <Audio src={staticFile("prop1/musica.mp3")} volume={(fr) => (fr < s(31.6) ? 0.06 : interpolate(fr, [s(31.6), s(32.1), s(32.9), s(33.5)], [0.06, 0.25, 0.25, 0], { extrapolateRight: "clamp" }))} />
+      {/* 09/11/2026, dono: propaganda sem música, só efeitos (whoosh nas trocas, pop nas pílulas, cliques, ding) */}
+      <Audio src={staticFile("prop1/efeitos.wav")} volume={0.55} />
     </AbsoluteFill>
   );
 };
