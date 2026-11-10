@@ -9,15 +9,15 @@ import { C, Cursor, Foto, Menu, fontFamily, lerp } from "../kit/kit";
 import palavras from "../../public/prop1/words.json";
 
 const FPS = 30;
-const s = (seg: number) => Math.round(seg * FPS);
+export const s = (seg: number) => Math.round(seg * FPS);
 export const DURACAO_FICHA = s(33.5);
 
 // [início em s, cena]
-const SEG: [number, string][] = [
+export const SEG: [number, string][] = [
   [0, "pergunta"], [3.45, "dor"], [9.3, "lista"], [13.0, "abasA"], [16.8, "abasB"], [20.3, "contador"],
   [23.85, "pasta"], [25.4, "frase"], [28.9, "cta"], [31.6, "final"],
 ];
-const segAtual = (f: number) => {
+export const segAtual = (f: number) => {
   let i = 0;
   for (let k = 0; k < SEG.length; k++) if (f >= s(SEG[k][0])) i = k;
   return { ini: s(SEG[i][0]), cena: SEG[i][1] };
@@ -25,7 +25,7 @@ const segAtual = (f: number) => {
 const CORRIGE: Record<string, string> = { recursos: "Recursos", "cognitivos,": "Cognitivos,", plano: "Plano", educacional: "Educacional", individualizado: "Individualizado", "individualizado,": "Individualizado," };
 
 // ---------------------------------------------------------------- fundo da marca (vivo)
-const Fundo: React.FC<{ f: number }> = ({ f }) => (
+export const Fundo: React.FC<{ f: number }> = ({ f }) => (
   <AbsoluteFill style={{ background: `radial-gradient(circle at 30% 20%, #16406b 0%, ${C.marca} 55%, #071a2e 100%)`, overflow: "hidden" }}>
     {[0, 1, 2, 3].map((k) => (
       <div key={k} style={{ position: "absolute", width: 520 + k * 120, height: 520 + k * 120, borderRadius: "50%",
@@ -64,7 +64,7 @@ const Bt: React.FC<{ cor: string; t: string; w?: number; press?: number }> = ({ 
     transform: `scale(${1 - 0.06 * press})`, filter: `brightness(${1 - 0.18 * press})` }}>{t}</span>
 );
 
-const TelaLista: React.FC<{ f: number }> = ({ f }) => {
+export const TelaLista: React.FC<{ f: number }> = ({ f }) => {
   const press = lerp(f, [s(11.75), s(11.9), s(12.05)], [0, 1, 0]);
   return (
     <div style={{ position: "absolute", width: 1920, height: 1080, background: C.fundo, fontFamily, overflow: "hidden" }}>
@@ -110,9 +110,9 @@ const POS_ABAS = (() => {
   for (const a of ABAS) { const w = Math.round(a.length * 9.4 + 32); if (x + w > 1890) { x = 290; y += 42; } out.push({ x, y, w }); x += w; }
   return out;
 })();
-const centroAba = (k: number) => [POS_ABAS[k].x + POS_ABAS[k].w / 2, POS_ABAS[k].y + 21] as const;
+export const centroAba = (k: number) => [POS_ABAS[k].x + POS_ABAS[k].w / 2, POS_ABAS[k].y + 21] as const;
 // anel por FORA da aba citada (não muda cor nem formato do botão)
-const TelaFicha: React.FC<{ f: number; citada: number }> = ({ f, citada }) => (
+export const TelaFicha: React.FC<{ f: number; citada: number }> = ({ f, citada }) => (
   <div style={{ position: "absolute", width: 1920, height: 1080, background: C.fundo, fontFamily, overflow: "hidden" }}>
     <Barra /><Topo />
     <div style={{ position: "absolute", left: 0, top: 0 }}>
@@ -153,7 +153,7 @@ const Cartao: React.FC<{ t: string; n: string; cor: string; x: number; y: number
     <div style={{ fontSize: 20, opacity: 0.85 }}>{t}</div><div style={{ fontSize: 46, fontWeight: 400, marginTop: 4 }}>{n}</div><Icone tipo={ic} />
   </div>
 );
-const TelaInicio: React.FC = () => (
+export const TelaInicio: React.FC = () => (
   <div style={{ position: "absolute", width: 1920, height: 1080, background: C.fundo, fontFamily, overflow: "hidden" }}>
     <Barra /><Topo />
     <div style={{ position: "absolute", left: 300, right: 40, top: 96, height: 92, background: C.azul, color: "#fff", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38, fontWeight: 400 }}>Seja bem vindo ao Recursos Cognitivos!</div>
@@ -170,7 +170,7 @@ const TelaInicio: React.FC = () => (
 );
 
 // Pré-visualização do Aluno (mesmo formato do modal real), dados fictícios
-const Previa: React.FC = () => (
+export const Previa: React.FC = () => (
   <div style={{ width: 860, background: "#fff", borderRadius: 8, fontFamily, color: "#222", boxShadow: "0 30px 80px rgba(0,0,0,.5)", overflow: "hidden" }}>
     <div style={{ display: "flex", justifyContent: "space-between", padding: "22px 30px", borderBottom: "1px solid #e3e6ea", fontSize: 32, fontWeight: 500 }}>Pré-visualização do Aluno<span style={{ color: "#999" }}>×</span></div>
     <div style={{ display: "flex", gap: 28, padding: 30 }}>
@@ -186,7 +186,7 @@ const Previa: React.FC = () => (
 );
 
 // Janela da tela: posição/tamanho/inclinação mudam por cena (a dinâmica sem apresentador)
-const Janela: React.FC<{ children: React.ReactNode; x: number; y: number; w: number; foco: [number, number, number]; h?: number; rot?: number; entrou?: number }> = ({ children, x, y, w, foco, h, rot = 0, entrou = 1 }) => {
+export const Janela: React.FC<{ children: React.ReactNode; x: number; y: number; w: number; foco: [number, number, number]; h?: number; rot?: number; entrou?: number }> = ({ children, x, y, w, foco, h, rot = 0, entrou = 1 }) => {
   const hh = h ?? (w / 1920) * 1080;
   const esc = (w / 1920) * foco[2];
   return (
@@ -223,7 +223,7 @@ const GRUPOS: { pal: [string, number, number][]; ini: number; fim: number }[] = 
 })();
 const limpa = (p: string) => p.replace(/[.,?!;:]+$/, "");
 
-const Legenda: React.FC<{ f: number; y: number; desde: number }> = ({ f, y, desde }) => {
+export const Legenda: React.FC<{ f: number; y: number; desde: number }> = ({ f, y, desde }) => {
   const { fps } = useVideoConfig();
   const t = f / FPS;
   const g = GRUPOS.find((x) => t >= x.ini - 0.05 && t < x.fim - 0.05);
@@ -294,7 +294,7 @@ const Busca: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
   );
 };
 
-const Pilulas: React.FC<{ f: number; itens: [string, number][]; top: number }> = ({ f, itens, top }) => {
+export const Pilulas: React.FC<{ f: number; itens: [string, number][]; top: number }> = ({ f, itens, top }) => {
   const { fps } = useVideoConfig();
   return (
     <>
@@ -370,7 +370,7 @@ const Frase: React.FC<{ f: number }> = ({ f }) => {
   );
 };
 
-const BotaoBio: React.FC<{ f: number }> = ({ f }) => {
+export const BotaoBio: React.FC<{ f: number }> = ({ f }) => {
   const { fps } = useVideoConfig();
   if (f < s(30.45)) return null;
   const a = spring({ frame: f - s(30.5), fps, config: { damping: 10 } });
@@ -383,7 +383,7 @@ const BotaoBio: React.FC<{ f: number }> = ({ f }) => {
   );
 };
 
-const Final: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
+export const Final: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
   const { fps } = useVideoConfig();
   const g = f - ini;
   const sp = spring({ frame: g, fps, config: { damping: 14 } });
