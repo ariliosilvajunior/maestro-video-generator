@@ -4,7 +4,11 @@ import { loadFont } from "@remotion/google-fonts/Poppins";
 
 export const { fontFamily } = loadFont("normal", { weights: ["400", "500", "600", "700"], subsets: ["latin"] });
 
-export const C = { side: "#212529", top: "#212529", fundo: "#ced4da", cab: "#212529", ciano: "#17a2b8", cinza: "#343a40", azul: "#1f3b63", verde: "#28a745", verm: "#dc3545", marca: "#0E2A47", teal: "#2EC4C9" };
+// 09/11/2026, dono: "mantenha as mesmas cores e formatos dos botões do sistema original, não altere isso nunca".
+// Cores medidas nos prints reais (pasta "Prints do Sistema"): azul #2b4872, azul2 #3e69b7, tealSis #56cac9,
+// botões Pré-visualizar #17a2b8, Visualizar #343a40, Editar #2b4872, Ativado #28a745, Excluir #dc3545, aba ativa #f0f0f0.
+export const C = { side: "#212529", top: "#212429", fundo: "#ced4da", cab: "#212529", ciano: "#17a2b8", cinza: "#343a40", azul: "#2b4872", azul2: "#3e69b7",
+  tealSis: "#56cac9", abaAtiva: "#f0f0f0", verde: "#28a745", verm: "#dc3545", marca: "#0E2A47", teal: "#2EC4C9" };
 export const ease = Easing.bezier(0.45, 0, 0.2, 1);
 export const lerp = (f: number, a: number[], b: number[]) => interpolate(f, a, b, { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
 
