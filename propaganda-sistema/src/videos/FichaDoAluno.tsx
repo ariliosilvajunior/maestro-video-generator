@@ -408,8 +408,13 @@ export const FichaDoAluno: React.FC = () => {
   const citadaB = ([[16.9, 9], [19.1, 12], [19.6, 15]] as [number, number][]).reduce((acc, [t, k]) => (f >= s(t) ? k : acc), 9);
   const focoLista: [number, number, number] = [lerp(f, [s(10.4), s(11.1)], [760, 1640]), 430, 2.0];
   const focoAba = (marcas: [number, number][], z: number): [number, number, number] => {
-    const xs = marcas.map(([, k]) => centroAba(k)[0]); const ys = marcas.map(([, k]) => centroAba(k)[1]);
-    const ts = marcas.map(([t]) => s(t));
+    // segura na aba até a palavra seguinte; a câmera só anda nos 0,25 s antes de cada palavra
+    const ts: number[] = [], xs: number[] = [], ys: number[] = [];
+    marcas.forEach(([t, k], i) => {
+      const [cx, cy] = centroAba(k);
+      if (i > 0) { const [px, py] = centroAba(marcas[i - 1][1]); ts.push(s(t - 0.25)); xs.push(px); ys.push(py); }
+      ts.push(s(t)); xs.push(cx); ys.push(cy);
+    });
     return [lerp(f, ts, xs), lerp(f, ts, ys) + 60, z];
   };
   const legY: Record<string, number> = { pergunta: 1350, dor: 300, lista: 1300, abasA: 1460, abasB: 300, contador: 860, pasta: 1380, frase: 300, cta: 1060 };
@@ -419,11 +424,11 @@ export const FichaDoAluno: React.FC = () => {
       {cena === "pergunta" && <CartaoPergunta f={f - ini + 75} />}
       {cena === "dor" && <Busca f={f} ini={ini} />}
       {cena === "lista" && <Janela x={40} y={220} w={1000} h={1000} foco={focoLista} entrou={entrou}><TelaLista f={f} /></Janela>}
-      {cena === "abasA" && <Janela x={40} y={160} w={1000} h={760} foco={focoAba([[13.0, 1], [14.6, 4], [15.8, 5]], 2.6)} rot={-8} entrou={entrou}><TelaFicha f={f} citada={citadaA} /></Janela>}
+      {cena === "abasA" && <Janela x={40} y={160} w={1000} h={760} foco={focoAba([[13.0, 1], [14.9, 4], [16.0, 5]], 2.6)} rot={-8} entrou={entrou}><TelaFicha f={f} citada={citadaA} /></Janela>}
       {cena === "abasA" && <Pilulas f={f} itens={[["Entrevista", 14.2], ["Estudo de caso", 14.9], ["Rastreio", 16.0]]} top={1000} />}
-      {cena === "abasB" && <Janela x={40} y={820} w={1000} h={760} foco={focoAba([[16.8, 9], [18.9, 12], [19.4, 15]], 2.6)} rot={8} entrou={entrou}><TelaFicha f={f} citada={citadaB} /></Janela>}
+      {cena === "abasB" && <Janela x={40} y={820} w={1000} h={760} foco={focoAba([[16.8, 9], [19.1, 12], [19.6, 15]], 2.6)} rot={8} entrou={entrou}><TelaFicha f={f} citada={citadaB} /></Janela>}
       {cena === "abasB" && <Pilulas f={f} itens={[["Plano Educacional Individualizado", 16.9], ["Chamada", 19.1], ["Parecer", 19.6]]} top={430} />}
-      {cena === "contador" && <Janela x={140} y={180} w={800} h={560} foco={[1090, 300, 0.95]} entrou={entrou}><TelaFicha f={f} citada={-1} /></Janela>}
+      {cena === "contador" && <Janela x={140} y={220} w={800} h={450} foco={[960, 540, 1.0]} entrou={entrou}><TelaFicha f={f} citada={-1} /></Janela>}
       {cena === "contador" && <Contador f={f} />}
       {cena === "pasta" && <PastaUnica f={f} ini={ini} />}
       {cena === "frase" && <Frase f={f} />}
