@@ -5,14 +5,18 @@
 import React from "react";
 import { AbsoluteFill, Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { C, Foto, fontFamily, lerp } from "../kit/kit";
-import { BotaoBio as _b, Final, Fundo, Janela, Legenda, Previa, TelaFicha, TelaInicio, TelaLista, centroAba, s, segAtual } from "./FichaDoAluno";
+import { BotaoBio as _b, Final, Fundo, Janela, Legenda, Previa, TelaFicha, TelaInicio, TelaLista, centroAba, montarGrupos, s, segAtual } from "./FichaDoAluno";
+import palavrasYt from "../../public/prop1/words_yt.json";
+
+// fala final própria do YouTube: "Chama no link da descrição" (no YouTube não existe bio)
+const GRUPOS_YT = montarGrupos(palavrasYt as [string, number, number][]);
 
 void _b;
 
 const Pergunta: React.FC<{ f: number }> = ({ f }) => {
   const { fps } = useVideoConfig();
   const e = spring({ frame: f - 4, fps, config: { damping: 14 } });
-  const docs: [string, string, number, number][] = [["📁", "Ficha do aluno", 220, 470], ["📄", "Estudo de caso", 1270, 430], ["✉️", "Plano no e-mail", 330, 700], ["❓", "Parecer?", 1220, 680]];
+  const docs: [string, string, number, number][] = [["📁", "Ficha do aluno", 220, 400], ["📄", "Estudo de caso", 1270, 380], ["✉️", "Plano no e-mail", 330, 600], ["❓", "Parecer?", 1220, 590]];
   return (
     <>
       {docs.map(([ic, txt, x, y], k) => {
@@ -56,7 +60,7 @@ const Busca: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
   );
 };
 
-const Pilulas: React.FC<{ f: number; itens: [string, number][]; x: number; top: number }> = ({ f, itens, x, top }) => {
+const Pilulas: React.FC<{ f: number; itens: [string, number][]; x: number; top: number; passo?: number }> = ({ f, itens, x, top, passo = 130 }) => {
   const { fps } = useVideoConfig();
   return (
     <>
@@ -64,8 +68,8 @@ const Pilulas: React.FC<{ f: number; itens: [string, number][]; x: number; top: 
         if (f < s(ts)) return null;
         const a = spring({ frame: f - s(ts), fps, config: { damping: 12, stiffness: 180 } });
         return (
-          <div key={t} style={{ position: "absolute", left: x, top: top + k * 130, maxWidth: 600, padding: "22px 36px", background: k % 2 ? C.teal : "#fff", color: k % 2 ? "#fff" : C.marca,
-            fontFamily, fontSize: t.length > 18 ? 36 : 50, fontWeight: 700, borderRadius: 60, transform: `translateY(${(1 - a) * 120}px) scale(${0.6 + 0.4 * a})`, opacity: Math.min(1, a * 1.5),
+          <div key={t} style={{ position: "absolute", left: x, top: top + k * passo, whiteSpace: "nowrap", padding: "22px 36px", background: k % 2 ? C.teal : "#fff", color: k % 2 ? "#fff" : C.marca,
+            fontFamily, fontSize: t.length > 18 ? 32 : 50, fontWeight: 700, borderRadius: 60, transform: `translateY(${(1 - a) * 120}px) scale(${0.6 + 0.4 * a})`, opacity: Math.min(1, a * 1.5),
             boxShadow: "0 18px 40px rgba(0,0,0,.4)" }}>✓ {t}</div>
         );
       })}
@@ -138,7 +142,7 @@ const Bio: React.FC<{ f: number }> = ({ f }) => {
   if (f < s(30.45)) return null;
   const a = spring({ frame: f - s(30.5), fps, config: { damping: 10 } });
   return (
-    <div style={{ position: "absolute", right: 120, top: 700, padding: "34px 56px", background: C.teal, color: "#fff", fontFamily, fontSize: 60, fontWeight: 800, borderRadius: 80,
+    <div style={{ position: "absolute", right: 60, top: 330, padding: "30px 46px", background: C.teal, color: "#fff", fontFamily, fontSize: 52, fontWeight: 800, borderRadius: 80,
       transform: `scale(${a * (1 + 0.05 * Math.sin(f / 4))})`, boxShadow: "0 0 0 10px rgba(46,196,201,.25), 0 20px 50px rgba(0,0,0,.45)" }}>👉 Link na descrição</div>
   );
 };
@@ -160,27 +164,27 @@ export const FichaDoAlunoH: React.FC = () => {
     });
     return [lerp(f, ts, xs), lerp(f, ts, ys) + 140, z];
   };
-  const focoLista: [number, number, number] = [lerp(f, [s(10.4), s(11.1)], [900, 1500]), 480, 1.55];
+  const focoLista: [number, number, number] = [lerp(f, [s(10.4), s(11.1)], [900, 1500]), 505, 1.55];
   return (
     <AbsoluteFill style={{ background: C.marca, fontFamily }}>
       <Fundo f={f} />
       {cena === "pergunta" && <Pergunta f={f - ini + 75} />}
       {cena === "dor" && <Busca f={f} ini={ini} />}
-      {cena === "lista" && <Janela x={160} y={90} w={1600} h={800} foco={focoLista} entrou={entrou}><TelaLista f={f} /></Janela>}
-      {cena === "abasA" && <Janela x={80} y={90} w={1160} h={800} foco={focoAba([[13.0, 1], [14.9, 4], [16.0, 5]], 2.2)} rot={-7} entrou={entrou}><TelaFicha f={f} citada={citadaA} /></Janela>}
+      {cena === "lista" && <Janela x={160} y={70} w={1600} h={680} foco={focoLista} entrou={entrou}><TelaLista f={f} /></Janela>}
+      {cena === "abasA" && <Janela x={80} y={70} w={1160} h={680} foco={focoAba([[13.0, 1], [14.9, 4], [16.0, 5]], 2.2)} rot={-7} entrou={entrou}><TelaFicha f={f} citada={citadaA} /></Janela>}
       {cena === "abasA" && <Pilulas f={f} itens={[["Entrevista", 14.2], ["Estudo de caso", 14.9], ["Rastreio", 16.0]]} x={1330} top={230} />}
-      {cena === "abasB" && <Janela x={680} y={90} w={1160} h={800} foco={focoAba([[16.8, 9], [19.1, 12], [19.6, 15]], 2.2)} rot={7} entrou={entrou}><TelaFicha f={f} citada={citadaB} /></Janela>}
-      {cena === "abasB" && <Pilulas f={f} itens={[["Plano Educacional Individualizado", 16.9], ["Chamada", 19.1], ["Parecer", 19.6]]} x={80} top={230} />}
+      {cena === "abasB" && <Janela x={840} y={70} w={1000} h={680} foco={focoAba([[16.8, 9], [19.1, 12], [19.6, 15]], 2.2)} rot={7} entrou={entrou}><TelaFicha f={f} citada={citadaB} /></Janela>}
+      {cena === "abasB" && <Pilulas f={f} itens={[["Plano Educacional Individualizado", 16.9], ["Chamada", 19.1], ["Parecer", 19.6]]} x={60} top={200} passo={150} />}
       {cena === "contador" && <Janela x={100} y={200} w={960} h={540} foco={[960, 540, 1.0]} entrou={entrou}><TelaFicha f={f} citada={-1} /></Janela>}
       {cena === "contador" && <Contador f={f} />}
       {cena === "pasta" && <Pasta f={f} ini={ini} />}
       {cena === "frase" && <Frase f={f} />}
-      {cena === "cta" && <Janela x={160} y={90} w={1600} h={760} foco={[1100, 450, 1.2]} entrou={entrou}><TelaInicio /></Janela>}
+      {cena === "cta" && <Janela x={60} y={130} w={1060} h={460} foco={[1100, 400, 1.2]} entrou={entrou}><TelaInicio /></Janela>}
       {cena === "cta" && <Bio f={f} />}
       {cena === "final" && <Final f={f} ini={ini} />}
-      {cena !== "final" && cena !== "contador" && !(cena === "frase" && f >= s(26.6)) && <Legenda f={f} desde={ini} y={cena === "pergunta" ? 900 : 925} />}
+      {cena !== "final" && cena !== "contador" && !(cena === "frase" && f >= s(26.6)) && <Legenda f={f} desde={ini} grupos={GRUPOS_YT} y={790} />}
       <AbsoluteFill style={{ background: "#fff", opacity: flash, pointerEvents: "none" }} />
-      <Audio src={staticFile("prop1/narracao.mp3")} />
+      <Audio src={staticFile("prop1/narracao_yt.mp3")} />
       <Audio src={staticFile("prop1/efeitos.wav")} volume={0.55} />
     </AbsoluteFill>
   );

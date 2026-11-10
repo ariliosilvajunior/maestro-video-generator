@@ -200,9 +200,10 @@ export const Janela: React.FC<{ children: React.ReactNode; x: number; y: number;
 
 // ---------------------------------------------------------------- legenda cinética (respeita a frase)
 const PEQUENAS = new Set(["e", "o", "a", "no", "na", "do", "da", "de", "num", "ao", "com", "em", "os", "as"]);
-const GRUPOS: { pal: [string, number, number][]; ini: number; fim: number }[] = (() => {
+export type Grupo = { pal: [string, number, number][]; ini: number; fim: number };
+export const montarGrupos = (lista: [string, number, number][]): Grupo[] => {
   const ps: [string, number, number][] = [];
-  for (const [p, a, b] of palavras as [string, number, number][]) {
+  for (const [p, a, b] of lista) {
     if (p.startsWith("-") && ps.length) { const u = ps[ps.length - 1]; ps[ps.length - 1] = [u[0] + p, u[1], b]; continue; }
     ps.push([CORRIGE[p] ?? p, a, b]);
   }
@@ -220,13 +221,14 @@ const GRUPOS: { pal: [string, number, number][]; ini: number; fim: number }[] = 
     if (dur < 0.5 && out[k].length + out[k + 1].length <= 4) { out[k] = [...out[k], ...out[k + 1]]; out.splice(k + 1, 1); k--; }
   }
   return out.map((gr, k) => ({ pal: gr, ini: gr[0][1], fim: k + 1 < out.length ? out[k + 1][0][1] : gr[gr.length - 1][2] + 0.4 }));
-})();
+};
+const GRUPOS = montarGrupos(palavras as [string, number, number][]);
 const limpa = (p: string) => p.replace(/[.,?!;:]+$/, "");
 
-export const Legenda: React.FC<{ f: number; y: number; desde: number }> = ({ f, y, desde }) => {
+export const Legenda: React.FC<{ f: number; y: number; desde: number; grupos?: Grupo[] }> = ({ f, y, desde, grupos = GRUPOS }) => {
   const { fps } = useVideoConfig();
   const t = f / FPS;
-  const g = GRUPOS.find((x) => t >= x.ini - 0.05 && t < x.fim - 0.05);
+  const g = grupos.find((x) => t >= x.ini - 0.05 && t < x.fim - 0.05);
   if (!g || Math.round(g.ini * FPS) < desde - 1) return null;
   const pop = spring({ frame: f - Math.round(g.ini * FPS), fps, config: { damping: 12, stiffness: 220 } });
   const atual = g.pal.reduce((acc, [, a], k) => (t >= a - 0.05 ? k : acc), 0);
