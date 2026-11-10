@@ -284,7 +284,7 @@ const PastaUnica: React.FC<{ f: number; ini: number }> = ({ f, ini }) => {
         const ang = (k / nomes.length) * Math.PI * 2;
         const t = lerp(g, [k * 2, 16 + k * 2], [0, 1]);
         const x = 540 + Math.cos(ang) * 470 * (1 - t) - 140;
-        const y = 860 + Math.sin(ang) * 640 * (1 - t) - 50;
+        const y = 860 + Math.sin(ang) * 400 * (1 - t) - 50;
         return <div key={n} style={{ position: "absolute", left: x, top: y, width: 280, padding: "18px 0", textAlign: "center", background: "#fff", color: C.marca, borderRadius: 14, fontSize: 32, fontWeight: 700,
           transform: `scale(${1 - 0.6 * t}) rotate(${(1 - t) * (k % 2 ? 20 : -20)}deg)`, opacity: 1 - lerp(g, [14 + k * 2, 18 + k * 2], [0, 1]), boxShadow: "0 14px 30px rgba(0,0,0,.35)" }}>{n}</div>;
       })}
@@ -325,7 +325,7 @@ const BotaoBio: React.FC<{ f: number }> = ({ f }) => {
   const pulso = 1 + 0.05 * Math.sin(f / 4);
   if (f < s(27.0)) return null;
   return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1460, display: "flex", justifyContent: "center" }}>
+    <div style={{ position: "absolute", right: 140, top: 1470, display: "flex", justifyContent: "flex-end" }}>
       <div style={{ padding: "34px 50px", background: C.teal, color: "#fff", fontFamily, fontSize: 56, fontWeight: 800, borderRadius: 80,
         transform: `scale(${a * pulso})`, boxShadow: "0 0 0 10px rgba(46,196,201,.25), 0 20px 50px rgba(0,0,0,.45)" }}>👉 Link na bio</div>
     </div>
