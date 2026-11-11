@@ -95,7 +95,10 @@ inp, fc, prev = [], [], "0:v"
 for i, (k, a, b) in enumerate(cuts):
     inp += ["-i", P("tmp", f"c{k:02d}.mp4")]
 for i, (k, a, b) in enumerate(cuts[1:], 1):
-    fc.append(f"[{prev}][{i}:v]xfade=transition=fade:duration={XF}:offset={inicio[k]:.3f}[v{i}]"); prev = f"v{i}"
+    # 11/11/2026 (Notícias 05, revisor): mesma câmera com gente que some/aparece → o dissolve vira "fantasma".
+    # "fade_preto": [k, ...] no episodio.json = escurecer até o preto na entrada da cena k (passagem de tempo).
+    tr = "fadeblack" if k in {int(x) for x in CFG.get("fade_preto", [])} else "fade"
+    fc.append(f"[{prev}][{i}:v]xfade=transition={tr}:duration={XF}:offset={inicio[k]:.3f}[v{i}]"); prev = f"v{i}"
 fc.append(f"[{prev}]{CFG['cor']}[g]")
 run(["ffmpeg", "-v", "error", "-y", *inp, "-filter_complex", ";".join(fc), "-map", "[g]", "-t", f"{END:.3f}",
      "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", P("tmp", "cenas.mp4")])

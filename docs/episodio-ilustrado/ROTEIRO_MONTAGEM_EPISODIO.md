@@ -113,6 +113,9 @@ Entradas: `narracao.mp3, cuts.json, words.json, clipes/pNN.mp4, avatar_fala.mp4,
   da linha SOM de cada cena no Painel.
 - ✅ Clipes e avatar baixados direto do Drive pelo Painel (token): `GET /producao-videos/drive/pasta/{id}` e
   `/drive/arquivo/{id}` — sem pedir permissão arquivo por arquivo.
+- ✅ (11/11/2026, Notícias 05) Mesma câmera com gente que some/aparece de uma cena para a outra: o dissolve deixa as pessoas
+  "fantasma". `"fade_preto": [k, ...]` no `episodio.json` escurece até o preto na entrada da cena k (vira passagem de tempo);
+  o certo continua sendo a cena nova com outro ângulo ou a pessoa entrando no quadro.
 - ✅ Aproximar uma cena sem gerar imagem nova: `"recorte": {"15": [cx, cy, zoom]}` no `episodio.json` (centro em
   fração da largura/altura, zoom até ~1,8). Usado na Notícias 02: E15 = E13 de perto, E18 = E17 no berço.
 - ⬜ Música escolhida pela paleta/clima da ficha (hoje: trilha fixa da biblioteca do YouTube, escolhida pelo dono).
