@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script src="studio.js"></script>
+<style>
+  /* style: paper-world. Colours live in P below (the style's six paper tones + the rose accent). */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #F2E8D5; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #F2E8D5; }
+  canvas { position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1920" data-height="1080"></div>
+<script>
+  const S = STUDIO, D = S.D, W = 1920, H = 1080, root = S.root;
+
+  // ---------- colour: the paper-world tones; four light keys mixed only from them ----------
+  const P = { cream: '#F2E8D5', sand: '#E3CBA8', sage: '#9CB49A', dsage: '#5E7F6A', teal: '#2F5D62', rose: '#D98C7A', ink: '#2B2B2B' };
+  for (const k in P) { const h = P[k]; P[k] = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); }
+  const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+  const css = (c, a) => `rgba(${Math.round(c[0])},${Math.round(c[1])},${Math.round(c[2])},${a === undefined ? 1 : a})`;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const smooth = (a, b, x) => { const p = clamp((x - a) / (b - a), 0, 1); return p * p * (3 - 2 * p); };
+  let LT = 0;                                   // 0 morning, 1 golden, 2 dusk, 3 night; 4 wraps back to morning
+  const lit = (k) => { const l = ((LT % 4) + 4) % 4, i = Math.floor(l), f = l - i; return mix(k[i], k[(i + 1) % 4], f); };
+  const C = {
+    skyTop:   [mix(P.cream, P.sage, 0.34), mix(P.rose, P.sand, 0.45), mix(P.rose, P.teal, 0.34), mix(P.teal, P.ink, 0.5)],
+    skyMid:   [mix(P.cream, P.sage, 0.16), mix(P.sand, P.cream, 0.25), mix(P.rose, P.sand, 0.12), mix(P.teal, P.ink, 0.36)],
+    skyBot:   [mix(P.cream, P.sage, 0.08), mix(P.cream, P.sand, 0.35), mix(P.cream, P.sand, 0.45), mix(P.teal, P.dsage, 0.4)],
+    far:      [mix(P.sage, P.cream, 0.6), mix(P.sand, P.rose, 0.3), mix(P.rose, P.sand, 0.15), mix(P.teal, P.sage, 0.42)],
+    back:     [mix(P.sage, P.cream, 0.3), mix(P.sage, P.sand, 0.5), mix(P.rose, P.dsage, 0.5), mix(P.teal, P.dsage, 0.35)],
+    mid:      [mix(P.sage, P.dsage, 0.12), mix(mix(P.sage, P.dsage, 0.25), P.sand, 0.2), mix(P.dsage, P.rose, 0.22), mix(P.teal, P.dsage, 0.12)],
+    mount:    [mix(P.sage, P.sand, 0.28), mix(P.sand, P.sage, 0.4), mix(P.sand, P.rose, 0.4), mix(P.dsage, P.teal, 0.5)],
+    deep:     [mix(P.dsage, P.teal, 0.3), mix(P.dsage, P.teal, 0.42), mix(P.dsage, P.rose, 0.3), mix(P.teal, P.ink, 0.5)],
+    bank:     [P.dsage, mix(P.dsage, P.teal, 0.35), mix(P.teal, P.ink, 0.35), mix(P.teal, P.ink, 0.6)],
+    fern:     [P.teal, mix(P.teal, P.ink, 0.25), mix(P.teal, P.ink, 0.6), mix(P.teal, P.ink, 0.78)],
+    treeBack: [mix(P.sage, P.dsage, 0.45), mix(P.dsage, P.sand, 0.2), mix(P.dsage, P.rose, 0.3), mix(P.teal, P.dsage, 0.22)],
+    treeMid:  [P.dsage, mix(P.dsage, P.teal, 0.3), mix(P.teal, P.rose, 0.12), mix(P.teal, P.ink, 0.3)],
+    treeBank: [P.teal, mix(P.teal, P.dsage, 0.2), mix(P.teal, P.ink, 0.5), mix(P.teal, P.ink, 0.72)],
+    cloud:    [P.cream, mix(P.cream, P.sand, 0.45), mix(P.rose, P.cream, 0.5), mix(P.teal, P.cream, 0.4)],
+    stripC:   [mix(P.cream, P.sand, 0.25), mix(P.sand, P.cream, 0.3), mix(P.rose, P.cream, 0.3), mix(P.teal, P.cream, 0.3)],
+    star:     [P.cream, P.cream, mix(P.cream, P.sand, 0.3), mix(P.cream, P.sand, 0.12)],
+    moon:     [P.cream, P.cream, P.cream, mix(P.cream, P.sand, 0.1)],
+    crater:   [P.sand, P.sand, P.sand, mix(P.sand, P.teal, 0.18)],
+    halo:     [mix(P.cream, P.sage, 0.3), mix(P.cream, P.sage, 0.3), mix(P.rose, P.teal, 0.3), mix(P.teal, P.cream, 0.16)],
+    sun0:     [P.sand, mix(P.sand, P.rose, 0.35), P.rose, P.rose],
+    sun1:     [mix(P.sand, P.cream, 0.5), P.sand, mix(P.rose, P.sand, 0.45), mix(P.rose, P.sand, 0.45)],
+    sun2:     [P.cream, mix(P.cream, P.sand, 0.35), mix(P.cream, P.rose, 0.3), mix(P.cream, P.rose, 0.3)],
+    hull:     [P.teal, mix(P.teal, P.dsage, 0.25), mix(P.teal, P.rose, 0.18), mix(P.teal, P.sage, 0.22)],
+    sailL:    [P.cream, mix(P.cream, P.sand, 0.25), mix(P.cream, P.rose, 0.25), mix(P.cream, P.teal, 0.12)],
+    sailR:    [P.sand, mix(P.sand, P.rose, 0.2), mix(P.rose, P.sand, 0.3), mix(P.sand, P.teal, 0.28)],
+    pollen:   [P.cream, mix(P.cream, P.sand, 0.3), mix(P.cream, P.rose, 0.35), mix(P.cream, P.sand, 0.15)],
+    rimT:     [P.cream, mix(P.cream, P.sand, 0.4), mix(P.rose, P.cream, 0.25), mix(P.cream, P.teal, 0.4)],
+  };
+
+  // ---------- noise + hand-cut geometry (the paper-world toolkit) ----------
+  const rng = S.rng;
+  function noise1(seed) { const r = rng(seed), N = 1024, v = new Float32Array(N); for (let i = 0; i < N; i++) v[i] = r() * 2 - 1;
+    return (x) => { const i = Math.floor(x), f = x - i, a = v[((i % N) + N) % N], b = v[(((i + 1) % N) + N) % N], s = f * f * (3 - 2 * f); return a + (b - a) * s; }; }
+  function hash2(x, y, s) { let h = (Math.imul(x, 374761393) + Math.imul(y, 668265263) + Math.imul(s, 1442695041)) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
+  function vnoise(x, y, s, per) { const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi, ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy), m = a => ((a % per) + per) % per;
+    const a = hash2(m(xi), m(yi), s), b = hash2(m(xi + 1), m(yi), s), c = hash2(m(xi), m(yi + 1), s), d = hash2(m(xi + 1), m(yi + 1), s); return a + (b - a) * ux + (c - a) * uy + (a - b - c + d) * ux * uy; }
+  // cut a polyline into hand-cut facets; closed wraps the last point to the first
+  function cut(pts, seed, step, amp, wob, closed) {
+    step = step || 12; amp = amp === undefined ? 1.1 : amp; wob = wob === undefined ? 2.2 : wob; closed = closed === undefined ? true : closed;
+    const r = rng(seed), nz = noise1(seed + 7), n = pts.length, segs = closed ? n : n - 1, L = [0];
+    for (let i = 1; i <= segs; i++) { const a = pts[i - 1], b = pts[i % n]; L.push(L[i - 1] + Math.hypot(b[0] - a[0], b[1] - a[1])); }
+    const tot = L[segs], out = []; let s = 0, j = 0;
+    while (s < tot) {
+      while (L[j + 1] < s) j++;
+      const a = pts[j], b = pts[(j + 1) % n], f = (s - L[j]) / ((L[j + 1] - L[j]) || 1), dx = b[0] - a[0], dy = b[1] - a[1], dl = Math.hypot(dx, dy) || 1;
+      const d = nz(s / 70) * wob + (r() - 0.5) * amp * 2;
+      out.push([a[0] + dx * f - dy / dl * d, a[1] + dy * f + dx / dl * d]);
+      s += step * (0.5 + r());
+    }
+    if (!closed) out.push(pts[n - 1]);
+    return out;
+  }
+  const toPath = (pts, p) => { p = p || new Path2D(); p.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) p.lineTo(pts[i][0], pts[i][1]); p.closePath(); return p; };
+  const bbox = (pts) => { let a = 1e9, b = 1e9, c = -1e9, d = -1e9; for (const q of pts) { a = Math.min(a, q[0]); b = Math.min(b, q[1]); c = Math.max(c, q[0]); d = Math.max(d, q[1]); } return [a, b, c, d]; };
+  const circ = (cx, cy, r, n) => Array.from({ length: n || 90 }, (_, i) => { const a = i / (n || 90) * Math.PI * 2; return [cx + Math.cos(a) * r, cy + Math.sin(a) * r]; });
+  const bez = (a, b, c, d, n) => Array.from({ length: n }, (_, i) => { const u = (i + 1) / n, v = 1 - u;
+    return [v * v * v * a[0] + 3 * v * v * u * b[0] + 3 * v * u * u * c[0] + u * u * u * d[0], v * v * v * a[1] + 3 * v * v * u * b[1] + 3 * v * u * u * c[1] + u * u * u * d[1]]; });
+  const yOn = (pts, x) => { for (let i = 1; i < pts.length; i++) if (x <= pts[i][0]) { const a = pts[i - 1], b = pts[i], f = (x - a[0]) / (b[0] - a[0]); return a[1] + (b[1] - a[1]) * f; } return pts[pts.length - 1][1]; };
+
+  // ---------- grain tile (procedural paper, from the style) ----------
+  const GT = 768, grainC = document.createElement('canvas'); grainC.width = GT; grainC.height = GT;
+  { const x = grainC.getContext('2d'), id = x.createImageData(GT, GT), d = id.data;
+    for (let j = 0; j < GT; j++) for (let i = 0; i < GT; i++) {
+      const v = (hash2(i, j, 11) - 0.5) * 0.75 + (vnoise(i / 48, j / 48, 2, GT / 48) - 0.5) * 0.3 + (vnoise(i / 12, j / 12, 3, GT / 12) - 0.5) * 0.22 + (vnoise(i / 3, j / 3, 5, GT / 3) - 0.5) * 0.3;
+      const o = (j * GT + i) * 4, c = v > 0 ? 255 : 0; d[o] = c; d[o + 1] = c; d[o + 2] = c; d[o + 3] = Math.min(255, Math.abs(v) * 78);
+    }
+    x.putImageData(id, 0, 0);
+    const r = rng(77);
+    for (let k = 0; k < 420; k++) { const sx = 20 + r() * (GT - 40), sy = 20 + r() * (GT - 40), a = r() * 6.283, l = 6 + r() * 22;
+      x.strokeStyle = r() < 0.6 ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.10)'; x.lineWidth = 0.6 + r() * 0.7;
+      x.beginPath(); x.moveTo(sx, sy); x.quadraticCurveTo(sx + Math.cos(a + 0.6) * l * 0.6, sy + Math.sin(a + 0.6) * l * 0.6, sx + Math.cos(a) * l, sy + Math.sin(a) * l); x.stroke(); }
+  }
+
+  // ---------- canvases: background (depth of field), main, foreground (depth of field) ----------
+  const mk = (show) => { const c = document.createElement('canvas'); c.width = W; c.height = H; if (show) root.appendChild(c); const x = c.getContext('2d'); x.grainP = x.createPattern(grainC, 'repeat'); return [c, x]; };
+  const [mainC, MX] = mk(true), [bgC, BX] = mk(false), [fgC, FX] = mk(false);
+
+  // ---------- painters ----------
+  const SH = { dx: -3, dy: -3 };
+  let RIMA = 0.4;
+  // a sheet: lit rim on its top edge, optional soft shadow, base (or top-to-bottom shading), grain
+  function sheet(x, p, base, o) {
+    o = o || {};
+    const rim = o.rim === undefined ? 2.4 : o.rim, rimc = mix(base, lit(C.rimT), o.rimAmt === undefined ? RIMA : o.rimAmt);
+    if (o.shadow) { x.shadowColor = css(P.ink, o.shadow); x.shadowBlur = o.blur || 12; x.shadowOffsetX = SH.dx * (o.so || 0.6); x.shadowOffsetY = SH.dy * (o.so || 0.6) + (o.sy || 0); }
+    x.fillStyle = css(rimc); x.fill(p);
+    x.shadowColor = 'rgba(0,0,0,0)'; x.shadowBlur = 0; x.shadowOffsetX = 0; x.shadowOffsetY = 0;
+    let fill = css(base);
+    if (o.grad) { fill = x.createLinearGradient(0, o.grad[0], 0, o.grad[1]); fill.addColorStop(0, css(mix(base, lit(C.rimT), 0.16))); fill.addColorStop(1, css(mix(base, P.ink, 0.13))); }
+    x.save(); x.clip(p); x.translate(0, rim); x.fillStyle = fill; x.fill(p); x.translate(0, -rim);
+    if (o.bb) { x.grainP.setTransform(new DOMMatrix([1, 0, 0, 1, o.gx || 0, o.gy || 0])); x.globalAlpha *= o.ga === undefined ? 0.7 : o.ga; x.fillStyle = x.grainP;
+      x.fillRect(o.bb[0] - 4, o.bb[1] - 4, o.bb[2] - o.bb[0] + 8, o.bb[3] - o.bb[1] + 8); }
+    x.restore();
+  }
+  // pre-blurred shadows for the big sheets: one wide and soft, one tight contact shadow
+  function shadowOf(path, bb, blur) {
+    const k = 0.5, pad = blur * 3, w = bb[2] - bb[0] + pad * 2, h = bb[3] - bb[1] + pad * 2;
+    const c = document.createElement('canvas'); c.width = Math.ceil(w * k); c.height = Math.ceil(h * k);
+    const x = c.getContext('2d'); x.filter = `blur(${blur * k}px)`; x.setTransform(k, 0, 0, k, (pad - bb[0]) * k, (pad - bb[1]) * k); x.fillStyle = '#000'; x.fill(path);
+    return { c, x0: bb[0] - pad, y0: bb[1] - pad, w, h };
+  }
+  function bigShadow(x, L, a, air) {
+    air = air || 0; const g = x.globalAlpha;
+    x.globalAlpha = g * (0.42 + 0.18 * air) * a; x.drawImage(L.s1.c, L.s1.x0 + SH.dx * (1.6 + air * 2), L.s1.y0 + SH.dy * 1.6 + air * 14, L.s1.w, L.s1.h);
+    x.globalAlpha = g * 0.28 * a * (1 - 0.8 * air); x.drawImage(L.s2.c, L.s2.x0 + SH.dx * 0.4, L.s2.y0 + SH.dy * 0.4, L.s2.w, L.s2.h);
+    x.globalAlpha = g;
+  }
+  const big = (pts, seed) => { const c = cut(pts.top, seed, 12, 1.1, 2.2, false).concat([[pts.top[pts.top.length - 1][0], 1340], [pts.top[0][0], 1340]]);
+    const p = toPath(c), bb = bbox(c); return { p, bb, s1: shadowOf(p, bb, 22), s2: shadowOf(p, bb, 5), top: pts.top }; };
+
+  // ---------- our drawing ----------
+  const RIDGE = [[-120, 1030], [250, 868], [410, 905], [690, 706], [850, 768], [1040, 470]];
+  for (let i = 1; i <= 24; i++) { const u = i / 24; RIDGE.push([1040 + 300 * u, 470 * (1 - u) ** 2 + 720 * u * (1 - u) + 470 * u * u]); }
+  RIDGE.push([1450, 552], [1570, 515], [1770, 762], [2040, 900]);
+  const domeY = (x) => { const u = (x - 1040) / 300; return 470 * (1 - u) ** 2 + 720 * u * (1 - u) + 470 * u * u; };
+  const L = {
+    far:   big({ top: [[-200, 640], [220, 560], [430, 610], [650, 480], [900, 560], [1150, 470], [1420, 550], [1640, 440], [1850, 520], [2120, 470]] }, 11),
+    back:  big({ top: [[-200, 730], [180, 660], [400, 712], [620, 610], [860, 672], [1120, 600], [1380, 668], [1600, 580], [1820, 640], [2120, 590]] }, 17),
+    mid:   big({ top: [[-200, 820], [140, 724], [330, 792], [560, 630], [770, 712], [990, 660], [1250, 760], [1500, 670], [1760, 720], [2120, 640]] }, 23),
+    mount: big({ top: RIDGE }, 301),
+    bankL: big({ top: [[-220, 950], [40, 922], [230, 945], [390, 985], [520, 1040], [620, 1130]] }, 41),
+    bankR: big({ top: [[1420, 1130], [1580, 1012], [1760, 970], [1960, 952], [2160, 948]] }, 43),
+  };
+
+  // trees (the style's three cut shapes: pine, round, poplar)
+  function treeShape(type, h, seed) {
+    const p = new Path2D(), r = rng(seed), tw = Math.max(3, h * 0.07);
+    toPath(cut([[-tw / 2, 4], [tw / 2, 4], [tw / 2, -h * 0.3], [-tw / 2, -h * 0.3]], seed, 6, 0.4, 0.6), p);
+    if (type === 0) for (let i = 0; i < 3; i++) { const b = -h * (0.16 + 0.24 * i), a = b - h * 0.44, hw = h * (0.27 - 0.055 * i) * (0.9 + r() * 0.2); toPath(cut([[-hw, b], [hw, b], [r() * 2 - 1, a]], seed + i * 13, 7, 0.5, 0.8), p); }
+    else if (type === 1) toPath(cut(circ(0, -h * 0.62, h * 0.33, 60), seed + 3, 7, 0.5, 1.0), p);
+    else toPath(cut(Array.from({ length: 60 }, (_, i) => { const a = i / 60 * Math.PI * 2; return [Math.cos(a) * h * 0.17, -h * 0.56 + Math.sin(a) * h * 0.42]; }), seed + 5, 7, 0.5, 0.9), p);
+    return p;
+  }
+  const trees = (list, top, col, seed, sink) => list.map((d, i) => ({ x: d[0], h: d[1], y: yOn(top, d[0]) + d[1] * sink, p: treeShape(d[2], d[1], seed + i * 31), col, ph: (i * 0.37) % 1 }));
+  const T = {
+    back: trees([[60, 44, 2], [120, 36, 0], [196, 50, 2], [500, 40, 1], [585, 46, 0], [1850, 38, 0], [1912, 50, 2], [1990, 36, 1]], L.back.top, C.treeBack, 900, 0.14),
+    mid: trees([[350, 70, 0], [420, 92, 0], [497, 64, 2], [610, 80, 1], [1840, 74, 2], [1910, 98, 0], [1985, 70, 0], [2060, 86, 1]], L.mid.top, C.treeMid, 1200, 0.12),
+    bankL: trees([[-90, 250, 0], [40, 300, 0], [170, 220, 2], [300, 160, 0]], L.bankL.top, C.treeBank, 1500, 0.1),
+    bankR: trees([[1660, 190, 2], [1770, 250, 0], [1890, 300, 0], [2030, 230, 2]], L.bankR.top, C.treeBank, 1600, 0.1),
+  };
+
+  // ferns in the near corners
+  function fernCluster(x0, x1, n, seed, dir) {
+    const r = rng(seed), p = new Path2D();
+    for (let j = 0; j < n; j++) {
+      const bx = x0 + (x1 - x0) * (j + r() * 0.6) / n, hgt = 150 + r() * 200, lean = (r() - 0.5) * 160 + dir * 60, hw = 14 + r() * 11, Lp = [], Rp = [];
+      for (let k = 0; k <= 16; k++) { const s = k / 16, cx = bx + lean * s * s, cy = 1160 - s * hgt, w = hw * Math.pow(1 - s, 0.85), tx = 2 * lean * s, ty = -hgt, tl = Math.hypot(tx, ty);
+        Lp.push([cx - ty / tl * w, cy + tx / tl * w]); Rp.push([cx + ty / tl * w, cy - tx / tl * w]); }
+      toPath(cut(Lp.concat(Rp.reverse()), seed + j * 7, 8, 0.6, 1.0), p);
+    }
+    return p;
+  }
+  const FERN = [{ p: fernCluster(-80, 300, 10, 1900, 1), cx: 120 }, { p: fernCluster(1640, 2000, 10, 1950, -1), cx: 1820 }];
+
+  // clouds (the style's puff: top contour of a few circles, flat base) and long strips
+  function cloudShape(s, circles, seed) {
+    const cs = circles.map(c => [c[0] * s, -c[2] * s * 0.55 + c[1] * s, c[2] * s]);
+    let xa = 1e9, xb = -1e9; for (const c of cs) { xa = Math.min(xa, c[0] - c[2]); xb = Math.max(xb, c[0] + c[2]); }
+    const top = [], bot = [];
+    for (let x = xa + 1; x < xb - 1; x += 3) { let ty = 1e9, by = -1e9;
+      for (const c of cs) { const dx = x - c[0]; if (Math.abs(dx) < c[2]) { const q = Math.sqrt(c[2] * c[2] - dx * dx); ty = Math.min(ty, c[1] - q); by = Math.max(by, c[1] + q); } }
+      if (ty < 1e9) { top.push([x, ty]); bot.push([x, Math.min(0, by)]); } }
+    const pts = cut(top.concat(bot.reverse()), seed, 9, 0.8, 1.6); return { p: toPath(pts), bb: bbox(pts) };
+  }
+  function capsule(w, h, seed) { const p = [], r = h / 2;
+    for (let i = 0; i <= 30; i++) { const a = -Math.PI / 2 + i / 30 * Math.PI; p.push([w / 2 - r + Math.cos(a) * r, Math.sin(a) * r]); }
+    for (let i = 0; i <= 30; i++) { const a = Math.PI / 2 + i / 30 * Math.PI; p.push([-w / 2 + r + Math.cos(a) * r, Math.sin(a) * r]); }
+    const c = cut(p, seed, 10, 0.7, 1.3); return { p: toPath(c), bb: bbox(c) }; }
+  const CLOUDS = [
+    Object.assign(cloudShape(0.9, [[-130, 0, 58], [-55, -6, 88], [40, -2, 74], [118, 4, 52]], 700), { x: 740, y: 165, par: 0.2, sway: 40, ph: 0 }),
+    Object.assign(cloudShape(0.7, [[-90, 0, 50], [-20, -8, 78], [70, 0, 58]], 710), { x: 1430, y: 118, par: 0.2, sway: 30, ph: 0.4 }),
+  ];
+  const TRAVELLER = cloudShape(0.55, [[-80, 0, 46], [0, -6, 70], [80, 2, 50], [140, 6, 36]], 720);
+  // sunset strips: they slide in with the golden light and slide out as night falls
+  const STRIPS = [Object.assign(capsule(760, 22, 1301), { x: 560, y: 318, par: 0.16, sway: 30, ph: 0.2, from: -1500 }),
+                  Object.assign(capsule(520, 16, 1302), { x: 1590, y: 286, par: 0.17, sway: 24, ph: 0.7, from: 1300 }),
+                  Object.assign(capsule(380, 14, 1303), { x: 980, y: 352, par: 0.16, sway: 20, ph: 0.45, from: -1700 })];
+
+  // sun (three stacked discs), moon (disc, craters, two halo sheets)
+  const SUN = [100, 76, 54].map((r, i) => toPath(cut(circ(0, 0, r, 160), 800 + i, 9, 0.7, 1.4)));
+  const MOON = toPath(cut(circ(0, 0, 58), 611, 9, 0.7, 1.3));
+  const HALO = [124, 90].map((r, i) => toPath(cut(circ(0, 0, r, 120), 630 + i, 10, 0.7, 1.6)));
+  const CRATERS = [[-18, -14, 11], [16, 10, 8], [-8, 22, 6]].map(([x, y, r], i) => toPath(cut(circ(x, y, r, 40), 620 + i, 5, 0.4, 0.5)));
+
+  // stars: eight-point paper stars that land one by one as night falls, plus tiny dots
+  const STARS = (() => { const r = rng(5), a = [];
+    for (let i = 0; i < 16; i++) { const R = 9 + r() * 12, pts = [];
+      for (let k = 0; k < 8; k++) { const ang = k / 8 * Math.PI * 2 - Math.PI / 2, rr = k % 2 ? R * 0.36 : R; pts.push([Math.cos(ang) * rr, Math.sin(ang) * rr]); }
+      a.push({ x: 80 + r() * 1760, y: 50 + r() * 400, p: toPath(cut(pts, 2100 + i, 3, 0.2, 0.3)), th: 0.05 + r() * 0.5, n: 2 + (i % 3), ph: r(), R }); }
+    return a; })();
+  const DOTS = (() => { const r = rng(9); return Array.from({ length: 46 }, () => ({ x: r() * 1920, y: 30 + r() * 480, r: 1.4 + r() * 1.3, th: r() * 0.6, n: 3 + Math.floor(r() * 3), ph: r() })); })();
+
+  // the boat (our shapes, cut paper)
+  const HULL_PTS = [[-118, -58], [118, -58]].concat(bez([118, -58], [104, -22], [88, 0], [58, 0], 10), [[-58, 0]], bez([-58, 0], [-88, 0], [-104, -22], [-118, -58], 10));
+  const B = {
+    hull: toPath(cut(HULL_PTS, 501, 7, 0.5, 0.8)),
+    fold: toPath(cut([[-64, -58], [64, -58], [0, -14]], 502, 6, 0.3, 0.5)),
+    sailL: toPath(cut([[-11, -248], [-11, -76], [-106, -76]], 503, 7, 0.5, 0.8)),
+    sailR: toPath(cut([[11, -226], [11, -76], [94, -76]], 505, 7, 0.5, 0.8)),
+    sailLf: toPath(cut([[-11, -248], [-11, -76], [-46, -76]], 504, 6, 0.3, 0.5)),
+  };
+  const BOAT_BB = [-130, -270, 130, 10];
+
+  // birds (the style's bird: two curved wings and a small body)
+  function birdPath(s, flap) { const wy = Math.sin(flap) * s * 0.55, p = new Path2D();
+    p.moveTo(-s, wy - s * 0.1); p.quadraticCurveTo(-s * 0.5, -s * 0.28 + wy * 0.45, 0, s * 0.06); p.quadraticCurveTo(s * 0.5, -s * 0.28 + wy * 0.45, s, wy - s * 0.1);
+    p.quadraticCurveTo(s * 0.5, -s * 0.06 + wy * 0.5, s * 0.06, s * 0.3); p.lineTo(-s * 0.06, s * 0.3); p.quadraticCurveTo(-s * 0.5, -s * 0.06 + wy * 0.5, -s, wy - s * 0.1); return p; }
+  const FLOCKS = [{ par: 0.32, birds: [[1480, 196, 22, 0], [1560, 232, 18, 0.33], [1636, 180, 15, 0.66]] }, { par: 0.2, birds: [[250, 128, 13, 0.15], [298, 150, 11, 0.5], [336, 122, 10, 0.8]] }];
+
+  // pollen by day, drifting specks at night: closed loops, so they never jump
+  const POLLEN = (() => { const r = rng(1900); return Array.from({ length: 54 }, () => ({ x: r() * 1900 + 10, y: 360 + r() * 620, r: 1.2 + r() * 2.2, ph: r(), n: 1 + Math.floor(r() * 2) })); })();
+
+  // ---------- the clock of the day ----------
+  const DAY = 0.62, MOON_IN = 0.66, MOON_LEN = 0.30;
+  const half = (p) => S.mix(p, S.ease('sine.inOut')(p), 0.5);
+  const sunAt = (p) => { const q = half(p); return [S.mix(-120, 1000, q), 900 - 760 * Math.sin(Math.PI * q)]; };
+  const moonAt = (p) => { const q = half(p); return [S.mix(2060, 1330, q), 860 - 700 * Math.sin(Math.PI * q)]; };
+  const KEYS = [[0, 3.5], [0.12, 4], [0.30, 4], [0.50, 5], [0.62, 6], [0.70, 7], [0.90, 7], [1.0, 7.5]];
+  const keyAt = (c) => { for (let i = 1; i < KEYS.length; i++) if (c <= KEYS[i][0]) { const [c0, l0] = KEYS[i - 1], [c1, l1] = KEYS[i];
+    return l0 + (l1 - l0) * S.ease('sine.inOut')((c - c0) / (c1 - c0)); } return 7.5; };
+
+  const F = [1190, 430], BOAT_X = 1190, BOAT_Y = 446, N = 5, DEPTH = 640, PERIOD = 4, CX = 1190;
+  const breathe = S.ease('sine.inOut'), out2 = S.ease('power2.out'), land = S.ease('back.out(2.4)');
+  const CAM = { Z: 1, pan: 0, rise: 0 };
+  const setLayer = (x, par, dy) => { const k = 1 + (CAM.Z - 1) * par; x.setTransform(k, 0, 0, k, F[0] * (1 - k) + CAM.pan * par, F[1] * (1 - k) + CAM.rise * par + (dy || 0)); return k; };
+  const drawTrees = (x, list, par, dy, sway) => list.forEach(tr => {
+    setLayer(x, par, dy); x.translate(tr.x, tr.y); if (sway) x.rotate(sway * S.wave(t_, 2, tr.ph));
+    sheet(x, tr.p, lit(tr.col), { shadow: 0.28, blur: 10, rim: Math.max(1.4, tr.h * 0.012), bb: [-tr.h * 0.4, -tr.h * 1.05, tr.h * 0.4, 6], gx: tr.x, gy: tr.h }); });
+  let t_ = 0;
+
+  window.__timelines["main"] = S.play(function render(t) {
+    t_ = t;
+    const c = (t / D + 0.186) % 1, pd = c / DAY, pm = (c - MOON_IN) / MOON_LEN;
+    LT = keyAt(c) % 4;
+    const nightA = smooth(2.3, 3.0, LT) * (1 - smooth(3.4, 3.9, LT));
+    const gl = smooth(0.4, 1.5, LT) * (1 - smooth(2.0, 2.8, LT));           // golden-to-dusk warmth
+    const [sx, sy] = sunAt(clamp(pd, 0, 1)), [mx, my] = moonAt(clamp(pm, 0, 1));
+    const lx = pd <= 1 ? sx : mx, side = clamp((lx - 960) / 700, -1, 1);
+    // shadows lean away from the light and grow longer as the sun gets low
+    const low = pd <= 1 ? 1 - Math.sin(Math.PI * clamp(pd, 0, 1)) : 0.5;
+    SH.dx = -side * (3 + 11 * low * (0.4 + 0.6 * gl)); SH.dy = -3 + 1.5 * gl;
+    RIMA = 0.36 + 0.24 * gl - 0.12 * nightA;
+
+    // the night swell: before dawn a wave rolls through the ranges, back to front, and reaches the boat last.
+    // Each sheet rises and lands again (out and back), throwing a wider shadow while it is in the air.
+    const swell = (t0, A) => A * (S.seg(t, t0, 0.45, 'power2.out') - S.seg(t, t0 + 0.45, 0.6, 'back.out(1.3)'));
+    const sFar = swell(11.2, 16), sBack = swell(11.5, 24), sMid = swell(11.8, 30), sBoat = swell(12.2, 14);
+
+    // camera: parallax, a slow rise and fall, and the push to the boat and back
+    const pushA = S.seg(t, 4.2, 1.6, 'power2.inOut') - S.seg(t, 9.0, 1.8, 'power2.inOut');
+    CAM.Z = 1 + 0.10 * pushA; CAM.pan = 40 * S.wave(t, 1); CAM.rise = 8 * S.wave(t, 1, 0.25);
+
+    // ===================== background: sky .. back range =====================
+    const x = BX; x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = 1; x.clearRect(0, 0, W, H);
+    setLayer(x, 0.1);
+    const sg = x.createLinearGradient(0, -200, 0, 700);
+    sg.addColorStop(0, css(lit(C.skyTop))); sg.addColorStop(0.55, css(lit(C.skyMid))); sg.addColorStop(1, css(lit(C.skyBot)));
+    x.fillStyle = sg; x.fillRect(-400, -400, 2800, 1900);
+    x.setTransform(1, 0, 0, 1, 0, 0); x.grainP.setTransform(new DOMMatrix([1, 0, 0, 1, 0, 0])); x.globalAlpha = 0.42; x.fillStyle = x.grainP; x.fillRect(0, 0, W, H); x.globalAlpha = 1;
+
+    // night sky: dots, then the eight-point stars landing one by one
+    if (nightA > 0.01) {
+      setLayer(x, 0.08); x.fillStyle = css(lit(C.star));
+      DOTS.forEach(d => { const e = clamp((nightA - d.th) / 0.3, 0, 1); if (e <= 0) return;
+        x.globalAlpha = e * (0.55 + 0.35 * S.wave(t, d.n, d.ph)); x.beginPath(); x.arc(d.x, d.y, d.r, 0, Math.PI * 2); x.fill(); });
+      x.globalAlpha = 1;
+      STARS.forEach((st, i) => { const q = clamp((nightA - st.th) / 0.3, 0, 1); if (q <= 0) return; const e = land(q);
+        setLayer(x, 0.1); x.translate(st.x, st.y); x.rotate(0.3 * (1 - e) + 0.06 * S.wave(t, st.n, st.ph)); x.scale(0.6 + 0.4 * e, 0.6 + 0.4 * e); x.globalAlpha = Math.min(1, q * 2);
+        sheet(x, st.p, lit(C.star), { shadow: 0.25, blur: 6, so: 0.4, rim: 1.2, bb: [-24, -24, 24, 24], gx: i * 50 }); x.globalAlpha = 1; });
+    }
+    // the moon with its paper halo
+    if (pm > 0 && pm < 1) {
+      HALO.forEach((h, i) => { setLayer(x, 0.15); x.translate(mx, my); x.globalAlpha = 0.55 + 0.2 * i;
+        sheet(x, h, mix(lit(C.halo), lit(C.skyTop), 0.55 - 0.25 * i), { shadow: 0.12, blur: 14, so: 0.6, rim: 1.4, bb: [-130, -130, 130, 130], gx: 400 + i * 90, rimAmt: 0.25 }); x.globalAlpha = 1; });
+      setLayer(x, 0.15); x.translate(mx, my);
+      sheet(x, MOON, lit(C.moon), { shadow: 0.24, blur: 16, so: 0.8, rim: 2, bb: [-62, -62, 62, 62] });
+      CRATERS.forEach((cp, i) => sheet(x, cp, lit(C.crater), { shadow: 0.18, blur: 4, so: 0.3, rim: 1.2, bb: [-30, -30, 30, 30], gx: i * 40 }));
+    }
+    // the sun: three discs turning against each other
+    if (pd > 0 && pd < 1) { const cols = [C.sun0, C.sun1, C.sun2];
+      for (let i = 0; i < 3; i++) { setLayer(x, 0.15); x.translate(sx, sy); x.rotate(0.06 * S.wave(t, 1, i * 0.3) * (i % 2 ? -1 : 1));
+        sheet(x, SUN[i], lit(cols[i]), { shadow: 0.2, blur: 18, so: 0.8, rim: 2, bb: [-104, -104, 104, 104], gx: i * 200 }); } }
+    // strip clouds, then puffs (the sun passes behind them)
+    const stripIn = S.ease('power3.out')(smooth(0.35, 1.25, LT)) * (1 - S.ease('power2.in')(smooth(2.25, 2.9, LT)));
+    if (stripIn > 0.001) STRIPS.forEach(s => { setLayer(x, s.par); x.translate(s.x + s.sway * S.wave(t, 1, s.ph) + (1 - stripIn) * s.from, s.y);
+      sheet(x, s.p, lit(C.stripC), { shadow: 0.16, blur: 12, so: 1, sy: 4, rim: 1.6, bb: s.bb, gx: s.x }); });
+    CLOUDS.forEach(cl => { setLayer(x, cl.par); x.translate(cl.x + cl.sway * S.wave(t, 1, cl.ph), cl.y + 4 * S.wave(t, 2, cl.ph));
+      sheet(x, cl.p, lit(C.cloud), { shadow: 0.2, blur: 16, so: 1, sy: 4, rim: 2, bb: cl.bb, gx: cl.x }); });
+    // far range, the travelling cloud (it resets hidden behind the mountain), back range with its trees
+    setLayer(x, 0.3); bigShadow(x, L.far, 0.7, sFar / 16); setLayer(x, 0.3, -sFar); sheet(x, L.far.p, lit(C.far), { bb: L.far.bb, gx: 11, gy: 7, grad: [440, 900] });
+    setLayer(x, 0.4); x.translate(S.mix(-380, 1060, S.seg(t, 0, D, 'sine.inOut')), 560 + 3 * S.wave(t, 3));
+    sheet(x, TRAVELLER.p, lit(C.cloud), { shadow: 0.2, blur: 14, so: 1, sy: 4, rim: 2, bb: TRAVELLER.bb, gx: 100 });
+    drawTrees(x, T.back, 0.42, -sBack, 0);
+    setLayer(x, 0.42); bigShadow(x, L.back, 0.9, sBack / 24); setLayer(x, 0.42, -sBack); sheet(x, L.back.p, lit(C.back), { bb: L.back.bb, gx: 90, gy: 30, grad: [560, 1000] });
+    // the far flock
+    if (gl < 0.99) FLOCKS[1].birds.forEach(b => { setLayer(x, FLOCKS[1].par); x.translate(b[0] + 20 * S.wave(t, 1, b[3]), b[1] + 8 * S.wave(t, 2, b[3]));
+      x.globalAlpha = 1 - smooth(1.7, 2.4, LT) + smooth(3.6, 3.95, LT); x.fillStyle = css(P.ink); x.fill(birdPath(b[2], 2 * Math.PI * 24 * t / D + b[3] * 6)); x.globalAlpha = 1; });
+
+    // ===================== main =====================
+    const m = MX; m.setTransform(1, 0, 0, 1, 0, 0); m.globalAlpha = 1; m.clearRect(0, 0, W, H);
+    const dofB = 2.4 * pushA; if (dofB > 0.15) m.filter = `blur(${dofB.toFixed(2)}px)`; m.drawImage(bgC, 0, 0); m.filter = 'none';
+
+    // the middle range rides the swell; its trees ride with it
+    const lift = sMid, air = clamp(lift / 30, 0, 1);
+    drawTrees(m, T.mid, 0.6, -lift, 0);
+    setLayer(m, 0.6); bigShadow(m, L.mid, 1, air);
+    setLayer(m, 0.6, -lift); sheet(m, L.mid.p, lit(C.mid), { bb: L.mid.bb, gx: 200, gy: 60, grad: [620, 1100] });
+
+    // the breath: one clock for terraces, boat, ripples
+    const ph = t / PERIOD, f = ph - Math.floor(ph), e = breathe(f);
+    const bob = Math.cos(2 * Math.PI * f), rock = Math.sin(2 * Math.PI * f);
+
+    // the boat (drawn before the mountain, so the summit hides its keel)
+    setLayer(m, 1); m.translate(BOAT_X, BOAT_Y - 9 * bob - sBoat); m.rotate((2.4 * rock + 0.25 * sBoat) * Math.PI / 180);
+    m.strokeStyle = css(mix(P.ink, lit(C.hull), 0.15)); m.lineWidth = 1.6; m.lineCap = 'round';
+    m.beginPath(); m.moveTo(0, -258); m.lineTo(-112, -60); m.moveTo(0, -258); m.lineTo(108, -60); m.stroke();             // rigging
+    m.strokeStyle = css(P.ink); m.lineWidth = 4.5; m.beginPath(); m.moveTo(0, -60); m.lineTo(0, -264); m.stroke();       // mast
+    sheet(m, B.sailL, lit(C.sailL), { shadow: 0.26, blur: 10, so: 0.6, rim: 1.8, bb: BOAT_BB, gx: 90, rimAmt: 0.5 });
+    m.save(); m.clip(B.sailL); m.fillStyle = css(mix(lit(C.sailL), P.ink, 0.06)); m.fill(B.sailLf); m.restore();          // a fold in the sail
+    sheet(m, B.sailR, lit(C.sailR), { shadow: 0.26, blur: 10, so: 0.6, rim: 1.8, bb: BOAT_BB, gx: 60 });
+    { const fl = S.wave(t, 16), fl2 = S.wave(t, 16, 0.25);
+      const flag = toPath(cut([[4, -264], [26, -264 + 5 * fl], [50, -253 + 4 * fl2], [26, -247 + 5 * fl], [4, -242]], 507, 5, 0.3, 0.4));
+      sheet(m, flag, P.rose, { shadow: 0.25, blur: 6, rim: 1.4, bb: [-4, -272, 54, -236], gx: 5, rimAmt: 0.35 }); }
+    sheet(m, B.hull, lit(C.hull), { shadow: 0.32, blur: 12, rim: 2.2, bb: BOAT_BB, gx: 10, rimAmt: 0.35 });
+    sheet(m, B.fold, mix(lit(C.hull), P.ink, 0.2), { rim: 1.4, bb: BOAT_BB, gx: 30, rimAmt: 0.25 });
+
+    // the mountain and its terraces: sheets with the mountain's own ridge, sinking and darkening
+    setLayer(m, 1); bigShadow(m, L.mount, 1);
+    sheet(m, L.mount.p, lit(C.mount), { bb: L.mount.bb, gx: 120, gy: 80, grad: [380, 1100] });
+    m.save(); m.clip(L.mount.p);
+    const base = lit(C.mount), deep = lit(C.deep);
+    for (let i = 0; i < N; i++) {
+      const d = ((e + i) / N) * DEPTH, k = d / DEPTH, sxw = 1 + 0.18 * k;
+      m.save(); m.translate(CX, d); m.scale(sxw, 1); m.translate(-CX, 0); m.globalAlpha = clamp(d / 40, 0, 1);
+      bigShadow(m, L.mount, 0.85);
+      sheet(m, L.mount.p, mix(base, deep, Math.pow(k, 0.8)), { rim: 2.2, bb: L.mount.bb, gx: 160 + i * 37, gy: 40 * i, grad: [380, 1100] });
+      m.restore();
+    }
+    // the hull's contact shadow, the waterline lapping at it, and ripple rings leaving it with every breath
+    setLayer(m, 1);
+    { m.save(); m.translate(BOAT_X + SH.dx * 0.6, 432 - 2 * bob); m.scale(150, 16); const rg = m.createRadialGradient(0, 0, 0, 0, 0, 1);
+      rg.addColorStop(0, css(P.ink, 0.32)); rg.addColorStop(1, css(P.ink, 0)); m.fillStyle = rg; m.fillRect(-1, -1, 2, 2); m.restore(); }
+    const lap = lit(C.stripC); m.lineCap = 'round';
+    m.strokeStyle = css(lap, 0.85); m.lineWidth = 3; m.beginPath();
+    for (let xx = 1080; xx <= 1300; xx += 6) { const yy = domeY(xx) + 4 + 2.4 * Math.sin(xx * 0.075 + 2 * Math.PI * 8 * t / D); xx === 1080 ? m.moveTo(xx, yy) : m.lineTo(xx, yy); }
+    m.stroke();
+    [0, 0.22].forEach(off => { const q = clamp((f - off) / 0.55, 0, 1); if (q <= 0 || q >= 1) return; const eq = out2(q), rx = 140 + 260 * eq;
+      m.globalAlpha = (1 - q) * 0.85; m.strokeStyle = css(lap); m.lineWidth = 3.2 * (1 - 0.6 * q);
+      m.beginPath(); m.ellipse(BOAT_X, 424 + 10 * eq, rx, rx * 0.15, 0, 0, Math.PI * 2); m.stroke(); m.globalAlpha = 1; });
+    m.restore();
+
+    // the near flock goes home at dusk
+    const birdA = 1 - smooth(1.7, 2.4, LT) + smooth(3.6, 3.95, LT);
+    if (birdA > 0.01) FLOCKS[0].birds.forEach(b => {
+      setLayer(m, FLOCKS[0].par); m.translate(b[0] + 26 * S.wave(t, 1, b[3]), b[1] + 12 * S.wave(t, 2, b[3])); m.rotate(0.06 * S.wave(t, 3, b[3]));
+      m.globalAlpha = birdA; m.shadowColor = css(P.ink, 0.22); m.shadowBlur = 6; m.shadowOffsetX = SH.dx * 0.8; m.shadowOffsetY = 5;
+      m.fillStyle = css(P.ink); m.fill(birdPath(b[2], 2 * Math.PI * 22 * t / D + b[3] * 6));
+      m.shadowColor = 'rgba(0,0,0,0)'; m.shadowBlur = 0; m.shadowOffsetX = 0; m.shadowOffsetY = 0; m.globalAlpha = 1; });
+
+    // ===================== foreground =====================
+    const y = FX; y.setTransform(1, 0, 0, 1, 0, 0); y.globalAlpha = 1; y.clearRect(0, 0, W, H);
+    drawTrees(y, T.bankL, 0.95, 0, 0.008); drawTrees(y, T.bankR, 0.95, 0, 0.008);
+    setLayer(y, 0.95); bigShadow(y, L.bankL, 1.1); sheet(y, L.bankL.p, lit(C.bank), { bb: L.bankL.bb, gx: 30, gy: 200, grad: [880, 1150] });
+    setLayer(y, 0.95); bigShadow(y, L.bankR, 1.1); sheet(y, L.bankR.p, lit(C.bank), { bb: L.bankR.bb, gx: 70, gy: 240, grad: [900, 1150] });
+    FERN.forEach((fz, i) => { setLayer(y, 1.15); y.translate(fz.cx, 1160); y.rotate(0.02 * S.wave(t, 2, i * 0.4)); y.translate(-fz.cx, -1160);
+      sheet(y, fz.p, lit(C.fern), { shadow: 0.35, blur: 22, so: 1.2, rim: 2.2, bb: [fz.cx - 420, 720, fz.cx + 420, 1180], gx: 77 * i }); });
+    m.setTransform(1, 0, 0, 1, 0, 0);
+    const dofF = 3.4 * pushA; if (dofF > 0.15) m.filter = `blur(${dofF.toFixed(2)}px)`; m.drawImage(fgC, 0, 0); m.filter = 'none';
+
+    // pollen in the light, drifting specks at night
+    const pa = 0.3 + 0.7 * Math.max(gl, nightA);
+    setLayer(m, 0.85); m.fillStyle = css(lit(C.pollen));
+    POLLEN.forEach(p => { m.globalAlpha = pa * (0.45 + 0.4 * S.wave(t, 4, p.ph));
+      m.beginPath(); m.arc(p.x + 22 * S.wave(t, p.n, p.ph) + 9 * S.wave(t, 3, p.ph + 0.3), p.y + 30 * S.wave(t, p.n, p.ph + 0.25), p.r, 0, Math.PI * 2); m.fill(); });
+    m.globalAlpha = 1;
+
+    // ===================== light: the dusk glow from the sun, a light vignette (the style's own signature) =====================
+    m.setTransform(1, 0, 0, 1, 0, 0);
+    if (gl > 0.01 && pd > 0 && pd < 1) {
+      const k = 1 + (CAM.Z - 1) * 0.15, gx = sx * k + F[0] * (1 - k) + CAM.pan * 0.15, gy = sy * k + F[1] * (1 - k) + CAM.rise * 0.15;
+      m.globalCompositeOperation = 'soft-light';
+      const rg = m.createRadialGradient(gx, gy, 0, gx, gy, 1400);
+      rg.addColorStop(0, css(P.rose, 0.75 * gl)); rg.addColorStop(0.45, css(P.sand, 0.32 * gl)); rg.addColorStop(1, css(P.teal, 0.22 * gl));
+      m.fillStyle = rg; m.fillRect(0, 0, W, H);
+    }
+    m.globalCompositeOperation = 'multiply';
+    const vg = m.createRadialGradient(W / 2, H * 0.5, H * 0.5, W / 2, H * 0.5, H * 1.15);
+    vg.addColorStop(0, 'rgba(255,255,255,1)'); vg.addColorStop(1, css(mix(mix(P.cream, P.rose, gl * 0.5), P.ink, 0.12 + 0.06 * gl)));
+    m.fillStyle = vg; m.fillRect(0, 0, W, H);
+    m.globalCompositeOperation = 'source-over';
+  }, { loop: true });
+</script>
+</body>
+</html>

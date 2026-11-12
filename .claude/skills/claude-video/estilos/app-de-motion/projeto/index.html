@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1920" data-height="1080">
+  <div id="desk"></div>
+  <div id="dim"></div>
+  <div id="cam">
+    <div id="app"><div id="winBg" style="position:absolute;inset:0;background:#121212;border-radius:14px"></div></div>
+    <div id="barWrap"><div class="dots3"><i></i><i></i><i></i></div><div class="wtabs" id="wtabs"></div></div>
+    <div class="pn" id="tools"></div>
+    <div class="pn" id="binP"></div>
+    <div class="pn" id="viewP"><div class="ptabs"><span class="on">Composição Hora Dourada</span></div><div id="view"><div class="comp" style="transform:scale(.5984)"><div class="bg" id="viewB"></div><div class="dyn" id="viewD"></div></div></div><div class="vf"><span class="pct">50%</span><span class="tc" id="vtc"></span><span class="play" id="vplay"></span><span class="vfull">Cheia</span></div></div>
+    <div class="pn" id="tlP"><div class="lane" id="lane"></div></div>
+    <div class="pn" id="aiP"><div class="aitabs"><span>Info</span><span>Personagem</span><span class="on" id="aiTab"></span></div><div id="aiBody"></div><div class="send"><u></u><i id="sendI"></i></div></div>
+    <svg id="graph" viewBox="0 0 1920 1080"></svg>
+    <div id="focus"></div>
+    <div id="ghost">Seu Nome</div>
+  </div>
+  <div id="click"></div>
+  <div class="cur" id="cAI"><span class="ar"></span><span class="tg"></span></div>
+  <div id="full"><div class="comp" id="fullC"><div class="bg" id="fullB"></div><div class="dyn" id="fullD"></div></div></div>
+  <div id="flash"></div>
+</div>
+<script src="app.js"></script>
+<script src="motor.js"></script>
+</body>
+</html>

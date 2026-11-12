@@ -1,0 +1,11 @@
+{
+  "amplitude_min": 5.6,
+  "fracao_parada_min": 0.21,
+  "picos_por_10s_min": 0.4,
+  "cortes_duros_por_10s_ref": 0.2,
+  "amplitude_ref": 8.0,
+  "fracao_parada_ref": 0.31,
+  "duracao_ref": 52.672,
+  "origem": "modelar.py --alvo",
+  "regra": "a peça precisa bater os mínimos; as referências por 10 s escalam com a duração"
+}

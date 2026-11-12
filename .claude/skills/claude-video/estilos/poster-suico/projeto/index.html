@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;900&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  html,body{margin:0;background:#FFFFFF;overflow:hidden}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#FFFFFF}
+  #cv{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  .pre{position:absolute;left:-9999px;top:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="9" data-width="1920" data-height="1080">
+  <canvas id="cv" width="1920" height="1080"></canvas>
+</div>
+<!-- as fontes do canvas só carregam se alguém na página usar -->
+<span class="pre" style="font:900 40px 'Inter'">Claude Code cria edita anima</span>
+<span class="pre" style="font:600 40px 'Inter'">rótulo</span>
+<script src="motor.js"></script>
+</body>
+</html>

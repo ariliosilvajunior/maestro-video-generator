@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Stencil:wght@800;900&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="root" data-composition-id="main" data-variante="desenho" data-start="0" data-duration="22" data-width="1920" data-height="1080">
+  <canvas id="gl" width="1920" height="1080"></canvas>
+  <div id="realw"><canvas id="bgc" width="1920" height="1080"></canvas><canvas id="fg" width="1920" height="1080"></canvas></div>
+  <div id="scan"></div>
+
+  <div id="tag"><i></i>Hangar de código</div>
+
+  <div id="title">
+    <div class="t0">Embraer</div>
+    <div class="t1">A-29</div>
+    <div class="t2">Super Tucano</div>
+    <div class="ts"><span><b>Asa</b>11,14 m</span><span><b>Corpo</b>11,38 m</span><span><b>Motor</b>1.604 hp</span></div>
+  </div>
+
+  <div id="cap"><div id="capE"><i></i>Claude Code</div><div id="capT"></div></div>
+
+  <div id="panel">
+    <h6>Aeronave</h6>
+    <div class="row"><label>Comandos</label><div class="seg" data-k="ctrl"><span>Centro</span><span>Manobra</span></div></div>
+    <div class="row"><label>Flaps</label><div class="seg" data-k="flaps"><span>Recolhidos</span><span>Baixados</span></div></div>
+    <div class="row"><label>Capota</label><div class="seg" data-k="canopy"><span>Fechada</span><span>Aberta</span></div></div>
+    <hr>
+    <h6>Motor</h6>
+    <div class="sl" id="slMotor"><div class="slh"><label>Hélice</label><em id="vMotor">parada</em></div><div class="tr"><u></u><s></s></div></div>
+    <hr>
+    <h6>Pintura</h6>
+    <div class="liv" id="livA"><i style="background:linear-gradient(90deg,#123d9c 45%,#16803c 45% 72%,#e0a61d 72%)"></i><div><b>Fumaça</b><small>Azul, verde e amarelo</small></div></div>
+    <div class="liv" id="livB"><i style="background:linear-gradient(90deg,#36493a 55%,#6f7779 55%)"></i><div><b>Operacional</b><small>Verde e cinza</small></div></div>
+    <hr>
+    <h6>Realismo</h6>
+    <div class="sl hot" id="slReal"><div class="slh"><label>Do desenho ao real</label><em id="vReal">0%</em></div><div class="tr"><u></u><s></s></div></div>
+  </div>
+
+  <div id="ring"></div>
+  <svg id="cur" width="34" height="40" viewBox="0 0 34 40"><path d="M3 2 L3 31 L10.6 24.6 L15.6 36 L21 33.6 L16 22.4 L26 22.2 Z" fill="#fff" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/></svg>
+
+  <div id="end">
+    <div class="e0">A-29 Super Tucano</div>
+    <div class="e1">Do código<br>ao real</div>
+    <div class="e2">Desenhado em código, <mark>foto real da FAB</mark></div>
+    <div class="e3">Foto: André Gustavo Stumpf (CC BY 2.0), via Wikimedia Commons. Avião da Força Aérea Brasileira.</div>
+  </div>
+</div>
+<script type="module" src="motor.js"></script>
+</body>
+</html>

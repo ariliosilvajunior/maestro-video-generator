@@ -1,0 +1,57 @@
+:root{--paper:#e8e6d6;--ink:#20241c;--dim:#6b6e5f;--line:#c9c7b4;--mari:#e79a19}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#c6ccc1}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;font-family:Barlow,sans-serif;color:var(--ink)}
+#gl{position:absolute;inset:0;width:1920px;height:1080px;display:block}
+#realw{position:absolute;inset:0;width:1920px;height:1080px}
+#realw canvas,#voo{position:absolute;inset:0;width:1920px;height:1080px}
+#voo{display:none}
+#scan{position:absolute;top:0;bottom:0;left:0;width:3px;background:var(--mari);box-shadow:0 0 0 1px rgba(231,154,25,.35);opacity:0}
+
+#tag{position:absolute;left:30px;top:24px;font-size:17px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:9px}
+#tag i{width:9px;height:9px;border-radius:50%;background:var(--mari)}
+
+#title{--tt:#20241c;position:absolute;left:34px;bottom:26px;line-height:.86;color:var(--tt)}
+#title .t0{font:800 38px 'Big Shoulders Stencil',sans-serif;color:var(--tt);opacity:.86;letter-spacing:.01em;margin-bottom:6px}
+#title .t1,#title .t2{font:900 88px 'Big Shoulders Stencil',sans-serif;color:var(--tt);letter-spacing:.005em}
+#title .ts{display:flex;gap:26px;margin-top:16px;font-size:16px;font-weight:600;line-height:1.15}
+#title .ts b{display:block;font-weight:500;font-size:13px;color:var(--tt);opacity:.72}
+
+#cap{position:absolute;top:44px;left:calc(798px);transform:translateX(-50%);background:rgba(240,238,226,.94);border-radius:5px;padding:13px 30px 15px;text-align:center;white-space:nowrap;opacity:0}
+#capE{font-size:15px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#5d5a43;display:flex;gap:9px;align-items:center;justify-content:center;margin-bottom:3px}
+#capE i{width:9px;height:9px;border-radius:50%;background:var(--mari)}
+#capT{font-size:39px;font-weight:600;letter-spacing:-.005em}
+
+#panel{position:absolute;right:14px;top:14px;width:318px;background:rgba(232,230,214,.95);border-radius:7px;padding:16px 18px;font-size:15px}
+#panel h6{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--dim);margin-bottom:10px}
+#panel hr{border:0;border-top:1px solid var(--line);margin:18px 0 15px}
+.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.row label{font-weight:500}
+.seg{display:flex;gap:4px}
+.seg span{display:block;min-width:78px;text-align:center;padding:6px 8px;border-radius:4px;font-size:13.5px;font-weight:600;background:#dcdac7;color:#52554a}
+.seg span.on{background:#2b2f26;color:#f4f2e4}
+.sl{margin-bottom:4px}
+.slh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-weight:500}
+.slh em{font-style:normal;color:var(--dim);font-size:13.5px;font-variant-numeric:tabular-nums}
+.tr{position:relative;height:5px;background:#cfcdb9;border-radius:3px}
+.tr u{position:absolute;left:0;top:0;bottom:0;background:#2b2f26;border-radius:3px;width:0}
+.tr s{position:absolute;top:50%;left:0;width:17px;height:17px;margin:-8.5px 0 0 -8.5px;border-radius:50%;background:#2b2f26;border:2.5px solid #f2f0e2}
+.sl.hot .tr u{background:var(--mari)}
+.sl.hot .tr s{background:var(--mari)}
+.sl.hot .slh em{color:#a56c0e;font-weight:700}
+.liv{display:flex;gap:11px;align-items:center;padding:9px 10px;border:1.5px solid transparent;border-radius:5px;margin-bottom:6px}
+.liv.on{border-color:#2b2f26;background:rgba(255,255,255,.28)}
+.liv i{width:44px;height:27px;border-radius:3px;flex:none}
+.liv b{display:block;font-weight:600;font-size:15px;line-height:1.1}
+.liv small{font-size:12.5px;color:var(--dim)}
+
+#cur{position:absolute;left:0;top:0;filter:drop-shadow(0 3px 3px rgba(0,0,0,.28))}
+#ring{position:absolute;left:0;top:0;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;border:3px solid var(--mari);opacity:0}
+
+#end{position:absolute;inset:0;background:#dfdfcc;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;text-align:center}
+#end .e0{font-size:24px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#5d5a43;margin-bottom:12px}
+#end .e1{font:900 172px/.92 'Big Shoulders Stencil',sans-serif;color:var(--ink)}
+#end .e2{font-size:42px;font-weight:600;margin-top:22px}
+#end mark{background:linear-gradient(transparent 82%,var(--mari) 82%);color:inherit;padding:0 4px}
+
+#end .e3{position:absolute;bottom:36px;left:0;right:0;font-size:17px;color:#5d5a43;font-weight:500}

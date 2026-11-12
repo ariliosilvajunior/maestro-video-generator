@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,500&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  html,body{margin:0;background:#F2E8D5;overflow:hidden}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#F2E8D5}
+  #cv{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  .pre{position:absolute;left:-9999px;top:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+  <canvas id="cv" width="1920" height="1080"></canvas>
+</div>
+<!-- a fonte do canvas só carrega se alguém na página usar -->
+<span class="pre" style="font:italic 500 40px 'EB Garamond'">Passo a passo sem tecniquês</span>
+<script src="motor.js"></script>
+</body>
+</html>

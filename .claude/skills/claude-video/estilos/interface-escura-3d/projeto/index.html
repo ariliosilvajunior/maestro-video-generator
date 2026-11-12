@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  /* graphite-ui, versão autoral. Todas as cores saem destas variáveis. */
+  :root { --fundo:#0E0F12; --painel:#17181C; --linha:#26282E; --texto:#ECEDEF; --apagado:#8A8F98; --verde:#3DD68C;
+    --relevo:rgba(236,237,239,0.05); --esq:rgba(138,143,152,0.62); --esq2:rgba(138,143,152,0.3); --ponto:rgba(138,143,152,0.2); --sombra:rgba(0,0,0,0.6); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--fundo)}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--fundo);font-family:'Inter',sans-serif;color:var(--texto)}
+  #pontos{position:absolute;left:-400px;top:-300px;width:2720px;height:1680px;background-image:radial-gradient(circle,var(--ponto) 1.4px,transparent 1.6px);background-size:40px 40px}
+  #palco{position:absolute;inset:0;perspective:2200px;perspective-origin:960px 540px}
+  #app{position:absolute;left:0;top:0;width:1400px;height:880px;border-radius:16px;background:var(--painel);border:1px solid var(--linha);overflow:hidden;transform-origin:700px 440px;box-shadow:0 60px 140px var(--sombra)}
+  #flutua{position:absolute;left:0;top:0;width:1400px;height:880px;transform-origin:700px 440px;transform-style:preserve-3d}
+  .abs{position:absolute}
+  .hl{position:absolute;height:1px;background:var(--linha)}
+  .vl{position:absolute;width:1px;background:var(--linha)}
+  .barra{position:absolute;border-radius:999px}
+  .mascara{position:absolute;overflow:hidden}
+  #titulo{position:absolute;left:0;top:0;font-size:44px;font-weight:600;letter-spacing:-0.03em;line-height:64px;white-space:nowrap}
+  #botao{position:absolute;left:1120px;top:92px;width:216px;height:64px;border-radius:12px;background:var(--verde);overflow:hidden;transform-origin:50% 50%}
+  #botaoRotulo{position:absolute;left:0;top:0;width:216px;height:64px;line-height:64px;text-align:center;color:var(--fundo);font-size:24px;font-weight:600;letter-spacing:-0.01em}
+  #botaoVisto{position:absolute;left:0;top:0;width:216px;height:64px;display:flex;align-items:center;justify-content:center}
+  .linha{position:absolute;left:364px;width:972px;height:104px;overflow:hidden}
+  .caixa{position:absolute;left:0;top:37px;width:30px;height:30px;border-radius:9px;border:2px solid var(--esq2)}
+  .caixaCheia{position:absolute;left:-2px;top:-2px;width:30px;height:30px;border-radius:9px;background:var(--verde);display:flex;align-items:center;justify-content:center}
+  .mini{position:absolute;left:58px;top:20px;width:112px;height:64px;border-radius:8px;background:var(--esq2);overflow:hidden}
+  .mini i{position:absolute;left:44px;top:22px;width:0;height:0;border-left:16px solid var(--esq);border-top:10px solid transparent;border-bottom:10px solid transparent}
+  .risco{position:absolute;height:2px;background:var(--apagado);transform-origin:0 50%}
+  .data{position:absolute;left:830px;top:36px;height:32px;border-radius:999px;border:2px solid var(--esq2)}
+  #manchete{position:absolute;left:120px;top:0;font-size:168px;font-weight:600;letter-spacing:-0.03em}
+  .mmask{position:absolute;left:0;overflow:hidden;height:214px;width:1100px}
+  .mpal{position:absolute;left:0;top:0;line-height:214px;white-space:nowrap}
+  #aviso{position:absolute;left:380px;top:600px;width:600px;height:132px;border-radius:16px;background:var(--painel);border:1px solid var(--esq2);box-shadow:0 30px 80px var(--sombra)}
+  #avisoBola{position:absolute;left:32px;top:36px;width:60px;height:60px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center}
+  #cursor{position:absolute;left:0;top:0;width:44px;height:52px}
+  #anel{position:absolute;left:0;top:0;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;border:2px solid var(--verde)}
+  #limpeza{position:absolute;width:2px;background:var(--texto)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+  <div id="pontos"></div>
+  <div id="palco"><div id="app"></div><div id="flutua"></div></div>
+  <div id="manchete"></div>
+  <div id="anel"></div>
+  <svg id="cursor" viewBox="0 0 44 52"><path d="M4 3 L4 41 L14 32 L21 47 L28 44 L21 29 L35 29 Z" fill="var(--verde)" stroke="var(--fundo)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+</div>
+<script src="motor.js"></script>
+</body>
+</html>

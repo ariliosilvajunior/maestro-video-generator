@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+  <div id="cam">
+    <div id="app">
+      <div id="canvas"></div>
+      <div id="frames"></div>
+      <div id="flabels"></div>
+      <div id="over"></div>
+      <div id="bar"><div id="barL"></div><div id="barR"><span class="av" style="background:#2F8C83">A</span><span class="av" style="background:#6E5FC2;margin-left:-8px">L</span><span class="av ai" style="margin-left:-8px" id="avAI"></span><span id="zoomL">60%</span><span class="share">Compartilhar</span></div></div>
+      <div class="pn" id="layers"></div>
+      <div class="pn" id="design"></div>
+      <div class="pn" id="claude"></div>
+      <div id="tool"></div>
+    </div>
+  </div>
+  <div id="feed">
+    <div class="ng" style="left:-250px"></div><div class="ng" style="left:1730px"></div>
+    <div id="feedCard"><div id="feedArt"></div><div id="feedDur">12:04</div><div id="feedClock"></div></div>
+    <div id="feedMeta"></div>
+    <div class="ngm"><i></i><u></u><u style="top:34px;width:56px"></u></div>
+  </div>
+  <div class="cur" id="cAna"><span class="ar"></span><span class="nm" style="background:#2F8C83">Ana</span></div>
+  <div class="cur" id="cLeo"><span class="ar"></span><span class="nm" style="background:#6E5FC2">Léo</span></div>
+  <div id="click"></div>
+  <div id="click2"></div>
+  <div id="wash"></div>
+  <div id="fly"></div>
+  <div class="cur" id="cAI"><span class="ar"></span><span class="tg"></span></div>
+</div>
+<script src="app.js"></script>
+<script src="motor.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Archivo+Black&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  html,body{margin:0;background:#FFD400;overflow:hidden}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#FFD400}
+  #cv{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  .pre{position:absolute;left:-9999px;top:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+  <canvas id="cv" width="1920" height="1080"></canvas>
+</div>
+<!-- as fontes do canvas só carregam se alguém na página usar -->
+<span class="pre" style="font:400 40px 'League Gothic'">TRÊS ERROS 321</span>
+<span class="pre" style="font:400 40px 'Archivo Black'">PROMPT CONTEXTO</span>
+<script src="motor.js"></script>
+</body>
+</html>

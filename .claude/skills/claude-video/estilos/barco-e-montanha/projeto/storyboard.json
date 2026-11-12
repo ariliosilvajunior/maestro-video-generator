@@ -1,0 +1,15 @@
+{
+  "title": "Barco na montanha, premium (um dia em loop)",
+  "format": "16:9",
+  "seconds": 16,
+  "shots": [
+    {"time": "0.0-4.0", "graphic": "Manha, plano aberto em folhas de papel; a caneta de tinta corre o contorno; ondas de nivel respiram sob o barco",
+     "asset": {"kind": "code"}},
+    {"time": "4.0-8.0", "graphic": "A camera aproxima 10% no barco; o sol cruza o ceu e as sombras e a hachura mudam de lado",
+     "asset": {"kind": "code"}},
+    {"time": "8.0-12.0", "graphic": "Por do sol atras da serra; a noite cai, estrelas e lua; a folha do meio levanta e assenta; a camera volta",
+     "asset": {"kind": "code"}},
+    {"time": "12.0-16.0", "graphic": "A lua se poe, amanhece, o sol nasce a esquerda; o quadro de 16 s e igual ao de 0 s",
+     "asset": {"kind": "code"}}
+  ]
+}

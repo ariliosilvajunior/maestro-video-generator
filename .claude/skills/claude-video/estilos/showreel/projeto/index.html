@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Instrument+Serif:ital@1&family=Caveat:wght@600&family=JetBrains+Mono:wght@500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  html,body{margin:0;background:#F1EEE6;overflow:hidden}
+  #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#F1EEE6}
+  #cv{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  .pre{position:absolute;left:-9999px;top:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1920" data-height="1080">
+  <canvas id="cv" width="1920" height="1080"></canvas>
+  <audio id="trilha" src="assets/trilha.wav" data-start="0" data-duration="16" data-track-index="9" data-volume="1"></audio>
+</div>
+<!-- as fontes do canvas só carregam se alguém na página usar -->
+<span class="pre" style="font:800 40px 'Inter Tight'">CLAUDE çã</span>
+<span class="pre" style="font:700 40px 'Inter Tight'">Faço a letra</span>
+<span class="pre" style="font:italic 400 40px 'Instrument Serif'">motion designer</span>
+<span class="pre" style="font:600 40px 'Caveat'">achata! ✓</span>
+<span class="pre" style="font:500 40px 'JetBrains Mono'">00:00 →</span>
+<span class="pre" style="font:700 40px 'JetBrains Mono'">CAPÍTULO</span>
+<script src="motor.js"></script>
+</body>
+</html>

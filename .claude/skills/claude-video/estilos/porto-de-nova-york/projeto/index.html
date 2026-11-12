@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  html, body { margin: 0; background: #000; overflow: hidden; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+  #gl, #ov { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; }
+  #veu { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: #160d14; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+  <canvas id="gl" width="1920" height="1080"></canvas>
+  <canvas id="ov" width="1920" height="1080"></canvas>
+  <div id="veu"></div>
+  <audio id="trilha" src="assets/trilha.wav" data-start="0" data-duration="30" data-track-index="9" data-volume="1"></audio>
+</div>
+<script src="cena.js"></script>
+<script src="motor.js"></script>
+</body>
+</html>

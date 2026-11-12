@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Galeria de estilos · Claude Video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@500&display=swap" />
+<style>
+  :root {
+    /* Identidade AiVerso: papel claro, tinta, azul como âncora, marigold como marca-texto, coral só na marca, cards brancos chapados. */
+    --bg: #f6f5f4; --surface: #ffffff; --line: rgba(17,17,17,0.10); --line2: rgba(17,17,17,0.18);
+    --text: #111111; --mute: #5c5a57; --faint: #8a8783; --accent: #0075de; --coral: #f64932; --marigold: #fff1cc; --ivory: #f6f5f4; --ink: #111111; --midnight: #02093a;
+    --sans: 'Inter', system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --tight: -0.04em;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  /* barra do topo */
+  .bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 18px 64px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .mark { font-weight: 800; font-size: 22px; letter-spacing: var(--tight); white-space: nowrap; }
+  .mark i { font-style: normal; color: var(--coral); }
+  .controls { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  .seg { display: inline-flex; padding: 4px; border-radius: 999px; background: #fff; border: 1px solid var(--line); }
+  .seg button { padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--mute); transition: color .2s, background .2s; white-space: nowrap; }
+  .seg button:hover { color: var(--text); }
+  .seg button.on { background: var(--ink); color: #fff; }
+  .seg button:disabled { opacity: 0.35; cursor: default; }
+
+  /* aviso: só aparece quando a galeria não consegue carregar os vídeos ou o servidor para */
+  #aviso { padding: 14px 64px; background: var(--marigold); color: var(--ink); font-size: 15px; line-height: 1.55; border-bottom: 1px solid var(--line2); }
+  #aviso[hidden] { display: none; }
+  #aviso code { font-family: var(--mono); font-size: 13px; background: rgba(255,255,255,0.75); padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+
+  /* herói */
+  .wrap { max-width: 1680px; margin: 0 auto; padding: 0 64px 120px; }
+  .hero { padding: 104px 0 72px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: end; border-bottom: 1px solid var(--line); margin-bottom: 64px; }
+  .hero h1 { font-weight: 800; font-size: clamp(56px, 7vw, 112px); line-height: 0.95; letter-spacing: var(--tight); }
+  /* a palavra-chave ganha a tarja de marca-texto marigold, com a tinta por cima */
+  .hero h1 i { font-style: normal; color: var(--ink); position: relative; z-index: 0; padding: 0 0.1em; margin: 0 -0.04em; }
+  /* a tarja é 10 % mais baixa que a caixa da linha, para não engolir a palavra */
+  .hero h1 i::before { content: ''; position: absolute; left: 0; right: 0; top: 5%; bottom: 5%; background: var(--marigold); border-radius: 4px; z-index: -1; }
+  .hero p { font-size: 18px; line-height: 1.6; color: var(--mute); max-width: 560px; }
+  .hero p b { color: var(--text); font-weight: 600; }
+  .steps { display: flex; gap: 32px; margin-top: 28px; font-size: 14px; color: var(--mute); flex-wrap: wrap; }
+  .steps span { display: flex; align-items: center; gap: 10px; }
+  .steps em { font-style: normal; font-family: var(--mono); font-size: 12px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line2);
+    display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: var(--marigold); border: 0; font-weight: 500; }
+
+  /* cabeçalhos de família */
+  .group { margin-bottom: 96px; }
+  .ghead { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+  .ghead h2 { font-weight: 800; font-size: 40px; letter-spacing: var(--tight); line-height: 1; }
+  .ghead p { color: var(--mute); font-size: 15px; max-width: 520px; text-align: right; line-height: 1.5; }
+
+  /* tiles */
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px 40px; }
+  .tile { display: flex; flex-direction: column; gap: 20px; }
+  .screen { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: var(--surface);
+    box-shadow: 0 0 0 1px var(--line); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+  .tile:hover .screen { box-shadow: 0 0 0 2px var(--accent); }
+  .screen { background: #fff; }
+  .screen.has-video { cursor: zoom-in; }
+  .tile:hover .screen { transform: translateY(-4px); }
+  /* 1:1 e 9:16 cabem inteiros no tile: contain sobre fundo escuro, nunca recorta */
+  .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; display: block; transition: opacity .18s linear; }
+  .screen .only-name { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 32px; text-align: center;
+    font-weight: 800; font-size: 36px; line-height: 1.05; letter-spacing: var(--tight); color: var(--mute); }
+  .screen .seg { position: absolute; left: 16px; top: 16px; z-index: 2; background: rgba(246,245,244,0.92); border-color: var(--line); }
+  .screen .seg button { padding: 7px 14px; font-size: 12.5px; color: rgba(255,255,255,0.75); }
+  .screen .seg button.on { background: var(--ink); color: #fff; }
+  .chips { position: absolute; right: 16px; top: 16px; z-index: 2; display: flex; gap: 8px; }
+  .chip { padding: 7px 12px; border-radius: 999px; font-size: 12px; color: var(--ink); font-family: var(--mono);
+    background: rgba(246,245,244,0.92); border: 1px solid var(--line); }
+  .meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+  .meta h3 { font-weight: 800; font-size: 28px; line-height: 1.05; letter-spacing: var(--tight); }
+  .meta .chamada { margin-top: 8px; color: var(--mute); font-size: 14.5px; line-height: 1.45; }
+  .meta .specs { display: flex; gap: 14px; margin-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: 0.02em; flex-wrap: wrap; }
+  .use { flex: none; display: inline-flex; align-items: center; gap: 10px; padding: 13px 20px; border-radius: 999px; background: var(--accent); color: #fff;
+    font-size: 14px; font-weight: 600; transition: transform .2s, background .2s; white-space: nowrap; }
+  .use:hover { transform: translateY(-1px); background: #1a86ea; }
+  .use.done { background: var(--ivory); color: var(--ink); }
+  .use svg { width: 15px; height: 15px; }
+
+  /* referência própria */
+  .own { margin-top: 24px; padding: 48px; border-radius: 20px; background: #fff; border: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+  .own h2 { font-weight: 800; font-size: 36px; letter-spacing: var(--tight); line-height: 1; }
+  .own p { color: var(--mute); font-size: 15.5px; line-height: 1.6; max-width: 640px; margin-top: 8px; }
+  .own .use { background: var(--ink); color: #fff; }
+  .own .use:hover { background: #000; }
+  footer { color: var(--faint); font-size: 13px; padding-top: 64px; }
+
+  /* lightbox + aviso */
+  /* o único beat midnight da página: a tela grande */
+  #big { position: fixed; inset: 0; z-index: 30; background: rgba(2,9,58,0.97); display: none; align-items: center; justify-content: center; padding: 48px; }
+  #big video { max-width: 92vw; max-height: 88vh; border-radius: 14px; background: #fff; }
+  #toast { position: fixed; left: 50%; bottom: 40px; transform: translate(-50%, 24px); opacity: 0; z-index: 40; padding: 14px 22px; border-radius: 999px;
+    background: var(--marigold); color: var(--ink); font-size: 14.5px; font-weight: 500; transition: opacity .25s, transform .35s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+  #toast.on { opacity: 1; transform: translate(-50%, 0); }
+  #toast b { font-family: var(--mono); font-weight: 500; font-size: 13.5px; }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 64px; }
+    .bar, .wrap, #aviso { padding-left: 24px; padding-right: 24px; }
+    .ghead { flex-direction: column; } .ghead p { text-align: left; }
+    .own { flex-direction: column; align-items: flex-start; padding: 32px; }
+  }
+  @media (max-width: 640px) {
+    .meta { flex-direction: column; }
+    .bar { flex-wrap: wrap; gap: 10px; padding: 12px 16px; } .controls { width: 100%; justify-content: flex-start; }
+    .wrap, #aviso { padding-left: 16px; padding-right: 16px; } .hero h1 { font-size: 56px; } .ghead h2 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="mark">Claude <i>Video</i></div>
+  <div class="controls">
+    <div class="seg" id="every"><button data-v="graphic" class="on">Tudo em grafismo</button><button data-v="media">Tudo com mídia real</button></div>
+  </div>
+</div>
+<div id="aviso" hidden></div>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>Galeria de <i>estilos.</i></h1>
+    <div>
+      <p>Cada tile é um vídeo de verdade, feito pelo Claude em código. Quando um estilo tem <b>versão com mídia real</b>, vire o tile para ver o mesmo design com fotos e filmagens dentro.
+        Ache um que você goste, aperte <b>Usar este estilo</b> e cole de volta no Claude Code.</p>
+      <div class="steps"><span><em>1</em>Escolha um estilo</span><span><em>2</em>Responda 5 perguntas</span><span><em>3</em>Aprove 3 frames e receba o vídeo</span></div>
+    </div>
+  </section>
+
+  <div id="familias"></div>
+
+  <section class="own">
+    <div>
+      <h2>Tem a sua própria referência?</h2>
+      <p>Cole de 1 a 3 links ou imagens no Claude Code. O Claude estuda como elas foram feitas e escreve um estilo novo para você.</p>
+    </div>
+    <button class="use" data-copy="minha própria referência">Usar minha própria referência</button>
+  </section>
+  <footer>Feito com HyperFrames e GSAP. Clique em qualquer vídeo para ver em tela grande. Todo estilo daqui é livre para usar.</footer>
+</div>
+
+<div id="big"><video controls loop playsinline></video></div>
+<div id="toast"></div>
+
+<script src="estilos.js"></script>
+<script>
+const COPY_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="9" height="9" rx="2"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>';
+const CHECK_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.2 3L13 4.5"/></svg>';
+const big = document.getElementById('big'), bv = big.querySelector('video'), toast = document.getElementById('toast'), aviso = document.getElementById('aviso');
+const tiles = [];
+let toastTimer;
+// A galeria é feita para ser servida pelo scripts/galeria.py. Aberta como arquivo (file://), os vídeos podem não carregar.
+const SERVIDO = location.protocol === 'http:' || location.protocol === 'https:';
+const COMO_ABRIR = 'No Claude Code, diga: <b>abre a galeria de estilos</b>. Ou, no Terminal: <code>python3 ~/.claude/skills/claude-video/scripts/galeria.py</code>';
+
+function avisar(html, motivo) { aviso.innerHTML = html; aviso.dataset.motivo = motivo || ''; aviso.hidden = false; }
+function silenciar() { aviso.hidden = true; aviso.dataset.motivo = ''; }
+window.addEventListener('error', e => {
+  if (!document.querySelector('.tile')) avisar('A galeria não conseguiu montar a lista de estilos (' + esc(e.message || 'erro') + '). ' + COMO_ABRIR, 'erro');
+});
+
+function copyText(text) {
+  const fallback = () => { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); } catch (e) {} t.remove(); };
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(fallback);
+  fallback(); return Promise.resolve();
+}
+function say(html) { toast.innerHTML = html; toast.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('on'), 2600); }
+function wireUse(btn, id) {
+  btn.innerHTML = COPY_ICON + (btn.textContent.trim() || 'Usar este estilo');
+  const label = btn.textContent;
+  btn.onclick = () => copyText(id).then(() => {
+    btn.classList.add('done'); btn.innerHTML = CHECK_ICON + 'Copiado';
+    say(`Copiado <b>${id}</b>. Cole no Claude Code.`);
+    setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = COPY_ICON + label; }, 1800);
+  });
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function segundos(n) { return String(n).replace('.', ',') + ' s'; }
+
+// Monta os tiles na hora, sem esperar nada da rede. Um vídeo que não carregar vira um tile só com o nome;
+// se nenhum carregar, o aviso no topo diz como abrir a galeria do jeito certo.
+function montar() {
+  if (typeof ESTILOS === 'undefined' || !Array.isArray(ESTILOS) || !ESTILOS.length) {
+    avisar('A lista de estilos (estilos.js) não carregou. ' + COMO_ABRIR, 'erro');
+    return;
+  }
+  const familias = [];
+  ESTILOS.forEach(E => { if (!familias.includes(E.familia)) familias.push(E.familia); });
+  const host = document.getElementById('familias');
+  familias.forEach(f => {
+    const sec = document.createElement('section'); sec.className = 'group';
+    const n = ESTILOS.filter(E => E.familia === f).length;
+    sec.innerHTML = `<div class="ghead"><h2>${esc(f)}</h2><p>${n} ${n === 1 ? 'estilo' : 'estilos'}</p></div><div class="grid"></div>`;
+    host.appendChild(sec);
+    sec.querySelector('.grid').dataset.familia = f;
+  });
+
+  let semVideo = 0;
+  ESTILOS.forEach(E => {
+    const t = document.createElement('article'); t.className = 'tile';
+    t.innerHTML = `<div class="screen"></div>
+      <div class="meta"><div><h3>${esc(E.nome)}</h3><div class="chamada">${esc(E.chamada)}</div>
+      <div class="specs"><span>${segundos(E.duracao)}</span><span>${esc(E.formato)}</span>${E.loop ? '<span>loop</span>' : ''}<span>${esc(E.id)}</span></div></div>
+      <button class="use">Usar este estilo</button></div>`;
+    const screen = t.querySelector('.screen');
+    wireUse(t.querySelector('.use'), E.id);
+    const files = { graphic: `${E.id}.mp4`, media: `${E.id}-media.mp4` };
+    const temMedia = !!E.media;
+
+    const chips = document.createElement('div'); chips.className = 'chips';
+    chips.innerHTML = `<span class="chip">${esc(E.formato)}</span>${E.loop ? '<span class="chip">loop</span>' : ''}`;
+    screen.appendChild(chips);
+    screen.classList.add('has-video');
+
+    let sw = null;
+    if (temMedia) {
+      sw = document.createElement('div'); sw.className = 'seg';
+      sw.innerHTML = '<button data-v="graphic" class="on">Grafismo</button><button data-v="media">Com mídia real</button>';
+      screen.appendChild(sw);
+    }
+
+    // Dois vídeos empilhados tocam em sincronia. Virar só troca qual deles você vê, então o loop nunca reinicia.
+    const vids = {}; let cur = null, visible = false;
+    function soNome() {
+      // o vídeo principal não carregou: o tile mostra só o nome
+      if (screen.dataset.estado === 'sem-video') return;
+      screen.dataset.estado = 'sem-video';
+      screen.classList.remove('has-video');
+      Object.values(vids).forEach(v => v.remove());
+      if (sw) sw.remove();
+      const only = document.createElement('div'); only.className = 'only-name'; only.textContent = E.nome;
+      screen.appendChild(only);
+      semVideo++;
+      if (semVideo === ESTILOS.length) {
+        avisar('Os vídeos da galeria não carregaram' + (SERVIDO ? '' : ' porque a página foi aberta como arquivo, sem o servidor da skill') + '. ' + COMO_ABRIR, 'sem-video');
+      }
+    }
+    function make(kind) {
+      const v = document.createElement('video');
+      Object.assign(v, { src: 'videos/' + files[kind], muted: true, loop: true, playsInline: true, preload: 'auto' });
+      v.setAttribute('muted', ''); v.style.opacity = 0;
+      v.onclick = () => { bv.src = v.currentSrc || ('videos/' + files[kind]); big.style.display = 'flex'; bv.currentTime = v.currentTime; bv.muted = true; bv.play().catch(() => {}); };
+      v.onerror = () => { if (kind === 'media') { if (sw) sw.querySelector('[data-v=media]').disabled = true; } else soNome(); };
+      screen.insertBefore(v, screen.firstChild); vids[kind] = v;
+      if (visible) v.play().catch(() => {});
+      return v;
+    }
+    function show(kind) {
+      if (kind === 'media' && !temMedia) return;
+      if (screen.dataset.estado === 'sem-video') return;
+      const next = vids[kind] || make(kind);
+      if (cur && cur !== next && next.readyState >= 1) next.currentTime = cur.currentTime % (next.duration || 1e9);
+      Object.values(vids).forEach(v => { v.style.opacity = v === next ? 1 : 0; v.style.pointerEvents = v === next ? 'auto' : 'none'; });
+      cur = next;
+      if (sw) sw.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.v === kind));
+    }
+    if (sw) sw.querySelectorAll('button').forEach(b => b.onclick = e => { e.stopPropagation(); show(b.dataset.v); });
+    show('graphic');
+    if (temMedia) make('media');
+    // mantém o gêmeo escondido travado no que você está vendo
+    (function lock() {
+      if (cur && visible) Object.values(vids).forEach(v => {
+        if (v === cur || v.readyState < 2) return;
+        const target = cur.currentTime % (v.duration || 1e9);
+        if (Math.abs(v.currentTime - target) > 0.12) v.currentTime = target;
+        if (v.paused) v.play().catch(() => {});
+      });
+      requestAnimationFrame(lock);
+    })();
+    new IntersectionObserver(es => es.forEach(e => {
+      visible = e.isIntersecting;
+      Object.values(vids).forEach(v => visible ? v.play().catch(() => {}) : v.pause());
+    }), { rootMargin: '300px' }).observe(t);
+    tiles.push({ E, show, temMedia, t });
+    document.querySelector(`.grid[data-familia="${CSS.escape(E.familia)}"]`).appendChild(t);
+  });
+}
+
+// Com servidor: a cada 20 s confere se ele continua vivo. Se parar (ele desliga sozinho depois de algumas horas),
+// o aviso no topo diz como reabrir. Como arquivo (file://) não há servidor para conferir.
+if (SERVIDO) {
+  let faltas = 0;
+  setInterval(async () => {
+    try {
+      const r = await fetch('_ok', { cache: 'no-store' });
+      if (!r.ok) throw new Error('sem resposta');
+      faltas = 0;
+      if (aviso.dataset.motivo === 'parou') silenciar();
+    } catch (e) {
+      if (++faltas >= 2) avisar('A galeria parou (ela desliga sozinha depois de algumas horas). ' + COMO_ABRIR + ' e depois recarregue esta página.', 'parou');
+    }
+  }, 20000);
+}
+
+wireUse(document.querySelector('.own .use'), 'minha própria referência');
+big.onclick = e => { if (e.target === big) { bv.pause(); big.style.display = 'none'; } };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { bv.pause(); big.style.display = 'none'; } });
+document.querySelectorAll('#every button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#every button').forEach(x => x.classList.toggle('on', x === b));
+  tiles.forEach(x => x.show(b.dataset.v === 'media' && x.temMedia ? 'media' : 'graphic'));
+});
+montar();
+</script>
+</body>
+</html>

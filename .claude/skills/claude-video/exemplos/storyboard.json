@@ -1,0 +1,15 @@
+{
+  "title": "Abertura do vídeo sobre Claude Code com a minha foto",
+  "format": "16:9",
+  "seconds": 12,
+  "shots": [
+    {"time": "0.0-3.0", "graphic": "O título 'Claude Code sem tecniquês' pousa num slide com máscara; uma grade de pontos se monta atrás",
+     "asset": {"kind": "code"}},
+    {"time": "3.0-8.0", "graphic": "A foto fica num card alto à direita; o card faz push-in; o rótulo 'uso todo dia' pousa à esquerda",
+     "asset": {"kind": "generate", "from": "media/foto.jpg", "model": "seedance-2.0",
+               "prompt": "push-in lento, a pessoa ergue os olhos do notebook e sorri, luz suave de janela, câmera parada",
+               "duration": 5, "resolution": "720p"}},
+    {"time": "8.0-12.0", "graphic": "Três chips empilham: 'skills', 'agentes', 'terminal'; o card da foto encolhe para um canto",
+     "asset": {"kind": "user_photo", "path": "media/foto.jpg"}}
+  ]
+}

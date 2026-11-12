@@ -1,0 +1,55 @@
+# o .gitignore da raiz do maestro ignora imagens/áudio; dentro da skill os arquivos PEQUENOS vão pro git
+!*.png
+!*.jpg
+!*.jpeg
+!*.webp
+!*.gif
+!*.svg
+!*.wav
+!*.mp3
+!*.mp4
+
+# keys never go in git
+.env
+.env.*
+# renders and work files
+exemplos/out/
+work/
+out/
+*.mov
+renders/
+.hyperframes/
+frames/
+node_modules/
+.DS_Store
+*-silent.mp4
+
+# skill claude-video: mídia pesada baixada por baixar-midia.sh (não vai pro git)
+/estilos/aviao-em-codigo/projeto/assets/reais/des-fundo.jpg
+/estilos/festival-da-lua/projeto/midia/gerados/crepusculo-1.png
+/estilos/festival-da-lua/projeto/midia/gerados/dourado-1.png
+/estilos/festival-da-lua/projeto/midia/gerados/noite-1.png
+/estilos/festival-da-lua/projeto/midia/ref/tinta-17.5s.png
+/estilos/porto-de-nova-york/projeto/assets/trilha.wav
+/estilos/showreel/projeto/assets/trilha.wav
+/galeria/videos/app-de-design.mp4
+/galeria/videos/app-de-motion.mp4
+/galeria/videos/aviao-em-codigo.mp4
+/galeria/videos/barco-e-montanha.mp4
+/galeria/videos/cartaz-gritado.mp4
+/galeria/videos/cartaz-risografia.mp4
+/galeria/videos/diagrama-azul-marinho.mp4
+/galeria/videos/dirigivel-a-lapis.mp4
+/galeria/videos/documento-vira-video.mp4
+/galeria/videos/editor-ia.mp4
+/galeria/videos/festival-da-lua.mp4
+/galeria/videos/folha-de-projeto.mp4
+/galeria/videos/giz-de-cera.mp4
+/galeria/videos/grafico-de-jornal.mp4
+/galeria/videos/interface-escura-3d.mp4
+/galeria/videos/livro-pop-up.mp4
+/galeria/videos/porto-de-nova-york.mp4
+/galeria/videos/poster-suico.mp4
+/galeria/videos/rabisco-de-caneta.mp4
+/galeria/videos/sessao-na-mesa.mp4
+/galeria/videos/showreel.mp4

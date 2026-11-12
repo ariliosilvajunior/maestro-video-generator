@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<title>documento-vira-video · composição HyperFrames</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,700&display=swap" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  #tela { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; }
+  .fonte-oculta { position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+  <canvas id="tela" width="1920" height="1080"></canvas>
+  <span class="fonte-oculta" style="font-family: 'Inter'; font-weight: 700; font-style: italic;">Inter</span>
+  <span class="fonte-oculta" style="font-family: 'Inter'; font-weight: 800;">Inter</span>
+</div>
+<script type="module">
+  // Estilo modelado no formato da Biblioteca de motion: style.render(ctx, t, theme, w, h), loop de 5 s, render(0) === render(5).
+  // Troque o tema (cores em hex, fonte, name = a frase/o nome em tela) sem mexer no estilo.js.
+  import { style } from './estilo.js';
+  const tema = { ...style.theme, font: 'Inter' };
+  const canvas = document.getElementById('tela');
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const W = 1920, H = 1080, LOOP = 5;
+
+  function desenha(t) {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.filter = 'none';
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = tema.bg; ctx.fillRect(0, 0, W, H);
+    style.render(ctx, ((t % LOOP) + LOOP) % LOOP, tema, W, H);
+    ctx.restore();
+  }
+
+  // Relógio único: a timeline anda p.t de 0 a 5 e cada atualização redesenha o quadro.
+  const p = { t: 0 };
+  const tl = gsap.timeline({ paused: true });
+  tl.to(p, { t: LOOP, duration: LOOP, ease: 'none', onUpdate: () => desenha(p.t) }, 0);
+  window.__timelines = window.__timelines || {};
+  window.__timelines.main = tl;
+  document.fonts.ready.then(() => desenha(tl.time()));
+  desenha(0);
+</script>
+</body>
+</html>
