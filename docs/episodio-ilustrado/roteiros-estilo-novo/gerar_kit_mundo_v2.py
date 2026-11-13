@@ -158,15 +158,19 @@ CENARIOS = [
 # ES10 rapaz magro triste sentado na cama (dono).
 # ES11 carteiro de óculos lendo carta · ES12 senhora de óculos com cartas (dono). ES02/03/04 ainda não chegaram como arquivo.
 # ES13 rua de pedra com portas laranja e azuis (dono, modelo dos CENÁRIOS) · ES14 grupo de bonecos de corpo inteiro (dono).
-MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES14 + ES01", "ES14 + ES01", "ES12 + ES14", "ES10 + ES14", "ES11 + ES14"
+MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES14 + ES01", "ES14 + ES01", "ES23 + ES12", "ES10 + ES14", "ES11 + ES14"
 ANEXO = {"PE01": MENINO, "PE02": MENINO, "PE03": MENINO, "PE04": MENINA, "PE05": MENINO, "PE06": MENINO, "PE07": MENINA,
          "PE08": IDOSO, "PE09": MULHER, "PE10": MENINO, "PE11": MULHER, "PE12": MULHER, "PE13": HOMEM, "PE14": HOMEM,
-         "PE15": "ES17 + ES14", "PE16": MENINO, "PE17": MENINO}
+         "PE15": "ES17 + ES24", "PE16": MENINO, "PE17": MENINO}
 
 # ES15 casa colorida · ES16 prédio de tijolo à noite (escola) · ES17 senhora com caixa de lembranças · ES18 sala de aula
 # antiga · ES19 baile com lanternas (dono, 13/11/2026).
-ANEXO_CE = {"CE01": "ES16 + ES13", "CE06": "ES18 + ES06", "CE07": "ES18 + ES06", "CE08": "ES18 + ES06", "CE15": "ES18 + ES06",
-            "CE27": "ES13 + ES15", "CE28": "ES15 + ES13", "CE31": "ES19 + ES06"}
+# ES20 prédio com árvore e relógio · ES21 mesa com idosos brindando · ES22 praça com fonte à noite · ES23 duas mulheres
+# tomando chá · ES24 senhora tricotando · ES25 portão com folhas · ES26 praça com poço · ES27 senhora com xícara na janela
+# · ES28 rua de casas de terracota · ES29 casal no muro de pedra · ES30 casa de porta redonda à noite (dono, 13/11/2026).
+ANEXO_CE = {"CE01": "ES20 + ES25", "CE02": "ES20 + ES13", "CE06": "ES18 + ES06", "CE07": "ES18 + ES06", "CE08": "ES18 + ES06",
+            "CE15": "ES18 + ES06", "CE27": "ES28 + ES13", "CE28": "ES30 + ES15", "CE29": "ES23 + ES06", "CE31": "ES21 + ES19",
+            "CE35": "ES22 + ES26"}
 EXTERNOS = {"CE01", "CE02", "CE04", "CE05", "CE12", "CE18", "CE27", "CE28", "CE35"}
 
 def prompt_p(cod, nome, tipo, desc, expr, dep):
