@@ -106,13 +106,15 @@ BRANCO = ("The whole set is built on a square wooden board and photographed ISOL
           "(#FFFFFF): nothing outside the board, no sky, no horizon, a faint shadow under the board.")
 MARCA = ("Brand detail: somewhere on the school, a small round sign with a simple stylized brain drawn in navy and aqua "
          "lines (no letters).")
+# 13/11/2026: CE01-B e CE01-C saíram iguais à base — o texto do ângulo agora descreve a câmera com força e proíbe repetir
+# o enquadramento da imagem anexada.
 ANG = {
- "A": "wide establishing view from above at a 45-degree angle, the whole set visible",
- "B": "eye level of a small child, low camera close to the floor, looking across the set",
- "C": "low-angle view looking up, the set feeling tall and imposing",
- "D": "top-down view straight from above, like a map of the set",
- "E": "extreme macro close-up on the most emotional detail of the set, very shallow depth of field",
- "F": "reverse angle: the camera on the opposite side of the set, looking back",
+ "A": "a HIGH aerial view from above at about 45 degrees, far away, the whole board and the roof visible from above, the building small in the frame",
+ "B": "the camera placed ON THE GROUND at the height of a small child's eyes, very low, close to the cobblestones, looking up a little at the building; big blurry stones in the foreground",
+ "C": "a dramatic LOW-ANGLE shot from very close to the base of the building looking steeply UP, the walls and roof towering over the camera, strong perspective lines",
+ "D": "a TOP-DOWN view straight from above, camera pointing straight down at 90 degrees, like a map: you see roofs, the floor plan and the layout, no horizon",
+ "E": "an EXTREME MACRO CLOSE-UP of ONE small emotional detail of this set (a door handle, a flower pot, a window, a cup…), filling the whole frame, very shallow depth of field, everything else blurred",
+ "F": "the REVERSE side: the camera moved to the opposite side of the set, showing the back or the other side we have never seen, as if we walked around it",
 }
 # 13/11/2026, dono: a escola é uma ESCOLA PARA TODOS (escola comum da cidade), não escola especial/APAE. Dentro dela há UMA
 # sala de recursos (AEE), onde a Helena atende no CONTRATURNO. Nada de placa, uniforme ou cenário que sugira escola especial.
@@ -193,7 +195,7 @@ def itens():
                     " ".join(f"{REF_C} {desc} {CEN} {BRANCO}".split())))
         for a in angs:
             out.append((f"{cod}-{a}", f"{nome} — ângulo {a}", f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {cod} · salvar como {cod}-{a} (SOMENTE depois de {cod})",
-                        f"Same miniature set as the attached image, same objects, colors, style and white background, seen from a new camera position: {ANG[a]}. Keep every object, its position and design exactly the same. No people, no text."))
+                        f"A NEW photograph of the SAME miniature set shown in the attached image — same buildings, objects, colors, materials and style, still isolated on a pure white background — but taken from a COMPLETELY DIFFERENT camera position: {ANG[a]}. The composition and framing must look clearly different from the attached image; do NOT repeat its framing or point of view. Keep the design of every object the same. No people, no text."))
     return out
 
 if __name__ == "__main__":
