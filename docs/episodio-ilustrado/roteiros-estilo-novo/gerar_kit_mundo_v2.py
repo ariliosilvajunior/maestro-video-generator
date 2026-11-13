@@ -114,16 +114,18 @@ ANG = {
  "E": "extreme macro close-up on the most emotional detail of the set, very shallow depth of field",
  "F": "reverse angle: the camera on the opposite side of the set, looking back",
 }
-ESC = "the small old public school of the town"
+# 13/11/2026, dono: a escola é uma ESCOLA PARA TODOS (escola comum da cidade), não escola especial/APAE. Dentro dela há UMA
+# sala de recursos (AEE), onde a Helena atende no CONTRATURNO. Nada de placa, uniforme ou cenário que sugira escola especial.
+ESC = "the small old regular public school of the town, a school for ALL children"
 CENARIOS = [
  ("CE01","Escola — fachada e portão",f"The front of {ESC}: a long one-storey building with peeling cream plaster, a terracotta roof, tall navy blue windows, an iron front gate and a short cobblestone sidewalk where parents wait. {MARCA}","ABCF"),
  ("CE02","Pátio da escola","A school courtyard: cobblestone and dirt ground, a big old tree with a round wooden bench around it, a lonely corner by a wall, a drinking fountain, a small football goal.","ABCDE"),
  ("CE03","Cantina","A small school canteen: a long counter with big aluminium pots, a serving window, long wooden tables with benches, enamel cups and plates, a tiled wall.","ABC"),
  ("CE04","Corredor externo","An open-air school corridor: a long covered walkway with old columns, a row of classroom doors painted navy blue, potted plants, a bulletin board with blank paper notes.","ABC"),
  ("CE05","Quadra de esportes","A small open school sports court: cracked painted concrete floor with faded lines, a basketball hoop, a small football goal, a low wall with blank children's drawings, a bench.","ABD"),
- ("CE06","Sala de aula","A small classroom: rows of old wooden desks and chairs, a green chalkboard with no text, a teacher's desk, tall windows, a cubby wall with small backpacks.","ABCF"),
+ ("CE06","Sala de aula","A regular classroom for all children: rows of old wooden desks and chairs, a green chalkboard with no text, a teacher's desk, tall windows, a cubby wall with small backpacks.","ABCF"),
  ("CE07","Sala de aula — quadro e mesa da professora","The front of the small classroom: a green chalkboard with no text, the teacher's wooden desk with a pile of notebooks, an apple and a jar of pencils, a globe on a shelf.","AB"),
- ("CE08","Sala de recursos (porta azul)",f"A small cozy resource room behind a bright NAVY BLUE door: a low wooden children's table with two small chairs, shelves with colorful wooden toys and boxes, a felt board with picture cards, an adult round table with three chairs, a soft rug, a big window with golden light. {MARCA}","ABCDEF"),
+ ("CE08","Sala de recursos (porta azul)",f"One small cozy resource room at the end of a corridor INSIDE the regular public school (not a special school), behind a bright NAVY BLUE door: a low wooden children's table with two small chairs, shelves with colorful wooden toys and boxes, a felt board with picture cards, an adult round table with three chairs, a soft rug, a big window with golden light. {MARCA}","ABCDEF"),
  ("CE10","Sala de reunião","A small teachers' meeting room: a long wooden table with chairs, a pot of coffee and cups, folders, a wall clock, a window with blinds.","AB"),
  ("CE11","Sala de atendimento às famílias","A small room for talking with families: a round wooden table with four chairs, a box of tissues, coffee cups, a shelf with folders, a window with a plant.","ABEF"),
  ("CE12","Pátio coberto","A covered school patio: a wide roof on old wooden beams, a cement floor with a painted hopscotch game, a row of hooks with backpacks, benches along the wall.","ABD"),
