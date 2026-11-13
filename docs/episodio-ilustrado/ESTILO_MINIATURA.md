@@ -39,5 +39,11 @@
 - Folha de personagem: boneco em pé numa **base redonda de madeira**, frente / 3/4 / perfil em cima; closes de rosto,
   mãos, roupa e sapato embaixo.
 
+## Mundo único (dono, 13/11/2026)
+- Todas as histórias se passam na MESMA cidadezinha e na MESMA escola, com o mesmo elenco: um Kit só para tudo,
+  `roteiros-estilo-novo/kit_mundo_miniatura.md` (gerado por `gerar_kit_mundo.py`), tudo em FUNDO BRANCO.
+- Cada item é gerado uma vez, aprovado, salvo no Drive e subido nas 4 contas do Flow.
+- Histórias são FICTÍCIAS e nossas (sem nome de livro/autor/pessoa real), inspiradas nos temas das notícias.
+
 ## Próximo passo
 - Escolher a história do piloto (notícia ainda não usada ou história do dono) e escrever o roteiro longo com pausas.

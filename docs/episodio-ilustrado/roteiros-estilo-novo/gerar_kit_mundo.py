@@ -47,6 +47,10 @@ PERS = [
  ("PM07","Dona Benedita, a benzedeira (vizinha) — PERSONAGEM NOVO","(nenhum — criar)","elderly woman of about 75, aged clay skin with deep gentle wrinkles, a grey felted bun, a faded floral cotton dress, a knitted shawl, a small sprig of rue in her hand", False, "calm, praying with closed eyes, kind smile, mysterious, gentle", ""),
 ]
 AMIGOS = [("PM08","Léo","P02"),("PM09","Ícaro","P03"),("PM10","Alice","P04"),("PM11","Téo","P05"),("PM12","Kenji","P06"),("PM13","Clara","P07")]
+PERS += [
+ ("PM14","Prof.ª Regina (professora da sala de aula)","P12 (Prof.ª Regina)","woman of about the same age as in the attached image, taller slim adult proportions", False, EXPR_ADULTO, ""),
+ ("PM15","Prof. Marcos (professor)","P13 (Prof. Marcos)","man of about the same age as in the attached image, taller slim adult proportions", False, EXPR_ADULTO, ""),
+]
 
 CENARIOS = [
  ("CM01","Rua de pedra da cidadezinha (entardecer)","A narrow cobblestone street in an old small town in the Brazilian countryside: crooked two-storey houses leaning gently toward each other, small iron balconies with dried flowers, an old bent street lamp, uneven hand-laid cobblestones.","ABCDF"),
@@ -62,6 +66,11 @@ CENARIOS = [
  ("CM11","Pátio da escola","A school courtyard: cobblestone and dirt ground, a big old tree with a round bench around it, a lonely corner by a wall, a drinking fountain, a small football goal.","ABCDE"),
  ("CM12","Sala de recursos (porta azul)","A small cozy resource room: a navy blue door, a low wooden children's table with two small chairs, shelves with colorful wooden toys and boxes, a felt board with picture cards, an adult table with three chairs for meetings, a soft rug, a big window with golden light.","ABCDEF"),
  ("CM13","Sala de aula","A small classroom: rows of old wooden desks, a green chalkboard with no readable text, a teacher's desk, tall windows, a cubby wall with backpacks.","ABCF"),
+ ("CM15","Cantina da escola","A small school canteen: a long counter with big aluminium pots, a serving window, long wooden tables with benches, enamel cups and plates, a tiled wall.","ABCF"),
+ ("CM16","Corredor externo da escola","An open-air school corridor: a long covered walkway with old columns, a row of classroom doors painted navy blue, potted plants, a bulletin board with paper notes and no readable text.","ABCF"),
+ ("CM17","Quadra da escola","A small school sports court: a cracked painted concrete floor with faded lines, a basketball hoop, a small football goal, a low wall with children's drawings, a bench.","ABCD"),
+ ("CM18","Sala de reunião / atendimento às famílias","A small meeting room for talking with families: a round wooden table with four chairs, a box of tissues, a pot of coffee and cups, a shelf with folders, a window with a plant.","ABEF"),
+ ("CM19","Pátio coberto","A covered school patio: a wide roof on old wooden beams, a cement floor with a painted hopscotch game, a row of hooks with backpacks, benches along the wall.","ABCD"),
  ("CM14","Pracinha com banco e árvore velha","A small town square at the end of the cobblestone street: one old wooden bench under a big old twisted tree, a little stone fountain, an old street lamp, fallen leaves.","ABCDE"),
 ]
 
@@ -70,9 +79,13 @@ def item_p(cod,nome,anexo,desc,crianca,expr,extra):
     txt = f"{base}A {desc}. {ESTILO} {CRIANCA if crianca else 'Small warm expressive eyes.'} {PALETA_P if not anexo.startswith('(nenhum') else 'Use deep navy blue (#2B4872) or medium blue (#3E69B7) and cream, with ONE small soft aqua green (#56CAC9) detail.'} " + BRANCO_P.format(expr=expr)
     return " ".join(txt.split())
 
-md=["# Kit do episódio 01 — estilo miniatura (Conta C) — fundo branco em tudo","",
+md=["# Kit do MUNDO — estilo miniatura — vale para TODAS as histórias e as 4 contas do Flow — fundo branco em tudo","",
     "> Dono, 13/11/2026: \"o kit quero todos e várias dimensões para manter o mesmo cenário em vários ângulos, abuse da posição",
     "> das câmeras… drama, emoção e felicidade… todos personagens e cenários com FUNDO BRANCO\".",
+    "> Dono, 13/11/2026: \"todas as histórias vão se passar no mesmo cenário e ambiente, então já pense nas 4 contas\". Cada",
+    "> item é gerado UMA vez (em qualquer conta), aprovado, salvo no Drive (pasta do Kit do mundo) e SUBIDO nas outras 3",
+    "> contas — o mundo fica idêntico em todas e não se gasta cota 4 vezes. Ordem sugerida: base de cada cenário e as folhas",
+    "> dos personagens do episódio 01 primeiro; ângulos e o resto do elenco depois.",
     "> Como fazer: PERSONAGENS = CRIAR (Imagem · 16:9 · Nano Banana 2.1 · x2) anexando a imagem indicada. CENÁRIOS = 1º a",
     "> base (CRIAR, sem anexo, ou anexando a imagem antiga do lugar se existir); depois cada ÂNGULO = CRIAR anexando a BASE",
     "> aprovada do mesmo cenário. Salvar com o código no nome (ex.: PM02-Marta, CM03-A-cozinha).",""]
@@ -90,7 +103,7 @@ for cod,nome,desc,angs in CENARIOS:
     for c,t in angulos(cod,angs):
         md += [f"**{c}** (anexar {cod}-base)", "```", t, "```"]
     md.append("")
-open('/home/user/maestro-video-generator/docs/episodio-ilustrado/roteiros-estilo-novo/ep01_kit.md','w').write("\n".join(md))
+open('/home/user/maestro-video-generator/docs/episodio-ilustrado/roteiros-estilo-novo/kit_mundo_miniatura.md','w').write("\n".join(md))
 
 # docx
 d=Document(); d.styles['Normal'].font.name='Arial'; d.styles['Normal'].font.size=Pt(10)
@@ -102,6 +115,6 @@ for linha in md:
     elif linha.startswith('**') : d.add_paragraph(linha.replace('**',''), style='List Bullet')
     elif linha.startswith('> '): d.add_paragraph(linha[2:]).italic=True
     else: d.add_paragraph(linha)
-d.save('/tmp/claude-0/-home-user/be8c2ca8-b73c-5f63-95ff-7e1938a7ecc2/scratchpad/Kit Episodio 01 - estilo miniatura.docx')
+d.save('/tmp/claude-0/-home-user/be8c2ca8-b73c-5f63-95ff-7e1938a7ecc2/scratchpad/Kit do mundo - estilo miniatura.docx')
 n_p=len(PERS)+len(AMIGOS); n_c=sum(1+len(a) for *_,a in CENARIOS)
 print('personagens',n_p,'cenarios (base+angulos)',n_c,'total',n_p+n_c)

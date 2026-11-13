@@ -1,7 +1,11 @@
-# Kit do episódio 01 — estilo miniatura (Conta C) — fundo branco em tudo
+# Kit do MUNDO — estilo miniatura — vale para TODAS as histórias e as 4 contas do Flow — fundo branco em tudo
 
 > Dono, 13/11/2026: "o kit quero todos e várias dimensões para manter o mesmo cenário em vários ângulos, abuse da posição
 > das câmeras… drama, emoção e felicidade… todos personagens e cenários com FUNDO BRANCO".
+> Dono, 13/11/2026: "todas as histórias vão se passar no mesmo cenário e ambiente, então já pense nas 4 contas". Cada
+> item é gerado UMA vez (em qualquer conta), aprovado, salvo no Drive (pasta do Kit do mundo) e SUBIDO nas outras 3
+> contas — o mundo fica idêntico em todas e não se gasta cota 4 vezes. Ordem sugerida: base de cada cenário e as folhas
+> dos personagens do episódio 01 primeiro; ângulos e o resto do elenco depois.
 > Como fazer: PERSONAGENS = CRIAR (Imagem · 16:9 · Nano Banana 2.1 · x2) anexando a imagem indicada. CENÁRIOS = 1º a
 > base (CRIAR, sem anexo, ou anexando a imagem antiga do lugar se existir); depois cada ÂNGULO = CRIAR anexando a BASE
 > aprovada do mesmo cenário. Salvar com o código no nome (ex.: PM02-Marta, CM03-A-cozinha).
@@ -59,6 +63,18 @@ Use the attached image ONLY to keep this same character (same face, hair color a
 Anexar: (nenhum — criar)
 ```
 A elderly woman of about 75, aged clay skin with deep gentle wrinkles, a grey felted bun, a faded floral cotton dress, a knitted shawl, a small sprig of rue in her hand. Handmade caricature stop-motion puppet style, lifelike macro photograph of a real handmade puppet: matte polymer clay skin with fine real texture, a long rounded clay nose (the strongest feature), rosy cheeks, slightly oversized head, thin neck, needle-felted wool hair with loose stray fibers, clothes of worn real fabric (knitted wool with frayed cuffs, linen, canvas, visible stitches). Not a cartoon, not a clean 3D render, no text. Small warm expressive eyes. Use deep navy blue (#2B4872) or medium blue (#3E69B7) and cream, with ONE small soft aqua green (#56CAC9) detail. Character reference sheet on a PURE WHITE seamless studio background (#FFFFFF), no props, no base, no floor line, soft even studio light with a faint natural shadow under the feet. Top row: full body front view, three-quarter view, side view and back view. Bottom row: face close-ups with these expressions: calm, praying with closed eyes, kind smile, mysterious, gentle. Plus one close-up of the hands.
+```
+
+### PM14 — Prof.ª Regina (professora da sala de aula)
+Anexar: P12 (Prof.ª Regina)
+```
+Use the attached image ONLY to keep this same character (same face, hair color and hairstyle, same kind of clothes). A woman of about the same age as in the attached image, taller slim adult proportions. Handmade caricature stop-motion puppet style, lifelike macro photograph of a real handmade puppet: matte polymer clay skin with fine real texture, a long rounded clay nose (the strongest feature), rosy cheeks, slightly oversized head, thin neck, needle-felted wool hair with loose stray fibers, clothes of worn real fabric (knitted wool with frayed cuffs, linen, canvas, visible stitches). Not a cartoon, not a clean 3D render, no text. Small warm expressive eyes. Clothes keep the same style as the attached image, recolored with deep navy blue (#2B4872) or medium blue (#3E69B7) and cream, with ONE small soft aqua green (#56CAC9) detail. Character reference sheet on a PURE WHITE seamless studio background (#FFFFFF), no props, no base, no floor line, soft even studio light with a faint natural shadow under the feet. Top row: full body front view, three-quarter view, side view and back view. Bottom row: face close-ups with these expressions: calm kind smile, worried, crying softly with one tear, tired and sad, joyful laughing. Plus one close-up of the hands.
+```
+
+### PM15 — Prof. Marcos (professor)
+Anexar: P13 (Prof. Marcos)
+```
+Use the attached image ONLY to keep this same character (same face, hair color and hairstyle, same kind of clothes). A man of about the same age as in the attached image, taller slim adult proportions. Handmade caricature stop-motion puppet style, lifelike macro photograph of a real handmade puppet: matte polymer clay skin with fine real texture, a long rounded clay nose (the strongest feature), rosy cheeks, slightly oversized head, thin neck, needle-felted wool hair with loose stray fibers, clothes of worn real fabric (knitted wool with frayed cuffs, linen, canvas, visible stitches). Not a cartoon, not a clean 3D render, no text. Small warm expressive eyes. Clothes keep the same style as the attached image, recolored with deep navy blue (#2B4872) or medium blue (#3E69B7) and cream, with ONE small soft aqua green (#56CAC9) detail. Character reference sheet on a PURE WHITE seamless studio background (#FFFFFF), no props, no base, no floor line, soft even studio light with a faint natural shadow under the feet. Top row: full body front view, three-quarter view, side view and back view. Bottom row: face close-ups with these expressions: calm kind smile, worried, crying softly with one tear, tired and sad, joyful laughing. Plus one close-up of the hands.
 ```
 
 ### PM08–PM13 — amigos do Caio na escola (Léo, Ícaro, Alice, Téo, Kenji, Clara)
@@ -395,6 +411,116 @@ Same miniature set as the attached image, same objects, colors and white backgro
 **CM13-F** (anexar CM13-base)
 ```
 Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: reverse angle: the camera on the opposite side of the set, looking back toward where the first view was taken. Keep every object, its position and design exactly the same.
+```
+
+### CM15 — Cantina da escola
+**CM15-base** (sem anexo)
+```
+A small school canteen: a long counter with big aluminium pots, a serving window, long wooden tables with benches, enamel cups and plates, a tiled wall. Whimsical handmade stop-motion miniature diorama, macro photograph of a real handmade miniature set: slightly crooked walls, weathered cracked plaster, chipped paint, carved worn wood, aged fabric with visible stitches, tiny dried flowers, terracotta tiles. Colors: a warm aged base of beige, cream, honey wood and terracotta; doors, window frames and main furniture in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE single small accent in soft aqua green (#56CAC9). Warm golden side light, tiny dust particles. No people. Not a cartoon, not a clean 3D render, no readable text. The whole set is built on a small square wooden board and photographed ISOLATED on a PURE WHITE seamless studio background (#FFFFFF): nothing outside the board, no sky, no horizon, only white around it, a faint natural shadow under the board.
+```
+**CM15-A** (anexar CM15-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: wide establishing view from above at a 45-degree angle, the whole set visible. Keep every object, its position and design exactly the same.
+```
+**CM15-B** (anexar CM15-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: eye level of a small child, low camera close to the floor, looking across the set. Keep every object, its position and design exactly the same.
+```
+**CM15-C** (anexar CM15-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: low-angle view looking up (contra-plongée), the set feeling tall and imposing. Keep every object, its position and design exactly the same.
+```
+**CM15-F** (anexar CM15-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: reverse angle: the camera on the opposite side of the set, looking back toward where the first view was taken. Keep every object, its position and design exactly the same.
+```
+
+### CM16 — Corredor externo da escola
+**CM16-base** (sem anexo)
+```
+An open-air school corridor: a long covered walkway with old columns, a row of classroom doors painted navy blue, potted plants, a bulletin board with paper notes and no readable text. Whimsical handmade stop-motion miniature diorama, macro photograph of a real handmade miniature set: slightly crooked walls, weathered cracked plaster, chipped paint, carved worn wood, aged fabric with visible stitches, tiny dried flowers, terracotta tiles. Colors: a warm aged base of beige, cream, honey wood and terracotta; doors, window frames and main furniture in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE single small accent in soft aqua green (#56CAC9). Warm golden side light, tiny dust particles. No people. Not a cartoon, not a clean 3D render, no readable text. The whole set is built on a small square wooden board and photographed ISOLATED on a PURE WHITE seamless studio background (#FFFFFF): nothing outside the board, no sky, no horizon, only white around it, a faint natural shadow under the board.
+```
+**CM16-A** (anexar CM16-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: wide establishing view from above at a 45-degree angle, the whole set visible. Keep every object, its position and design exactly the same.
+```
+**CM16-B** (anexar CM16-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: eye level of a small child, low camera close to the floor, looking across the set. Keep every object, its position and design exactly the same.
+```
+**CM16-C** (anexar CM16-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: low-angle view looking up (contra-plongée), the set feeling tall and imposing. Keep every object, its position and design exactly the same.
+```
+**CM16-F** (anexar CM16-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: reverse angle: the camera on the opposite side of the set, looking back toward where the first view was taken. Keep every object, its position and design exactly the same.
+```
+
+### CM17 — Quadra da escola
+**CM17-base** (sem anexo)
+```
+A small school sports court: a cracked painted concrete floor with faded lines, a basketball hoop, a small football goal, a low wall with children's drawings, a bench. Whimsical handmade stop-motion miniature diorama, macro photograph of a real handmade miniature set: slightly crooked walls, weathered cracked plaster, chipped paint, carved worn wood, aged fabric with visible stitches, tiny dried flowers, terracotta tiles. Colors: a warm aged base of beige, cream, honey wood and terracotta; doors, window frames and main furniture in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE single small accent in soft aqua green (#56CAC9). Warm golden side light, tiny dust particles. No people. Not a cartoon, not a clean 3D render, no readable text. The whole set is built on a small square wooden board and photographed ISOLATED on a PURE WHITE seamless studio background (#FFFFFF): nothing outside the board, no sky, no horizon, only white around it, a faint natural shadow under the board.
+```
+**CM17-A** (anexar CM17-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: wide establishing view from above at a 45-degree angle, the whole set visible. Keep every object, its position and design exactly the same.
+```
+**CM17-B** (anexar CM17-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: eye level of a small child, low camera close to the floor, looking across the set. Keep every object, its position and design exactly the same.
+```
+**CM17-C** (anexar CM17-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: low-angle view looking up (contra-plongée), the set feeling tall and imposing. Keep every object, its position and design exactly the same.
+```
+**CM17-D** (anexar CM17-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: top-down view straight from above (plongée), like a map of the set. Keep every object, its position and design exactly the same.
+```
+
+### CM18 — Sala de reunião / atendimento às famílias
+**CM18-base** (sem anexo)
+```
+A small meeting room for talking with families: a round wooden table with four chairs, a box of tissues, a pot of coffee and cups, a shelf with folders, a window with a plant. Whimsical handmade stop-motion miniature diorama, macro photograph of a real handmade miniature set: slightly crooked walls, weathered cracked plaster, chipped paint, carved worn wood, aged fabric with visible stitches, tiny dried flowers, terracotta tiles. Colors: a warm aged base of beige, cream, honey wood and terracotta; doors, window frames and main furniture in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE single small accent in soft aqua green (#56CAC9). Warm golden side light, tiny dust particles. No people. Not a cartoon, not a clean 3D render, no readable text. The whole set is built on a small square wooden board and photographed ISOLATED on a PURE WHITE seamless studio background (#FFFFFF): nothing outside the board, no sky, no horizon, only white around it, a faint natural shadow under the board.
+```
+**CM18-A** (anexar CM18-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: wide establishing view from above at a 45-degree angle, the whole set visible. Keep every object, its position and design exactly the same.
+```
+**CM18-B** (anexar CM18-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: eye level of a small child, low camera close to the floor, looking across the set. Keep every object, its position and design exactly the same.
+```
+**CM18-E** (anexar CM18-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: extreme macro close-up on the most emotional detail of the set, very shallow depth of field. Keep every object, its position and design exactly the same.
+```
+**CM18-F** (anexar CM18-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: reverse angle: the camera on the opposite side of the set, looking back toward where the first view was taken. Keep every object, its position and design exactly the same.
+```
+
+### CM19 — Pátio coberto
+**CM19-base** (sem anexo)
+```
+A covered school patio: a wide roof on old wooden beams, a cement floor with a painted hopscotch game, a row of hooks with backpacks, benches along the wall. Whimsical handmade stop-motion miniature diorama, macro photograph of a real handmade miniature set: slightly crooked walls, weathered cracked plaster, chipped paint, carved worn wood, aged fabric with visible stitches, tiny dried flowers, terracotta tiles. Colors: a warm aged base of beige, cream, honey wood and terracotta; doors, window frames and main furniture in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE single small accent in soft aqua green (#56CAC9). Warm golden side light, tiny dust particles. No people. Not a cartoon, not a clean 3D render, no readable text. The whole set is built on a small square wooden board and photographed ISOLATED on a PURE WHITE seamless studio background (#FFFFFF): nothing outside the board, no sky, no horizon, only white around it, a faint natural shadow under the board.
+```
+**CM19-A** (anexar CM19-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: wide establishing view from above at a 45-degree angle, the whole set visible. Keep every object, its position and design exactly the same.
+```
+**CM19-B** (anexar CM19-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: eye level of a small child, low camera close to the floor, looking across the set. Keep every object, its position and design exactly the same.
+```
+**CM19-C** (anexar CM19-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: low-angle view looking up (contra-plongée), the set feeling tall and imposing. Keep every object, its position and design exactly the same.
+```
+**CM19-D** (anexar CM19-base)
+```
+Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: top-down view straight from above (plongée), like a map of the set. Keep every object, its position and design exactly the same.
 ```
 
 ### CM14 — Pracinha com banco e árvore velha
