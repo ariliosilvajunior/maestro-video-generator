@@ -1,4 +1,4 @@
-# Gera o Kit do episódio 01 (estilo miniatura) — md no repositório + docx para o dono.
+# Gera o Kit do MUNDO (estilo miniatura) — md no repositório + docx para o dono.
 from docx import Document
 from docx.shared import Pt
 
@@ -35,43 +35,64 @@ ANG = {
 def angulos(cod, lista):
     return [(f"{cod}-{a}", f"Same miniature set as the attached image, same objects, colors and white background, seen from a new camera position: {ANG[a]}. Keep every object, its position and design exactly the same.") for a in lista]
 
+# Códigos alinhados com os originais da pasta 06-originais-3d (Conta M): PE01 = P01-Davi … CE01 = C01-Fachada-escola.
 PERS = [
- ("PM01","Davi, 8 anos (garoto autista — protagonista)","P01-Davi-miniatura","boy of about 8", True, EXPR_CRIANCA, ""),
- ("PM01b","Davi pequeno, 2 anos (começo da história)","P01-Davi-miniatura","toddler of about 2, small round toddler body, same hair color, a little cotton t-shirt and shorts", True, "calm, curious, overwhelmed with hands over his ears (calm face), sleepy, happy", "Same character as the attached sheet, but at 2 years old."),
- ("PM02","Marta, a mãe (38 anos)","P09 (mãe do Davi)","woman of about 38, smooth youthful clay skin with NO wrinkles, taller slim adult proportions", False, EXPR_ADULTO, ""),
- ("PM03","Rogério, o pai (40 anos) — PERSONAGEM NOVO","(nenhum — criar)","man of about 40, light-brown clay skin, short dark felted hair, a short stubble beard, tired kind eyes, tall slim adult proportions, a worn navy blue denim work shirt with rolled sleeves, cream canvas trousers, worn brown boots", False, EXPR_ADULTO, ""),
- ("PM04","Caio, irmão mais velho, 11 anos","P10 (irmão mais velho)","boy of about 11, slim, a bit taller", True, "calm smile, waiting and lonely, worried, proud, joyful laughing", ""),
- ("PM04b","Caio pequeno, 5 anos (começo da história)","P10 (irmão mais velho)","boy of about 5, small body, same hair color", True, "calm, lonely waiting at a window, curious, shy, happy", "Same character as the attached sheet, but at 5 years old."),
- ("PM05","Prof.ª Helena (professora do AEE)","P11-Helena-miniatura","woman of about 35, smooth youthful clay skin with NO wrinkles, taller slim adult proportions, the navy cardigan, cream linen dress and aqua green knitted scarf", False, "calm kind smile, attentive listening, moved with teary eyes, proud, joyful laughing", ""),
- ("PM06","O pediatra da cidade (Sr. Aurélio)","P08 (Sr. Aurélio)","elderly man of about 70, aged matte clay skin with gentle wrinkles, felted grey hair and bushy eyebrows, a worn white doctor coat over a cream shirt, round wire glasses", False, "calm, serious and sorry, thoughtful, kind smile, tired", ""),
- ("PM07","Dona Benedita, a benzedeira (vizinha) — PERSONAGEM NOVO","(nenhum — criar)","elderly woman of about 75, aged clay skin with deep gentle wrinkles, a grey felted bun, a faded floral cotton dress, a knitted shawl, a small sprig of rue in her hand", False, "calm, praying with closed eyes, kind smile, mysterious, gentle", ""),
+ ("PE01","Davi, 8 anos (garoto autista — protagonista)","P01-Davi","boy of about 8", True, EXPR_CRIANCA, ""),
+ ("PE02","Léo","P02-Leo","child of about 10, friendly and playful", True, "calm smile, curious, laughing with friends, cheering, kind", ""),
+ ("PE03","Ícaro","P03-Icaro","child of about 10, friendly and playful", True, "calm smile, curious, laughing with friends, cheering, kind", ""),
+ ("PE04","Alice","P04-Alice","child of about 10, friendly and playful", True, "calm smile, curious, laughing with friends, cheering, kind", ""),
+ ("PE05","Téo","P05-Teo","child of about 10, friendly and playful", True, "calm smile, curious, laughing with friends, cheering, kind", ""),
+ ("PE06","Kenji","P06-Kenji","child of about 10, friendly and playful", True, "calm smile, curious, laughing with friends, cheering, kind", ""),
+ ("PE07","Clara","P07-Clara","child of about 10, friendly and playful", True, "calm smile, curious, laughing with friends, cheering, kind", ""),
+ ("PE08","Sr. Aurélio (o pediatra da cidade)","P08-Sr-Aurelio","elderly man of about 70, aged matte clay skin with gentle wrinkles, felted grey hair and bushy eyebrows, a worn white doctor coat over a cream shirt, round wire glasses", False, "calm, serious and sorry, thoughtful, kind smile, tired", ""),
+ ("PE09","Marta, a mãe do Davi (38 anos)","P09-Mae-Davi","woman of about 38, smooth youthful clay skin with NO wrinkles, taller slim adult proportions", False, EXPR_ADULTO, ""),
+ ("PE10","Caio, irmão mais velho do Davi (11 anos)","P10-Irmao-velho","boy of about 11, slim, a bit taller", True, "calm smile, waiting and lonely, worried, proud, joyful laughing", ""),
+ ("PE11","Prof.ª Helena (professora do AEE)","P11-Helena","woman of about 35, smooth youthful clay skin with NO wrinkles, taller slim adult proportions, the navy cardigan, cream linen dress and aqua green knitted scarf", False, "calm kind smile, attentive listening, moved with teary eyes, proud, joyful laughing", ""),
+ ("PE12","Prof.ª Regina (professora da sala de aula)","P12-Regina","woman of about the same age as in the attached image, taller slim adult proportions", False, EXPR_ADULTO, ""),
+ ("PE13","Prof. Marcos (professor)","P13-Marcos","man of about the same age as in the attached image, taller slim adult proportions", False, EXPR_ADULTO, ""),
+ ("PE14","Rogério, o pai do Davi (40 anos) — NOVO","(nenhum — criar)","man of about 40, light-brown clay skin, short dark felted hair, a short stubble beard, tired kind eyes, tall slim adult proportions, a worn navy blue denim work shirt with rolled sleeves, cream canvas trousers, worn brown boots", False, EXPR_ADULTO, ""),
+ ("PE15","Dona Benedita, a benzedeira vizinha — NOVO","(nenhum — criar)","elderly woman of about 75, aged clay skin with deep gentle wrinkles, a grey felted bun, a faded floral cotton dress, a knitted shawl, a small sprig of rue in her hand", False, "calm, praying with closed eyes, kind smile, mysterious, gentle", ""),
+ ("PE16","Davi pequeno, 2 anos (começo da história)","PE01 (aprovada)","toddler of about 2, small round toddler body, same hair color, a little cotton t-shirt and shorts", True, "calm, curious, overwhelmed with hands over his ears (calm face), sleepy, happy", "Same character as the attached sheet, but at 2 years old."),
+ ("PE17","Caio pequeno, 5 anos (começo da história)","PE10 (aprovada)","boy of about 5, small body, same hair color", True, "calm, lonely waiting at a window, curious, shy, happy", "Same character as the attached sheet, but at 5 years old."),
 ]
-AMIGOS = [("PM08","Léo","P02"),("PM09","Ícaro","P03"),("PM10","Alice","P04"),("PM11","Téo","P05"),("PM12","Kenji","P06"),("PM13","Clara","P07")]
-PERS += [
- ("PM14","Prof.ª Regina (professora da sala de aula)","P12 (Prof.ª Regina)","woman of about the same age as in the attached image, taller slim adult proportions", False, EXPR_ADULTO, ""),
- ("PM15","Prof. Marcos (professor)","P13 (Prof. Marcos)","man of about the same age as in the attached image, taller slim adult proportions", False, EXPR_ADULTO, ""),
-]
+AMIGOS = []
 
+ESCOLA = "Same place as the attached image: keep its layout, furniture and objects in the same positions, rebuilt as a handmade miniature set."
 CENARIOS = [
- ("CM01","Rua de pedra da cidadezinha (entardecer)","A narrow cobblestone street in an old small town in the Brazilian countryside: crooked two-storey houses leaning gently toward each other, small iron balconies with dried flowers, an old bent street lamp, uneven hand-laid cobblestones.","ABCDF"),
- ("CM02","Casa da família — fachada e quintal","A small crooked one-storey family house with a navy blue front door and window shutters, a little front garden with a low wooden fence, and a backyard with a dirt yard, a clothesline, a mango tree and a small worn football.","ABCE"),
- ("CM03","Cozinha da família","A small family kitchen: a worn wooden table with two chairs facing each other and two coffee cups going cold, an old stove, open shelves with jars, a window over the sink, a hanging light bulb, a navy blue cupboard. Under the table there is a clear empty space at floor level.","ABCDEF"),
- ("CM04","Quarto dos meninos","A small bedroom for two brothers: two narrow single beds with knitted blankets, a wooden shelf with toy cars lined up in a perfect row, a small window with curtains, a worn rug.","ABDE"),
- ("CM05","Sala da festa de família","A small living room decorated for a simple family party: a long table with a cake and paper cups, colorful paper bunting across the ceiling, many empty chairs, an old sofa.","ABCF"),
- ("CM06","Consultório do pediatra da cidade","A small old-fashioned doctor's office in a small town: a wooden desk with a notepad and an old pen, two chairs in front of it, a small examination bed with a paper sheet, a glass cabinet with old medicine bottles, a framed diploma with no readable text.","ABEF"),
- ("CM07","Viagem: dentro do ônibus na estrada","The inside of an old intercity bus: two rows of worn fabric seats, a window seat with a view of a winding countryside road and green hills made of felt and painted wood.","ABE"),
- ("CM08","Corredor de espera do hospital na cidade grande","A long hospital waiting corridor: a row of plastic chairs against the wall, closed doors with small windows, a water cooler, a long cold strip of light on the floor; the colors here are colder and greyer than the rest of the story.","ABCF"),
- ("CM09","Secretaria de Educação (balcão)","A small municipal education office: a long wooden counter, piles of paper folders, a wall clock, a bench for waiting, a window with half-closed blinds.","ABE"),
- ("CM10","Escola — fachada e portão","The same small old public school as the attached facade image, now with an iron front gate in front of it where parents wait outside.","ABCF"),
- ("CM11","Pátio da escola","A school courtyard: cobblestone and dirt ground, a big old tree with a round bench around it, a lonely corner by a wall, a drinking fountain, a small football goal.","ABCDE"),
- ("CM12","Sala de recursos (porta azul)","A small cozy resource room: a navy blue door, a low wooden children's table with two small chairs, shelves with colorful wooden toys and boxes, a felt board with picture cards, an adult table with three chairs for meetings, a soft rug, a big window with golden light.","ABCDEF"),
- ("CM13","Sala de aula","A small classroom: rows of old wooden desks, a green chalkboard with no readable text, a teacher's desk, tall windows, a cubby wall with backpacks.","ABCF"),
- ("CM15","Cantina da escola","A small school canteen: a long counter with big aluminium pots, a serving window, long wooden tables with benches, enamel cups and plates, a tiled wall.","ABCF"),
- ("CM16","Corredor externo da escola","An open-air school corridor: a long covered walkway with old columns, a row of classroom doors painted navy blue, potted plants, a bulletin board with paper notes and no readable text.","ABCF"),
- ("CM17","Quadra da escola","A small school sports court: a cracked painted concrete floor with faded lines, a basketball hoop, a small football goal, a low wall with children's drawings, a bench.","ABCD"),
- ("CM18","Sala de reunião / atendimento às famílias","A small meeting room for talking with families: a round wooden table with four chairs, a box of tissues, a pot of coffee and cups, a shelf with folders, a window with a plant.","ABEF"),
- ("CM19","Pátio coberto","A covered school patio: a wide roof on old wooden beams, a cement floor with a painted hopscotch game, a row of hooks with backpacks, benches along the wall.","ABCD"),
- ("CM14","Pracinha com banco e árvore velha","A small town square at the end of the cobblestone street: one old wooden bench under a big old twisted tree, a little stone fountain, an old street lamp, fallen leaves.","ABCDE"),
+ ("CE01","Escola — fachada e portão","C01-Fachada-escola","The small old public school building with an iron front gate in front of it where parents wait outside.","ABCF"),
+ ("CE02","Pátio da escola","C02-Patio-escola","A school courtyard: cobblestone and dirt ground, a big old tree with a round bench around it, a lonely corner by a wall, a drinking fountain.","ABCDE"),
+ ("CE03","Cantina","C03-Cantina","A small school canteen: a long counter with big aluminium pots, long wooden tables with benches, enamel cups and plates, a tiled wall.","ABC"),
+ ("CE04","Corredor externo","C04-Corredor-externo","An open-air school corridor with old columns and a row of classroom doors painted navy blue.","ABC"),
+ ("CE05","Quadra de esportes","C05-Quadra-esportes","A small school sports court with faded painted lines, a basketball hoop and a small football goal.","ABD"),
+ ("CE06","Sala de aula","C06-Sala-de-aula","A small classroom: rows of old wooden desks, a green chalkboard with no readable text, tall windows.","ABCF"),
+ ("CE07","Sala de aula — quadro e mesa da professora","C07-Sala-aula-quadro-mesa","The front of the classroom: the chalkboard and the teacher's desk.","AB"),
+ ("CE08","Sala de recursos (porta azul)","C08-Sala-recursos","A small cozy resource room: a navy blue door, a low children's table with two small chairs, shelves with wooden toys, a felt board with picture cards, a soft rug, a big window with golden light.","ABCDEF"),
+ ("CE10","Sala de reunião","C10-Sala-reuniao","A small meeting room for teachers.","AB"),
+ ("CE11","Sala de atendimento às famílias","C11-Sala-reuniao-atendimento","A small room for talking with families: a round wooden table with four chairs, a box of tissues, coffee cups.","ABEF"),
+ ("CE12","Pátio coberto","C12-Patio-coberto","A covered school patio on old wooden beams, a painted hopscotch game on the floor, benches along the wall.","ABD"),
+ ("CE14","Sala dos professores","C14-Sala-dos-professores","The teachers' room.","AB"),
+ ("CE15","Biblioteca","C15-Biblioteca","The small school library.","AB"),
+ ("CE16","Secretaria / coordenação","C16-Secretaria-coordenacao","The school office and coordination room.","AB"),
+ ("CE17","Cozinha / refeitório","C17-Cozinha-refeitorio","The school kitchen and dining hall.","A"),
+ ("CE18","Quadra coberta","C18-Quadra-coberta","The covered sports court.","A"),
+ ("CE19","Corredor de entrada","C19-Corredor-entrada","The school entrance hallway.","AB"),
+ ("CE20","Auditório","C20-Auditorio","The small school auditorium with a little stage.","AB"),
+ ("CE21","Sala de artes","C21-Sala-de-artes","The art room with paint pots and children's drawings.","AB"),
+ ("CE22","Depósito / almoxarifado","C22-Deposito","The storage room.","A"),
+ ("CE23","Banheiro","C23-Banheiro","The school bathroom.","A"),
+ ("CE24","Vestiário","C24-Vestiario","The physical education changing room.","A"),
+ ("CE25","Copa dos professores","C25-Copa","The teachers' small pantry with lockers.","A"),
+ ("CE26","Sala de apoio / atendimento","C26-Sala-apoio-atendimento","A small support room for one-to-one sessions.","AB"),
+ ("CE27","Rua de pedra da cidadezinha (entardecer) — NOVO","","A narrow cobblestone street in an old small town in the Brazilian countryside: crooked two-storey houses leaning gently toward each other, small iron balconies with dried flowers, an old bent street lamp, uneven hand-laid cobblestones.","ABCDF"),
+ ("CE28","Casa da família — fachada e quintal — NOVO","","A small crooked one-storey family house with a navy blue front door and window shutters, a little front garden with a low wooden fence, and a backyard with a clothesline, a mango tree and a small worn football.","ABCE"),
+ ("CE29","Cozinha da família — NOVO","","A small family kitchen: a worn wooden table with two chairs facing each other and two coffee cups going cold, an old stove, open shelves with jars, a window over the sink, a hanging light bulb, a navy blue cupboard. Under the table there is a clear empty space at floor level.","ABCDEF"),
+ ("CE30","Quarto dos meninos — NOVO","","A small bedroom for two brothers: two narrow single beds with knitted blankets, a wooden shelf with toy cars lined up in a perfect row, a small window with curtains, a worn rug.","ABDE"),
+ ("CE31","Sala da festa de família — NOVO","","A small living room decorated for a simple family party: a long table with a cake and paper cups, colorful paper bunting, many empty chairs, an old sofa.","ABCF"),
+ ("CE32","Consultório do pediatra — NOVO","","A small old-fashioned doctor's office: a wooden desk with a notepad, two chairs in front of it, a small examination bed with a paper sheet, a glass cabinet with old medicine bottles, a framed diploma with no readable text.","ABEF"),
+ ("CE33","Dentro do ônibus na estrada — NOVO","","The inside of an old intercity bus: two rows of worn fabric seats, a window seat with a view of a winding countryside road and green hills made of felt and painted wood.","ABE"),
+ ("CE34","Corredor do hospital da cidade grande — NOVO","","A long hospital waiting corridor: a row of plastic chairs, closed doors with small windows, a water cooler; colder and greyer colors than the rest of the story.","ABCF"),
+ ("CE35","Pracinha com banco e árvore velha — NOVO","","A small town square: one old wooden bench under a big old twisted tree, a little stone fountain, an old street lamp, fallen leaves.","ABCDE"),
+ ("CE36","Secretaria de Educação (balcão) — NOVO","","A small municipal education office: a long wooden counter, piles of paper folders, a wall clock, a bench for waiting, a window with half-closed blinds.","ABE"),
 ]
 
 def item_p(cod,nome,anexo,desc,crianca,expr,extra):
@@ -88,20 +109,23 @@ md=["# Kit do MUNDO — estilo miniatura — vale para TODAS as histórias e as 
     "> dos personagens do episódio 01 primeiro; ângulos e o resto do elenco depois.",
     "> Como fazer: PERSONAGENS = CRIAR (Imagem · 16:9 · Nano Banana 2.1 · x2) anexando a imagem indicada. CENÁRIOS = 1º a",
     "> base (CRIAR, sem anexo, ou anexando a imagem antiga do lugar se existir); depois cada ÂNGULO = CRIAR anexando a BASE",
-    "> aprovada do mesmo cenário. Salvar com o código no nome (ex.: PM02-Marta, CM03-A-cozinha).",""]
+    "> aprovada do mesmo cenário. Salvar com o código no nome (ex.: PE09, CE29, CE29-A). Originais antigos ficam em 06-originais-3d (P01-Davi … C26).",""]
 md.append("## Personagens")
 for p in PERS:
     md += [f"### {p[0]} — {p[1]}", f"Anexar: {p[2]}", "```", item_p(*p), "```",""]
-md += ["### PM08–PM13 — amigos do Caio na escola (Léo, Ícaro, Alice, Téo, Kenji, Clara)",
-       "Mesmo texto para cada um, anexando a folha original dele (P2 a P7); troque a idade se ele não tiver ~10 anos.",""]
-for cod,nome,orig in AMIGOS:
-    md += [f"**{cod} — {nome}** (anexar {orig})", "```", item_p(cod,nome,orig,"child of about 10, friendly and playful",True,"calm smile, curious, laughing with friends, cheering, kind",""), "```",""]
 md.append("## Cenários (base + ângulos)")
-for cod,nome,desc,angs in CENARIOS:
-    base = " ".join(f"{('Use the attached facade image to keep the same school building. ' if cod=='CM10' else '')}{desc} {CEN} {BRANCO_C}".split())
-    md += [f"### {cod} — {nome}", f"**{cod}-base**" + (" (anexar C01-fachada-miniatura)" if cod=="CM10" else " (sem anexo)"), "```", base, "```"]
+ITENS=[]  # (descricao/arquivo, obs, prompt) — vai pro Painel
+for p in PERS:
+    an = p[2]
+    ob = "CRIAR (Imagem · 16:9 · x2)" + ("" if an.startswith("(nenhum") else f" · ANEXAR {an.split()[0]}") + f" · salvar como {p[0]}" + (f" (SOMENTE depois de {an.split()[0]})" if "aprovada" in an else "")
+    ITENS.append((p[0], p[1], ob, item_p(*p)))
+for cod,nome,orig,desc,angs in CENARIOS:
+    base = " ".join(f"{(ESCOLA+' ') if orig else ''}{desc} {CEN} {BRANCO_C}".split())
+    md += [f"### {cod} — {nome}", f"**{cod}**" + (f" (anexar {orig})" if orig else " (sem anexo)"), "```", base, "```"]
+    ITENS.append((cod, nome, "CRIAR (Imagem · 16:9 · x2)" + (f" · ANEXAR {orig}" if orig else "") + f" · salvar como {cod}", base))
     for c,t in angulos(cod,angs):
-        md += [f"**{c}** (anexar {cod}-base)", "```", t, "```"]
+        md += [f"**{c}** (anexar {cod} aprovado)", "```", t, "```"]
+        ITENS.append((c, f"{nome} — ângulo {c[-1]}", f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {cod} · salvar como {c} (SOMENTE depois de {cod})", t))
     md.append("")
 open('/home/user/maestro-video-generator/docs/episodio-ilustrado/roteiros-estilo-novo/kit_mundo_miniatura.md','w').write("\n".join(md))
 
@@ -118,3 +142,8 @@ for linha in md:
 d.save('/tmp/claude-0/-home-user/be8c2ca8-b73c-5f63-95ff-7e1938a7ecc2/scratchpad/Kit do mundo - estilo miniatura.docx')
 n_p=len(PERS)+len(AMIGOS); n_c=sum(1+len(a) for *_,a in CENARIOS)
 print('personagens',n_p,'cenarios (base+angulos)',n_c,'total',n_p+n_c)
+
+import json as _j
+_j.dump([{"codigo":f"K{i:02d}","descricao":d,"situacao":"falta","obs":f"{o} [{n}]","imagem":t} for i,(d,n,o,t) in enumerate(ITENS,1)],
+        open('/tmp/claude-0/-home-user/be8c2ca8-b73c-5f63-95ff-7e1938a7ecc2/scratchpad/kitmini/itens_kit_mundo.json','w'),ensure_ascii=False)
+print('itens painel',len(ITENS))
