@@ -98,7 +98,8 @@ PERS = [
 
 CEN = ("Whimsical handmade stop-motion miniature diorama, macro photograph of a real handmade set: slightly crooked walls, "
        "weathered cracked plaster, chipped paint, carved worn wood, aged fabric with visible stitches, tiny dried flowers, "
-       "terracotta tiles. Colors: warm aged beige, cream, honey wood and terracotta; doors, window frames and main furniture "
+       "terracotta tiles, potted flowers, old iron lamp posts, rooftop antennas and chimneys. Colors: warm aged ochre, beige, "
+       "cream, honey wood and terracotta plaster; doors, window frames and main furniture "
        "in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE small accent in soft aqua green (#56CAC9). Warm golden "
        "side light, tiny dust particles in the air. No people. No readable text.")
 BRANCO = ("The whole set is built on a square wooden board and photographed ISOLATED on a PURE WHITE seamless background "
@@ -156,10 +157,13 @@ CENARIOS = [
 # ES08 rapaz de boina no banco com cachorro (dono) · ES09 feirante com rabanetes, rosto adulto de perto (dono) ·
 # ES10 rapaz magro triste sentado na cama (dono).
 # ES11 carteiro de óculos lendo carta · ES12 senhora de óculos com cartas (dono). ES02/03/04 ainda não chegaram como arquivo.
-MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES01 + ES07", "ES01 + ES07", "ES12 + ES07", "ES10 + ES11", "ES11 + ES09"
+# ES13 rua de pedra com portas laranja e azuis (dono, modelo dos CENÁRIOS) · ES14 grupo de bonecos de corpo inteiro (dono).
+MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES14 + ES01", "ES14 + ES01", "ES12 + ES14", "ES10 + ES14", "ES11 + ES14"
 ANEXO = {"PE01": MENINO, "PE02": MENINO, "PE03": MENINO, "PE04": MENINA, "PE05": MENINO, "PE06": MENINO, "PE07": MENINA,
          "PE08": IDOSO, "PE09": MULHER, "PE10": MENINO, "PE11": MULHER, "PE12": MULHER, "PE13": HOMEM, "PE14": HOMEM,
          "PE15": MULHER, "PE16": MENINO, "PE17": MENINO}
+
+EXTERNOS = {"CE01", "CE02", "CE04", "CE05", "CE12", "CE18", "CE27", "CE28", "CE35"}
 
 def prompt_p(cod, nome, tipo, desc, expr, dep):
     idade = {"child": CHILD, "young": YOUNG, "old": OLD}[tipo]
@@ -174,7 +178,8 @@ def itens():
         ob = f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {anexo} · salvar como {cod}" + (f" (SOMENTE depois de {dep})" if dep else "")
         out.append((cod, nome, ob, prompt_p(*p)))
     for cod, nome, desc, angs in CENARIOS:
-        out.append((cod, nome, f"CRIAR (Imagem · 16:9 · x2) · ANEXAR ES05 + ES06 · salvar como {cod}",
+        interno = cod not in EXTERNOS
+        out.append((cod, nome, f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {'ES06 + ES13' if interno else 'ES13 + ES05'} · salvar como {cod}",
                     " ".join(f"{REF_C} {desc} {CEN} {BRANCO}".split())))
         for a in angs:
             out.append((f"{cod}-{a}", f"{nome} — ângulo {a}", f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {cod} · salvar como {cod}-{a} (SOMENTE depois de {cod})",
