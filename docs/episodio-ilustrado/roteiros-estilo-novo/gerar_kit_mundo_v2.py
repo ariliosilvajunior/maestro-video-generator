@@ -151,8 +151,8 @@ CENARIOS = [
 
 # Estilo (pasta 01-estilo): ES01 grupo de bonecos de corpo inteiro · ES02 mulher passando roupa (dono) · ES03 menino com
 # cachorro (dono) · ES04 menina de tranças (dono) · ES05 fachada com flores · ES06 cozinha · ES07 rostos de perto ·
-# ES08 rapaz de boina no banco com cachorro (dono).
-MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES03 + ES01", "ES04 + ES01", "ES02 + ES07", "ES08 + ES07", "ES07 + ES01"
+# ES08 rapaz de boina no banco com cachorro (dono) · ES09 feirante com rabanetes, rosto adulto de perto (dono).
+MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES03 + ES01", "ES04 + ES01", "ES02 + ES07", "ES08 + ES09", "ES09 + ES07"
 ANEXO = {"PE01": MENINO, "PE02": MENINO, "PE03": MENINO, "PE04": MENINA, "PE05": MENINO, "PE06": MENINO, "PE07": MENINA,
          "PE08": IDOSO, "PE09": MULHER, "PE10": MENINO, "PE11": MULHER, "PE12": MULHER, "PE13": HOMEM, "PE14": HOMEM,
          "PE15": MULHER, "PE16": MENINO, "PE17": MENINO}
