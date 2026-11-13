@@ -13,11 +13,13 @@ REF_P = ("Use the attached style images ONLY for the visual style — the same h
 REF_C = ("Use the attached style images ONLY for the visual style — the same handmade stop-motion miniature set look, "
          "materials, weathering, warm light and color mood. Do NOT copy any building, object, logo or text from them; "
          "this is a NEW place described below.")
-PUPPET = ("Handmade caricature stop-motion puppet, lifelike macro photograph of a real puppet: matte sculpted clay skin with "
-          "fine fingerprints and texture, a LONG rounded clay nose (the strongest feature), big droopy expressive eyes, "
-          "slightly oversized head on a thin neck, long thin limbs, needle-felted wool hair with loose stray fibers, clothes "
-          "of worn real fabric (knitted wool with frayed cuffs, tweed, linen, visible stitches).")
-CHILD = "A child puppet: softer and cuter caricature, nose clearly long but rounder, big curious eyes, rosy cheeks, light freckles."
+PUPPET = ("Handmade caricature stop-motion puppet, lifelike macro photograph of a real puppet (Gengu-like look the owner "
+          "chose): a VERY long, narrow clay nose that droops down over the mouth (the strongest feature), small simple eyes "
+          "set close together, thin expressive eyebrows, a long narrow face, a lanky elongated body with a very thin neck, "
+          "long thin arms and large hands; smooth matte clay skin; needle-felted wool hair with loose stray fibers; clothes "
+          "of muted felt and knitted wool (frayed cuffs, visible stitches) in desaturated grey-blue, beige and brown; warm "
+          "soft sepia light.")
+CHILD = "A child puppet: a shorter, smaller body and a softer caricature — the nose still long but rounder, bigger curious eyes, rosy cheeks, light freckles."
 YOUNG = "Smooth youthful clay skin with NO wrinkles."
 OLD = "Aged clay skin with gentle wrinkles."
 PALETA = ("Clothing colors: deep navy blue (#2B4872) and medium blue (#3E69B7) with cream and warm browns, plus ONE small "
@@ -153,7 +155,8 @@ CENARIOS = [
 # cachorro (dono) · ES04 menina de tranças (dono) · ES05 fachada com flores · ES06 cozinha · ES07 rostos de perto ·
 # ES08 rapaz de boina no banco com cachorro (dono) · ES09 feirante com rabanetes, rosto adulto de perto (dono) ·
 # ES10 rapaz magro triste sentado na cama (dono).
-MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES03 + ES01", "ES04 + ES01", "ES02 + ES07", "ES10 + ES09", "ES09 + ES07"
+# ES11 carteiro de óculos lendo carta · ES12 senhora de óculos com cartas (dono). ES02/03/04 ainda não chegaram como arquivo.
+MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES01 + ES07", "ES01 + ES07", "ES12 + ES07", "ES10 + ES11", "ES11 + ES09"
 ANEXO = {"PE01": MENINO, "PE02": MENINO, "PE03": MENINO, "PE04": MENINA, "PE05": MENINO, "PE06": MENINO, "PE07": MENINA,
          "PE08": IDOSO, "PE09": MULHER, "PE10": MENINO, "PE11": MULHER, "PE12": MULHER, "PE13": HOMEM, "PE14": HOMEM,
          "PE15": MULHER, "PE16": MENINO, "PE17": MENINO}
