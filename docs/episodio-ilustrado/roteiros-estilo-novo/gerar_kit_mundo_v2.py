@@ -161,8 +161,12 @@ CENARIOS = [
 MENINO, MENINA, MULHER, HOMEM, IDOSO = "ES14 + ES01", "ES14 + ES01", "ES12 + ES14", "ES10 + ES14", "ES11 + ES14"
 ANEXO = {"PE01": MENINO, "PE02": MENINO, "PE03": MENINO, "PE04": MENINA, "PE05": MENINO, "PE06": MENINO, "PE07": MENINA,
          "PE08": IDOSO, "PE09": MULHER, "PE10": MENINO, "PE11": MULHER, "PE12": MULHER, "PE13": HOMEM, "PE14": HOMEM,
-         "PE15": MULHER, "PE16": MENINO, "PE17": MENINO}
+         "PE15": "ES17 + ES14", "PE16": MENINO, "PE17": MENINO}
 
+# ES15 casa colorida · ES16 prédio de tijolo à noite (escola) · ES17 senhora com caixa de lembranças · ES18 sala de aula
+# antiga · ES19 baile com lanternas (dono, 13/11/2026).
+ANEXO_CE = {"CE01": "ES16 + ES13", "CE06": "ES18 + ES06", "CE07": "ES18 + ES06", "CE08": "ES18 + ES06", "CE15": "ES18 + ES06",
+            "CE27": "ES13 + ES15", "CE28": "ES15 + ES13", "CE31": "ES19 + ES06"}
 EXTERNOS = {"CE01", "CE02", "CE04", "CE05", "CE12", "CE18", "CE27", "CE28", "CE35"}
 
 def prompt_p(cod, nome, tipo, desc, expr, dep):
@@ -179,7 +183,7 @@ def itens():
         out.append((cod, nome, ob, prompt_p(*p)))
     for cod, nome, desc, angs in CENARIOS:
         interno = cod not in EXTERNOS
-        out.append((cod, nome, f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {'ES06 + ES13' if interno else 'ES13 + ES05'} · salvar como {cod}",
+        out.append((cod, nome, f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {ANEXO_CE.get(cod) or ('ES06 + ES13' if interno else 'ES13 + ES05')} · salvar como {cod}",
                     " ".join(f"{REF_C} {desc} {CEN} {BRANCO}".split())))
         for a in angs:
             out.append((f"{cod}-{a}", f"{nome} — ângulo {a}", f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {cod} · salvar como {cod}-{a} (SOMENTE depois de {cod})",
