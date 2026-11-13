@@ -18,6 +18,9 @@
 > - **[pausa]** é ~1 s de silêncio e **[pausa longa]** é ~2 s.
 
 ## Faixas de música (Suno — instrumentais, sem voz)
+> 13/11/2026: o dono escolheu o estilo "fábula de cinema" (orquestra delicada, piano, flauta, cordas). Arquivos
+> prontos no Drive: Conta M › `07-musicas (Suno)` › `M1 - Rua de Pedra.wav` … `M8 - Gancho.wav`. Base de todo Estilo:
+> "whimsical orchestral film score … storybook animation, instrumental, no vocals". A tabela abaixo é o CLIMA de cada faixa.
 | Faixa | Clima | Onde entra |
 |---|---|---|
 | M1 — "Rua de Pedra" (tema da série) | violão dedilhado + caixinha de música, saudade quente | abertura e final de todo episódio |
