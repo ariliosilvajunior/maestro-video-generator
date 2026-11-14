@@ -62,7 +62,20 @@ A estrutura não pode aparecer nem ser seguida à risca: ela é um esqueleto pre
 
 **Na série:** cada episódio tem uma família como herói, e a Helena, a escola e a Rua de Pedra se repetem. O "elixir" de um episódio vira o "chamado" do próximo: o menino no portão.
 
+## 2c. Tom e humor ("Memórias de um Amigo Imaginário", Matthew Dicks — romance, só como modelo de jeito de contar)
+- **Frase curta e simples, como quem conta para uma criança.** Os momentos pequenos do dia a dia dizem tudo: o pote de geleia que finalmente abre… e cai no chão.
+- **Pensamento em lista quando o personagem trava:** "O vermelho é melhor que o amarelo? Qual derrete mais rápido?…"
+- **Humor carinhoso, que nasce do cotidiano e da lógica da criança.** Rimos COM a família, nunca DO autismo. Exemplos: o carrinho escondido; o ônibus inteiro contando postes; "não tem quebranto, tem é organização"; a piada sem graça do pai.
+- **Pelo menos 3 momentos de riso por episódio,** antes ou depois das partes pesadas, como respiro.
+
+**Livros guardados:**
+- Drive › Conta M › `08-livros (como contar histórias)`: Jornada do Escritor e Memórias.
+- O "Story" (McKee), que é grande demais para subir daqui, continua no pCloud: `https://u.pcloud.link/publink/show?code=XZDUNfJZmwKevJH3aYFqWfN1FLR34RPBqWY7`. Para baixar, usar `api.pcloud.com/getpubzip?code=…`.
+
 ## 3. Como isso vira a narração gravada (ElevenLabs v3)
+- **Sua voz com interpretação:** gera no v3 (que interpreta bem, mas a voz não fica parecida) e depois passa pela TROCA DE VOZ
+  (speech-to-speech, `eleven_multilingual_sts_v2`) com a voz do dono `7E34QW8YpZNX1CILBhmz`. Script:
+  `scratchpad/ep01v3/gerar.py`. O v3 não aceita `previous_text`.
 - **Marcas de emoção** antes da frase: `[whispers]`, `[sad]`, `[excited]`, `[nervous]`, `[warmly]`, `[laughs]`, `[sighs]`, `[mysterious]`, `[serious]`.
 - **Pausa** com reticências e ponto final; nunca marcas de pausa dentro da frase, porque isso já gerou "iiii".
 - **Fala de personagem:** entre aspas, com a marca do jeito dela. Por exemplo: `[softly] "E você? Como você está?"`.
