@@ -4,7 +4,7 @@
 > Este guia é aplicado em TODA narração antes de ela ir para o dono. Fontes:
 > - o vídeo de storytelling que o dono assistiu, com as 5 técnicas;
 > - o livro "Story", de Robert McKee (biblioteca pCloud do dono);
-> - (pendente) "A Jornada do Escritor", de Christopher Vogler, para a estrutura da série.
+> - "A Jornada do Escritor", de Christopher Vogler (biblioteca pCloud), para a estrutura do episódio e da série.
 >
 > Usamos só ideias e técnicas: nada é copiado dos livros. As histórias são de autoria própria.
 
@@ -32,6 +32,35 @@
   - Usar os três em todo episódio.
 - **Exposição como munição:** não explicar o passado logo de cara. Soltar a informação só quando ela muda a cena, como uma arma usada na hora certa.
 - **Sem clichê:** cada detalhe deve ser específico deste mundo (a porta azul, o carrinho aqua do Davi, o caderno marrom da Helena).
+
+## 2b. A Jornada do Herói (Vogler), como molde de cada episódio
+A estrutura não pode aparecer nem ser seguida à risca: ela é um esqueleto preenchido com os detalhes do nosso mundo.
+
+| Estágio | No ep. 01 |
+|---|---|
+| Mundo comum | A cidadezinha, a família na varanda |
+| Chamado à aventura | Os sinais do Davi e o sumiço na festa |
+| Recusa / hesitação | "Aqui eu não tenho o que fazer por ele" |
+| Mentor | Mais tarde, a Helena; no começo, ninguém (é essa a dor) |
+| Travessia do 1º limiar | A palavra "autismo" dita em voz alta; o papel com o nome do especialista |
+| Provas, aliados e inimigos | A maratona, a benzedeira, a Secretaria |
+| Caverna secreta | A sala de recursos conquistada… e proibida |
+| Provação | A cozinha fria e a palavra "separação" |
+| Recompensa | "E você? Como você está?" |
+| Caminho de volta | A pracinha, os 15 minutos |
+| Ressurreição | O casamento mais forte que antes |
+| Retorno com o elixir | A casa cheia; e a lição para o professor do AEE |
+
+**Arquétipos (funções, não pessoas fixas):**
+- **Herói:** a família da vez (no ep. 01, a Marta).
+- **Mentor:** a Prof.ª Helena, que volta em todos os episódios.
+- **Arauto:** quem traz a notícia (o pediatra).
+- **Guardião do limiar:** quem barra o caminho (a escola que proíbe a mãe; o balcão da Secretaria).
+- **Camaleão:** quem a gente não sabe se ajuda (a benzedeira).
+- **Aliado:** o Caio e os amigos.
+- **Sombra:** o silêncio e a solidão. Nem sempre é uma pessoa.
+
+**Na série:** cada episódio tem uma família como herói, e a Helena, a escola e a Rua de Pedra se repetem. O "elixir" de um episódio vira o "chamado" do próximo: o menino no portão.
 
 ## 3. Como isso vira a narração gravada (ElevenLabs v3)
 - **Marcas de emoção** antes da frase: `[whispers]`, `[sad]`, `[excited]`, `[nervous]`, `[warmly]`, `[laughs]`, `[sighs]`, `[mysterious]`, `[serious]`.
