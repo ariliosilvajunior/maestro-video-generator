@@ -90,3 +90,12 @@ A estrutura não pode aparecer nem ser seguida à risca: ela é um esqueleto pre
 - [ ] O fim tem gancho para o próximo episódio.
 - [ ] A escola é uma escola para todos, com AEE no contraturno.
 - [ ] Os nomes e os cenários são do Kit do mundo.
+
+## 5. Regras da ANIMAÇÃO (aprendidas no Ep01, 14/11/2026 — cada vídeo errado custa caro)
+- **E006:** a senhora "se replicou" atrás do senhor. **E007:** apareceu gente que não existe. A causa é a câmera andando para o lado ou para trás e gente atravessando o quadro: a IA preenche o espaço novo inventando ou duplicando pessoas.
+- **Câmera PARADA, ou no máximo um empurrão lento para a frente.** Nunca pan, dolly lateral, recuo, grua ou "câmera na mão".
+- **Ninguém entra nem sai do quadro.** Quem está na imagem continua lá; ninguém novo aparece e ninguém duplica.
+- **Uma ação pequena por personagem.** Acenar, sorrir, virar a cabeça, pegar um objeto. Nada de correr de um lado para o outro.
+- **Multidão** (ônibus, festa, escola inteira) só se mexe no próprio lugar.
+- **Cena sem gente:** escrever sempre "no people appear at any moment".
+- O texto-base de toda animação está em `ep01/correcoes_animacao.py` (ANIM + câmera).
