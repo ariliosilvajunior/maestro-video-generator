@@ -102,6 +102,10 @@ CEN = ("Whimsical handmade stop-motion miniature diorama, macro photograph of a 
        "cream, honey wood and terracotta plaster; doors, window frames and main furniture "
        "in deep navy blue (#2B4872) and medium blue (#3E69B7); ONE small accent in soft aqua green (#56CAC9). Warm golden "
        "side light, tiny dust particles in the air. No people. No readable text.")
+# 14/11/2026, dono: "a fechadura da porta está perto do chão… todos vão parecer anões". ESCALA REAL para os bonecos.
+ESCALA = ("REAL-WORLD SCALE for adult-sized puppets: every door is tall (about 2 m in real scale, clearly taller than an adult), "
+          "the door handle and keyhole are at MID-HEIGHT of the door (adult waist height), never near the floor; windows start "
+          "at adult waist height; tables at adult waist height; chairs, beds and counters with normal human proportions.")
 BRANCO = ("The whole set is built on a square wooden board and photographed ISOLATED on a PURE WHITE seamless background "
           "(#FFFFFF): nothing outside the board, no sky, no horizon, a faint shadow under the board.")
 MARCA = ("Brand detail: somewhere on the school, a small round sign with a simple stylized brain drawn in navy and aqua "
@@ -113,7 +117,7 @@ ANG = {
  "B": "the camera placed ON THE GROUND at the height of a small child's eyes, very low, close to the cobblestones, looking up a little at the building; big blurry stones in the foreground",
  "C": "a dramatic LOW-ANGLE shot from very close to the base of the building looking steeply UP, the walls and roof towering over the camera, strong perspective lines",
  "D": "a TOP-DOWN view straight from above, camera pointing straight down at 90 degrees, like a map: you see roofs, the floor plan and the layout, no horizon",
- "E": "an EXTREME MACRO CLOSE-UP of ONE small emotional detail of this set (a door handle, a flower pot, a window, a cup…), filling the whole frame, very shallow depth of field, everything else blurred",
+ "E": "a CLOSE-UP of ONE small emotional detail of this set placed at the height of an adult's hands or eyes (a cup on a table, a flower pot on a window sill, a toy on a shelf, a lamp) — NOT the bottom of a door and NOT at floor level — very shallow depth of field, everything else blurred",
  "F": "the REVERSE side: the camera moved to the opposite side of the set, showing the back or the other side we have never seen, as if we walked around it",
 }
 # 13/11/2026, dono: a escola é uma ESCOLA PARA TODOS (escola comum da cidade), não escola especial/APAE. Dentro dela há UMA
@@ -192,10 +196,10 @@ def itens():
     for cod, nome, desc, angs in CENARIOS:
         interno = cod not in EXTERNOS
         out.append((cod, nome, f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {ANEXO_CE.get(cod) or ('ES06 + ES13' if interno else 'ES13 + ES05')} · salvar como {cod}",
-                    " ".join(f"{REF_C} {desc} {CEN} {BRANCO}".split())))
+                    " ".join(f"{REF_C} {desc} {CEN} {ESCALA} {BRANCO}".split())))
         for a in angs:
             out.append((f"{cod}-{a}", f"{nome} — ângulo {a}", f"CRIAR (Imagem · 16:9 · x2) · ANEXAR {cod} · salvar como {cod}-{a} (SOMENTE depois de {cod})",
-                        f"A NEW photograph of the SAME miniature set shown in the attached image — same buildings, objects, colors, materials and style, still isolated on a pure white background — but taken from a COMPLETELY DIFFERENT camera position: {ANG[a]}. The composition and framing must look clearly different from the attached image; do NOT repeat its framing or point of view. Keep the design of every object the same. No people, no text."))
+                        f"A NEW photograph of the SAME miniature set shown in the attached image — same buildings, objects, colors, materials and style, still isolated on a pure white background — but taken from a COMPLETELY DIFFERENT camera position: {ANG[a]}. The composition and framing must look clearly different from the attached image; do NOT repeat its framing or point of view. Keep the design of every object the same and keep real-world scale: door handles at mid-height of the doors, never near the floor. No people, no text."))
     return out
 
 if __name__ == "__main__":
