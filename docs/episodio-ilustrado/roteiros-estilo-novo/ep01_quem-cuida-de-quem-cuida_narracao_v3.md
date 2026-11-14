@@ -18,6 +18,8 @@
 > - **[MÚSICA …]:** fica para a montagem.
 > - **Marcas em inglês** (`[whispers]`, `[sad]`, `[laughs]`…): é o jeito de falar, lido pela ElevenLabs v3.
 > - **Pausas:** só reticências e ponto final.
+> - **"Arílio" com acento SÓ no texto da voz:** é o jeito que a ElevenLabs pronuncia certo (dono aprovou a amostra
+>   "Meu nome é Arílio, sou professor do Recursos Cognitivos", 14/11/2026). Escrito em tela, legenda e título: Arilio.
 
 ---
 
@@ -33,7 +35,7 @@
 
 [MÚSICA M1 — título: "A Rua de Pedra · Episódio 1 · Quem cuida de quem cuida"]
 
-[warmly] Eu sou o professor Arilio. E essa é a primeira história da Rua de Pedra.
+[warmly] Meu nome é Arílio, sou professor do Recursos Cognitivos. E essa é a primeira história da Rua de Pedra.
 
 [warmly] Tem uma cidade pequena no interior, onde as ruas são de pedra e todo mundo se conhece pelo nome. No fim da rua, tem uma escola com uma porta azul. Guarda essa porta.
 
@@ -175,6 +177,6 @@
 
 [MÚSICA M8 para — silêncio]
 
-[warmly] Isso fica para o próximo episódio da Rua de Pedra. Eu sou o professor Arilio. Até lá.
+[warmly] Isso fica para o próximo episódio da Rua de Pedra. Meu nome é Arílio. Até lá.
 
 [MÚSICA M1 — até o fim]
