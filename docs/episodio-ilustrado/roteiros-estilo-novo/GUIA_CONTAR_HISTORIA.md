@@ -99,3 +99,4 @@ A estrutura não pode aparecer nem ser seguida à risca: ela é um esqueleto pre
 - **Multidão** (ônibus, festa, escola inteira) só se mexe no próprio lugar.
 - **Cena sem gente:** escrever sempre "no people appear at any moment".
 - O texto-base de toda animação está em `ep01/correcoes_animacao.py` (ANIM + câmera).
+- **Escala, imagem das cenas (15/11/2026, E008):** os personagens ficaram do tamanho da casa. Todo texto de imagem leva "TRUE SCALE": prédios MUITO maiores que as pessoas, porta mais alta que qualquer adulto e telhado de casa térrea com o dobro da altura de um adulto. Ninguém é do tamanho de uma casa.
