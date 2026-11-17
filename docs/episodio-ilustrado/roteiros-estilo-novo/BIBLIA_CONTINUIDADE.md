@@ -55,3 +55,4 @@
 | 17/11 | E054 | editar NÃO diminui pessoas | escala errada = CRIAR de novo com câmera de longe + medidas pelo portão/porta |
 | 17/11 | — | "adultos não envelhecem" | o tempo passa para todos |
 | 16/11 | Painel | prompt mandado no chat dava confusão | toda correção vai DIRETO para o Painel |
+| 17/11 | E098, E101, E102 | casa cada vez menor, crianças gigantes (o dono avisou várias vezes) | A MAQUETE É UM MODELINHO: criar cada cena do zero copia o tamanho de brinquedo. Para cada lugar com gente na frente: 1 PLANO MESTRE em escala real (ex.: CE28-M, com bicicleta encostada na parede como régua) e TODAS as cenas desse lugar são feitas EDITANDO o mestre, só acrescentando as pessoas com altura dita pela porta |
