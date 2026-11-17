@@ -67,3 +67,4 @@
 | 17/11 | curta | fala fora da cena ("Rogério, cadê o Davi?" já mostrando o menino achado) | cada fala entra na cena da AÇÃO que ela descreve; conferir fala × cena antes de montar |
 | 17/11 | curta | narração dizia "limpou na ponta do jaleco" e a imagem mostra um paninho | narração e imagem dizem a mesma coisa: corrigir o texto quando a imagem aprovada for diferente |
 | 17/11 | E101 | editar uma imagem com erro acumula erros (cerca, menino grande, 3 chinelos) | sempre editar a partir do MESTRE limpo (CE28-M), nunca da imagem errada; pôr a pessoa AO LADO de uma régua (bicicleta, porta) e longe da câmera; contar objetos ("exatamente 2 chinelos") |
+| 17/11 | E101 × E098/E102 | Kenji maior que os amigos: eu pedi para ele ficar colado na cerca, perto da câmera (perspectiva) | cenas seguidas no mesmo lugar: personagens na MESMA DISTÂNCIA da câmera; anexar uma cena já aprovada como régua de tamanho |
