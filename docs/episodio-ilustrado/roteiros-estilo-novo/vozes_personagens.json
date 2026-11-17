@@ -1,0 +1,32 @@
+{
+ "Marta": {
+  "voz": "Angela - Calm & Friendly",
+  "voice_id": "JgC47uWQV1gKpJtcT73r",
+  "biblioteca_id": "JgC47uWQV1gKpJtcT73r"
+ },
+ "Helena": {
+  "voz": "Maria",
+  "voice_id": "A9cobG3xDLsfb3wUEiin",
+  "biblioteca_id": "A9cobG3xDLsfb3wUEiin"
+ },
+ "Benedita": {
+  "voz": "Bianca - Raspy and Animated",
+  "voice_id": "HReOQZPV9tH5iTEnSbGo",
+  "biblioteca_id": "HReOQZPV9tH5iTEnSbGo"
+ },
+ "Diretora": {
+  "voz": "Maria",
+  "voice_id": "A9cobG3xDLsfb3wUEiin",
+  "biblioteca_id": "A9cobG3xDLsfb3wUEiin"
+ },
+ "Rogerio": {
+  "voz": "Luciano - Energetic & Dynamic",
+  "voice_id": "FOhTvAmqIK234DPck9zT",
+  "biblioteca_id": "FOhTvAmqIK234DPck9zT"
+ },
+ "Aurelio": {
+  "voz": "Noel Natal - Animated Santa Claus",
+  "voice_id": "oQL5kq26ctJzupM0mJot",
+  "biblioteca_id": "oQL5kq26ctJzupM0mJot"
+ }
+}
