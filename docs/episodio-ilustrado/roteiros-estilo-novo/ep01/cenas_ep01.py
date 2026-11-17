@@ -226,7 +226,7 @@ S = [
   "Many children around Davi (8) at the birthday table, sitting naturally with him, one offering him a slice of cake", "medium shot", "kids laugh; Davi holds his green toy car and smiles a little", FESTA),
  (734.9, "CE28", [], "A casa cheia de vozes de novo",
   "The family house seen from the street at golden hour, full of light and children's silhouettes in every window", "wide shot", "slow pull-back; bunting in the wind", F1),
- (739.8, "CE29", ["PE09", "PE14"], "Marta e Rogério de mãos dadas na porta da cozinha",
+ (739.8, "CE28", ["PE09", "PE14"], "Marta e Rogério de mãos dadas na porta da frente",
   "Marta and Rogério stand in the kitchen doorway holding hands, watching the party, backlit", "medium shot from behind them", "slow push-in on their joined hands", F3),
  (747.4, "CE08", ["PE11"], "Mensagem ao professor: fechar o caderno",
   "In the empty resource room at sunset, Helena closes her brown notebook on the table and smiles", "close-up", "the notebook closes softly; dust in the light", F3),

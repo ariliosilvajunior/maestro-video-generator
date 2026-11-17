@@ -161,7 +161,7 @@
 
 [happy] No aniversário de oito anos do Davi, a Marta perguntou: [cheerful] "Caio, quantos amigos você vai chamar?" [kid voice] "Uns dez… talvez quinze." [laughs] Naquela tarde… chegou a escola inteira.
 
-[warmly] E aquelas crianças trataram o Davi como se ele sempre tivesse sido da turma. A casa que um dia ficou em silêncio voltou a ficar cheia de vozes. E na porta da cozinha, a Marta e o Rogério olhavam tudo. De mãos dadas.
+[warmly] E aquelas crianças trataram o Davi como se ele sempre tivesse sido da turma. A casa que um dia ficou em silêncio voltou a ficar cheia de vozes. E na porta de casa, a Marta e o Rogério olhavam tudo. De mãos dadas.
 
 [MÚSICA M7 baixa]
 
