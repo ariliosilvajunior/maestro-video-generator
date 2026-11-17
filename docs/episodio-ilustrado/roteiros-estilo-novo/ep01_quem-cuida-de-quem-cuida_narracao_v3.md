@@ -67,7 +67,7 @@
 
 [serious] No dia seguinte, no consultório do doutor Aurélio, o pediatra da cidade, a Marta segurou a bolsa no colo com as duas mãos. E disse em voz alta a palavra que até então só morava no pensamento dela: [softly] autismo.
 
-[serious] O doutor Aurélio tirou os óculos. Limpou na ponta do jaleco. Pôs de novo. [softly] "Minha filha… aqui, eu não tenho o que fazer por ele." E escreveu um nome num pedaço de papel. [sad] "Procura esse médico. Na cidade grande. Boa sorte."
+[serious] O doutor Aurélio tirou os óculos. Limpou devagar com um paninho. Pôs de novo. [softly] "Minha filha… aqui, eu não tenho o que fazer por ele." E escreveu um nome num pedaço de papel. [sad] "Procura esse médico. Na cidade grande. Boa sorte."
 
 [MÚSICA M4 — estrada]
 
