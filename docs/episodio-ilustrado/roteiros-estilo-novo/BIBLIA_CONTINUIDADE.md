@@ -38,3 +38,20 @@
 - A cena copia a maquete CE do lugar (portas, janelas, portão, objetos). A imagem da cena anterior serve só para luz e clima.
 - O mesmo objeto de perto em cenas seguidas (portão, porta azul, mesa da cozinha): a segunda cena é feita EDITANDO a imagem aprovada da primeira.
 - Objetos-símbolo que nunca mudam: a porta azul da sala de recursos; o carrinho verde-água do Davi; as duas xícaras da cozinha; o caderno marrom da Helena; o símbolo do cérebro na escola.
+
+## 5. Erros já cometidos — NÃO repetir (registro vivo)
+| Data | Cena | Erro | Regra |
+|---|---|---|---|
+| 14/11 | E006/E007 | gente duplicada/inventada no vídeo | câmera parada ou push-in; ninguém entra, sai ou duplica |
+| 14/11 | CE28-E e outros | fechadura perto do chão (bonecos anões) | fechadura no meio da porta; close na altura das mãos |
+| 15/11 | E008/E010 | adultos do tamanho da casa | âncoras de tamanho: porta > adulto, cerca na cintura, telhado 3× |
+| 16/11 | E035 | Flow recusou ("menores") | no vídeo: "felt puppet", nunca child/boy; criança parada |
+| 16/11 | E058 | mão solta pintando; lata gigante | nada de "mão entrando na borda"; objeto pequeno com tamanho dito |
+| 16/11 | E063/E064 | corrigi sem olhar a maquete; portão e janelas errados | SEMPRE abrir a maquete CE do lugar antes de escrever ou corrigir |
+| 16/11 | E063×E064 | portão com 12 e 9 barras | mesmo objeto em cenas seguidas = EDITAR a imagem aprovada |
+| 16/11 | E064 | ferro solto no meio do portão | ao abrir portão/porta: "sem barra solta"; a mão segura a beirada |
+| 16/11 | E043 | cabeça separada do corpo | "ANATOMY: corpo inteiro, cabeça presa" |
+| 17/11 | E054/E064 | Davi de 2 anos na fase da escola | idade pela linha do tempo (seção 1–2) |
+| 17/11 | E054 | editar NÃO diminui pessoas | escala errada = CRIAR de novo com câmera de longe + medidas pelo portão/porta |
+| 17/11 | — | "adultos não envelhecem" | o tempo passa para todos |
+| 16/11 | Painel | prompt mandado no chat dava confusão | toda correção vai DIRETO para o Painel |
