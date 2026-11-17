@@ -34,6 +34,11 @@
 - Cerca da casa: na cintura de um adulto. Telhado da casa térrea: ~3× a altura de um adulto.
 - Portão da escola: alto como a porta da escola; o adulto chega à metade.
 
+## 3b. Inclusão e acessibilidade (dono, 17/11/2026)
+- A série é para passar algo POSITIVO. Onde o Ícaro (cadeira de rodas) estiver: rampa com corrimão, chão liso e plano, porta e portão largos.
+- Casa da família (CE28-M): rampa de madeira na porta e caminho liso do portão até ela. Escola (CE01): rampa ao lado dos degraus da porta central.
+- Nada de cena com barreira para pessoa com deficiência, a não ser que a história trate disso de propósito (e mostre a solução).
+
 ## 4. Lugares — a maquete do Kit é a verdade
 - A cena copia a maquete CE do lugar (portas, janelas, portão, objetos). A imagem da cena anterior serve só para luz e clima.
 - O mesmo objeto de perto em cenas seguidas (portão, porta azul, mesa da cozinha): a segunda cena é feita EDITANDO a imagem aprovada da primeira.
@@ -56,3 +61,4 @@
 | 17/11 | — | "adultos não envelhecem" | o tempo passa para todos |
 | 16/11 | Painel | prompt mandado no chat dava confusão | toda correção vai DIRETO para o Painel |
 | 17/11 | E098, E101, E102 | casa cada vez menor, crianças gigantes (o dono avisou várias vezes) | A MAQUETE É UM MODELINHO: criar cada cena do zero copia o tamanho de brinquedo. Para cada lugar com gente na frente: 1 PLANO MESTRE em escala real (ex.: CE28-M, com bicicleta encostada na parede como régua) e TODAS as cenas desse lugar são feitas EDITANDO o mestre, só acrescentando as pessoas com altura dita pela porta |
+| 17/11 | E102 | Ícaro (cadeirante) numa casa sem rampa, caminho de pedrinhas | A série passa INCLUSÃO: todo lugar onde o Ícaro aparece é acessível — rampa com corrimão, caminho liso e plano, portão/porta largos. A escola (CE01) também precisa de rampa ao lado dos degraus. Ele chega sozinho e com facilidade, nunca carregado nem barrado |
