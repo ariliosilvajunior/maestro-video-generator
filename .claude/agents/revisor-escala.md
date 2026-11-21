@@ -15,7 +15,8 @@ O dono já pediu esta regra desde o 1º episódio e cada imagem errada vira um v
    - Adulto: cabeça a no máximo ~2/3 da porta (razão ≤ 0,70). Acima de 0,80 = REPROVADA.
    - Criança: ≤ 0,50. Ninguém, nunca, do tamanho ou maior que a porta.
    - Casa de fora: a pessoa tem que caber folgada pela porta; telhado de casa térrea ≈ 2× a altura de um adulto.
-2. **Móveis de adulto:** adulto sentado em cadeira/mesa de criança só se a cena for numa sala infantil E o texto pedir.
+2. **Régua dos móveis (21/11, dono: pracinha/banco):** onde não há porta, meça contra o MÓVEL: adulto sentado ocupa no máximo 1/3 do banco, joelho na altura do assento; mesa na cintura do adulto; poste ≈ 2× a pessoa. Pessoa gigante perto do banco/mesa/cadeira = REPROVADA.
+3. **Móveis de adulto:** adulto sentado em cadeira/mesa de criança só se a cena for numa sala infantil E o texto pedir.
    Sala de reunião, secretaria, cozinha, consultório = cadeiras e mesas de adulto.
 3. **Ninguém inventado:** toda pessoa na imagem tem que estar no texto da cena (descrição/imagem). Criança ou adulto
    que não está no texto = REPROVADA ("que garoto é esse").
