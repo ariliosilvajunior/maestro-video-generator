@@ -274,10 +274,10 @@ def video(ep):
     blocos = []
     for b0 in range(0, N, 20):
         b1 = min(b0 + 20, N); out = D + f'bloco{b0:03d}.mp4'; blocos.append((b0, out))
-        for k in range(b0, b1):
+        def seg(k):
             d = ts[k + 1] - ts[k] + (XF if k < N - 1 else 0); src = D + 'clipes/' + plano[k]['arq']; s = D + f'seg/s{k:03d}.mp4'
             if os.path.exists(s):
-                continue
+                return
             if src.endswith('.jpg'):
                 run(['ffmpeg', '-v', 'error', '-y', '-loop', '1', '-t', f'{d:.3f}', '-i', src, '-vf', _kb(d, k, 0.10) + ',format=yuv420p', '-an', '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', s])
             else:
@@ -285,6 +285,9 @@ def video(ep):
                       f"trim=0:{d:.3f},setpts=PTS-STARTPTS,{_kb(d, k, 0.06)},format=yuv420p[v]")
                 run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-filter_complex', fc, '-map', '[v]', '-an', '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', s])
         if not os.path.exists(out):
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(2) as ex:  # cada ffmpeg já usa ~2 núcleos
+                list(ex.map(seg, range(b0, b1)))
             ins = sum((['-i', D + f'seg/s{k:03d}.mp4'] for k in range(b0, b1)), []); fc = []; last = '[0:v]'
             for j, k in enumerate(range(b0 + 1, b1), 1):
                 fc.append(f"{last}[{j}:v]xfade=transition={TR[k % len(TR)]}:duration={XF}:offset={ts[k]-ts[b0]:.3f}[x{j}]"); last = f'[x{j}]'
@@ -309,17 +312,7 @@ def video(ep):
     M = D + 'mg/'; cam = [(M + 'titulo.mov', _tempo(ep, TL, ep['motion_titulo']))] if ep.get('motion_titulo') else []
     cam += [(M + m['arquivo'] + '.mov', _tempo(ep, TL, m)) for m in ep['motion']]
     luzes = [_tempo(ep, TL, l) for l in ep.get('luz', [])]
-    ins = ['-i', base, '-stream_loop', '-1', '-i', M + 'particulas.mp4'] + sum((['-i', f] for f, _ in cam), []) + sum((['-i', M + 'luz.mp4'] for _ in luzes), [])
-    fc = [f"[1:v]trim=0:{FIM},setpts=PTS-STARTPTS,format=gbrp[p]", "[0:v]format=gbrp[b0]", "[b0][p]blend=all_mode=screen:all_opacity=0.35,format=yuv420p[v0]"]; cur = '[v0]'
-    for j, (f, t0) in enumerate(cam):
-        fc.append(f"[{2+j}:v]setpts=PTS-STARTPTS+{t0:.2f}/TB[o{j}]"); fc.append(f"{cur}[o{j}]overlay=0:0:eof_action=pass:format=auto[v{j+1}]"); cur = f'[v{j+1}]'
-    for j, t0 in enumerate(luzes):
-        i = 2 + len(cam) + j
-        fc.append(f"[{i}:v]setpts=PTS-STARTPTS+{t0:.2f}/TB,format=gbrp[l{j}]")
-        fc.append(f"{cur}format=gbrp[g{j}];[g{j}][l{j}]blend=all_mode=screen:all_opacity=0.6:eof_action=pass,format=yuv420p[w{j}]"); cur = f'[w{j}]'
-    fc.append(f"{cur}vignette=angle=PI/5,noise=alls=3:allf=t,fade=t=in:d=0.8,fade=t=out:st={FIM-2}:d=2,format=yuv420p[v]")
-    run(['ffmpeg', '-v', 'error', '-y'] + ins + ['-filter_complex', ';'.join(fc), '-map', '[v]', '-t', f'{FIM:.2f}', '-c:v', 'libx264', '-b:v', '8M', '-maxrate', '10M',
-         '-bufsize', '20M', '-preset', 'veryfast', D + 'video.mp4'])
+    camadas(D, base, cam, luzes, FIM)
     os.remove(base)
     final = D + ep['chave'] + ' - 1080p.mp4'
     run(['ffmpeg', '-v', 'error', '-y', '-i', D + 'video.mp4', '-i', D + 'audio.m4a', '-c', 'copy', '-shortest', '-movflags', '+faststart', final])
@@ -327,6 +320,52 @@ def video(ep):
     run(['ffmpeg', '-v', 'error', '-y', '-i', final, '-vf', 'scale=1280:720', '-c:v', 'libx264', '-b:v', '2200k', '-maxrate', '3000k', '-bufsize', '6000k',
          '-preset', 'veryfast', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', D + ep['chave'] + ' - 720p.mp4'])
     conferir(ep, final, ts, plano)
+
+
+def camadas(D, base, cam, luzes, FIM, partes=None):
+    """Motion por cima da base. 23/11/2026: era um processo só (~35 min num episódio de 13 min, 1 núcleo); agora o
+    episódio é cortado em partes que rodam ao mesmo tempo (uma por núcleo) e são emendadas sem recodificar."""
+    from concurrent.futures import ThreadPoolExecutor
+    M = os.path.dirname(cam[0][0]) + '/' if cam else D + 'mg/'
+    partes = partes or max(1, min(os.cpu_count() or 1, 6))
+    passo = FIM / partes; saidas = []
+
+    def parte(n):
+        a = n * passo; z = FIM if n == partes - 1 else (n + 1) * passo; d = z - a
+        meus = [(f, t0) for f, t0 in cam if t0 < z and t0 + dur_cache(f) > a]
+        minhas = [t0 for t0 in luzes if t0 < z and t0 + 3 > a]
+        ins = ['-ss', f'{a:.3f}', '-t', f'{d:.3f}', '-i', base, '-stream_loop', '-1', '-i', M + 'particulas.mp4']
+        fc = [f"[1:v]trim=start={a % 10:.3f}:duration={d:.3f},setpts=PTS-STARTPTS,format=gbrp[p]", "[0:v]setpts=PTS-STARTPTS,format=gbrp[b0]",
+              "[b0][p]blend=all_mode=screen:all_opacity=0.35,format=yuv420p[v0]"]; cur = '[v0]'; k = 2
+        for j, (f, t0) in enumerate(meus):
+            ins += ['-i', f]; rel = t0 - a
+            fc.append(f"[{k}:v]trim=start={max(0, -rel):.3f},setpts=PTS-STARTPTS+{max(0, rel):.3f}/TB[o{j}]")
+            fc.append(f"{cur}[o{j}]overlay=0:0:eof_action=pass:format=auto[v{j+1}]"); cur = f'[v{j+1}]'; k += 1
+        for j, t0 in enumerate(minhas):
+            ins += ['-i', M + 'luz.mp4']; rel = t0 - a
+            fc.append(f"[{k}:v]trim=start={max(0, -rel):.3f},setpts=PTS-STARTPTS+{max(0, rel):.3f}/TB,format=gbrp[l{j}]")
+            fc.append(f"{cur}format=gbrp[g{j}];[g{j}][l{j}]blend=all_mode=screen:all_opacity=0.6:eof_action=pass,format=yuv420p[w{j}]"); cur = f'[w{j}]'; k += 1
+        fim = (',fade=t=in:d=0.8' if n == 0 else '') + (f',fade=t=out:st={d-2:.3f}:d=2' if n == partes - 1 else '')
+        fc.append(f"{cur}vignette=angle=PI/5,noise=alls=3:allf=t{fim},format=yuv420p[v]")
+        out = D + f'parte{n}.mp4'
+        run(['ffmpeg', '-v', 'error', '-y', '-threads', '2'] + ins + ['-filter_complex', ';'.join(fc), '-map', '[v]', '-t', f'{d:.3f}', '-r', str(FPS),
+             '-c:v', 'libx264', '-b:v', '8M', '-maxrate', '10M', '-bufsize', '20M', '-preset', 'veryfast', out])
+        return out
+    with ThreadPoolExecutor(partes) as ex:
+        saidas = list(ex.map(parte, range(partes)))
+    open(D + 'partes.txt', 'w').write(''.join(f"file '{s}'\n" for s in saidas))
+    run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', D + 'partes.txt', '-c', 'copy', D + 'video.mp4'])
+    for s in saidas:
+        os.remove(s)
+
+
+_DUR = {}
+
+
+def dur_cache(f):
+    if f not in _DUR:
+        _DUR[f] = dur(f)
+    return _DUR[f]
 
 
 def conferir(ep, final, ts, plano):
