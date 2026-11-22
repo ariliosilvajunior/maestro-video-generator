@@ -20,7 +20,11 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 PAINEL = 'https://painel.recursoscognitivos.com.br'
 VOZES = os.path.join(AQUI, '..', 'roteiros-estilo-novo', 'vozes_personagens.json')
 FB, FR = os.path.join(AQUI, 'fontes', 'Goodly-Bold.woff'), os.path.join(AQUI, 'fontes', 'Goodly-Regular.woff')
-W, H, FPS, XF = 1920, 1080, 25, 0.5
+# 23/11/2026: as cenas do Flow vêm em 720p — montar em 1080p só aumentava o trabalho sem ganhar detalhe. Monta em 720p
+# (MONTAGEM_RES=1080 volta ao jeito antigo) e só o arquivo final é aumentado para 1080p.
+RES = int(os.environ.get('MONTAGEM_RES', '720'))
+W, H = (1280, 720) if RES == 720 else (1920, 1080)
+FPS, XF = 25, 0.5
 TR = ['fade', 'dissolve', 'fade', 'smoothleft', 'fade', 'fadeblack', 'dissolve', 'smoothright']
 run = lambda c: subprocess.run(c, check=True)
 dur = lambda f: float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).decode())
@@ -157,6 +161,7 @@ def _gravar(out, frames, opaco=False):
 
 def motion(ep):
     from PIL import Image, ImageDraw, ImageFilter, ImageFont
+    W, H = 1920, 1080  # camadas desenhadas em 1080p; reduzidas para o tamanho da montagem em camadas()
     D = trabalho(ep) + 'mg/'
 
     def particulas():
@@ -314,11 +319,16 @@ def video(ep):
     luzes = [_tempo(ep, TL, l) for l in ep.get('luz', [])]
     camadas(D, base, cam, luzes, FIM)
     os.remove(base)
-    final = D + ep['chave'] + ' - 1080p.mp4'
-    run(['ffmpeg', '-v', 'error', '-y', '-i', D + 'video.mp4', '-i', D + 'audio.m4a', '-c', 'copy', '-shortest', '-movflags', '+faststart', final])
+    final = D + ep['chave'] + ' - 1080p.mp4'; p720 = D + ep['chave'] + ' - 720p.mp4'
+    if H == 720:  # 720p sai direto da montagem; o 1080p é só o aumento final, de uma vez
+        run(['ffmpeg', '-v', 'error', '-y', '-i', D + 'video.mp4', '-i', D + 'audio.m4a', '-c', 'copy', '-shortest', '-movflags', '+faststart', p720])
+        run(['ffmpeg', '-v', 'error', '-y', '-i', p720, '-vf', 'scale=1920:1080:flags=lanczos', '-c:v', 'libx264', '-b:v', '8M', '-maxrate', '10M', '-bufsize', '20M',
+             '-preset', 'veryfast', '-c:a', 'copy', '-movflags', '+faststart', final])
+    else:
+        run(['ffmpeg', '-v', 'error', '-y', '-i', D + 'video.mp4', '-i', D + 'audio.m4a', '-c', 'copy', '-shortest', '-movflags', '+faststart', final])
+        run(['ffmpeg', '-v', 'error', '-y', '-i', final, '-vf', 'scale=1280:720', '-c:v', 'libx264', '-b:v', '2200k', '-maxrate', '3000k', '-bufsize', '6000k',
+             '-preset', 'veryfast', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', p720])
     os.remove(D + 'video.mp4')
-    run(['ffmpeg', '-v', 'error', '-y', '-i', final, '-vf', 'scale=1280:720', '-c:v', 'libx264', '-b:v', '2200k', '-maxrate', '3000k', '-bufsize', '6000k',
-         '-preset', 'veryfast', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', D + ep['chave'] + ' - 720p.mp4'])
     conferir(ep, final, ts, plano)
 
 
@@ -326,7 +336,16 @@ def camadas(D, base, cam, luzes, FIM, partes=None):
     """Motion por cima da base. 23/11/2026: era um processo só (~35 min num episódio de 13 min, 1 núcleo); agora o
     episódio é cortado em partes que rodam ao mesmo tempo (uma por núcleo) e são emendadas sem recodificar."""
     from concurrent.futures import ThreadPoolExecutor
-    M = os.path.dirname(cam[0][0]) + '/' if cam else D + 'mg/'
+    M0 = os.path.dirname(cam[0][0]) + '/' if cam else D + 'mg/'
+    M = M0
+    if W != 1920:  # cópias das camadas no tamanho da montagem (uma vez só, com transparência)
+        M = D + f'mg{H}/'; os.makedirs(M, exist_ok=True)
+        for f in os.listdir(M0):
+            o = M + f
+            if not os.path.exists(o):
+                args = ['-c:v', 'png'] if f.endswith('.mov') else ['-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p']
+                run(['ffmpeg', '-v', 'error', '-y', '-i', M0 + f, '-vf', f'scale={W}:{H}:flags=bicubic'] + args + [o])
+        cam = [(M + os.path.basename(f), t) for f, t in cam]
     partes = partes or max(1, min(os.cpu_count() or 1, 6))
     passo = FIM / partes; saidas = []
 
@@ -349,7 +368,7 @@ def camadas(D, base, cam, luzes, FIM, partes=None):
         fc.append(f"{cur}vignette=angle=PI/5,noise=alls=3:allf=t{fim},format=yuv420p[v]")
         out = D + f'parte{n}.mp4'
         run(['ffmpeg', '-v', 'error', '-y', '-threads', '2'] + ins + ['-filter_complex', ';'.join(fc), '-map', '[v]', '-t', f'{d:.3f}', '-r', str(FPS),
-             '-c:v', 'libx264', '-b:v', '8M', '-maxrate', '10M', '-bufsize', '20M', '-preset', 'veryfast', out])
+             '-c:v', 'libx264', '-b:v', '5M' if H == 720 else '8M', '-maxrate', '10M', '-bufsize', '20M', '-preset', 'veryfast', out])
         return out
     with ThreadPoolExecutor(partes) as ex:
         saidas = list(ex.map(parte, range(partes)))
