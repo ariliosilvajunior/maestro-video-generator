@@ -1,0 +1,1441 @@
+{
+ "chave": "rp-ep01",
+ "titulo": "A Rua de Pedra — Episódio 1: Quem cuida de quem cuida",
+ "prefixo": "rp1-",
+ "pasta_cenas": "1BiFNojxGKEE5qzh0BWgwO-jhWQSh5asF",
+ "pasta_entrega": "17D6MIC_V5HVBKUjnUDXcEAERkLmB7icJ",
+ "voz_narrador": "7E34QW8YpZNX1CILBhmz",
+ "sfx": {
+  "festa": {
+   "texto": "Muffled lively Brazilian family birthday party inside a small house: many relatives chatting and laughing, music playing, plates and pot lids clinking",
+   "seg": 6
+  },
+  "sino": {
+   "texto": "Small town morning: a distant church bell rings twice, birds chirping, calm",
+   "seg": 4
+  },
+  "carrinhos": {
+   "texto": "Small toy cars rolling on a wooden floor and clicking as a child lines them up",
+   "seg": 3
+  },
+  "relogio": {
+   "texto": "Quiet old office: a wall clock ticking slowly, distant street sounds through a window",
+   "seg": 6
+  },
+  "oculos": {
+   "texto": "Taking off small metal eyeglasses and rubbing the lenses with a cloth, close and quiet",
+   "seg": 2
+  },
+  "caneta": {
+   "texto": "Old pen scribbling quickly on a small paper notepad, then a page being torn off",
+   "seg": 3
+  },
+  "onibus": {
+   "texto": "Old diesel intercity bus engine starting and driving away on a countryside road at dawn",
+   "seg": 5
+  },
+  "aplausos": {
+   "texto": "Passengers inside a bus cheering and applauding happily, laughter",
+   "seg": 3
+  },
+  "noite": {
+   "texto": "Quiet kitchen at night: crickets outside, a refrigerator humming, a page of a book turning",
+   "seg": 4
+  },
+  "pincel": {
+   "texto": "A paint brush slowly painting a wooden door, soft strokes, quiet school corridor",
+   "seg": 3
+  },
+  "recreio": {
+   "texto": "School playground at recess heard from a distance: children shouting and laughing, a ball bouncing",
+   "seg": 5
+  },
+  "colher": {
+   "texto": "A teaspoon stirring sugar in a ceramic coffee cup, clinking slowly and repeatedly, quiet room",
+   "seg": 4
+  },
+  "geladeira": {
+   "texto": "An old refrigerator door opening at night, the motor humming, silence around",
+   "seg": 3
+  },
+  "carro": {
+   "texto": "A small old car engine turning off, keys, then quiet night street with distant dog",
+   "seg": 3
+  },
+  "praca": {
+   "texto": "Small town square in the afternoon: birds singing, leaves rustling in the wind, calm",
+   "seg": 5
+  },
+  "porta": {
+   "texto": "An old wooden door creaking open in an empty school corridor, footsteps",
+   "seg": 2
+  },
+  "criancas": {
+   "texto": "A group of happy children arriving at a house, laughing and talking, a gate opening",
+   "seg": 4
+  },
+  "festa_criancas": {
+   "texto": "Children birthday party in a backyard: many kids laughing and playing, balloons, happy",
+   "seg": 5
+  },
+  "parabens": {
+   "texto": "Muffled group of people singing happy birthday in Portuguese style and clapping, heard from outside",
+   "seg": 4
+  },
+  "noite_rua": {
+   "texto": "Quiet cobblestone street at night: crickets, a distant dog, soft wind",
+   "seg": 4
+  }
+ },
+ "blocos": [
+  {
+   "tipo": "S:festa:2.4",
+   "cenas": [
+    "E001"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E001",
+    "E002"
+   ],
+   "texto": "[softly] Embaixo da mesa da cozinha, no meio de uma festa, um menino de dois anos tapava os ouvidos com as duas mãos. E balançava. Pra frente, pra trás. Devagar."
+  },
+  {
+   "tipo": "G:1.0",
+   "cenas": [
+    "E002"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E003",
+    "E004"
+   ],
+   "texto": "[serious] Naquela noite, uma família inteira ia começar uma viagem que ninguém escolhe. E a pergunta mais importante dessa história… ninguém ia fazer. Por anos."
+  },
+  {
+   "tipo": "S:sino:2.0",
+   "cenas": [
+    "E004"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E005"
+   ],
+   "texto": "[warm] Meu nome é Arilio, sou professor do Recursos Cognitivos, e essa é a primeira história da Rua de Pedra."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E006",
+    "E007"
+   ],
+   "texto": "[warm] Tem uma cidade pequena no interior, onde as ruas são de pedra e todo mundo se conhece pelo nome. No fim da rua, tem uma escola com uma porta azul."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E007"
+   ],
+   "texto": "[whispers] Guarda essa porta."
+  },
+  {
+   "tipo": "G:0.8",
+   "cenas": [
+    "E007"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012"
+   ],
+   "texto": "[cheerful] Na casa de janela azul, mora a família do Davi. A Marta, que faz café forte demais. O Rogério, que conta piada ruim demais. O Caio, de cinco anos, que corre pelo quintal o dia inteiro. E o Davi. O caçula."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E013"
+   ],
+   "texto": "Na sala, numa tarde qualquer, a Marta se ajoelha no tapete."
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E014"
+   ],
+   "texto": "[gently] Davi… Davi… Davi!"
+  },
+  {
+   "tipo": "S:carrinhos:1.6",
+   "cenas": [
+    "E015"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E015",
+    "E016"
+   ],
+   "texto": "[amused] O Davi não levanta os olhos. Ele está ocupado. Muito ocupado. Ele está enfileirando os carrinhos, um atrás do outro. O vermelho, o azul, o amarelo… e, por último, o verdinho. Sempre o verdinho por último."
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E017"
+   ],
+   "texto": "[whispers] Ele me ouviu. Eu sei que ele me ouviu… não ouviu?"
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E018"
+   ],
+   "texto": "[mischievously] E aí o Caio, com a sabedoria dos seus cinco anos, pega o carrinho verde… e esconde no bolso."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E019"
+   ],
+   "texto": "[dramatic] Foi o maior erro da vida dele."
+  },
+  {
+   "tipo": "G:0.8",
+   "cenas": [
+    "E019"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E020"
+   ],
+   "texto": "[tense] O Davi procurou. Procurou de novo. Contou a fila. Um, dois, três… e cadê o quarto?"
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E021"
+   ],
+   "texto": "[sad] As mãos foram para os ouvidos. O corpo começou a balançar. E o choro veio, alto, como se o mundo inteiro tivesse saído do lugar."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E022"
+   ],
+   "texto": "[amused] O Caio devolveu o carrinho tão rápido que quase tropeçou no tapete."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E023"
+   ],
+   "texto": "[softly] E a Marta ficou ali, de joelhos, com o coração batendo na garganta."
+  },
+  {
+   "tipo": "S:festa:2.6",
+   "cenas": [
+    "E024"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E024",
+    "E025"
+   ],
+   "texto": "[excited] Até que veio a festa. Aniversário da avó. Casa cheia, música alta, tio falando alto, prima rindo alto, panela batendo… tudo alto."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E026",
+    "E027"
+   ],
+   "texto": "[nervous] A Marta olha em volta. Cadê o Davi? Na sala, não. No quintal, não. No quarto, não."
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E028"
+   ],
+   "texto": "[whispers] Rogério… cadê o Davi?"
+  },
+  {
+   "tipo": "G:1.4",
+   "cenas": [
+    "E028"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E028",
+    "E029"
+   ],
+   "texto": "[whispers] Acharam ele embaixo da mesa da cozinha. Com as mãos nos ouvidos. Balançando. A Marta se abaixou, levantou a toalha de plástico… e não disse nada. Só estendeu a mão. E esperou."
+  },
+  {
+   "tipo": "S:relogio:2.2",
+   "cenas": [
+    "E030"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E030"
+   ],
+   "texto": "[serious] No dia seguinte, no consultório do doutor Aurélio, o pediatra da cidade, a Marta segurou a bolsa no colo com as duas mãos. E disse em voz alta a palavra que até então só morava no pensamento dela:"
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E031"
+   ],
+   "texto": "[softly] Autismo."
+  },
+  {
+   "tipo": "G:1.4",
+   "cenas": [
+    "E031"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E032"
+   ],
+   "texto": "[serious] O doutor Aurélio tirou os óculos. Limpou na ponta do jaleco. Pôs de novo."
+  },
+  {
+   "tipo": "S:oculos:1.2",
+   "cenas": [
+    "E032"
+   ]
+  },
+  {
+   "tipo": "P:Aurelio",
+   "cenas": [
+    "E032"
+   ],
+   "texto": "[sighs] Minha filha… aqui, eu não tenho o que fazer por ele."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E033"
+   ],
+   "texto": "E escreveu um nome num pedaço de papel."
+  },
+  {
+   "tipo": "S:caneta:2.0",
+   "cenas": [
+    "E033"
+   ]
+  },
+  {
+   "tipo": "P:Aurelio",
+   "cenas": [
+    "E034"
+   ],
+   "texto": "[sad] Procura esse médico. Na cidade grande. Boa sorte."
+  },
+  {
+   "tipo": "S:onibus:3.0",
+   "cenas": [
+    "E034"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E034",
+    "E035",
+    "E036"
+   ],
+   "texto": "[tired] E assim começou o que a Marta chamaria, anos depois, de \"a maratona\". Ônibus de madrugada. Quatro horas de estrada. Corredor de hospital com cadeira de plástico. Exame que não dava em nada. Médico que dizia uma coisa, médico que dizia outra."
+  },
+  {
+   "tipo": "G:1.0",
+   "cenas": [
+    "E037"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E037",
+    "E038"
+   ],
+   "texto": "[amused] Numa dessas viagens, o Davi descobriu os postes. Começou a contar. \"Um. Dois. Três…\" Em voz alta. Muito alta."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E039",
+    "E040"
+   ],
+   "texto": "[laughs] No poste cento e doze, o motorista já estava contando junto. No poste duzentos, o ônibus inteiro."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E041"
+   ],
+   "texto": "Quando chegaram na cidade grande, foram aplaudidos."
+  },
+  {
+   "tipo": "S:aplausos:2.6",
+   "cenas": [
+    "E041"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E041"
+   ],
+   "texto": "[laughs] O Davi nem olhou. Ainda faltava contar o poste da rodoviária."
+  },
+  {
+   "tipo": "S:noite:1.8",
+   "cenas": [
+    "E042"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E042"
+   ],
+   "texto": "[tired] De madrugada, na cozinha, a Marta lia livro atrás de livro, na luz fraca da lâmpada. E pensava:"
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E043"
+   ],
+   "texto": "[whispers] E se for culpa minha? E se eu fiz alguma coisa errada na gravidez?"
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E044",
+    "E045",
+    "E046"
+   ],
+   "texto": "[amused] E teve até a dona Benedita, a benzedeira da rua de trás, que a vizinha jurou que resolvia. Dona Benedita rezou, benzeu com um raminho de arruda… e o Davi pegou as folhinhas da arruda e enfileirou uma do lado da outra em cima da mesa. Perfeitamente retas."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E047"
+   ],
+   "texto": "Dona Benedita olhou aquilo por um bom tempo. E disse:"
+  },
+  {
+   "tipo": "P:Benedita",
+   "cenas": [
+    "E047"
+   ],
+   "texto": "[amused] Minha filha, esse menino não tem quebranto, não. Tem é organização."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E048",
+    "E049"
+   ],
+   "texto": "[laughs softly] A Marta riu pela primeira vez em semanas. Não porque acreditasse em benzedeira. Mas porque, quando você ainda não tem um nome pra aquilo que vê dentro de casa, qualquer porta vira uma porta a tentar."
+  },
+  {
+   "tipo": "G:1.0",
+   "cenas": [
+    "E048",
+    "E049"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E050",
+    "E051"
+   ],
+   "texto": "[softly] E enquanto isso, perto da janela, um menino de cinco anos esperava. O Caio. Esperava a mãe voltar da consulta. Esperava o pai voltar da viagem. Esperava a vez dele."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E052"
+   ],
+   "texto": "[warm] Guarda o nome do Caio. Ele vai voltar nessa história. E vai voltar de um jeito bonito."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E053"
+   ],
+   "texto": "[serious] O diagnóstico veio. E veio com uma ordem: o Davi precisava de escola, de convivência, de outras crianças."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E054"
+   ],
+   "texto": "A escola da cidade, a escola de todo mundo, abria a porta pro Davi… mas não tinha sala de recursos. Não tinha quem fizesse a ponte."
+  },
+  {
+   "tipo": "S:relogio:1.6",
+   "cenas": [
+    "E055"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E055",
+    "E056",
+    "E057"
+   ],
+   "texto": "[determined] Então a Marta foi à Secretaria de Educação. Esperou no banco de madeira. Voltou na semana seguinte. E na outra. E na outra. Juntou outras mães, escreveu carta, ligou, insistiu. Por um ano inteiro."
+  },
+  {
+   "tipo": "S:pincel:2.0",
+   "cenas": [
+    "E058"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E058"
+   ],
+   "texto": "[hopeful] Até que um dia, no fim do corredor da escola, uma porta nova foi pintada. Azul. A sala de recursos."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E059"
+   ],
+   "texto": "[softly] A Marta encostou a mão na tinta ainda fresca. E pensou:"
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E059"
+   ],
+   "texto": "[emotional] Essa sala existe por causa do meu filho."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E060"
+   ],
+   "texto": "O plano dela era simples: ficar na escola meio período, perto do Davi, e ensinar, aos poucos, o jeito de acalmar o menino quando o barulho ficasse demais."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E061"
+   ],
+   "texto": "[sad] Mas o plano não sobreviveu à inauguração."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E062"
+   ],
+   "texto": "A diretora falou com educação. Mas falou:"
+  },
+  {
+   "tipo": "P:Diretora",
+   "cenas": [
+    "E062"
+   ],
+   "texto": "[politely] Mãe, a senhora não pode ficar dentro da escola. E a professora da sala de recursos ainda não foi contratada."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E063"
+   ],
+   "texto": "[sad] De quem lutou pela sala, a Marta virou só mais uma mãe esperando no portão."
+  },
+  {
+   "tipo": "S:recreio:2.4",
+   "cenas": [
+    "E064"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E064",
+    "E065"
+   ],
+   "texto": "[sad] E sem ninguém fazendo a ponte, o Davi chorava na entrada. Passava o recreio sozinho, num canto do pátio. Faltou mais do que foi."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E066"
+   ],
+   "texto": "[serious] E sem perceber, a Marta tomou uma decisão: dar tudo para o Davi. Cada minuto. Cada força. Cada noite."
+  },
+  {
+   "tipo": "G:1.2",
+   "cenas": [
+    "E066"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E067"
+   ],
+   "texto": "[slowly] E é aqui que começa a parte da história que quase ninguém conta."
+  },
+  {
+   "tipo": "S:colher:2.4",
+   "cenas": [
+    "E068"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E068",
+    "E069",
+    "E070",
+    "E071"
+   ],
+   "texto": "[quiet] Na cozinha, à noite, duas xícaras de café esfriando na mesa. O Rogério de um lado. A Marta do outro. Ele mexe o açúcar. Mexe. Mexe. Já está doce faz tempo. Ela olha pela janela."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E071"
+   ],
+   "texto": "[whispers] Ninguém fala."
+  },
+  {
+   "tipo": "G:1.2",
+   "cenas": [
+    "E071"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E072",
+    "E073"
+   ],
+   "texto": "[sad] O Rogério começou a chegar mais tarde. A Marta começou a dormir no quarto dos meninos."
+  },
+  {
+   "tipo": "S:geladeira:1.6",
+   "cenas": [
+    "E074"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E074"
+   ],
+   "texto": "[sad] E uma noite, sozinha, com a luz da geladeira aberta no rosto, ela pensou numa palavra que nunca imaginou pensar: separação."
+  },
+  {
+   "tipo": "S:carro:1.8",
+   "cenas": [
+    "E075"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E075"
+   ],
+   "texto": "[softly] O que a Marta não sabia é que o Rogério, sentado no carro, parado na frente de casa, com o motor desligado, também pensava."
+  },
+  {
+   "tipo": "P:Rogerio",
+   "cenas": [
+    "E076"
+   ],
+   "texto": "[sad] Eu não sei ajudar. Tudo que eu faço é pouco… ou errado."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E076",
+    "E077"
+   ],
+   "texto": "[sad] E ficava ali mais dez minutos antes de ter coragem de entrar. Cada um carregando o mundo sozinho, dentro da mesma casa."
+  },
+  {
+   "tipo": "G:1.4",
+   "cenas": [
+    "E076",
+    "E077"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E078"
+   ],
+   "texto": "[warm] E agora eu quero saber de você. Me conta aqui nos comentários: a Marta errou ao se dar inteira pro Davi? Ou era a única coisa que dava pra fazer? Escreve aí embaixo, eu leio todos."
+  },
+  {
+   "tipo": "S:praca:2.0",
+   "cenas": [
+    "E079"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E079",
+    "E080"
+   ],
+   "texto": "[hopeful] Mas essa não é uma história só do fim. É uma história sobre o caminho de volta. E o caminho de volta chegou numa segunda-feira, com um caderno marrom debaixo do braço."
+  },
+  {
+   "tipo": "S:porta:1.4",
+   "cenas": [
+    "E081"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E081",
+    "E082"
+   ],
+   "texto": "[warm] A professora Helena, finalmente contratada para a sala da porta azul. Ela atende o Davi no contraturno, à tarde, quando o resto da escola já foi para casa."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E083",
+    "E084"
+   ],
+   "texto": "Na primeira reunião, numa cadeirinha pequena demais para um adulto, a Marta respondeu tudo no automático. A rotina, o sono, o que acalma, o que assusta… como já tinha respondido para tantos."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E085"
+   ],
+   "texto": "[softly] E então Helena fechou o caderno, pôs a caneta em cima, olhou para a Marta e perguntou:"
+  },
+  {
+   "tipo": "P:Helena",
+   "cenas": [
+    "E085"
+   ],
+   "texto": "[gently] E você… como você está?"
+  },
+  {
+   "tipo": "G:1.6",
+   "cenas": [
+    "E085"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E086",
+    "E087"
+   ],
+   "texto": "[emotional] A Marta abriu a boca e não saiu nada. Os olhos encheram. A mão apertou a alça da bolsa. Fazia anos que ninguém perguntava. E ali, naquela cadeirinha, ela chorou. Chorou tudo que estava guardado desde a noite embaixo da mesa."
+  },
+  {
+   "tipo": "G:1.2",
+   "cenas": [
+    "E086",
+    "E087"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E088"
+   ],
+   "texto": "[amused] Na semana seguinte, a Helena chamou o Rogério também. Ele chegou de uniforme, com as mãos ainda sujas de graxa, sentou na ponta da cadeira, pronto para levar bronca. E ouviu:"
+  },
+  {
+   "tipo": "P:Helena",
+   "cenas": [
+    "E089"
+   ],
+   "texto": "[gently] Rogério… e você? Como você está?"
+  },
+  {
+   "tipo": "S:praca:2.2",
+   "cenas": [
+    "E090"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E090",
+    "E091"
+   ],
+   "texto": "[warm] No fim da rua de pedra tem uma pracinha, com um banco de madeira embaixo de uma árvore velha. Os dois combinaram de ir até lá nos dias difíceis. Quinze minutos. Sem falar de consulta, sem falar de exame."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E092"
+   ],
+   "texto": "[amused] No primeiro dia, o Rogério tentou quebrar o gelo:"
+  },
+  {
+   "tipo": "P:Rogerio",
+   "cenas": [
+    "E092"
+   ],
+   "texto": "[playful] Marta, sabe por que esse banco é tão calmo? Porque ele tem muito assento."
+  },
+  {
+   "tipo": "G:1.0",
+   "cenas": [
+    "E092"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E093",
+    "E094"
+   ],
+   "texto": "[laughs] Era a piada mais sem graça do mundo. A Marta revirou os olhos… e riu. Riu tanto que precisou segurar no braço dele."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E095"
+   ],
+   "texto": "[warm] Não foi mágico. Não foi rápido. Levou meses. Mas um dia, a Marta percebeu que tinha voltado a rir das piadas ruins do marido. E que os dois estavam mais fortes do que antes de tudo começar."
+  },
+  {
+   "tipo": "G:1.0",
+   "cenas": [
+    "E095"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E096"
+   ],
+   "texto": "[curious] E o Caio? Lembra do Caio? O menino que esperava perto da janela?"
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E097"
+   ],
+   "texto": "[warm] Com a Helena fazendo a ponte, o Davi foi encontrando o lugar dele na escola. Quinze minutos. Depois meia hora. Depois a manhã inteira, na sala de todo mundo."
+  },
+  {
+   "tipo": "S:criancas:2.2",
+   "cenas": [
+    "E098"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E098",
+    "E099",
+    "E100",
+    "E101",
+    "E102"
+   ],
+   "texto": "[cheerful] Mas quem trouxe a turma foi o irmão. Os amigos do Caio começaram a aparecer. O Léo, que nunca bate na porta: entra direto. O Téo, que come tudo da geladeira. O Kenji, que perde o chinelo toda vez. A Alice, a Clara, o Ícaro."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E103",
+    "E104"
+   ],
+   "texto": "[amused] A Marta já fazia bolo em dobro, sem nem perguntar. E sem ninguém pedir, eles foram puxando o Davi pra brincadeira. Do jeito dele. No tempo dele."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E105"
+   ],
+   "texto": "[amused] O Ícaro descobriu que o Davi era o melhor do mundo em organizar as figurinhas do álbum. Virou o gerente oficial das figurinhas."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E106"
+   ],
+   "texto": "No aniversário de oito anos do Davi, a Marta perguntou:"
+  },
+  {
+   "tipo": "P:Marta",
+   "cenas": [
+    "E106"
+   ],
+   "texto": "[cheerful] Caio, quantos amigos você vai chamar?"
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E106",
+    "E107"
+   ],
+   "texto": "[amused] \"Uns dez\", ele disse. \"Talvez quinze.\" Naquela tarde… chegou a escola inteira."
+  },
+  {
+   "tipo": "S:festa_criancas:2.6",
+   "cenas": [
+    "E107"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E108",
+    "E109",
+    "E110"
+   ],
+   "texto": "[warm] E aquelas crianças trataram o Davi como se ele sempre tivesse sido da turma. A casa que um dia ficou em silêncio voltou a ficar cheia de vozes. E na porta da cozinha, a Marta e o Rogério olhavam tudo. De mãos dadas."
+  },
+  {
+   "tipo": "G:1.2",
+   "cenas": [
+    "E108",
+    "E109",
+    "E110"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E111"
+   ],
+   "texto": "[warm] Quando uma família entra na sala de recursos, ela nunca chega no capítulo zero. Às vezes, o que muda tudo é fechar o caderno e perguntar como eles estão."
+  },
+  {
+   "tipo": "S:parabens:2.4",
+   "cenas": [
+    "E112"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E112",
+    "E113"
+   ],
+   "texto": "[mysterious] Mas naquela tarde, enquanto todo mundo cantava parabéns, a Helena viu uma coisa no portão. Um menino, do lado de fora, segurando a grade com as duas mãos, olhando a festa."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E114"
+   ],
+   "texto": "[sad] Ninguém tinha chamado ele para brincar. Ninguém nunca chamava."
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E115"
+   ],
+   "texto": "[mysterious] Quando a Helena chegou perto, ele disse uma coisa que ela nunca mais esqueceu."
+  },
+  {
+   "tipo": "S:noite_rua:2.0",
+   "cenas": [
+    "E116"
+   ]
+  },
+  {
+   "tipo": "N",
+   "cenas": [
+    "E116"
+   ],
+   "texto": "[warm] Isso fica para o próximo episódio da Rua de Pedra. Meu nome é Arilio. Até lá."
+  }
+ ],
+ "motion": [
+  {
+   "arquivo": "titulo",
+   "bloco": 5,
+   "pos": 0.264
+  },
+  {
+   "arquivo": "nome_Marta",
+   "bloco": 9,
+   "pos": 0.207
+  },
+  {
+   "arquivo": "nome_Rogério",
+   "bloco": 9,
+   "pos": 0.374
+  },
+  {
+   "arquivo": "nome_Caio",
+   "bloco": 9,
+   "pos": 0.564
+  },
+  {
+   "arquivo": "nome_Davi",
+   "bloco": 9,
+   "pos": 0.804
+  },
+  {
+   "arquivo": "frase_porta",
+   "bloco": 7,
+   "pos": 0.0
+  },
+  {
+   "arquivo": "frase_verdinho",
+   "bloco": 13,
+   "pos": 0.851
+  },
+  {
+   "arquivo": "nome_Aurelio",
+   "bloco": 32,
+   "pos": 0.021
+  },
+  {
+   "arquivo": "frase_autismo",
+   "bloco": 30,
+   "pos": 0.024
+  },
+  {
+   "arquivo": "frase_maratona",
+   "bloco": 39,
+   "pos": 0.035
+  },
+  {
+   "arquivo": "frase_culpa",
+   "bloco": 48,
+   "pos": 0.021
+  },
+  {
+   "arquivo": "nome_Benedita",
+   "bloco": 49,
+   "pos": 0.06
+  },
+  {
+   "arquivo": "frase_organizacao",
+   "bloco": 51,
+   "pos": 0.424
+  },
+  {
+   "arquivo": "frase_caio",
+   "bloco": 55,
+   "pos": 0.027
+  },
+  {
+   "arquivo": "frase_ninguem",
+   "bloco": 76,
+   "pos": 0.059
+  },
+  {
+   "arquivo": "frase_errou",
+   "bloco": 86,
+   "pos": 0.279
+  },
+  {
+   "arquivo": "nome_Helena",
+   "bloco": 90,
+   "pos": 0.027
+  },
+  {
+   "arquivo": "frase_evoce",
+   "bloco": 93,
+   "pos": 0.04
+  },
+  {
+   "arquivo": "frase_quinze",
+   "bloco": 100,
+   "pos": 0.691
+  },
+  {
+   "arquivo": "nome_Leo",
+   "bloco": 110,
+   "pos": 0.298
+  },
+  {
+   "arquivo": "nome_Teo",
+   "bloco": 110,
+   "pos": 0.488
+  },
+  {
+   "arquivo": "nome_Kenji",
+   "bloco": 110,
+   "pos": 0.634
+  },
+  {
+   "arquivo": "nome_Icaro",
+   "bloco": 112,
+   "pos": 0.01
+  },
+  {
+   "arquivo": "frase_gerente",
+   "bloco": 112,
+   "pos": 0.653
+  },
+  {
+   "arquivo": "frase_caderno",
+   "bloco": 119,
+   "pos": 0.559
+  },
+  {
+   "arquivo": "frase_nunca",
+   "bloco": 122,
+   "pos": 0.543
+  },
+  {
+   "arquivo": "frase_continua",
+   "bloco": 125,
+   "pos": 0.241
+  }
+ ],
+ "luz": [
+  {
+   "bloco": 5,
+   "pos": 0.0
+  },
+  {
+   "bloco": 10,
+   "pos": 0.0
+  },
+  {
+   "bloco": 23,
+   "pos": 0.0
+  },
+  {
+   "bloco": 39,
+   "pos": 0.0
+  },
+  {
+   "bloco": 56,
+   "pos": 0.0
+  },
+  {
+   "bloco": 73,
+   "pos": 0.0
+  },
+  {
+   "bloco": 88,
+   "pos": 0.0
+  },
+  {
+   "bloco": 105,
+   "pos": 0.0
+  },
+  {
+   "bloco": 107,
+   "pos": 0.0
+  },
+  {
+   "bloco": 117,
+   "pos": 0.556
+  }
+ ],
+ "musica": [
+  {
+   "arquivo": "sfx:festa",
+   "de": {
+    "bloco": 1,
+    "pos": 0.0
+   },
+   "ate": {
+    "bloco": 1,
+    "pos": 0.874
+   },
+   "vol": 0.45,
+   "filtro": ",lowpass=f=2500"
+  },
+  {
+   "arquivo": "mus:M3.wav",
+   "de": {
+    "bloco": 1,
+    "pos": 0.0
+   },
+   "ate": {
+    "bloco": 3,
+    "pos": 0.0
+   },
+   "vol": 0.28,
+   "filtro": ",lowpass=f=900"
+  },
+  {
+   "arquivo": "mus:M1.wav",
+   "de": {
+    "bloco": 5,
+    "pos": 0.0
+   },
+   "ate": {
+    "bloco": 10,
+    "pos": 0.0
+   },
+   "vol": 0.4
+  },
+  {
+   "arquivo": "sfx:festa",
+   "de": {
+    "bloco": 23,
+    "pos": 0.0
+   },
+   "ate": {
+    "bloco": 25,
+    "pos": 0.545
+   },
+   "vol": 0.45,
+   "filtro": ",lowpass=f=2500"
+  },
+  {
+   "arquivo": "sfx:onibus",
+   "de": {
+    "bloco": 39,
+    "pos": 0.0
+   },
+   "ate": {
+    "bloco": 45,
+    "pos": 0.776
+   },
+   "vol": 0.3,
+   "filtro": ",lowpass=f=1500"
+  },
+  {
+   "arquivo": "mus:M2.wav",
+   "de": {
+    "bloco": 10,
+    "pos": 0.0
+   },
+   "ate": "fim-34",
+   "vol": 0.26
+  },
+  {
+   "arquivo": "mus:M1.wav",
+   "de": "fim-34",
+   "ate": "fim",
+   "vol": 0.45
+  }
+ ],
+ "titulo_card": {
+  "titulo": "A Rua de Pedra",
+  "subtitulo": "Episódio 1  ·  Quem cuida de quem cuida"
+ },
+ "cartoes": {
+  "nome_Marta": [
+   "Marta",
+   "a mãe",
+   "Marta"
+  ],
+  "nome_Rogério": [
+   "Rogério",
+   "o pai",
+   "Rogério"
+  ],
+  "nome_Caio": [
+   "Caio",
+   "o irmão mais velho",
+   "Caio"
+  ],
+  "nome_Davi": [
+   "Davi",
+   "o caçula",
+   "Davi"
+  ],
+  "nome_Aurelio": [
+   "Dr. Aurélio",
+   "o pediatra da cidade",
+   "Aurelio"
+  ],
+  "nome_Benedita": [
+   "Dona Benedita",
+   "a benzedeira",
+   "Benedita"
+  ],
+  "nome_Helena": [
+   "Helena",
+   "sala de recursos",
+   "Helena"
+  ],
+  "nome_Leo": [
+   "Léo",
+   "nunca bate na porta",
+   "Leo"
+  ],
+  "nome_Teo": [
+   "Téo",
+   "come tudo da geladeira",
+   "Teo"
+  ],
+  "nome_Kenji": [
+   "Kenji",
+   "perde o chinelo",
+   "Kenji"
+  ],
+  "nome_Icaro": [
+   "Ícaro",
+   "amigo do Caio",
+   "Icaro"
+  ]
+ },
+ "frases": {
+  "frase_porta": [
+   "Guarda essa porta.",
+   [
+    140,
+    180,
+    255
+   ],
+   2.2
+  ],
+  "frase_verdinho": [
+   "Sempre o verdinho por último.",
+   [
+    86,
+    202,
+    201
+   ],
+   2.2
+  ],
+  "frase_autismo": [
+   "Autismo.",
+   [
+    250,
+    240,
+    220
+   ],
+   2.4
+  ],
+  "frase_maratona": [
+   "\"A maratona.\"",
+   [
+    250,
+    240,
+    220
+   ],
+   2.4
+  ],
+  "frase_culpa": [
+   "E se for culpa minha?",
+   [
+    140,
+    180,
+    255
+   ],
+   2.6
+  ],
+  "frase_organizacao": [
+   "Tem é organização.",
+   [
+    86,
+    202,
+    201
+   ],
+   2.4
+  ],
+  "frase_caio": [
+   "Guarda o nome do Caio.",
+   [
+    86,
+    202,
+    201
+   ],
+   2.8
+  ],
+  "frase_ninguem": [
+   "Ninguém fala.",
+   [
+    250,
+    240,
+    220
+   ],
+   2.2
+  ],
+  "frase_errou": [
+   "A Marta errou? Comenta aqui.",
+   [
+    255,
+    210,
+    120
+   ],
+   4.0
+  ],
+  "frase_evoce": [
+   "\"E você, como você está?\"",
+   [
+    140,
+    180,
+    255
+   ],
+   3.2
+  ],
+  "frase_quinze": [
+   "Quinze minutos.",
+   [
+    86,
+    202,
+    201
+   ],
+   2.2
+  ],
+  "frase_gerente": [
+   "Gerente oficial das figurinhas.",
+   [
+    255,
+    210,
+    120
+   ],
+   2.6
+  ],
+  "frase_caderno": [
+   "Feche o caderno. Pergunte como eles estão.",
+   [
+    86,
+    202,
+    201
+   ],
+   4.2
+  ],
+  "frase_nunca": [
+   "Ninguém nunca chamava.",
+   [
+    250,
+    240,
+    220
+   ],
+   2.4
+  ],
+  "frase_continua": [
+   "Continua no próximo episódio…",
+   [
+    250,
+    240,
+    220
+   ],
+   4.5
+  ]
+ }
+}
