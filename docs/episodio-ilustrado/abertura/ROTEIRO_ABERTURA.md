@@ -8,7 +8,7 @@ abertura (só no fim do episódio) · a abertura termina com a frase "A Rua de P
 |---|---|---|---|
 | 1 | Deserto vazio. A luz desce do céu e bate na areia. O chão treme. | CE98-A (deserto sem a luz) | E930 (novo) |
 | 2 | As pedras surgem formando o círculo. | — | E900 (pronto) |
-| 3 | Do círculo saem as ruas, areia escorrendo, sem vento. | — | E901 (pronto) |
+| 3 | Do círculo saem as ruas, areia escorrendo, sem vento. A câmera dá uma VOLTA DE 360° em volta do círculo (sol e terra), baixa e perto — nunca mostra o cenário todo. Só depois entra nas ruas. | último quadro do E901 | E901 (pronto, 1ª metade da volta) + E932 (novo, 2ª metade) |
 | 4 | De cima e PERTO (nunca a cidade toda): as casas surgem devagar da areia, areia escorrendo dos telhados. | CE98-B | E931 (novo) |
 | 5 | A câmera vai para as ruas: casas surgindo, luzes acendendo e apagando, areia escorrendo dos telhados. | CE96-S, CE96-BS | E920, E921 (novos) |
 | 6 | Casas completas: as árvores vão surgindo ao longo da rua. | CE96 | E922 (novo) |
