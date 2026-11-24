@@ -8,6 +8,18 @@
 >
 > Usamos só ideias e técnicas: nada é copiado dos livros. As histórias são de autoria própria.
 
+
+## 0. DE ONDE VEM CADA HISTÓRIA (regra do dono — 24/11/2026, repetida porque não foi seguida no Ep01/Ep02)
+- **Todo episódio tira a IDEIA de um livro** da pasta `noticias` do Drive (`13fWJL3Zws9EvbuV8jyYkKpJJqEG0xCyN`,
+  "Ecossistema IA - Educação Especial (Projeto)"; lista e capítulos já usados em
+  `ecossistema-ia-recursos-cognitivos/docs/NOTICIAS_CAPITULOS_USADOS.md`). Baixar pelo Painel
+  (`/producao-videos/drive/arquivo/<id>`), ler o capítulo, tirar a ideia central e o que muda na vida da criança/família.
+- **Pegar a ideia, NUNCA o texto:** história, personagens e falas são nossos, na Rua de Pedra. **Nunca citar o livro**
+  no vídeo nem na legenda.
+- Antes de escrever: marcar o livro+capítulo em `NOTICIAS_CAPITULOS_USADOS.md` com "(Rua de Pedra EpXX)".
+- Ep01 e Ep02 foram escritos SEM livro (erro do Claude). A partir do Ep03, sempre com livro.
+- Não perguntar ao dono onde estão os livros: estão nessa pasta. Biblioteca maior (+7000) no pCloud, ver `docs/ACESSOS.md`.
+
 ## 1. As 5 técnicas em cada momento (vídeo)
 1. **Onde:** abrir o momento dizendo o lugar, em poucas palavras. "Na cozinha, de madrugada…". Sem lista de móveis: quem ouve completa com a lembrança dele.
 2. **Ação:** contar com verbos o que o personagem está fazendo. "Ela abre a porta, senta, olha para o marido." Nunca "teve uma reunião e ficou tudo difícil".
