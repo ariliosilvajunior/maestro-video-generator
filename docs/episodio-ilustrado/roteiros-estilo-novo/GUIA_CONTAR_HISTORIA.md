@@ -18,6 +18,7 @@
   no vídeo nem na legenda.
 - Antes de escrever: marcar o livro+capítulo em `NOTICIAS_CAPITULOS_USADOS.md` com "(Rua de Pedra EpXX)".
 - Ep01 e Ep02 foram escritos SEM livro (erro do Claude). A partir do Ep03, sempre com livro.
+- **O nome da série é SEMPRE "A Rua de Pedra" (dono, 24/11/2026) — nunca muda.** Título e capa: "A Rua de Pedra · Episódio 03"; o nome do episódio ("O menino que não parava") é só subtítulo.
 - **Duração IGUAL em todos os episódios (dono, 24/11/2026): 13 min 30 s** — série de capítulos contínuos, mesmo
   ambiente e mesmos personagens. Narração ≈ 1.800 palavras (Ep01 = 1.779 → 13:30); a montagem acerta o segundo exato
   com as pausas de música. Lugares e cenas prontos dos episódios anteriores podem ser reaproveitados; lugar novo só
