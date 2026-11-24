@@ -1,17 +1,19 @@
-# A Rua de Pedra — roteiro da abertura (aprovado pelo dono em 24/11/2026)
+# A Rua de Pedra — roteiro da abertura (versão final do dono, 24/11/2026)
 
-Regra: **nada é gerado fora deste roteiro.** Imagens primeiro (sem custo), o dono aprova, só depois o vídeo (gasta crédito).
-Câmera sempre BAIXA, perto do chão; percorre as ruas; só no FINAL sobe e gira em volta da árvore, vista de cima (a câmera é o sol, a árvore é a terra).
-Nada é jogado na cena: tudo SAI DE BAIXO DA AREIA.
+Regras: nada é gerado fora deste roteiro · imagem primeiro (sem custo), o dono aprova, só depois o vídeo ·
+SEM VENTO (a areia só escorre pela gravidade) · nunca mostrar a cidade inteira de cima · o LOGO não entra na
+abertura (só no fim do episódio) · a abertura termina com a frase "A Rua de Pedra".
 
-| # | Tempo | O que acontece | Material |
+| # | O que acontece | Imagem de início | Vídeo |
 |---|---|---|---|
-| 1 | 0–4 s | Deserto vazio. A luz desce do céu e bate na areia. | vídeo E900 |
-| 2 | 4–8 s | Onde a luz bate, as pedras saem da areia e formam o anel. | vídeo E900 |
-| 3 | 8–12 s | Do anel, as pedras formam as 5 ruas em curva. | vídeo E901 |
-| 4 | 12–20 s | A câmera PERCORRE a rua; dos dois lados, as casas sobem de dentro da areia (telhado, paredes, portas), areia escorrendo dos telhados, janelas acendendo. | imagens CE96-S e CE96-BS (casas das ruas CE96/CE96-B meio enterradas) → vídeos E920, E921 |
-| 5 | 20–24 s | Nascem as árvores; dentro do anel, a árvore grande só de galhos. | imagem CE97-D → vídeo E922 |
-| 6 | 24–27 s | A câmera sobe e gira em volta da árvore, vista de cima; partículas sobem das pedras e formam o cérebro como copa. | vídeo E923 (do último quadro do E922) + cérebro do login do sistema (montagem) |
-| 7 | 27–30 s | Logo Recursos Cognitivos → A RUA DE PEDRA · Episódio NN. | montagem |
+| 1 | Deserto vazio. A luz desce do céu e bate na areia. O chão treme. | CE98-A (deserto sem a luz) | E930 (novo) |
+| 2 | As pedras surgem formando o círculo. | — | E900 (pronto) |
+| 3 | Do círculo saem as ruas, areia escorrendo, sem vento. | — | E901 (pronto) |
+| 4 | De cima e PERTO (nunca a cidade toda): as casas surgem devagar da areia, areia escorrendo dos telhados. | CE98-B | E931 (novo) |
+| 5 | A câmera vai para as ruas: casas surgindo, luzes acendendo e apagando, areia escorrendo dos telhados. | CE96-S, CE96-BS | E920, E921 (novos) |
+| 6 | Casas completas: as árvores vão surgindo ao longo da rua. | CE96 | E922 (novo) |
+| 7 | O ângulo vai para o centro: nasce a árvore de galhos no círculo. | CE97-D | E923 (novo) |
+| 8 | Partículas saem das pedras, sobem pela árvore e no lugar das folhas nasce o cérebro. | último quadro do E923 | montagem |
+| 9 | Frase: A RUA DE PEDRA. | — | montagem |
 
-Música: Suno, depois que o dono aprovar a imagem da abertura.
+Logo Recursos Cognitivos: só no fim do episódio. Música: Suno, depois.
