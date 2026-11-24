@@ -18,6 +18,11 @@
   no vídeo nem na legenda.
 - Antes de escrever: marcar o livro+capítulo em `NOTICIAS_CAPITULOS_USADOS.md` com "(Rua de Pedra EpXX)".
 - Ep01 e Ep02 foram escritos SEM livro (erro do Claude). A partir do Ep03, sempre com livro.
+- **Duração IGUAL em todos os episódios (dono, 24/11/2026): 13 min 30 s** — série de capítulos contínuos, mesmo
+  ambiente e mesmos personagens. Narração ≈ 1.800 palavras (Ep01 = 1.779 → 13:30); a montagem acerta o segundo exato
+  com as pausas de música. Lugares e cenas prontos dos episódios anteriores podem ser reaproveitados; lugar novo só
+  quando a história pede (ex.: casa do personagem novo) e com ficha antes. Elementos novos que podem entrar: bichos de
+  estimação, igreja, trem/estação.
 - Não perguntar ao dono onde estão os livros: estão nessa pasta. Biblioteca maior (+7000) no pCloud, ver `docs/ACESSOS.md`.
 
 ## 1. As 5 técnicas em cada momento (vídeo)
