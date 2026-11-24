@@ -286,8 +286,16 @@ def video(ep):
             if src.endswith('.jpg'):
                 run(['ffmpeg', '-v', 'error', '-y', '-loop', '1', '-t', f'{d:.3f}', '-i', src, '-vf', _kb(d, k, 0.10) + ',format=yuv420p', '-an', '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', s])
             else:
-                fc = (f"[0:v]fps={FPS},scale={W}:{H}:flags=lanczos,split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1,loop=-1:size=32000,"
-                      f"trim=0:{d:.3f},setpts=PTS-STARTPTS,{_kb(d, k, 0.06)},format=yuv420p[v]")
+                # 24/11/2026, dono (vídeos do Omni com 4 s): nada de tocar de trás para frente (gente "andando de costas").
+                # Desacelera até 1,5x (no stop-motion não aparece) e, se ainda faltar, congela o último quadro com o zoom lento.
+                try:
+                    dc = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', src]).decode().strip())
+                except Exception:
+                    dc = 4.0
+                lento = min(1.5, max(1.0, d / max(dc, 0.5)))
+                resto = max(0.0, d - dc * lento) + 0.5
+                fc = (f"[0:v]fps={FPS},scale={W}:{H}:flags=lanczos,setpts={lento:.4f}*(PTS-STARTPTS),fps={FPS},"
+                      f"tpad=stop_mode=clone:stop_duration={resto:.3f},trim=0:{d:.3f},setpts=PTS-STARTPTS,{_kb(d, k, 0.06)},format=yuv420p[v]")
                 run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-filter_complex', fc, '-map', '[v]', '-an', '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', s])
         if not os.path.exists(out):
             from concurrent.futures import ThreadPoolExecutor
