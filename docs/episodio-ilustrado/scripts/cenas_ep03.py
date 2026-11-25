@@ -142,7 +142,8 @@ ANIM_BASE = ("One single continuous shot, no cuts. Handmade stop-motion animatio
              "nobody new appears, nobody duplicates, nobody disappears, nobody leaves the frame. Keep faces, puppets, set and colors exactly "
              "as in the start frame; no mouths talking, no text. {extra}SCALE: nobody grows or changes size; every person stays clearly "
              "SHORTER than the doors.")
-NADA = ("NOTHING ELSE MOVES OR APPEARS: no smoke, no steam, no water, no sparks, no particles coming out of any object; light stays steady. ")
+NADA = ("ONLY THE PUPPETS OF THE ACTION MOVE: every object, lamp, cup and window stays exactly still, the air is clear and calm, "
+        "the light stays steady. ")
 
 
 def elenco(nomes, cao):

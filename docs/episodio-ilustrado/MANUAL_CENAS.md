@@ -159,6 +159,29 @@
   (n5-S05, 02/11: a educadora ficou de cabelo branco no fim). E nunca pede objeto que não está na imagem (n5-S08a: o
   texto pedia ursinho que a imagem não tinha e ele apareceu do nada) — a ação usa só o que já está no 1º quadro.
 
+- **R46 (25/11/2026 — aprendido do projeto flow-mcp, que testou o Google Flow gastando crédito; o Painel confere
+  sozinho com o "Conferidor de cenas")**:
+  - **Uma ação com começo e fim** por clipe (um gesto, um passo, um olhar). Ação contínua ("keeps", "continues",
+    "round and round") faz o boneco repetir gesto à toa o clipe inteiro.
+  - **O vídeo estraga:** objeto jogado, pego ou quicando (bola!), coisa passando de mão em mão, muitas peças
+    pequenas se mexendo (confete, faísca, respingo), multidão reagindo, veículo fazendo curva, escrita. Nessas cenas:
+    imagem parada ("NÃO GERAR vídeo") ou ação simples com o objeto já na mão.
+  - **Não nomear o que NÃO quer** no texto de animação: "she is never holding the phone" pôs um celular na cena. Em
+    vez de "no smoke, no steam", descrever o que existe: "only the puppets of the action move; every object stays
+    still; the air is clear and calm".
+  - **Mudança de lugar com tempo marcado no meio do clipe** ("at 5 s the street opens") volta como corte seco.
+  - **Uma câmera só por clipe** (dois movimentos brigam).
+  - **Conferir o vídeo no MEIO do movimento**, não só no 1º e no último quadro: a deformação acontece no meio
+    (folha de quadros a 8 por segundo no revisor).
+  - **Clipe gerado que não apareceu no Drive:** ele já foi pago e está no projeto do Flow. Baixar de lá, nunca gerar
+    de novo (o robô já procura o vídeo sem nome antes de gastar).
+  - **Junção invisível entre dois clipes (abertura/encerramento):** o último quadro do clipe A vira a imagem de INÍCIO
+    do clipe B (o Claude tira o quadro com ffmpeg e põe no Drive). Para câmera em volta: "The camera orbits a full 360
+    degrees around the subject at constant height while the subject stays frozen in place". Para transformar uma
+    imagem na outra (início + fim): "The first frame transforms smoothly and continuously into the final frame,
+    camera static". Logo no fim do episódio: "The elements of the scene break apart, swirl together and assemble into
+    the logo shown in the final frame".
+
 ## 5. Arquivos e nomes
 - **R55** **Códigos por categoria** (dono, 02/11: "um cód para cada coisa ... fica fácil de saber quando está em um
   lugar errado"). Nome do arquivo = código, igual no Drive e no Flow da conta: `AV01…` avatar (00-avatar-narrador),
