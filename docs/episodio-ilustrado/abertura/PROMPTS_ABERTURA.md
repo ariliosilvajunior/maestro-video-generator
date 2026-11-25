@@ -16,15 +16,15 @@ ABRIR CE90-B · ANEXAR CE27
 Keep this image EXACTLY the same — same camera, same light, the round stone ring in the centre and the curving streets in the same places. Change ONLY this: the streets are now COMPLETE, LONG and CLEAN — five wide streets of grey worn cobblestones (exactly like the attached street CE27) curve outward from the ring to the horizon, every stone visible, swept clean, no sand on them; the desert sand stays only BETWEEN the streets. No buildings, no people. No glowing particles. No text. 16:9.
 ```
 
-**Imagem INICIAL — CE99-R1** (depois; robô: Kit → K211 → ▶ Imagens)
+**Imagem INICIAL — CE99-R1** (robô: Kit → K211 → ▶ Imagens)
 ABRIR CE99-R2
 ```
-Keep this image EXACTLY the same — same camera, same light, the ring and the five streets in the same places. Change ONLY this: the streets are still mostly BURIED — thick golden sand covers most of them, only some patches and edges of the cobblestones show through the sand here and there, sand piled over the stones. The ring stays visible. No buildings, no people. No text. 16:9.
+Keep EXACTLY the same camera, light, sky and horizon, and the round stone ring in the centre in the same place. Change ONLY this: there are NO streets and NO cobblestones visible at all — everything around the ring is smooth, deep, untouched golden DESERT SAND, soft dunes, as if the streets do not exist yet (they are buried deep under the sand). Only the ring sticks out of the sand. No buildings, no people. No text. 16:9.
 ```
 
 **Vídeo — areia** (Flow → Vídeo → Frames · Início: CE99-R1 · Fim: CE99-R2) → salvar como **E953**
 ```
-Handmade stop-motion miniature, warm golden light, no wind. MOST IMPORTANT: the cobblestone streets slowly come out from under the desert — the golden sand slides off the stones and flows away to the sides like a slow river of sand, stone after stone appears, from the ring outward along each street, until the five streets are clean and complete. Sand trickles down between the stones the whole time. Slow camera push forward, low. No people. No text.
+Handmade stop-motion miniature, warm golden light, no wind. MOST IMPORTANT: cobblestones PUSH UP OUT OF THE SAND one by one, starting next to the ring and moving outward — each stone breaks through the sand surface, sand sliding off it — and they line up into five curving streets that grow from the ring to the horizon, until the five streets are clean and complete. Sand trickles down between the stones the whole time. Slow camera push forward, low. No people. No text.
 ```
 
 ---
