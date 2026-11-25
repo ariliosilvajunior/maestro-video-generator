@@ -189,6 +189,10 @@
   03-cenarios. Toda cena anexa PExx + PExxS. O Conferidor do Painel BARRA a cena que anexa PExx sem a PExxS.
   Medidas: adulto em pé 65% da porta, sentado 50%; criança de 7–8 em pé ~46–50%, sentada ~35–38%; Faísca 22% (orelha).
 
+- **R48 (25/11/2026, rp3-E022 recusada várias vezes — "Esta geração talvez viole nossas políticas"):** o texto da CENA
+  nunca junta "caricature" com cor de pele. A cor de pele vem da ficha anexada; o texto diz só cabelo, roupa e
+  acessório, e o estilo é "Handmade stop-motion film still". O Conferidor do Painel barra a cena que juntar os dois.
+
 ## 5. Arquivos e nomes
 - **R55** **Códigos por categoria** (dono, 02/11: "um cód para cada coisa ... fica fácil de saber quando está em um
   lugar errado"). Nome do arquivo = código, igual no Drive e no Flow da conta: `AV01…` avatar (00-avatar-narrador),

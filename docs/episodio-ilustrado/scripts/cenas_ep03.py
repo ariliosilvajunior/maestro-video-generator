@@ -127,7 +127,7 @@ ESCALA = ("TRUE SCALE between puppets and buildings: the buildings are MUCH bigg
 LUZ = {"manha": "soft cool morning light, long gentle shadows", "tarde": "warm golden afternoon light, long soft shadows",
        "noite": "NIGHT: deep blue night outside, warm yellow lamp light, soft glows, dark shadows",
        "oficina": "dim workshop light: warm beams through dusty windows and the glow of an oil lamp"}
-FILME = ("Handmade caricature stop-motion film still — the SAME puppets and the SAME miniature set as the attached references: keep every "
+FILME = ("Handmade stop-motion film still — the SAME puppets and the SAME miniature set as the attached references: keep every "
          "face, long clay nose, felted hair and colors exactly as in the character sheets, and the set exactly as in the place image (now "
          "photographed as a real scene, not on a white background: fill the frame with the set and its surroundings). Macro photograph of "
          "a real handmade miniature, shallow depth of field, tiny dust particles floating in the light, lighting: {luz}. 16:9, no text, no "
