@@ -1,5 +1,7 @@
 # Série "A Rua de Pedra" — Episódio 03 — "O menino que não parava" — narração v1
 
+> ✅ **APROVADA pelo dono em 25/11/2026** (no chat, depois de ler no Google Docs da pasta do Ep03). Não mudar o texto sem nova aprovação.
+
 > 24/11/2026. Ideia tirada do livro "TDAH 2.0" (pasta `noticias` do Drive). Só a ideia, nunca o texto, e o livro
 > não é citado. As três ideias usadas:
 > - o TDAH não aparece por fora: a criança leva bronca todo dia por "desperdiçar o talento";
