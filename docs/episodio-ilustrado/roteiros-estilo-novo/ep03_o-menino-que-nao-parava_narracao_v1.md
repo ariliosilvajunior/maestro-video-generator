@@ -60,7 +60,7 @@
 
 [amused] "Senhora mãe. O Léo levantou da carteira vinte e duas vezes hoje. Apontou o lápis até sumir o lápis. E respondeu a pergunta antes de eu terminar de perguntar. Atenciosamente, professora Regina."
 
-[warmly] O Léo tinha oito anos, um moletom vermelho e um joelho que não sabia ficar quieto. O pé batia. Tum, tum, tum. E os olhos estavam sempre na janela.
+[warmly] O Léo tinha onze anos, um moletom vermelho e um joelho que não sabia ficar quieto. O pé batia. Tum, tum, tum. E os olhos estavam sempre na janela.
 
 [whispers] Lá fora passava um passarinho. E o Léo ia junto.
 
@@ -150,7 +150,7 @@
 
 [whispers] E então a voz dela quebrou no meio.
 
-[sad] — Sabe quantas vezes alguém veio aqui falar uma coisa boa dele? Nenhuma. Oito anos. Nenhuma.
+[sad] — Sabe quantas vezes alguém veio aqui falar uma coisa boa dele? Nenhuma. Onze anos. Nenhuma.
 
 [whispers] — Eu tenho medo dele virar o pai.
 
@@ -206,7 +206,7 @@
 
 [sad] A dona Sônia não respondeu. Pôs a mão na boca. E chorou ali mesmo, na porta, de chinelo.
 
-[whispers] Era a primeira coisa boa que um adulto dizia do filho dela. Em oito anos.
+[whispers] Era a primeira coisa boa que um adulto dizia do filho dela. Em onze anos.
 
 ---
 
