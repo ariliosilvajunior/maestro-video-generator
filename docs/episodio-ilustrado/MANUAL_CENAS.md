@@ -182,6 +182,13 @@
     camera static". Logo no fim do episódio: "The elements of the scene break apart, swirl together and assemble into
     the logo shown in the final frame".
 
+- **R47 (dono, 25/11/2026 — "isso tem que ser regra"): personagem NOVO (gente ou bicho) só entra em cena depois da
+  folha de altura com porta (PExxS) no Kit.** A Dona Sônia saiu sentada maior que a porta e o Faísca maior que a janela
+  porque o Claude criou as fichas PE19–PE22 sem a PExxS. Agora: ficha nova = ficha grande (PExx) + folha PExxS feita
+  pelo `scripts/folha_altura/montar.py` (gente: em pé e sentada no banco) ou `cao.py` (bicho, ao lado do Davi), salva em
+  03-cenarios. Toda cena anexa PExx + PExxS. O Conferidor do Painel BARRA a cena que anexa PExx sem a PExxS.
+  Medidas: adulto em pé 65% da porta, sentado 50%; criança de 7–8 em pé ~46–50%, sentada ~35–38%; Faísca 22% (orelha).
+
 ## 5. Arquivos e nomes
 - **R55** **Códigos por categoria** (dono, 02/11: "um cód para cada coisa ... fica fácil de saber quando está em um
   lugar errado"). Nome do arquivo = código, igual no Drive e no Flow da conta: `AV01…` avatar (00-avatar-narrador),
