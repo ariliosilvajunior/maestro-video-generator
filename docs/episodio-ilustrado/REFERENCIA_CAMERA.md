@@ -32,3 +32,11 @@ Um movimento por cena, escrito assim (nunca dois juntos):
 - Movimento grande aumenta o risco de deformar o boneco: conferir a **folha do movimento** (8 quadros) no Painel.
 - Aproximação grande e arco funcionam melhor com 1–2 personagens. Cena com 4+ pessoas: plano geral quase parado.
 - Dissolve se faz na MONTAGEM (ffmpeg), não no Flow.
+
+## Resultado do teste (26/11/2026, dono)
+- **E012 — aproximação no rosto: APROVADO ("ficou top").** Vale para o episódio.
+- **E041 — meia-volta (arco): REPROVADO.** O menino estava de costas; ao girar, a IA inventou o rosto (outro menino),
+  o globo saiu da mesa e o zoom ficou rápido demais em 4 s. **Regra:** nada de arco/meia-volta. Câmera nunca revela o
+  lado da pessoa que não aparece na imagem de início (vídeo do Flow em "Frames" usa só a imagem de início — a ficha do
+  personagem não entra). Personagem de costas: aproximação no que a mão dele faz, nunca no rosto.
+- Todo texto de animação começa com `DURATION: 4 seconds` (o Omni 1.2 escolhia 7 s sozinho).
