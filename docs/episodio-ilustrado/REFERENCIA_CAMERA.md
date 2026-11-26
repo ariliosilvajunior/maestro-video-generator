@@ -40,3 +40,6 @@ Um movimento por cena, escrito assim (nunca dois juntos):
   lado da pessoa que não aparece na imagem de início (vídeo do Flow em "Frames" usa só a imagem de início — a ficha do
   personagem não entra). Personagem de costas: aproximação no que a mão dele faz, nunca no rosto.
 - Todo texto de animação começa com `DURATION: 4 seconds` (o Omni 1.2 escolhia 7 s sozinho).
+- **26/11/2026, dono aprovou os testes: "nos que estão prontos deixa como estão, só mude os novos".** Ep03: as 90 cenas
+  sem vídeo ganharam a câmera nova — close: aproximação até o detalhe; plano médio com 1–2 pessoas: aproximação até o
+  rosto que JÁ aparece; plano geral ou 3+ pessoas: aproximação suave de antes. Vídeos já feitos ficaram como estão.
